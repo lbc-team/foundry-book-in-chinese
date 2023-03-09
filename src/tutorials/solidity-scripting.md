@@ -30,7 +30,7 @@ Next, we have to delete the `Counter.sol` file in the `src` folder and create an
 rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
 ```
 
-![set up commands](../images/solidity-scripting%20/set-up-commands.png)
+![set up commands](https://img.learnblockchain.cn/pics/20230309091356.png)
 
 Once that’s done, you should open up your preferred code editor and copy the code below into the `NFT.sol` file.
 

@@ -30,7 +30,7 @@ forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
 rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
 ```
 
-![set up commands](../images/solidity-scripting%20/set-up-commands.png)
+![set up commands](https://img.learnblockchain.cn/pics/20230309091416.png)
 
 
 完成后，你应该打开你喜欢的代码编辑器并将下面的代码复制到 `NFT.sol` 文件中。
@@ -109,7 +109,7 @@ forge build
 ```
 
 如果您的输出看起来像这样，则合约已成功编译。
-![compile successful](../images/solidity-scripting%20/compile-successful.png)
+![compile successful](https://img.learnblockchain.cn/pics/20230309091427.png)
 
 ### 部署我们的合约
 
@@ -232,7 +232,7 @@ forge script script/NFT.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --v
 
 Forge 将运行我们的脚本并为我们广播交易——这可能需要一些时间，因为 Forge 还将等待交易收据。 大约一分钟后，您应该会看到类似这样的内容：
 
-![contract verified](../images/solidity-scripting%20/contract-verified.png)
+![contract verified](https://img.learnblockchain.cn/pics/20230309091435.png)
 
 这确认您已成功将 `NFT` 合约部署到 Goerli 测试网，并已在 Etherscan 上对其进行了验证，所有这些都通过一个命令完成。
 
