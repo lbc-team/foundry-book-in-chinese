@@ -20,7 +20,7 @@ $ forge test --debug "testSomething()"
 
 如果匹配测试是模糊测试，调试器 Debugger 将打开第一个失败的模糊场景，或者最后一个成功的场景，以先到者为准。
 
-使用 `forge test`：
+使用 `forge debug`：
 
 ```sh
 $ forge debug --debug $FILE --sig $FUNC
