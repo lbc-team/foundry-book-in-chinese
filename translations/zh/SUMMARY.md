@@ -47,6 +47,10 @@
 
 - [Anvil 概述](./anvil/README.md)
 
+# Chisel 概述
+
+- [Chisel 概述](./chisel/README.md)
+
 # 配置
 
 - [使用 foundry.toml 进行配置](./config/README.md)
@@ -189,6 +193,7 @@
       - [cast wallet vanity](./reference/cast/cast-wallet-vanity.md)
       - [cast wallet verify](./reference/cast/cast-wallet-verify.md)
   - [`anvil` 参考](./reference/anvil/README.md)
+  - [`chisel` 参考](./reference/chisel/README.md)
   - [Config 参考](./reference/config/README.md)
     - [概述](./reference/config/overview.md)
     - [Project](./reference/config/project.md)
