@@ -1,19 +1,18 @@
 ## `allowCheatcodes`
 
-### Signature
+### 签名
 
 ```solidity
 function allowCheatcodes(address) external;
 ```
 
-### Description
+### 描述
 
-In forking mode, explicitly grant the given address cheatcode access.
+在分叉模式下，显式授予给定地址作弊码访问权限。
 
-By default, the test contract, and its deployer are allowed to access cheatcodes. In addition to that, cheat code
-access is granted if the contract was deployed by an address that already has cheatcode access.
-This will prevent cheatcode access from accounts already deployed on the forked network.
+默认情况下，测试合约及其部署者被允许访问作弊码。除此之外，如果合约是由已具有作弊码访问权限的地址部署的，则会授予作弊码访问权限。
+这将防止已在分叉网络上部署的账户获得作弊码访问权限。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> This is only useful for complexer test setup in forking mode.
+> 仅适用于在分叉模式下进行更复杂的测试设置时使用.

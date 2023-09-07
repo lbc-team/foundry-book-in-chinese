@@ -1,25 +1,24 @@
 ## `assume`
 
-### Signature
+### 签名
 
 ```solidity
 function assume(bool) external;
 ```
 
-### Description
+### 描述
 
-If the boolean expression evaluates to false, the fuzzer will discard the current fuzz inputs and start a new fuzz run.
+如果布尔表达式结果为假，模糊测试器将丢弃当前的测试输入，并开始新的运行。
 
-The `assume` cheatcode should mainly be used for very narrow checks.
-Broad checks will slow down tests as it will take a while to find valid values, and the test may fail if you hit the max number of rejects.
+`assume`作弊码主要用于特定情况检查以避免减慢测试速度，因为广泛测试会花费很多事件并且可能会因为达到测试失败的次数上限而被终止。因此，建议在使用`assume`作弊码时进行有针对性的、较为精确的检查。
 
-You can configure the rejection thresholds by setting [`fuzz.max_test_rejects`][max-test-rejects] in your `foundry.toml` file.
+您可以在`foundry.toml`文件中通过[`fuzz.max_test_rejects`][max-test-rejects]参数设置阈值。
 
-For broad checks, such as ensuring a `uint256` falls within a certain range, you can bound your input with the modulo operator or Forge Standard's [`bound`][forge-std-bound] method.
+对于广泛的检查，例如检查 `uint256` 在特定范围内，您可以使用取模运算符或 Forge 标准库的 [`bound`][forge-std-bound] 方法来检查。
 
-More information on filtering via `assume` can be found [here][filtering-guide].
+通过 `assume` 进行过滤的更多信息参见如下 [链接][filtering-guide].
 
-### Examples
+### 示例
 
 ```solidity
 // Good example of using assume
@@ -39,9 +38,9 @@ function testSomethingElse(uint256 a) public {
 }
 ```
 
-### SEE ALSO
+### 参见
 
-Forge Standard Library
+Forge 标准库
 
 [`bound`](../reference/forge-std/bound.md)
 

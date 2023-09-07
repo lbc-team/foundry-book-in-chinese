@@ -1,16 +1,16 @@
 ## `addr`
 
-### Signature
+### 签名
 
 ```solidity
 function addr(uint256 privateKey) external returns (address);
 ```
 
-### Description
+### 描述
 
-Computes the address for a given private key.
+计算给定私钥所对应的地址
 
-### Examples
+### 示例
 
 ```solidity
 address alice = vm.addr(1);
