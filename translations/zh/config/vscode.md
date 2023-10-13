@@ -9,7 +9,7 @@
 ```json
 {
    "solidity.packageDefaultDependenciesContractsDirectory": "src",
-   "solidity.packageDefaultDependenciesDirectory"："lib"
+   "solidity.packageDefaultDependenciesDirectory": "lib"
 }
 ```
 
