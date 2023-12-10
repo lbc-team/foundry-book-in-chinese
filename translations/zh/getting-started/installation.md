@@ -55,7 +55,7 @@ curl https://sh.rustup.rs -sSf | sh
 在此之后，运行以下命令从源代码构建 Foundry：
 
 ```sh
-cargo install --git https://github.com/foundry-rs/foundry foundry-cli anvil --bins --locked
+cargo install --git https://github.com/foundry-rs/foundry --profile local --locked forge cast chisel anvil
 ```
 
 要从源代码更新，请再次运行相同的命令。
