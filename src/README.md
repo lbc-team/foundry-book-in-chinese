@@ -30,12 +30,16 @@ Learn how to use `cast` to interact with smart contracts, send transactions, and
 
 Learn about `anvil`, Foundry's local node.
 
+**[Chisel Overview](chisel)**
+
+Learn how to use `chisel`, Foundry's integrated Solidity REPL.
+
 **Configuration**
 
 Guides on configuring Foundry.
 
 - [Configuring with `foundry.toml`](./config/)
-- [Continuous Integration](./config/continous-integration.md)
+- [Continuous Integration](./config/continuous-integration.md)
 - [Integrating with VSCode](./config/vscode.md)
 - [Shell Autocompletion](./config/shell-autocompletion.md)
 - [Static Analyzers](./config/static-analyzers.md)
@@ -50,7 +54,12 @@ Tutorials on building smart contracts with Foundry.
 - [Testing EIP-712 Signatures](./tutorials/testing-eip712.md)
 - [Solidity Scripting](./tutorials/solidity-scripting.md)
 - [Forking Mainnet with Cast and Anvil](./tutorials/forking-mainnet-with-cast-anvil.md)
+- [Learning Foundry Videos](./tutorials/learn-foundry.md)
 <!-- - [Incremental Adoption]() -->
+
+**Contributing**
+
+Help us improve Foundry: [Contributing](./contributing.md)
 
 **Appendix**
 
