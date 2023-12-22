@@ -27,7 +27,7 @@ We are then going to rename the boilerplate contract in `src/Contract.sol` to `s
 pragma solidity 0.8.10;
 
 import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/utils/Strings.sol";
+import "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 contract NFT is ERC721 {
     uint256 public currentTokenId;
@@ -71,7 +71,7 @@ this can be fixed by setting up the correct remapping. Create a file `remappings
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 ```
 
-(You can find out more on remappings in [the dependecies documentation](../projects/dependencies.md).
+(You can find out more on remappings in [the dependencies documentation](../projects/dependencies.md).
 
 By default the compiler output will be in the `out` directory. To deploy our compiled contract with Forge we have to set environment variables for the RPC endpoint and the private key we want to use to deploy.
 
@@ -203,15 +203,16 @@ contract NFTTest is Test {
         nft = new NFT("NFT_tutorial", "TUT", "baseUri");
     }
 
-    function testFailNoMintPricePaid() public {
+    function test_RevertMintWithoutValue() public {
+        vm.expectRevert(MintPriceNotPaid.selector);
         nft.mintTo(address(1));
     }
 
-    function testMintPricePaid() public {
+    function test_MintPricePaid() public {
         nft.mintTo{value: 0.08 ether}(address(1));
     }
 
-    function testFailMaxSupplyReached() public {
+    function test_RevertMintMaxSupplyReached() public {
         uint256 slot = stdstore
             .target(address(nft))
             .sig("currentTokenId()")
@@ -219,14 +220,16 @@ contract NFTTest is Test {
         bytes32 loc = bytes32(slot);
         bytes32 mockedCurrentTokenId = bytes32(abi.encode(10000));
         vm.store(address(nft), loc, mockedCurrentTokenId);
+        vm.expectRevert(MaxSupply.selector);
         nft.mintTo{value: 0.08 ether}(address(1));
     }
 
-    function testFailMintToZeroAddress() public {
+    function test_RevertMintToZeroAddress() public {
+        vm.expectRevert("INVALID_RECIPIENT");
         nft.mintTo{value: 0.08 ether}(address(0));
     }
 
-    function testNewMintOwnerRegistered() public {
+    function test_NewMintOwnerRegistered() public {
         nft.mintTo{value: 0.08 ether}(address(1));
         uint256 slotOfNewOwner = stdstore
             .target(address(nft))
@@ -242,7 +245,7 @@ contract NFTTest is Test {
         assertEq(address(ownerOfTokenIdOne), address(1));
     }
 
-    function testBalanceIncremented() public {
+    function test_BalanceIncremented() public {
         nft.mintTo{value: 0.08 ether}(address(1));
         uint256 slotBalance = stdstore
             .target(address(nft))
@@ -262,7 +265,7 @@ contract NFTTest is Test {
         assertEq(balanceSecondMint, 2);
     }
 
-    function testSafeContractReceiver() public {
+    function test_SafeContractReceiver() public {
         Receiver receiver = new Receiver();
         nft.mintTo{value: 0.08 ether}(address(receiver));
         uint256 slotBalance = stdstore
@@ -275,12 +278,14 @@ contract NFTTest is Test {
         assertEq(balance, 1);
     }
 
-    function testFailUnSafeContractReceiver() public {
-        vm.etch(address(1), bytes("mock code"));
-        nft.mintTo{value: 0.08 ether}(address(1));
+    function test_RevertUnSafeContractReceiver() public {
+        // Adress set to 11, because first 10 addresses are restricted for precompiles
+        vm.etch(address(11), bytes("mock code"));
+        vm.expectRevert(bytes(""));
+        nft.mintTo{value: 0.08 ether}(address(11));
     }
 
-    function testWithdrawalWorksAsOwner() public {
+    function test_WithdrawalWorksAsOwner() public {
         // Mint an NFT, sending eth to the contract
         Receiver receiver = new Receiver();
         address payable payee = payable(address(0x1337));
@@ -294,7 +299,7 @@ contract NFTTest is Test {
         assertEq(payee.balance, priorPayeeBalance + nftBalance);
     }
 
-    function testWithdrawalFailsAsNotOwner() public {
+    function test_WithdrawalFailsAsNotOwner() public {
         // Mint an NFT, sending eth to the contract
         Receiver receiver = new Receiver();
         nft.mintTo{value: nft.MINT_PRICE()}(address(receiver));

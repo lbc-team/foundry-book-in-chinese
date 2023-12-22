@@ -72,8 +72,8 @@ We'll use [Solmate's ERC-20](https://github.com/transmissions11/solmate/blob/mai
 We'll also be using a custom `SigUtils` contract to help create, hash, and sign the approvals off-chain.
 
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.20;
 
 contract SigUtils {
     bytes32 internal DOMAIN_SEPARATOR;
@@ -130,6 +130,10 @@ contract SigUtils {
     }
 }
 ```
+
+### Handling Dynamic Values
+
+While the Permit struct passed in the getStructHash() function above doesn't contain any dynamic value types, if you're using them it's important to remember that 'bytes' and 'string' types must be encoded as a 'keccak256' hash of their contents. More on this aspect of the [EIP 712 Spec here](https://github.com/ethereum/EIPs/blob/8061f8e2243eaae829d1fa91f7a763c889aca371/EIPS/eip-712.md?plain=1#L135).
 
 **Setup**
 
@@ -472,7 +476,7 @@ Here is a section of a [mock contract](https://github.com/kulkarohan/deposit/blo
     /// @param _amount The number of tokens to transfer
     /// @param _owner The user signing the approval
     /// @param _spender The user to transfer the tokens (ie this contract)
-    /// @param _value The number of tokens to appprove the spender
+    /// @param _value The number of tokens to approve the spender
     /// @param _deadline The timestamp the permit expires
     /// @param _v The 129th byte and chain id of the signature
     /// @param _r The first 64 bytes of the signature
