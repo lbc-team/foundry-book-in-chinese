@@ -3,6 +3,41 @@
 这是一个常见问题和答案的集合。 如果你在这里没有找到你的问题, 请跳转到 [Telegram 支持频道][tg-support]
 并让我们帮助你!
 
+### 我无法从源代码构建！
+
+确保您使用的是最新的稳定 Rust 工具链：
+```sh
+rustup default stable
+rustup update stable
+```
+
+### 运行 `forge`/`cast` 时出现 `libusb` 错误
+
+如果您使用发布的二进制文件，在 MacOS 上可能会看到以下错误：
+
+```sh
+dyld: Library not loaded: /usr/local/opt/libusb/lib/libusb-1.0.0.dylib
+```
+
+为了解决这个问题，您必须安装 `libusb` 库：
+
+```sh
+brew install libusb
+```
+
+### `GLIBC` 过时
+
+如果在使用 `foundryup` 后遇到类似以下错误的情况：
+
+```sh
+forge: /lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_2.29' not found (required by forge)
+```
+
+有两种解决方法：
+
+1. [从源代码构建](./getting-started/installation.md#building-from-source)
+2. [使用 Docker](./getting-started/installation.md#using-foundry-with-docker) 
+
 ### 帮助! 我无法看到我的日志
 
 Forge 默认不显示日志。 如果你想查看来自 Hardhat 的 `console.log` 或来自 DSTest `log_*` 样式的事件日志,
@@ -156,17 +191,30 @@ cargo install --path ./anvil --profile local --locked --force
 
 或通过 `cargo install --git https://github.com/foundry-rs/foundry --profile local --locked foundry-cli anvil`.
 
-### 我得到 `Permission denied (os error 13)` 错误
+### 我收到了 `Permission denied (os error 13)`
 
-如果你看到一个错误，例如：
+如果你看到了如下错误
 
 ```console
 Failed to create artifact parent folder "/.../MyProject/out/IsolationModeMagic.sol": Permission denied (os error 13)
 ```
 
-那么很可能是文件夹权限的问题。确保 `user` 在项目根目录下有写权限。
+那么很可能是文件夹权限问题。请确保 `user` 在项目根文件夹中具有写入权限。
 
-据 [报告](https://github.com/foundry-rs/foundry/issues/3268)，在 Linux 上，规范化路径可能会导致奇怪的路径（`/_1/...`）。这可以通过清除整个项目文件夹并重新初始化来解决。
+有[报告](https://github.com/foundry-rs/foundry/issues/3268)称在 Linux 上，规范化路径可能导致奇怪的路径(`/_1/...`)。这可以通过清空整个项目文件夹并重新初始化来解决。
+
+### 运行 `forge build` 时出现连接被拒绝
+
+如果你无法访问 `forge build` 调用的 github URL，你会看到如下错误
+
+```console
+Error:
+error sending request for url (https://raw.githubusercontent.com/roynalnaruto/solc-builds/ff4ea8a7bbde4488428de69f2c40a7fc56184f5e/macosx/aarch64/list.json): error trying to connect: tcp connect error: Connection refused (os error 61)
+```
+
+连接失败是因为你所在位置对 URL 的访问可能受到限制。为了解决这个问题，你应该设置代理。
+
+你可以先在终端中运行 `export http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890`，然后你就可以成功运行 `forge build` 了。
 
 [tg-support]: https://t.me/foundry_support
 [forge-test]: ./reference/forge/forge-test.md

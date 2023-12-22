@@ -72,8 +72,8 @@
 我们还将使用自定义的 `SigUtils` 合约来帮助创建、散列和签署链下批准。
 
 ```solidity
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity 0.8.13;
+// SPDX-License-Identifier: MIT
+pragma solidity 0.8.20;
 
 contract SigUtils {
     bytes32 internal DOMAIN_SEPARATOR;
@@ -130,6 +130,12 @@ contract SigUtils {
     }
 }
 ```
+
+
+### 处理动态值
+
+虽然上面在 getStructHash()函数中传递的 Permit 结构体不包含任何动态值类型，但如果您使用它们，重要的是要记住，'bytes' 和 'string' 类型必须编码为它们内容的 'keccak256' 哈希。有关 [EIP 712 规范的更多信息，请参见此处](https://github.com/ethereum/EIPs/blob/8061f8e2243eaae829d1fa91f7a763c889aca371/EIPS/eip-712.md?plain=1#L135) 。
+
 
 **设置**
 
