@@ -27,7 +27,7 @@ $ cast <subcommand>
 您还可以使用 `cast` 发送任意消息。 下面是在两个 Anvil 帐户之间发送消息的示例。
 
 ```bash
-$ cast send --private-key <Your Private Key> 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc $(cast --from-utf8 "hello world") --rpc-url http://127.0.0.1:8545/
+$ cast send --private-key <Your Private Key> 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc $(cast from-utf8 "hello world") --rpc-url http://127.0.0.1:8545/
 ```
 
 <br>

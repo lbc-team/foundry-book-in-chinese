@@ -20,7 +20,7 @@ cache = true
 # The cache directory if enabled
 cache_path = 'cache'
 # Where the broadcast logs are stored
-broadcast = 'boradcast'
+broadcast = 'broadcast'
 # additional solc allow paths
 allow_paths = []
 # additional solc include paths
@@ -47,6 +47,8 @@ optimizer_runs = 200
 verbosity = 0
 # A list of ignored solc error codes
 ignored_error_codes = [1878, 5574]
+# Whether contract build warnings will cause compilation to fail
+deny_warnings = false
 # Configures the permissions of cheat codes that touch the file system
 fs_permissions = []
 # Whether to emit additional build info files
@@ -156,8 +158,6 @@ runs = 256
 # `max_local_rejects` option isn't exposed here since we're not using
 # `prop_filter`.
 max_test_rejects = 65536
-# Being deprecated in favor of `max_test_rejects`. Will be removed in future versions.
-max_global_rejects = 65536
 # The weight of the dictionary
 dictionary_weight = 40
 # The flag indicating whether to include values from storage
