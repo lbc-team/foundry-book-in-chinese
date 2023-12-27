@@ -49,7 +49,7 @@ $ forge test
 如果我们在启用跟踪的情况下再次运行测试，我们可以看到 revert 了正确的错误消息。
 
 ```ignore
-$ forge test -vvvv --match-test testFailIncrementAsNotOwner
+$ forge test -vvvv --match-test testFail_IncrementAsNotOwner
 {{#include ../output/cheatcodes/forge-test-cheatcodes-tracing:output}}
 ```
 
@@ -81,15 +81,15 @@ $ forge test
 
 当我们调用 `vm.expectEmit(true, true, false, true);` 时，我们想要检查下一个事件的第一个和第二个 `indexed` 主题。
 
-`testExpectEmit()` 中预期的 `Transfer` 事件意味着我们期望 `from` 是 `address(this)`，而 `to` 是 `address(1337)`。 这与从 emitter.t() 发出的事件进行比较。
+`test_ExpectEmit()` 中预期的 `Transfer` 事件意味着我们期望 `from` 是 `address(this)`，而 `to` 是 `address(1337)`。 这与从 emitter.t() 发出的事件进行比较。
 
 换句话说，我们正在检查来自 `emitter.t()` 的第一个主题是否等于 `address(this)` 。 `expectEmit` 中的第三个参数设置为 `false`，因为不需要检查 `Transfer` 事件中的第三个主题，因为只有两个主题。 即使我们设置为 `true` 也没关系。
 
 `expectEmit` 中的第 4 个参数设置为 `true`，这意味着我们要检查 "non-indexed topics（非索引主题）"，也称为数据。
 
-例如，我们希望来自 `testExpectEmit` 中预期事件的数据（即 `amount`）等于实际发出的事件中的数据。 换句话说，我们断言 `emitter.t()` 发出的 `amount ` 等于 `1337`。 如果 `expectEmit` 中的第四个参数设置为 `false`，我们将不会检查 `amount`。
+例如，我们希望来自 `test_ExpectEmit` 中预期事件的数据（即 `amount`）等于实际发出的事件中的数据。 换句话说，我们断言 `emitter.t()` 发出的 `amount ` 等于 `1337`。 如果 `expectEmit` 中的第四个参数设置为 `false`，我们将不会检查 `amount`。
 
-换句话说，`testExpectEmitDoNotCheckData` 是一个有效的测试用例，即使数量不同，因为我们不检查数据。
+换句话说，`test_ExpectEmit_DoNotCheckData` 是一个有效的测试用例，即使数量不同，因为我们不检查数据。
 
 <br>
 

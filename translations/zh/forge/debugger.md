@@ -61,11 +61,18 @@ $ forge debug --debug src/SomeContract.sol --sig "myFunc(uint256,string)" 123 "�
 
 对于堆栈，**cyan words**正在被当前操作码读取或弹出。
 
+
+> ⚠️ **注意**
+>
+> 在大多数测试框架中，第一个失败的测试断言是被报告的。
+> 在 foundry 中，最后一个失败的测试断言（来自 DSTest 或 cheatcodes）将被报告。
+
 ### 导航
 
 ### General
 
-- <kbd>q</kbd>: Quit the debugger
+- <kbd>q</kbd>: 退出 debugger
+- <kbd>h</kbd>: 显示帮助
 
 ### Navigating calls
 
@@ -77,6 +84,7 @@ $ forge debug --debug src/SomeContract.sol --sig "myFunc(uint256,string)" 123 "�
 - <kbd>C</kbd>: 移动到下一个调用类型指令
 - <kbd>a</kbd>: 移动到上一个 [`JUMP`][op-jump] 或 [`JUMPI`][op-jumpi] 指令
 - <kbd>s</kbd>: 移动到下一个 [`JUMPDEST`][op-jumpdest] 指令
+- <kbd>'</kbd> + <kbd>a-z</kbd>: 移动到由 [`vm.breakpoint`][cheat-breakpoint] 作弊码设置的 `<char>` 断点
 
 ### Navigating memory
 - <kbd>Ctrl</kbd> + <kbd>j</kbd>：向下滚动内存视图
@@ -95,3 +103,4 @@ $ forge debug --debug src/SomeContract.sol --sig "myFunc(uint256,string)" 123 "�
 [op-jumpdest]: https://www.evm.codes/#5b
 [op-jump]: https://www.evm.codes/#f1
 [op-jumpi]: https://www.evm.codes/#57
+[cheat-breakpoint]: ../cheatcodes/breakpoint.md
