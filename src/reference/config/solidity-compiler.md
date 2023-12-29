@@ -54,7 +54,7 @@ If set to `false`, only the remappings in `foundry.toml` and `remappings.txt` ar
 - Default: none
 - Environment: `FOUNDRY_ALLOW_PATHS` or `DAPP_ALLOW_PATHS`
 
-Tells solc to allow reading source files from additional directories. This is mainly relevant for complex workspaces managed by `pnmp` or similar.
+Tells solc to allow reading source files from additional directories. This is mainly relevant for complex workspaces managed by `pnpm` or similar.
 
 See also [solc allowed-paths](https://docs.soliditylang.org/en/latest/path-resolution.html#allowed-paths)
 
@@ -108,11 +108,27 @@ If both `offline` and `auto-detect-solc` are set to `true`, the required version
 
 ##### `ignored_error_codes`
 
-- Type: array of integers
+- Type: array of integers/strings
 - Default: none for source, SPDX license identifiers and contract size for tests
 - Environment: `FOUNDRY_IGNORED_ERROR_CODES` or `DAPP_IGNORED_ERROR_CODES`
 
 An array of Solidity compiler error codes to ignore during build, such as warnings.
+
+Valid values are:
+
+- `license`: 1878
+- `code-size`: 5574
+- `func-mutability`: 2018
+- `unused-var`: 2072
+- `unused-param`: 5667
+- `unused-return`: 9302
+- `virtual-interfaces`: 5815
+- `missing-receive-ether`: 3628
+- `shadowing`: 2519
+- `same-varname`: 8760
+- `unnamed-return`: 6321
+- `unreachable`: 5740
+- `pragma-solidity`: 3420
 
 ##### `deny_warnings`
 
@@ -200,7 +216,7 @@ Valid values are:
 - Default: false
 - Environment: `FOUNDRY_SPARSE_MODE` or `DAPP_SPARSE_MODE`
 
-Enables [sparse mode](./forge/forge-build.md#sparse-mode-experimental) for builds.
+Enables [sparse mode](../forge/forge-build.md#sparse-mode-experimental) for builds.
 
 ### Optimizer
 
@@ -254,14 +270,14 @@ The Yul details subsection of the optimizer details section is used to tweak how
 
 Refer to the Solidity [compiler input description](https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description) for the default values.
 
-> ℹ️ **Note**  
+> ℹ️ **Note**
 > If you encounter compiler errors when using `via_ir`, explicitly enable the legacy `optimizer` and leave `optimizer_steps` as an empty string
 
 ### Model checker
 
 The Solidity model checker is a built-in opt-in module that is available in Solidity compilers for OSX and Linux. Learn more about the model checker in the [Solidity compiler documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#tutorial)
 
-> ℹ️ **Note**  
+> ℹ️ **Note**
 > The model checker requires `z3` version 4.8.8 or 4.8.14 on Linux.
 
 The model checker settings are configured in the `[model_checker]` section of the configuration.
@@ -307,6 +323,16 @@ For example:
 contracts = { "src/MyContracts.sol" = ["ContractA", "ContractB"] }
 ```
 
+###### `model_checker.div_mod_with_slacks`
+
+- Type: boolean
+- Default: false
+- Environment: N/A
+
+Sets how division and modulo operations should be encoded.
+
+Refer to the [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#division-and-modulo-with-slack-variables) for more information.
+
 ###### `model_checker.engine`
 
 - Type: string (see below)
@@ -320,6 +346,44 @@ Specifies the model checker engine to run. Valid values are:
 - `all`: Runs both engines
 
 Refer to the [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#model-checking-engines) for more information on the engines.
+
+###### `model_checker.invariants`
+
+- Type: array of strings
+- Default: N/A
+- Environment: N/A
+
+Sets the model checker invariants. Valid values are:
+
+- `contract`: Contract Invariants
+- `reentrancy`: Reentrancy Properties
+
+Refer to the [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#reported-inferred-inductive-invariants) for more information on the invariants.
+
+###### `model_checker.show_unproved`
+
+- Type: boolean
+- Default: false
+- Environment: N/A
+
+Whether or not to output all unproved targets.
+
+Refer to the [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#unproved-targets) for more information.
+
+###### `model_checker.solvers`
+
+- Type: array of strings
+- Default: N/A
+- Environment: N/A
+
+Sets the model checker solvers. Valid values are:
+
+- `cvc4`
+- `eld`: introduced in v0.8.18
+- `smtlib2`
+- `z3`
+
+Refer to the [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#smt-and-horn-solvers) for more information.
 
 ###### `model_checker.timeout`
 

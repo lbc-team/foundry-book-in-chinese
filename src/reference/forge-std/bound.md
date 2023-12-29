@@ -1,4 +1,4 @@
-33## `bound`
+## `bound`
 
 ### Signature
 
