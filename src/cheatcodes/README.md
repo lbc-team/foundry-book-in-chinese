@@ -34,6 +34,10 @@ Below are some subsections for the different Forge cheatcodes.
 - [RPC](./rpc.md): RPC related cheatcodes
 - [File](./fs.md): Cheatcodes for working with files
 
+### Add a new cheatcode
+
+If you need a new feature, consider [contributing to the Foundry's codebase](../contributing.md) to add the cheatcode.
+
 ### Cheatcodes Interface
 
 This is a Solidity interface for all of the cheatcodes present in Forge.
@@ -46,6 +50,76 @@ interface CheatCodes {
         bytes data;
     }
 
+    // Possible caller modes for readCallers()
+    enum CallerMode {
+        None,
+        Broadcast,
+        RecurrentBroadcast,
+        Prank,
+        RecurrentPrank
+    }
+
+    enum AccountAccessKind {
+        Call,
+        DelegateCall,
+        CallCode,
+        StaticCall,
+        Create,
+        SelfDestruct,
+        Resume
+    }
+
+    struct Wallet {
+        address addr;
+        uint256 publicKeyX;
+        uint256 publicKeyY;
+        uint256 privateKey;
+    }
+
+    struct ChainInfo {
+        uint256 forkId;
+        uint256 chainId;
+    }
+
+    struct AccountAccess {
+        ChainInfo chainInfo;
+        AccountAccessKind kind;
+        address account;
+        address accessor;
+        bool initialized;
+        uint256 oldBalance;
+        uint256 newBalance;
+        bytes deployedCode;
+        uint256 value;
+        bytes data;
+        bool reverted;
+        StorageAccess[] storageAccesses;
+    }
+
+    struct StorageAccess {
+        address account;
+        bytes32 slot;
+        bool isWrite;
+        bytes32 previousValue;
+        bytes32 newValue;
+        bool reverted;
+    }
+
+    // Derives a private key from the name, labels the account with that name, and returns the wallet
+    function createWallet(string calldata) external returns (Wallet memory);
+
+    // Generates a wallet from the private key and returns the wallet
+    function createWallet(uint256) external returns (Wallet memory);
+
+    // Generates a wallet from the private key, labels the account with that name, and returns the wallet
+    function createWallet(uint256, string calldata) external returns (Wallet memory);
+
+    // Signs data, (Wallet, digest) => (v, r, s)
+    function sign(Wallet calldata, bytes32) external returns (uint8, bytes32, bytes32);
+
+    // Get nonce for a Wallet
+    function getNonce(Wallet calldata) external returns (uint64);
+
     // Set block.timestamp
     function warp(uint256) external;
 
@@ -56,7 +130,12 @@ interface CheatCodes {
     function fee(uint256) external;
 
     // Set block.difficulty
+    // Does not work from the Paris hard fork and onwards, and will revert instead.
     function difficulty(uint256) external;
+    
+    // Set block.prevrandao
+    // Does not work before the Paris hard fork, and will revert instead.
+    function prevrandao(bytes32) external;
 
     // Set block.chainid
     function chainId(uint256) external;
@@ -171,11 +250,17 @@ interface CheatCodes {
     // Resets subsequent calls' msg.sender to be `address(this)`
     function stopPrank() external;
 
+    // Reads the current `msg.sender` and `tx.origin` from state and reports if there is any active caller modification
+    function readCallers() external returns (CallerMode callerMode, address msgSender, address txOrigin);
+
     // Sets an address' balance
     function deal(address who, uint256 newBalance) external;
-
+    
     // Sets an address' code
     function etch(address who, bytes calldata code) external;
+
+    // Marks a test as skipped. Must be called at the top of the test.
+    function skip(bool skip) external;
 
     // Expects an error on next call
     function expectRevert() external;
@@ -190,6 +275,13 @@ interface CheatCodes {
     function accesses(address)
         external
         returns (bytes32[] memory reads, bytes32[] memory writes);
+    
+    // Record all account accesses as part of CREATE, CALL or SELFDESTRUCT opcodes in order,
+    // along with the context of the calls.
+    function startStateDiffRecording() external;
+
+    // Returns an ordered array of all account accesses from a `startStateDiffRecording` session.
+    function stopAndReturnStateDiff() external returns (AccountAccess[] memory accesses);
 
     // Record all the transaction logs
     function recordLogs() external;
@@ -215,7 +307,14 @@ interface CheatCodes {
     // function will be mocked.
     function mockCall(address, bytes calldata, bytes calldata) external;
 
-    // Clears all mocked calls
+    // Reverts a call to an address, returning the specified error
+    //
+    // Calldata can either be strict or a partial match, e.g. if you only
+    // pass a Solidity selector to the expected calldata, then the entire Solidity
+    // function will be mocked.
+    function mockCallRevert(address where, bytes calldata data, bytes calldata retdata) external;
+
+    // Clears all mocked and reverted mocked calls
     function clearMockedCalls() external;
 
     // Expect a call to an address with the specified calldata.
@@ -233,6 +332,9 @@ interface CheatCodes {
 
     // Label an address in test traces
     function label(address addr, string calldata label) external;
+    
+    // Retrieve the label of an address
+    function getLabel(address addr) external returns (string memory);
 
     // When fuzzing, generate new inputs if conditional not met
     function assume(bool) external;
@@ -251,6 +353,7 @@ interface CheatCodes {
     // transactions that can later be signed and sent onchain
     function startBroadcast() external;
     function startBroadcast(address) external;
+    function startBroadcast(uint256 privateKey) external;
 
     // Stops collecting onchain transactions
     function stopBroadcast() external;
@@ -276,11 +379,24 @@ interface CheatCodes {
     // - The user lacks permissions to remove the file.
     // (path) => ()
     function removeFile(string calldata) external;
+    // Returns true if the given path points to an existing entity, else returns false
+    // (path) => (bool)
+    function exists(string calldata) external returns (bool);
+    // Returns true if the path exists on disk and is pointing at a regular file, else returns false
+    // (path) => (bool)
+    function isFile(string calldata) external returns (bool);
+    // Returns true if the path exists on disk and is pointing at a directory, else returns false
+    // (path) => (bool)
+    function isDir(string calldata) external returns (bool);
     
     // Return the value(s) that correspond to 'key'
     function parseJson(string memory json, string memory key) external returns (bytes memory);
     // Return the entire json file
     function parseJson(string memory json) external returns (bytes memory);
+    // Check if a key exists in a json string
+    function keyExists(string memory json, string memory key) external returns (bytes memory);
+    // Get list of keys in a json string
+    function parseJsonKeys(string memory json, string memory key) external returns (string[] memory);
 
     // Snapshot the current state of the evm.
     // Returns the id of the snapshot that was created.
