@@ -22,7 +22,11 @@ cast-balance - 获取一个账户的余额，单位为 Wei。
 `--block` *block*  
 &nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签: `earliest`, `latest` 或者 `pending`。
+&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签: `earliest`、`finalized`、`safe`、`latest` 或者 `pending`。
+
+`-e` *ether*  
+`--ether` *ether*  
+&nbsp;&nbsp;&nbsp;&nbsp; 如果使用了此标志，则余额将以以太显示
 
 #### RPC 选项
 

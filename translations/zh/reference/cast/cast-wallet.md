@@ -31,6 +31,12 @@ cast-wallet - 钱包管理实用工具。
 [cast wallet verify](./cast-wallet-verify.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;验证一个信息的签名。
 
+[cast wallet import](./cast-wallet-import.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;将私钥导入加密的 keystore。
+
+[cast wallet list](./cast-wallet-list.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;列出 keystore 默认目录中的所有账户。
+
 ### 可选
 
 #### Special 选项

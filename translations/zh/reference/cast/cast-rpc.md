@@ -17,7 +17,7 @@ cast-rpc -  执行一个原始的 JSON-RPC 请求
 #### 查询选项
 
 `-r` *url*  
-`--rpc-rul` *url*  
+`--rpc-url` *url*  
 &nbsp;&nbsp;&nbsp;&nbsp;provider 的 URL
 
 `-w`  
@@ -40,3 +40,9 @@ cast-rpc -  执行一个原始的 JSON-RPC 请求
     ```sh
     cast rpc eth_getTransactionByHash 0x2642e960d3150244e298d52b5b0f024782253e6d0b2c9a01dd4858f7b4665a3f
     ```
+
+3. 在以太坊主网获取最新的 `eth_getBlockByNumber`:
+
+   ```sh
+   cast rpc --rpc-url https://mainnet.infura.io/v3/ eth_getBlockByNumber "latest" "false"
+   ```

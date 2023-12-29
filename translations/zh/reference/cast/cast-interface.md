@@ -35,6 +35,10 @@ cast-interface - 从一个给定的 ABI 生成一个 Solidity 接口。
 `--pragma` *version*  
 &nbsp;&nbsp;&nbsp;&nbsp; 要在接口中使用的 Solidity 编译器版本。默认：`^0.8.10`。
 
+`-j`  
+`--json`  
+&nbsp;&nbsp;&nbsp;&nbsp;输出合约 JSON 格式的 ABI.
+
 {{#include ../common/etherscan-options.md}}
 
 {{#include common-options.md}}
@@ -55,6 +59,12 @@ cast-interface - 从一个给定的 ABI 生成一个 Solidity 接口。
     ```sh
     cast interface -n LilENS ./path/to/abi.json
     ```
+
+4. 从 Etherscan 获取 JOSN 格式的 ABI:
+    ```sh
+    cast interface -o IWETH.sol -j 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
+    ```
+
 ### 请参阅
 
 [cast](./cast.md), [cast proof](./cast-proof.md)

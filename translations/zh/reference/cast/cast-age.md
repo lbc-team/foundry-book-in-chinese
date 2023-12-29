@@ -12,6 +12,8 @@ cast-age - 获取一个区块的时间戳。
 
 获取一个区块的时间戳。
 
+指定的 *block* 可以是块编号，也可以是以下任何标签之一：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
+
 ### 可选
 
 #### 查询选项
@@ -32,7 +34,7 @@ cast-age - 获取一个区块的时间戳。
 
 1. 获取最新区块的时间戳：
     ```sh
-    cast age latest
+    cast age
     ```
 
 2. 获取创世区块的时间戳：
