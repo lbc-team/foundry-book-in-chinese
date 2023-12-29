@@ -1,10 +1,10 @@
-# cast base-fee
+# cast age
 
-Get the basefee of a block
+Get the timestamp of a block
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast age --help
+Usage: cast age [OPTIONS] [BLOCK]
 
 Arguments:
   [BLOCK]

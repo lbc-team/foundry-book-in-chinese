@@ -1,10 +1,10 @@
-# cast base-fee
+# cast block
 
-Get the basefee of a block
+Get information about a block
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast block --help
+Usage: cast block [OPTIONS] [BLOCK]
 
 Arguments:
   [BLOCK]
@@ -13,6 +13,12 @@ Arguments:
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
 Options:
+  -f, --field <FIELD>
+          If specified, only get the given field of the block
+
+      --full
+          [env: CAST_FULL_BLOCK=]
+
   -r, --rpc-url <URL>
           The RPC endpoint
           
@@ -33,4 +39,8 @@ Options:
 
   -h, --help
           Print help (see a summary with '-h')
+
+Display options:
+  -j, --json
+          Print the block as JSON
 ```

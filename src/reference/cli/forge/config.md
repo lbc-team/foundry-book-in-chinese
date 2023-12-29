@@ -1,38 +1,42 @@
-# chisel
+# forge config
 
-Fast, utilitarian, and verbose Solidity REPL
+Display the current config
 
 ```bash
-$ chisel --help
-Usage: chisel [OPTIONS] [COMMAND]
-
-Commands:
-  list         List all cached sessions
-  load         Load a cached session
-  view         View the source of a cached session
-  clear-cache  Clear all cached chisel sessions from the cache directory
-  help         Print this message or the help of the given subcommand(s)
+$ forge config --help
+Usage: forge config [OPTIONS]
 
 Options:
+      --basic
+          Print only a basic set of the currently set config values
+
+      --json
+          Print currently set config values as JSON
+
+      --fix
+          Attempt to fix any configuration warnings
+
   -h, --help
           Print help (see a summary with '-h')
 
-  -V, --version
-          Print version
+Build options:
+      --names
+          Print compiled contract names
 
-REPL options:
-      --prelude <PRELUDE>
-          Path to a directory containing Solidity files to import, or path to a single Solidity file.
+      --sizes
+          Print compiled contract sizes
+
+      --skip <SKIP>...
+          Skip building files whose names contain the given filter.
           
-          These files will be evaluated before the top-level of the REPL, therefore functioning as a prelude
+          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+
+      --no-cache
+          Disable the cache
 
 Cache options:
       --force
           Clear the cache and artifacts folder and recompile
-
-Build options:
-      --no-cache
-          Disable the cache
 
 Linker options:
       --libraries <LIBRARIES>
@@ -131,6 +135,33 @@ Project options:
 
       --config-path <FILE>
           Path to the config file
+
+Watch options:
+  -w, --watch [<PATH>...]
+          Watch the given files or directories for changes.
+          
+          If no paths are provided, the source and test directories of the project are watched.
+
+      --no-restart
+          Do not restart the command while it's still running
+
+      --run-all
+          Explicitly re-run all tests when a change is made.
+          
+          By default, only the tests of the last modified test file are executed.
+
+      --watch-delay <DELAY>
+          File update debounce delay.
+          
+          During the delay, incoming change events are accumulated and only once the delay has passed, is an action taken. Note that this does not mean a command will be started: if --no-restart is given and
+          a command is already running, the outcome of the action will be to do nothing.
+          
+          Defaults to 50ms. Parses as decimal seconds by default, but using an integer with the `ms` suffix may be more convenient.
+          
+          When using --poll mode, you'll want a larger duration, or risk overloading disk I/O.
+
+      --format-json
+          Output the compilation errors in the json format. This is useful when you want to use the output in other tools
 
 EVM options:
   -f, --fork-url <URL>

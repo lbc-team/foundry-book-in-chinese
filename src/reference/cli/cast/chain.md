@@ -1,16 +1,10 @@
-# cast base-fee
+# cast chain
 
-Get the basefee of a block
+Get the symbolic name of the current chain
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
-
-Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+$ cast chain --help
+Usage: cast chain [OPTIONS]
 
 Options:
   -r, --rpc-url <URL>

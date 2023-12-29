@@ -1,18 +1,21 @@
-# cast base-fee
+# cast codesize
 
-Get the basefee of a block
+Get the runtime bytecode size of a contract
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast codesize --help
+Usage: cast codesize [OPTIONS] <WHO>
 
 Arguments:
-  [BLOCK]
+  <WHO>
+          The contract address
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
   -r, --rpc-url <URL>
           The RPC endpoint
           

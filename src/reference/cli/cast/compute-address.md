@@ -1,18 +1,19 @@
-# cast base-fee
+# cast compute-address
 
-Get the basefee of a block
+Compute the contract address from a given nonce and deployer address
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast compute-address --help
+Usage: cast compute-address [OPTIONS] [ADDRESS]
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  [ADDRESS]
+          The deployer address
 
 Options:
+      --nonce <NONCE>
+          The nonce of the deployer address
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

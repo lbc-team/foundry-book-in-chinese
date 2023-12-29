@@ -1,18 +1,22 @@
-# cast base-fee
+# cast tx
 
-Get the basefee of a block
+Get information about a transaction
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast tx --help
+Usage: cast tx [OPTIONS] <TX_HASH> [FIELD]
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  <TX_HASH>
+          The transaction hash
+
+  [FIELD]
+          If specified, only get the given field of the transaction. If "raw", the RLP encoded transaction will be printed
 
 Options:
+      --raw
+          Print the raw RLP encoded transaction
+
   -r, --rpc-url <URL>
           The RPC endpoint
           
@@ -33,4 +37,8 @@ Options:
 
   -h, --help
           Print help (see a summary with '-h')
+
+Display options:
+  -j, --json
+          Print as JSON
 ```

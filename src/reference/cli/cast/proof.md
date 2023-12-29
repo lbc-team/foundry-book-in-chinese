@@ -1,18 +1,24 @@
-# cast base-fee
+# cast proof
 
-Get the basefee of a block
+Generate a storage proof for a given storage slot
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast proof --help
+Usage: cast proof [OPTIONS] <ADDRESS> [SLOTS]...
 
 Arguments:
-  [BLOCK]
+  <ADDRESS>
+          The contract address
+
+  [SLOTS]...
+          The storage slot numbers (hex or decimal)
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
   -r, --rpc-url <URL>
           The RPC endpoint
           

@@ -1,16 +1,14 @@
-# cast base-fee
+# cast find-block
 
-Get the basefee of a block
+Get the block number closest to the provided timestamp
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast find-block --help
+Usage: cast find-block [OPTIONS] <TIMESTAMP>
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  <TIMESTAMP>
+          The UNIX timestamp to search for, in seconds
 
 Options:
   -r, --rpc-url <URL>

@@ -1,16 +1,10 @@
-# cast base-fee
+# cast client
 
-Get the basefee of a block
+Get the current client version
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
-
-Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+$ cast client --help
+Usage: cast client [OPTIONS]
 
 Options:
   -r, --rpc-url <URL>

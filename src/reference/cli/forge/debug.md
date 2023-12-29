@@ -1,30 +1,36 @@
-# chisel
+# forge debug
 
-Fast, utilitarian, and verbose Solidity REPL
+Debugs a single smart contract as a script
 
 ```bash
-$ chisel --help
-Usage: chisel [OPTIONS] [COMMAND]
+$ forge debug --help
+Usage: forge debug [OPTIONS] <PATH> [ARGS]...
 
-Commands:
-  list         List all cached sessions
-  load         Load a cached session
-  view         View the source of a cached session
-  clear-cache  Clear all cached chisel sessions from the cache directory
-  help         Print this message or the help of the given subcommand(s)
+Arguments:
+  <PATH>
+          The contract you want to run. Either the file path or contract name.
+          
+          If multiple contracts exist in the same file you must specify the target contract with --target-contract.
+
+  [ARGS]...
+          Arguments to pass to the script function
 
 Options:
+      --target-contract <CONTRACT_NAME>
+          The name of the contract you want to run
+          
+          [aliases: tc]
+
+  -s, --sig <SIGNATURE>
+          The signature of the function you want to call in the contract, or raw calldata
+          
+          [default: run()]
+
+      --debug
+          Open the script in the debugger
+
   -h, --help
           Print help (see a summary with '-h')
-
-  -V, --version
-          Print version
-
-REPL options:
-      --prelude <PRELUDE>
-          Path to a directory containing Solidity files to import, or path to a single Solidity file.
-          
-          These files will be evaluated before the top-level of the REPL, therefore functioning as a prelude
 
 Cache options:
       --force

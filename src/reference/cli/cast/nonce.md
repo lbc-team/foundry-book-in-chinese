@@ -1,18 +1,21 @@
-# cast base-fee
+# cast nonce
 
-Get the basefee of a block
+Get the nonce for an account
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast nonce --help
+Usage: cast nonce [OPTIONS] <WHO>
 
 Arguments:
-  [BLOCK]
+  <WHO>
+          The address to get the nonce for
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
   -r, --rpc-url <URL>
           The RPC endpoint
           

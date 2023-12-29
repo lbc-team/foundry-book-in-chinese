@@ -1,18 +1,19 @@
-# cast base-fee
+# cast resolve-name
 
-Get the basefee of a block
+Perform an ENS lookup
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast resolve-name --help
+Usage: cast resolve-name [OPTIONS] [WHO]
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  [WHO]
+          The name to lookup
 
 Options:
+  -v, --verify
+          Perform a reverse lookup to verify that the name is correct
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

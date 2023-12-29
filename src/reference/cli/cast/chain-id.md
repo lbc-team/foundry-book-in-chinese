@@ -1,16 +1,10 @@
-# cast base-fee
+# cast chain-id
 
-Get the basefee of a block
+Get the Ethereum chain ID
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
-
-Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+$ cast chain-id --help
+Usage: cast chain-id [OPTIONS]
 
 Options:
   -r, --rpc-url <URL>

@@ -1,18 +1,30 @@
-# cast base-fee
+# cast rpc
 
-Get the basefee of a block
+Perform a raw JSON-RPC request
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast rpc --help
+Usage: cast rpc [OPTIONS] <METHOD> [PARAMS]...
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
+  <METHOD>
+          RPC method name
+
+  [PARAMS]...
+          RPC parameters
           
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+          Interpreted as JSON:
+          
+          cast rpc eth_getBlockByNumber 0x123 false => {"method": "eth_getBlockByNumber", "params": ["0x123", false] ... }
 
 Options:
+  -w, --raw
+          Send raw JSON parameters
+          
+          The first param will be interpreted as a raw JSON array of params. If no params are given, stdin will be used. For example:
+          
+          cast rpc eth_getBlockByNumber '["0x123", false]' --raw => {"method": "eth_getBlockByNumber", "params": ["0x123", false] ... }
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

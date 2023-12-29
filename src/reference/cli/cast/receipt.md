@@ -1,18 +1,29 @@
-# cast base-fee
+# cast receipt
 
-Get the basefee of a block
+Get the transaction receipt for a transaction
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast receipt --help
+Usage: cast receipt [OPTIONS] <TX_HASH> [FIELD]
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  <TX_HASH>
+          The transaction hash
+
+  [FIELD]
+          If specified, only get the given field of the transaction
 
 Options:
+      --confirmations <CONFIRMATIONS>
+          The number of confirmations until the receipt is fetched
+          
+          [default: 1]
+
+      --async
+          Exit immediately if the transaction was not found
+          
+          [env: CAST_ASYNC=]
+
   -r, --rpc-url <URL>
           The RPC endpoint
           
@@ -33,4 +44,8 @@ Options:
 
   -h, --help
           Print help (see a summary with '-h')
+
+Display options:
+  -j, --json
+          Print as JSON
 ```

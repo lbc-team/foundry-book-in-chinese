@@ -1,18 +1,21 @@
-# cast base-fee
+# cast implementation
 
-Get the basefee of a block
+Fetch the EIP-1967 implementation account
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast implementation --help
+Usage: cast implementation [OPTIONS] <WHO>
 
 Arguments:
-  [BLOCK]
+  <WHO>
+          The address to get the nonce for
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
   -r, --rpc-url <URL>
           The RPC endpoint
           

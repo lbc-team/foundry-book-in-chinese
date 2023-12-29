@@ -1,18 +1,24 @@
-# cast base-fee
+# cast code
 
-Get the basefee of a block
+Get the runtime bytecode of a contract
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast code --help
+Usage: cast code [OPTIONS] <WHO>
 
 Arguments:
-  [BLOCK]
+  <WHO>
+          The contract address
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
+  -d, --disassemble
+          Disassemble bytecodes into individual opcodes
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

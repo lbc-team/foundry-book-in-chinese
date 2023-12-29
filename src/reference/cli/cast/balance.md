@@ -1,18 +1,24 @@
-# cast base-fee
+# cast balance
 
-Get the basefee of a block
+Get the balance of an account in wei
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast balance --help
+Usage: cast balance [OPTIONS] <WHO>
 
 Arguments:
-  [BLOCK]
+  <WHO>
+          The account to query
+
+Options:
+  -B, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
+  -e, --ether
+          Format the balance in ether
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

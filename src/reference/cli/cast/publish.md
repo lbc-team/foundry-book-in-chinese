@@ -1,18 +1,21 @@
-# cast base-fee
+# cast publish
 
-Get the basefee of a block
+Publish a raw transaction to the network
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast publish --help
+Usage: cast publish [OPTIONS] <RAW_TX>
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  <RAW_TX>
+          The raw transaction
 
 Options:
+      --async
+          Only print the transaction hash and exit immediately
+          
+          [env: CAST_ASYNC=]
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

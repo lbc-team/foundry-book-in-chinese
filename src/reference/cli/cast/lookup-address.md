@@ -1,18 +1,19 @@
-# cast base-fee
+# cast lookup-address
 
-Get the basefee of a block
+Perform an ENS reverse lookup
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+$ cast lookup-address --help
+Usage: cast lookup-address [OPTIONS] [WHO]
 
 Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+  [WHO]
+          The account to perform the lookup for
 
 Options:
+  -v, --verify
+          Perform a normal lookup to verify that the address is correct
+
   -r, --rpc-url <URL>
           The RPC endpoint
           

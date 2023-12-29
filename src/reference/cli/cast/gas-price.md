@@ -1,16 +1,10 @@
-# cast base-fee
+# cast gas-price
 
-Get the basefee of a block
+Get the current gas price
 
 ```bash
-$ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
-
-Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+$ cast gas-price --help
+Usage: cast gas-price [OPTIONS]
 
 Options:
   -r, --rpc-url <URL>
