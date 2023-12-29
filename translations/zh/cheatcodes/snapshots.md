@@ -1,6 +1,6 @@
-## snapshot cheatcodes
+## snapshot 作弊码
 
-### Signature
+### 签名
 
 ```solidity
 // Snapshot the current state of the evm.
@@ -13,14 +13,13 @@ function snapshot() external returns(uint256);
 function revertTo(uint256) external returns(bool);
 ```
 
-### Description
+### 描述
 
-`snapshot` takes a snapshot of the state of the blockchain and returns the identifier of the created snapshot
+`snapshot` 对区块链的状态进行快照，并返回创建的快照的标识符
 
-`revertTo` reverts the state of the blockchain to the given snapshot. This deletes the given snapshot, as well as any snapshots taken after (e.g.: reverting to id 1 will delete snapshots with ids 2, 3, etc.)
+`revertTo` 将区块链的状态回滚到给定的快照。这将删除给定的快照，以及在其之后创建的任何快照（例如：回滚到 id 2 将删除 id 2、3、4 等快照）
 
-### Examples
-
+### 示例
 
 ```solidity
 struct Storage {
@@ -29,29 +28,36 @@ struct Storage {
 }
 
 contract SnapshotTest is Test {
-    Cheats constant cheats = Cheats(HEVM_ADDRESS);
-
     Storage store;
+    uint256 timestamp;
 
     function setUp() public {
         store.slot0 = 10;
         store.slot1 = 20;
+        vm.deal(address(this), 5 ether);        // balance = 5 ether
+        timestamp = block.timestamp;
     }
 
     function testSnapshot() public {
-        uint256 snapshot = cheats.snapshot();
+        uint256 snapshot = vm.snapshot();       // saves the state
+
+        // let's change the state
         store.slot0 = 300;
         store.slot1 = 400;
+        vm.deal(address(this), 500 ether);
+        vm.warp(12345);                         // block.timestamp = 12345
 
         assertEq(store.slot0, 300);
         assertEq(store.slot1, 400);
+        assertEq(address(this).balance, 500 ether);
+        assertEq(block.timestamp, 12345);
 
-        // after resetting to a snapshot all changes are discarded
-        cheats.revertTo(snapshot);
+        vm.revertTo(snapshot);                  // restores the state
+
         assertEq(store.slot0, 10, "snapshot revert for slot 0 unsuccessful");
         assertEq(store.slot1, 20, "snapshot revert for slot 1 unsuccessful");
+        assertEq(address(this).balance, 5 ether, "snapshot revert for balance unsuccessful");
+        assertEq(block.timestamp, timestamp, "snapshot revert for timestamp unsuccessful");
     }
-
 }
-
 ```

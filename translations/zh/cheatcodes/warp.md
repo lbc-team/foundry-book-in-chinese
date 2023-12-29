@@ -1,24 +1,24 @@
 ## `warp`
 
-### Signature
+### 签名
 
 ```solidity
 function warp(uint256) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.timestamp`.
+设置 `block.timestamp`.
 
-### Examples
+### 例子
 
 ```solidity
 vm.warp(1641070800);
 emit log_uint(block.timestamp); // 1641070800
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
 [`skip`](../reference/forge-std/skip.md), [`rewind`](../reference/forge-std/rewind.md)

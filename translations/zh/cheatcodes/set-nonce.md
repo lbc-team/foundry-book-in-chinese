@@ -1,18 +1,18 @@
 ## `setNonce`
 
-### Signature
+### 签名
 
 ```solidity
 function setNonce(address account, uint64 nonce) external;
 ```
 
-### Description
+### 描述
 
-Sets the nonce of the given account.
+设置给定账户的 nonce。
 
-The new nonce must be higher than the current nonce of the account.
+新的 nonce 必须高于账户当前的 nonce。
 
-### Examples
+### 例子
 
 ```solidity
 vm.setNonce(address(100), 1234);

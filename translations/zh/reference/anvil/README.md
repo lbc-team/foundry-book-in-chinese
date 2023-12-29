@@ -36,112 +36,127 @@ anvil --no-mining
 anvil --port <PORT>
 ```  
 
+#### 默认的 CREATE2 部署器
+
+Anvil 在没有分叉的情况下，包含地址为 `0x4e59b44847b379578588920ca78fbf26c0b4956c` 的[默认 CREATE2 部署器代理](https://github.com/Arachnid/deterministic-deployment-proxy) 。
+
+这使您可以在本地测试 CREATE2 部署，而无需进行分叉。
+
 #### 支持的 RPC 方法
 ##### 标准方法
 标准方法是基于 [此处](https://eth.wiki/json-rpc/API) 作为参考。
 
-* `web3_clientVersion`  
+* `web3_clientVersion`
 
-* `web3_sha3`  
-  
-* `eth_chainId`  
-  
-* `eth_networkId`  
-  
-* `eth_gasPrice`  
-  
-* `eth_accounts`  
-  
-* `eth_blockNumber`  
-  
-* `eth_getBalance`  
-  
-* `eth_getStorageAt`  
-  
-* `eth_getBlockByHash`  
-  
-* `eth_getBlockByNumber`  
-  
-* `eth_getTransactionCount`  
-  
-* `eth_getBlockTransactionCountByHash`  
-  
-* `eth_getBlockTransactionCountByNumber`  
-  
-* `eth_getUncleCountByBlockHash`  
-  
-* `eth_getUncleCountByBlockNumber`  
-  
-* `eth_getCode`  
-  
-* `eth_sign`  
+* `web3_sha3`
 
-* `eth_signTypedData_v4`  
-  
-* `eth_sendTransaction`  
-  
-* `eth_sendRawTransaction`  
-   
-* `eth_call`  
-  
-* `eth_createAccessList`  
-  
-* `eth_estimateGas`  
-   
-* `eth_getTransactionByHash`  
-  
-* `eth_getTransactionByBlockHashAndIndex`  
-  
-* `eth_getTransactionByBlockNumberAndIndex`  
-  
-* `eth_getTransactionReceipt`  
-  
-* `eth_getUncleByBlockHashAndIndex`  
-  
-* `eth_getUncleByBlockNumberAndIndex`  
-  
-* `eth_getLogs`  
-  
-* `eth_newFilter`  
-  
-* `eth_getFilterChanges`  
-  
-* `eth_newBlockFilter`  
-  
-* `eth_newPendingTransactionFilter`  
-  
-* `eth_getFilterLogs`  
-  
-* `eth_uninstallFilter`  
-  
-* `eth_getWork`  
+* `eth_chainId`
+
+* `eth_networkId`
+
+* `eth_gasPrice`
+
+* `eth_accounts`
+
+* `eth_blockNumber`
+
+* `eth_getBalance`
+
+* `eth_getStorageAt`
+
+* `eth_getBlockByHash`
+
+* `eth_getBlockByNumber`
+
+* `eth_getTransactionCount`
+
+* `eth_getBlockTransactionCountByHash`
+
+* `eth_getBlockTransactionCountByNumber`
+
+* `eth_getUncleCountByBlockHash`
+
+* `eth_getUncleCountByBlockNumber`
+
+* `eth_getCode`
+
+* `eth_sign`
+
+* `eth_signTypedData_v4`
+
+* `eth_sendTransaction`
+
+* `eth_sendRawTransaction`
+
+* `eth_call`
+
+* `eth_createAccessList`
+
+* `eth_estimateGas`
+
+* `eth_getTransactionByHash`
+
+* `eth_getTransactionByBlockHashAndIndex`
+
+* `eth_getTransactionByBlockNumberAndIndex`
+
+* `eth_getTransactionReceipt`
+
+* `eth_getUncleByBlockHashAndIndex`
+
+* `eth_getUncleByBlockNumberAndIndex`
+
+* `eth_getLogs`
+
+* `eth_newFilter`
+
+* `eth_getFilterChanges`
+
+* `eth_newBlockFilter`
+
+* `eth_newPendingTransactionFilter`
+
+* `eth_getFilterLogs`
+
+* `eth_uninstallFilter`
+
+* `eth_getWork`
 
 * `eth_subscribe`
 
-* `eth_unsubscribe`  
+* `eth_unsubscribe`
 
-* `eth_syncing`  
-  
-* `eth_submitWork`  
-  
-* `eth_submitHashrate`  
-  
+* `eth_syncing`
+
+* `eth_submitWork`
+
+* `eth_submitHashrate`
+
 * `eth_feeHistory`
 
 * `eth_getProof`
-  
+
+* `debug_traceTransaction`
+使用 `anvil --steps-tracing` 来获取 `structLogs`
+
+* `debug_traceCall`
+请注意，尚不支持非标准的跟踪。这意味着您不能向 `trace` 参数传递任何参数。
+
 * `trace_transaction`
-  
+
 * `trace_block`
 
 ##### 自定义方法
 `anvil_*` 命名空间是 `hardhat` 的别名。更多信息请参考 [Hardhat 文档](https://hardhat.org/hardhat-network/reference#hardhat-network-methods)。
 
 `anvil_impersonateAccount`   
-冒充外部拥者账户或合约发送交易。冒充合约时，不能调用合约函数。如果合约的函数要被再次调用则必须使用 `anvil_stopImpersonatingAccount`。另请参阅 [EIP-3607](https://eips.ethereum.org/EIPS/eip-3607)。
+发送交易以外部拥有的账户或合约的身份。
 
 `anvil_stopImpersonatingAccount`  
 如果之前设置过 `anvil_impersonateAccount` 则停止冒充账户或合约。
+
+`anvil_autoImpersonateAccount`
+接受 `true` 以启用自动冒充账户，接受 `false` 以禁用它。启用后，任何交易的发送方将自动被冒充。与 `anvil_impersonateAccount` 相同。
 
 `anvil_getAutomine`  
 如果启用了自动挖矿模式，则返回 true，否则返回 false。
@@ -181,6 +196,9 @@ anvil --port <PORT>
 
 `anvil_setNextBlockBaseFeePerGas`  
 设置下一个区块的基础费用
+
+`anvil_setChainId`
+设置当前 EVM 实例的链 ID
 
 `anvil_dumpState`
 返回一个代表链的完整状态的十六进制字符串。可以重新导入一个新的/重新启动的 Anvil 实例，以重新获得相同的状态。
@@ -241,11 +259,50 @@ anvil --port <PORT>
 `txpool_content`  
 返回所有目前等待列入下一个区块的交易的细节，以及安排在未来执行的交易的细节。 
 
+##### Otterscan 方法
+`ots_*` 命名空间实现了[Otterscan 规范](https://github.com/otterscan/otterscan/blob/develop/docs/custom-jsonrpc.md)
+
+`ots_getApiLevel`
+被 Otterscan 用来检查是否连接到兼容的节点，并在不兼容时显示友好消息。
+
+`ots_getInternalOperations`
+返回交易内部的以太坊转账。
+
+`ots_hasCode`
+检查特定地址是否包含部署的代码。
+
+`ots_getTransactionError`
+提取交易的原始错误输出。
+
+`ots_traceTransaction`
+提取所有调用、合约创建和自毁的各种变化，并返回调用树。
+
+`ots_getBlockDetails`
+为 Otterscan 中的区块详情页面量身定制和扩展的 *eth_getBlock* 版本。
+
+`ots_getBlockTransactions`
+获取特定区块的分页交易，并删除一些冗长的字段，如日志。
+
+`ots_searchTransactionsBefore`
+分页获取特定地址在给定目标区块之前的出入交易调用。
+
+`ots_searchTransactionsAfter`
+分页获取特定地址在给定目标区块之后的出入交易调用。
+
+`ots_getTransactionBySenderAndNonce`
+根据发送者地址和 nonce 获取交易哈希。
+
+`ots_getContractCreator`
+获取创建合约的交易哈希和地址。
+
 
 ### 选项
 #### 一般选项
 `-a, --accounts <ACCOUNTS>`  
 &nbsp;&nbsp;&nbsp;&nbsp; 设置账户的数量 [默认: 10]
+
+`--auto-impersonate`
+&nbsp;&nbsp;&nbsp;&nbsp; 在启动时启用 autoImpersonate
 
 `-b, --block-time <block-time>`  
 &nbsp;&nbsp;&nbsp;&nbsp; 间隔挖掘的区块时间，以秒为单位
@@ -260,7 +317,9 @@ anvil --port <PORT>
 &nbsp;&nbsp;&nbsp;&nbsp; 打印帮助信息
 
 `--hardfork <HARDFORK>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 选择要使用的 EVM 硬分叉 [默认: latest]
+&nbsp;&nbsp;&nbsp;&nbsp; 选择要使用的 EVM 硬分叉
+&nbsp;&nbsp;&nbsp;&nbsp; 选择硬分叉的名称, 例如 `shanghai`, `paris`, `london`, 等等...
+&nbsp;&nbsp;&nbsp;&nbsp; [默认: latest]
 
 `--init <PATH>`  
 &nbsp;&nbsp;&nbsp;&nbsp; 用给定的 `genesis.json` 文件初始创世块。
@@ -292,6 +351,8 @@ anvil --port <PORT>
 `-V, --version`  
 &nbsp;&nbsp;&nbsp;&nbsp; 打印版本信息
 
+`--disable-default-create2-deployer`
+&nbsp;&nbsp;&nbsp;&nbsp; 在不进行分叉的模式下运行 Anvil 时禁用部署默认的 CREATE2 工厂
 
 #### EVM 选项
 `-f, --fork-url <URL>`  
@@ -327,7 +388,7 @@ anvil --port <PORT>
 &nbsp;&nbsp;&nbsp;&nbsp; 区块的基础费用
 
 `--chain-id <CHAIN_ID>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 链 ID
+&nbsp;&nbsp;&nbsp;&nbsp; 链 ID [默认: 31337]
 
 `--code-size-limit <CODE_SIZE>`  
 &nbsp;&nbsp;&nbsp;&nbsp; EIP-170: 以字节为单位的合约代码大小限制。由于测试的原因，增加这一点很有用。

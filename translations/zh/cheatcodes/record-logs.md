@@ -1,17 +1,16 @@
 ## `recordLogs`
 
-### Signature
+### 签名
 
 ```solidity
 function recordLogs() external;
 ```
 
-### Description
+### 描述
 
-Tells the VM to start recording all the emitted events. To access them, use [`getRecordedLogs`](./get-recorded-logs.md).
+告诉虚拟机开始记录所有已发出的事件。要访问它们，请使用 [`getRecordedLogs`](./get-recorded-logs.md)。
 
-
-### Examples
+### 例子
 
 ```solidity
 /// event LogCompleted(

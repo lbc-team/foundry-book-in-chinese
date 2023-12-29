@@ -1,29 +1,29 @@
 ## `envBool`
 
-### Signature
+### 签名
 
 ```solidity
-function envBool(string calldata key) external returns (bool value);
+function envBool(string calldata key) external returns (bool value );
 ```
 
 ```solidity
 function envBool(string calldata key, string calldata delimiter) external returns (bool[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `bool` or `bool[]`.
+将环境变量读取为 `bool` 或 `bool[]`。
 
-### Tips
+### 提示
 
-- For `true`, use either "true" or "True" for the environment variable value.
-- For `false`, use either "false" or "False" for the environment variable value.
-- For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
+- 对于 `true`，可以使用 "true" 或 "True" 作为环境变量的值。
+- 对于 `false`，可以使用 "false" 或 "False" 作为环境变量的值。
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `BOOL_VALUE=true`,
+#### 单个值
+使用环境变量 `BOOL_VALUE=true`，
 ```solidity
 string memory key = "BOOL_VALUE";
 bool expected = true;
@@ -31,8 +31,8 @@ bool output = cheats.envBool(key);
 assert(output == expected);
 ```
 
-#### Array
-With environment variable `BOOL_VALUES=true,false,True,False`,
+#### 数组
+使用环境变量 `BOOL_VALUES=true,false,True,False`，
 ```solidity
 string memory key = "BOOL_VALUES";
 string memory delimiter = ",";

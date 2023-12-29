@@ -1,22 +1,22 @@
 ## `roll`
 
-### Signature
+### 签名
 
 ```solidity
 function roll(uint256) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.number`.
+设置Sets `block.number`.
 
-### Examples
+### 例子
 
 ```solidity
 vm.roll(100);
 emit log_uint(block.number); // 100
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [rollFork](./roll-fork.md)

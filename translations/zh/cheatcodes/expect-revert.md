@@ -1,76 +1,76 @@
 ## `expectRevert`
 
-### Signature
+### 签名
 
 ```solidity
 function expectRevert() external;
 ```
 
 ```solidity
-function expectRevert(bytes4 msg) external;
+function expectRevert(bytes4 message) external;
 ```
 
 ```solidity
-function expectRevert(bytes calldata msg) external;
+function expectRevert(bytes calldata message) external;
 ```
 
-### Description
+### 描述
 
-If the **next call** does not revert with the expected message `msg`, then `expectRevert` will.
+如果 **下一次调用** 没有以期望的数据 `message` 回滚，那么 `expectRevert` 会执行回滚。
 
-After calling `expectRevert`, calls to other cheatcodes before the reverting call are ignored.
+调用 `expectRevert` 后，在回滚调用之前对其他作弊码的调用将被忽略。
 
-This means, for example, we can call [`prank`](./prank.md) immediately before the reverting call.
+这意味着，例如，我们可以在回滚调用之前立即调用 [`prank`](./prank.md)。
 
-There are 3 signatures:
+有 3 个签名：
 
-- **Without parameters**: Asserts that the next call reverts, regardless of the message.
-- **With `bytes4`**: Asserts that the next call reverts with the specified 4 bytes.
-- **With `bytes`**: Asserts that the next call reverts with the specified bytes.
+- **没有参数**：断言下一次调用会回滚，无论消息是什么。
+- **带有`bytes4`**：断言下一次调用会以指定的 4 个字节回滚。
+- **带有`bytes`**：断言下一次调用会以指定的字节回滚。
 
-> ⚠️ **Gotcha: Usage with low-level calls**
+> ⚠️ **注意：与低级调用一起使用**
 >
-> Normally, a call that succeeds returns a status of `true` (along with any return data) and a call that reverts returns `false`.
+> 通常，成功的调用返回 `true`（以及任何返回数据），而回滚的调用返回 `false`。
 >
-> The Solidity compiler will insert checks that ensures that the call succeeded, and revert if it did not.
+> Solidity 编译器将插入检查，确保调用成功，并在失败时回滚。
 >
-> The `expectRevert` cheatcode works by inverting this, so the next call after this cheatcode returns `true` if it reverts, and `false` otherwise.
+> 在低级调用中，`expectRevert` 作弊码通过使低级调用返回的布尔值 `status` 对应于 `expectRevert` 是否成功，而不是低级调用是否成功。因此，`status` 为 false 对应于作弊码失败。
 >
-> The implication here is that to use this cheatcode with low-level calls, you must manually assert on the call's status since Solidity is not doing it for you.
+> 除此之外，`expectRevert` 还会在低级调用中修改返回数据，并且无法使用。
 >
-> For example:
->
+> 请参阅以下示例。为了清晰起见，`status` 已重命名为 `revertsAsExpected`：
+
 > ```solidity
 > function testLowLevelCallRevert() public {
 >     vm.expectRevert(bytes("error message"));
->     (bool status, ) = address(myContract).call(myCalldata);
->     assertTrue(status, "expectRevert: call did not revert");
+>     (bool revertsAsExpected, ) = address(myContract).call(myCalldata);
+>     assertTrue(revertsAsExpected, "expectRevert: call did not revert");
 > }
 > ```
 
-### Examples
+### 示例
 
-To use `expectRevert` with a `string`, convert it to `bytes`.
-
-```solidity
-vm.expectRevert(bytes("error message"));
-```
-
-To use `expectRevert` with a custom [error type][error-type] without parameters, use its selector.
+要使用 `expectRevert` 与 `string`，请将其作为字符串文字传递。
 
 ```solidity
-vm.expectRevert(MyContract.CustomError.selector);
+vm.expectRevert("error message");
 ```
 
-To use `expectRevert` with a custom [error type][error-type] with parameters, ABI encode the error type.
+要使用不带参数的自定义 [错误类型][error-type]与`expectRevert`，请使用其选择器。
+
+```solidity
+vm.expectRevert(CustomError.selector);
+```
+
+要使用带参数的自定义 [错误类型][error-type]与`expectRevert`，请对错误类型进行 ABI 编码。
 
 ```solidity
 vm.expectRevert(
-    abi.encodeWithSelector(MyContract.CustomError.selector, 1, 2)
+    abi.encodeWithSelector(CustomError.selector, 1, 2)
 );
 ```
 
-If you need to assert that a function reverts _without_ a message, you can do so with `expectRevert(bytes(""))`.
+如果您需要断言函数回滚_没有_消息，则可以使用`expectRevert(bytes(""))`。
 
 ```solidity
 function testExpectRevertNoReason() public {
@@ -80,30 +80,33 @@ function testExpectRevertNoReason() public {
 }
 ```
 
-If you need to assert that a function reverts a four character message, e.g. `AAAA`, you can do so with:
+当出现 EVM 错误时，例如当交易消耗超过区块的燃气限制时，会发生无消息的回滚。
+
+如果您需要断言函数以四个字符消息，例如 `AAAA` 回滚，可以这样做：
+
 ```solidity
 function testFourLetterMessage() public {
-    
     vm.expectRevert(bytes("AAAA"));
 }
 ```
-If used `expectRevert("AAAA")` the overload `expectRevert(bytes4 msg)` is used, resulting in a different behaviour.
 
-You can also have multiple `expectRevert()` checks in a single test.
+如果使用 `expectRevert("AAAA")`，编译器会抛出错误，因为它不知道使用哪个重载。
+
+最后，您还可以在单个测试中进行多个 `expectRevert()` 检查。
 
 ```solidity
 function testMultipleExpectReverts() public {
-    vm.expectRevert(abi.encodePacked("INVALID_AMOUNT"));
+    vm.expectRevert("INVALID_AMOUNT");
     vault.send(user, 0);
 
-    vm.expectRevert(abi.encodePacked("INVALID_ADDRESS"));
+    vm.expectRevert("INVALID_ADDRESS");
     vault.send(address(0), 200);
 }
 ```
 
-### SEE ALSO
+### 参见
 
-Forge Standard Library
+Forge 标准库
 
 [Std Errors](../reference/forge-std/std-errors.md)
 

@@ -1,26 +1,28 @@
-## RPC related cheatcodes
+## 与 RPC 相关的作弊码
 
-### Signature
+### 签名
 
 ```solidity
-    // Returns the URL for a configured alias
-    function rpcUrl(string calldata alias) external returns(string memory);
-    // Returns all configured (alias, URL) pairs
-    function rpcUrls() external returns(string[2][] memory);
+// Returns the URL for a configured alias
+function rpcUrl(string calldata alias) external returns (string memory);
+// Returns all configured (alias, URL) pairs
+function rpcUrls() external returns(string[2][] memory);
+/// Performs an Ethereum JSON-RPC request to the current fork URL.
+function rpc(string calldata method, string calldata params) external returns (bytes memory data);
 ```
 
-### Description
+### 描述
 
-Provides cheatcodes to access all RPC endpoints configured in the `rpc_endpoints` object of the `foundry.toml`
+提供作弊码，以访问在 `foundry.toml` 的 `rpc_endpoints` 对象中配置的所有 RPC 端点，并使用配置的分叉 URL 进行 `rpc` 调用的能力。
 
-### Examples
+### 示例
 
-The following `rpc_endpoints` in `foundry.toml` registers two RPC aliases:
+在 `foundry.toml` 中的以下 `rpc_endpoints` 注册了两个 RPC 别名：
 
-- `optimism` references the URL directly
-- `mainnet` references the `RPC_MAINNET` environment value that is expected to contain the actual URL
+- `optimism` 直接引用 URL
+- `mainnet` 引用了预期包含实际 URL 的 `RPC_MAINNET` 环境值
 
-*Env variables need to be wrapped in `${}`*
+*环境变量需要用 `${}` 包装*
 
 ```toml
 # --snip--
@@ -34,14 +36,14 @@ string memory url = vm.rpcUrl("optimism");
 assertEq(url, "https://optimism.alchemyapi.io/v2/...");
 ```
 
-If a ENV var is missing, `rpcUrl()` will revert:
+如果缺少 ENV 变量，`rpcUrl()` 将回滚：
 
 ```solidity
 vm.expectRevert("Failed to resolve env var `${RPC_MAINNET}` in `RPC_MAINNET`: environment variable not found");
 string memory url = vm.rpcUrl("mainnet");
 ```
 
-Retrieve all available alias -> URL pairs
+检索所有可用的别名 -> URL 对
 
 ```solidity
 string[2][] memory allUrls = vm.rpcUrls();
@@ -54,8 +56,16 @@ string[2] memory env = allUrls[1];
 assertEq(env[0], "mainnet");
 ```
 
-### SEE ALSO
+进行对 `eth_getBalance` 的 RPC 调用
 
-Forge Config
+```solidity
+// balance at block <https://etherscan.io/block/18332681>
+bytes memory result = vm.rpc("eth_getBalance", "[\"0x8D97689C9818892B700e27F316cc3E41e17fBeb9\", \"0x117BC09\"]")
+assertEq(hex"10b7c11bcb51e6", result);
+```
 
-[Config Reference](../reference/config/testing.md#rpc_endpoints)
+### 另请参阅
+
+Forge 配置
+
+[配置参考](../reference/config/testing.md#rpc_endpoints) 

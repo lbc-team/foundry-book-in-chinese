@@ -1,26 +1,27 @@
 ## `etch`
 
-### Signature
+### 签名
 
 ```solidity
 function etch(address who, bytes calldata code) external;
 ```
 
-### Description
+### 描述
 
-Sets the bytecode of an address `who` to `code`.
+将地址 `who` 的字节码设置为 `code`。
 
-### Examples
+### 例子
 
 ```solidity
 bytes memory code = address(awesomeContract).code;
-address targetAddr = address(1);
+address targetAddr = makeAddr("target");
 vm.etch(targetAddr, code);
 log_bytes(address(targetAddr).code); // 0x6080604052348015610010...
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
-[`deployCode`](../reference/forge-std/deployCode.md)
+- [`deployCode`](../reference/forge-std/deployCode.md) 
+- [`deployCodeTo`](../reference/forge-std/deployCodeTo.md) 

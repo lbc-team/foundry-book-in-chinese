@@ -1,15 +1,15 @@
 ## `stopBroadcast`
 
-### Signature
+### 签名
 ```solidity
 function stopBroadcast() external;
 ```
 
-### Description
+### 描述
 
-Stops collecting transactions for later on-chain broadcasting.
+停止收集交易以便稍后在链上广播。
 
-### Examples
+### 例子
 
 ```solidity
 function deployNoArgs() public {

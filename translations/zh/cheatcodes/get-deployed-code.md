@@ -1,30 +1,28 @@
 ## `getDeployedCode`
 
-### Signature
+### 签名
 
 ```solidity
 function getDeployedCode(string calldata) external returns (bytes memory);
 ```
 
-### Description
+### 描述
 
-This cheatcode works similar to [`getCode`](./get-code.md) but only returns the **deployed** bytecode (aka runtime
-bytecode) for a contract in the project given the path to the contract.
+此作弊码类似于 [`getCode`](./get-code.md)，但仅返回项目中合约的 **部署** 字节码（也称为运行时字节码）。
 
-The main use case for this cheat code is as a shortcut to deploy stateless contracts to arbitrary addresses.
+此作弊码的主要用例是将无状态合约快速部署到任意地址。
 
-The calldata parameter can either be in the form `ContractFile.sol` (if the filename and contract name are the same)
-, `ContractFile.sol:ContractName`, or the path to an artifact, relative to the root of your project.
+calldata 参数可以是 `ContractFile.sol`（如果文件名和合约名相同），`ContractFile.sol:ContractName`，或者是相对于项目根目录的工件路径。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> `getDeployedCode` requires read permission for the output directory, see [file cheatcodes](./fs.md).
+> `getDeployedCode` 需要输出目录的读取权限，请参阅 [文件作弊码](./fs.md) 。
 >
-> To grant read access set `fs_permissions = [{ access = "read", path = "./out"}]` in your `foundry.toml`.
+> 要授予读取访问权限，请在您的 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
 
-### Examples
+### 例子
 
-Deploy a stateless contract at an arbitrary address using `getDeployedCode` and [`etch`](./etch.md).
+使用 `getDeployedCode` 和 [`etch`](./etch.md) 在任意地址部署无状态合约。
 
 ```solidity
 // A stateless contract that we want deployed at a specific address
@@ -49,9 +47,9 @@ assertEq(
 )
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
 [`getCode`](./get-code.md)
 [`etch`](./etch.md)

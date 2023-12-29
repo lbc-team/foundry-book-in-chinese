@@ -1,16 +1,16 @@
 ## `chainId`
 
-### Signature
+### 签名
 
 ```solidity
 function chainId(uint256) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.chainid`.
+设置 `block.chainid`.
 
-### Examples
+### 例子
 
 ```solidity
 vm.chainId(31337);

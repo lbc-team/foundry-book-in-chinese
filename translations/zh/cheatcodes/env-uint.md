@@ -1,6 +1,6 @@
 ## `envUint`
 
-### Signature
+### 签名
 
 ```solidity
 function envUint(string calldata key) external returns (uint256 value);
@@ -10,20 +10,19 @@ function envUint(string calldata key) external returns (uint256 value);
 function envUint(string calldata key, string calldata delimiter) external returns (uint256[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `uint256` or `uint256[]`.
+读取环境变量作为 `uint256` 或 `uint256[]`。
 
-### Tips
+### 提示
 
-- If the value starts with `0x`, it will be interpreted as a hex value, otherwise, it will be
-treated as a decimal number.
-- For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
+- 如果值以 `0x` 开头，则将其解释为十六进制值，否则将视为十进制数。
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `UINT_VALUE=115792089237316195423570985008687907853269984665640564039457584007913129639935`,
+#### 单个值
+对于环境变量 `UINT_VALUE=115792089237316195423570985008687907853269984665640564039457584007913129639935`，
 ```solidity
 string memory key = "UINT_VALUE";
 uint256 expected = type(uint256).max;
@@ -31,8 +30,8 @@ uint256 output = cheats.envUint(key);
 assert(output == expected);
 ```
 
-#### Array
-With environment variable `UINT_VALUES=0,0x0000000000000000000000000000000000000000000000000000000000000000`,
+#### 数组
+对于环境变量 `UINT_VALUES=0,0x0000000000000000000000000000000000000000000000000000000000000000`，
 ```solidity
 string memory key = "UINT_VALUES";
 string memory delimiter = ",";

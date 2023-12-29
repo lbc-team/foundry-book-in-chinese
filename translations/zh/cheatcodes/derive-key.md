@@ -1,6 +1,6 @@
 ## `deriveKey`
 
-### Signature
+### 签名
 
 ```solidity
 function deriveKey(
@@ -17,32 +17,32 @@ function deriveKey(
 ) external returns (uint256);
 ```
 
-### Description
+### 描述
 
-Derive a private key from a given mnemonic or mnemonic file path.
+从给定的助记词或助记词文件路径派生私钥。
 
-The first signature derives at the derivation path `m/44'/60'/0'/0/{index}`.
-The second signature allows you to specify the derivation path as the second parameter.
+第一个签名派生到派生路径 `m/44'/60'/0'/0/{index}`。
+第二个签名允许您将派生路径指定为第二个参数。
 
-### Examples
+### 例子
 
-Derive the private key from the test mnemonic at path `m/44'/60'/0'/0/0`:
+从测试助记词的路径 `m/44'/60'/0'/0/0` 派生私钥：
 
 ```solidity
 string memory mnemonic = "test test test test test test test test test test test junk";
 uint256 privateKey = vm.deriveKey(mnemonic, 0);
 ```
 
-Derive the private key from the test mnemonic at path `m/44'/60'/0'/1/0`:
+从测试助记词的路径 `m/44'/60'/0'/1/0` 派生私钥：
 
 ```solidity
 string memory mnemonic = "test test test test test test test test test test test junk";
 uint256 privateKey = vm.deriveKey(mnemonic, "m/44'/60'/0'/1/", 0);
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [rememberKey](./remember-key.md)
 
-Forge Standard Library:
+Forge 标准库:
 - [deriveRememberKey](../reference/forge-std/derive-remember-key.md)
