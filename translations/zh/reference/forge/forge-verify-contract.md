@@ -66,6 +66,9 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
 
 {{#include ../common/retry-options.md}}
 
+`--show-standard-json-input`  
+&nbsp;&nbsp;&nbsp;&nbsp;该命令输出适合保存到文件并上传到区块浏览器进行验证的 JSON 格式数据。
+
 `--watch`  
 &nbsp;&nbsp;&nbsp;&nbsp;提交后等待验证结果。
 &nbsp;&nbsp;&nbsp;&nbsp;自动运行 `forge verify-check`，直到验证失败或成功。
@@ -103,6 +106,10 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
     ForgeUSD FUSD 18 1000000000000000000000
     ```
 
+5. 部署后立即使用 Blockscout 验证合约（确保在 Blockscout 浏览器 URL 末尾添加 "/api?"）：
+    ```sh
+    forge create --rpc-url <rpc_https_endpoint> --private-key $devTestnetPrivateKey src/Contract.sol:SimpleStorage --verify --verifier blockscout --verifier-url <blockscout_homepage_explorer_url>/api? 
+    ```
 
 ### 另请参阅
 

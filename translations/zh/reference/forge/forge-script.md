@@ -46,11 +46,17 @@ forge-script - 以脚本形式运行智能合约，建立可在链上发送的�
 `--skip-simulation`  
 &nbsp;&nbsp;&nbsp;&nbsp;跳过链上模拟。
 
+`--non-interactive`  
+&nbsp;&nbsp;&nbsp;&nbsp;移除交互式提示，如果合约接近 [EIP-170](https://eips.ethereum.org/EIPS/eip-170) 大小限制，则会出现交互式提示。
+
 `--slow`  
 &nbsp;&nbsp;&nbsp;&nbsp;确保只有在前一个交易得到确认和成功之后才发送交易。
 
 `--target-contract` *contract_name*  
 &nbsp;&nbsp;&nbsp;&nbsp;你想要运行的合约名称。
+
+`--priority-gas-price`  
+&nbsp;&nbsp;&nbsp;&nbsp;设置 EIP1559 交易的优先级 Gas 价格。当 Gas 价格波动较大且您希望确保您的交易被包含时，此选项非常有用。
 
 `--with-gas-price` *price*  
 &nbsp;&nbsp;&nbsp;&nbsp;设置 **广播** 传统交易的 Gas 价格，或广播 EIP1559 交易的最大费用。 
@@ -93,6 +99,25 @@ forge-script - 以脚本形式运行智能合约，建立可在链上发送的�
     ```sh
     forge script ./test/Broadcast.t.sol --tc BroadcastTest --sig "deploy()" \
                  -vvv --fork-url $GOERLI_RPC_URL
+    ```
+
+2. 在 Polygon 上部署合约（请参阅脚本教程以获取示例脚本）。*每个网络的验证器网址都不同。*
+    ```sh
+    forge script script/NFT.s.sol:MyScript --chain-id 137 --rpc-url $RPC_URL \
+        --etherscan-api-key $POLYGONSCAN_API_KEY --verifier-url https://api.polygonscan.com/api \
+        --broadcast --verify -vvvv
+    ```
+
+3. 恢复失败的脚本。以上述为例，删除`--broadcast`，添加`--resume`
+    ```sh
+    forge script script/NFT.s.sol:MyScript --chain-id 137 --rpc-url $RPC_URL \
+        --etherscan-api-key $POLYGONSCAN_API_KEY --verifier-url https://api.polygonscan.com/api \
+        --verify -vvvv --resume
+    ```
+
+4. 验证刚刚部署的合约所使用的脚本
+    ```sh
+    forge script script/NFT.s.sol --rpc-url $RPC_URL --verify --resume
     ```
 
 [debugger]: ../../forge/debugger.md

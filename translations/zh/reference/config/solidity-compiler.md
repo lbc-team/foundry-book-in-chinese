@@ -54,7 +54,7 @@ import "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Contex
 - 默认值: none
 - 环境变量: `FOUNDRY_ALLOW_PATHS` 或 `DAPP_ALLOW_PATHS`
 
-告诉 solc 允许从其他目录读取源文件。这主要适用于由 `pnmp` 或类似文件管理的复杂工作区。
+告诉 solc 允许从其他目录读取源文件。这主要适用于由 `pnpm` 或类似文件管理的复杂工作区。
 
 另请参阅 [solc allowed-paths](https://docs.soliditylang.org/en/latest/path-resolution.html#allowed-paths)
 
@@ -108,11 +108,27 @@ import "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Contex
 
 ##### `ignored_error_codes`
 
-- 类型: array of integers
+- 类型: array of integers/strings
 - 默认值: none for source, SPDX license identifiers and contract size for tests
 - 环境变量: `FOUNDRY_IGNORED_ERROR_CODES` or `DAPP_IGNORED_ERROR_CODES`
 
 Solidity 编译器错误代码的数组，以便在构建期间忽略，例如警告。
+
+Valid values are:
+
+- `license`: 1878
+- `code-size`: 5574
+- `func-mutability`: 2018
+- `unused-var`: 2072
+- `unused-param`: 5667
+- `unused-return`: 9302
+- `virtual-interfaces`: 5815
+- `missing-receive-ether`: 3628
+- `shadowing`: 2519
+- `same-varname`: 8760
+- `unnamed-return`: 6321
+- `unreachable`: 5740
+- `pragma-solidity`: 3420
 
 ##### `evm_version`
 
@@ -192,7 +208,7 @@ extra_output = [
 - 默认值: false
 - 环境变量: `FOUNDRY_SPARSE_MODE` or `DAPP_SPARSE_MODE`
 
-启用 [sparse mode](./forge/forge-build.md#sparse-mode-experimental) 进行构建。
+启用 [sparse mode](../forge/forge-build.md#sparse-mode-experimental) 进行构建。
 
 ### Optimizer
 
@@ -299,6 +315,16 @@ table 的键是源文件的路径，而值是要检查的合约名称的数组�
 contracts = { "src/MyContracts.sol" = ["ContractA", "ContractB"] }
 ```
 
+###### `model_checker.div_mod_with_slacks`
+
+- Type: boolean
+- Default: false
+- Environment: N/A
+
+设置如何对除法和取模运算进行编码。
+
+有关更多信息，请参阅 [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#division-and-modulo-with-slack-variables)。
+
 ###### `model_checker.engine`
 
 - 类型: string (see below)
@@ -312,6 +338,46 @@ contracts = { "src/MyContracts.sol" = ["ContractA", "ContractB"] }
 - `all`: 同时运行两种引擎
 
 请参阅 [Solidity 文档](https://docs.soliditylang.org/en/latest/smtchecker.html#model-checking-engines) 了解更多关于引擎信息
+
+
+###### `model_checker.invariants`
+
+- Type: array of strings
+- Default: N/A
+- Environment: N/A
+
+设置模型检查器不变量。有效值为:
+
+- `contract`: 合约不变量
+- `reentrancy`: 重入属性
+
+有关不变量的更多信息，请参阅 [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#reported-inferred-inductive-invariants)。
+
+###### `model_checker.show_unproved`
+
+- Type: boolean
+- Default: false
+- Environment: N/A
+
+是否输出所有未证明的目标。
+
+有关更多信息，请参阅 [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#unproved-targets)。
+
+###### `model_checker.solvers`
+
+- Type: array of strings
+- Default: N/A
+- Environment: N/A
+
+设置模型检查器求解器。有效值为:
+
+- `cvc4`
+- `eld`: 自 v0.8.18 引入
+- `smtlib2`
+- `z3`
+
+有关更多信息，请参阅 [Solidity documentation](https://docs.soliditylang.org/en/latest/smtchecker.html#smt-and-horn-solvers)。
+
 
 ###### `model_checker.timeout`
 

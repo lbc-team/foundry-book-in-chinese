@@ -41,6 +41,9 @@
 `--allow-failure`  
 &nbsp;&nbsp;&nbsp;&nbsp;即使测试失败，也以代码 0 退出。
 
+`--fail-fast`  
+&nbsp;&nbsp;&nbsp;&nbsp;在第一次测试失败时终止测试。
+
 `--etherscan-api-key` *key*  
 &nbsp;&nbsp;&nbsp;&nbsp;Etherscan 的 API 密钥。如果被设置了，同时 `--fork-url` 也被设置了，就会使用 Etherscan 解码追踪。
 &nbsp;&nbsp;&nbsp;&nbsp;环境变量：`ETHERSCAN_API_KEY`

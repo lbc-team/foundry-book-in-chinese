@@ -6,7 +6,7 @@ forge-build - 构建项目的智能合约。
 
 ### 简介
 
-``forge build`` [*options*]
+``forge build`` 或 ``forge b`` [*options*]
 
 ### 描述
 
@@ -172,6 +172,9 @@ targets = [ 'assert' ]
 
 `--sizes`
 &nbsp;&nbsp;&nbsp;&nbsp;打印已编译的非测试合约大小，如果其中任何一个超过大小限制，则以代码 1 退出。
+
+`--skip`
+&nbsp;&nbsp;&nbsp;&nbsp;跳过编译非必要的合约目录，比如测试或脚本（使用 `--skip test`）。
 
 {{#include core-build-options.md}}
 

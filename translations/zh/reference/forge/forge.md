@@ -47,6 +47,9 @@ forge - 构建、测试、模糊、调试和部署 Solidity 合约。
 [forge tree](./forge-tree.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;显示项目的树状可视化依赖关系图。
 
+[forge geiger](./forge-geiger.md)
+&nbsp;&nbsp;&nbsp;&nbsp;检测在 Foundry 项目及其依赖中使用的不安全作弊码。
+
 #### 构建命令
 
 [forge build](./forge-build.md)  
@@ -65,6 +68,9 @@ forge - 构建、测试、模糊、调试和部署 Solidity 合约。
 
 [forge snapshot](./forge-snapshot.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;创建每个测试的 Gas 使用快照。
+
+[forge coverage](./forge-coverage.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;生成覆盖率报告
 
 #### 部署命令
 
@@ -102,6 +108,9 @@ forge - 构建、测试、模糊、调试和部署 Solidity 合约。
 
 [forge upload-selectors](./forge-upload-selectors.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;将给定合约的 ABI 上传至 https://sig.eth.samczsun.com 函数选择器数据库。
+
+[forge doc](./forge-doc.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;为 Solidity 源文件生成文档。
 
 ### 选项
 

@@ -9,7 +9,7 @@
 `--root` *path*  
 &nbsp;&nbsp;&nbsp;&nbsp;项目的根路径。默认情况下，这是当前 git 仓库的根目录，或当前工作目录。
 
-`-c` *path*  
+`-C` *path*  
 `--contracts` *path*  
 &nbsp;&nbsp;&nbsp;&nbsp;合约源代码目录。
 &nbsp;&nbsp;&nbsp;&nbsp;环境变量：`DAPP_SRC`
@@ -17,7 +17,7 @@
 `--lib-paths` *path*  
 &nbsp;&nbsp;&nbsp;&nbsp;库的文件夹路径。
 
-`-r` *remappings*  
+`-R` *remappings*  
 `--remappings` *remappings*  
 &nbsp;&nbsp;&nbsp;&nbsp;项目的重映射。
 

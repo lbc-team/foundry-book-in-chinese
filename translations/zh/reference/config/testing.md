@@ -194,57 +194,59 @@ gas_limit = "18446744073709551615" # u64::MAX
 
 用于 RPC 调用的 etherscan API 密钥。
 
-##### `test_pattern`
+##### `match-test`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_TEST_PATTERN` 或 `DAPP_TEST_PATTERN`
+- 环境变量: `FOUNDRY_MATCH_TEST` 或 `DAPP_MATCH_TEST`
 
 只运行与正则表达式匹配的测试方法。
 相当于 `forge test --match-test <TEST_PATTERN>`
 
-##### `test_pattern_inverse`
+##### `no-match-test`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_TEST_PATTERN_INVERSE` 或 `DAPP_TEST_PATTERN_INVERSE`
+- 环境变量: `FOUNDRY_NO_MATCH_TEST` 或 `DAPP_NO_MATCH_TEST`
 
 只运行与正则表达式不匹配的测试方法。
 相当于 `forge test --no-match-test <TEST_PATTERN_INVERSE>`
 
-##### `contract_pattern`
+##### `match-contract`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_CONTRACT_PATTERN` 或 `DAPP_CONTRACT_PATTERN`
+- 环境变量: `FOUNDRY_MATCH_CONTRACT` 或 `DAPP_MATCH_CONTRACT`
 
 只在与正则表达式匹配的合约里运行测试方法。
 相当于 `forge test --match-contract <CONTRACT_PATTERN>`
 
-##### `contract_pattern_inverse`
+##### `no-match-contract`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_CONTRACT_PATTERN_INVERSE` 或 `DAPP_CONTRACT_PATTERN_INVERSE`
+- 环境变量: `FOUNDRY_NO_MATCH_CONTRACT` 或 `DAPP_NO_MATCH_CONTRACT`
 
 只在与正则表达式不匹配的合约里运行测试方法。
 相当于 `forge test --no-match-contract <CONTRACT_PATTERN_INVERSE>`
 
-##### `path_pattern`
+##### `match-path`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_PATH_PATTERN` 或 `DAPP_PATH_PATTERN`
+- 环境变量: `FOUNDRY_MATCH_PATH` 或 `DAPP_MATCH_PATH`
 
 只对匹配路径的文件运行测试方法。
+等同于 `forge test --match-path <PATH_PATTERN>`
 
-##### `path_pattern_inverse`
+##### `no-match-path`
 
 - 类型: regex
 - 默认值: none
-- 环境变量: `FOUNDRY_PATH_PATTERN_INVERSE` 或 `DAPP_PATH_PATTERN_INVERSE`
+- 环境变量: `FOUNDRY_NO_MATCH_PATH` 或 `DAPP_NO_MATCH_PATH`
 
 只在与路径不匹配的文件运行测试方法。
+等同于 `forge test --no-match-path <PATH_PATTERN_INVERSE>`
 
 ##### `block_gas_limit`
 
@@ -385,7 +387,7 @@ mainnet = "${RPC_MAINNET}"
 ##### `depth`
 
 - 类型: integer
-- 默认值: 256
+- 默认值: 15
 - 环境变量: `FOUNDRY_INVARIANT_DEPTH`
 
 在一次运行中为尝试破坏不变量而执行的调用次数。

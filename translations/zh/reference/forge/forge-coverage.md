@@ -31,6 +31,10 @@ forge coverage - 显示哪些部分的代码已被测试覆盖。
 
 {{#include common-options.md}}
 
+#### 优化选项
+
+`--ir-minimum` 允许您在覆盖率运行时启用 `via-ir`，以实现所需的 ["最小优化量"](https://github.com/ethereum/solidity/issues/12533#issuecomment-1013073350)。
+
 ### 示例
 
 1. 查看汇总覆盖率：
