@@ -66,9 +66,11 @@ Foundry 配置指引:
 参考手册, 疑难解答等等
 
 - [FAQ](./faq.md)
-- [forge 命令手册](./reference/forge/)
-- [cast 命令手册](./reference/cast/)
-- [anvil 命令手册](./reference/anvil/)
+- [CLI 参考](./reference/cli/)
+- [forge 命令](./reference/forge/)
+- [cast 命令](./reference/cast/)
+- [anvil 命令](./reference/anvil/)
+- [chisel 命令](./reference/chisel/)
 - [Config 参考](./reference/config/)
 - [Cheatcodes 参考](./cheatcodes/)
 - [Forge 标准库 参考](./reference/forge-std/)
