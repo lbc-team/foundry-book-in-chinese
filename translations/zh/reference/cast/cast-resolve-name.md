@@ -6,7 +6,7 @@ cast-resolve-name - 进行 ENS 查询。
 
 ### 简介
 
-``cast lookup-address`` [*options*] *who*
+``cast resolve-name`` [*options*] *who*
 
 ### 描述
 

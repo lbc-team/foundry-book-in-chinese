@@ -1,6 +1,6 @@
 ## `envOr`
 
-### Signature
+### 签名
 
 ```solidity
 function envOr(string calldata key, bool defaultValue) external returns (bool value);
@@ -22,29 +22,29 @@ function envOr(string calldata key, string calldata delimiter, string[] calldata
 function envOr(string calldata key, string calldata delimiter, bytes[] calldata defaultValue) external returns (bytes[] memory value);
 ```
 
-### Description
+### 描述
 
-A non-failing way to read an environment variable of any type: if the requested environment key does not exist, `envOr()` will return a default value instead of reverting (works with arrays too).
+`envOr()` 是一种非失败的方法，用于读取任何类型的环境变量：如果请求的环境键不存在，`envOr()` 将返回默认值，而不是回滚（也适用于数组）。
 
-The returned type is determined by the type of `defaultValue` parameter passed.
+返回的类型由传递的 `defaultValue` 参数的类型确定。
 
-### Tips
+### 提示
 
-- Use `envOr(key, defaultValue)` to read a single value
-- Use `envOr(key, delimiter, defaultValue[])` to read an array with delimiter
-- The parsing of the environment variable will be done according to the type of `defaultValue` (e.g. if the default value type is `uint` - the environment variable will be also parsed as `uint`)
-- Use explicit casting for literals to specify type of default variable: `uint(69)` will return an `uint` but `int(69)` will return an `int`
-- Same with: `string("")` and `bytes("")` - these will return `string` and `bytes` accordingly
-- Use dynamic arrays (`bool[]`) instead of fixed-size arrays (`bool[4]`) when providing default values (only dynamic arrays are supported)
+- 使用 `envOr(key, defaultValue)` 来读取单个值
+- 使用 `envOr(key, delimiter, defaultValue[])` 来使用分隔符读取数组
+- 环境变量的解析将根据 `defaultValue` 的类型进行（例如，如果默认值类型为 `uint`，则环境变量也将被解析为`uint`）
+- 对于字面量，使用显式转换来指定默认变量的类型：`uint(69)` 将返回 `uint`，但 `int(69)` 将返回 `int`
+- 同样适用于：`string("")` 和 `bytes("")` - 这些将分别返回 `string` 和 `bytes`
+- 在提供默认值时，请使用动态数组（`bool[]`）而不是固定大小数组（`bool[4]`）（仅支持动态数组）
 
-### Examples
+### 例子
 
-#### Single Value
-If the environment variable `FORK` is not set, you can specify it to be `false` by default:
+#### 单个值
+如果环境变量 `FORK` 未设置，您可以将其默认设置为 `false`：
 ```solidity
 bool fork = vm.envOr("FORK", false);
 ```
-or
+或者
 ```solidity
 address owner;
 
@@ -53,8 +53,8 @@ function setUp() {
 }
 ```
 
-#### Array
-If the environment variable `BAD_TOKENS` is not set, you can specify the default to be an empty array:
+#### 数组
+如果环境变量 `BAD_TOKENS` 未设置，您可以将默认值指定为空数组：
 ```solidity
 address[] badTokens;
 
@@ -62,10 +62,10 @@ function envBadTokens() public {
   badTokens = vm.envOr("BAD_TOKENS", ",", badTokens);
 }
 ```
-or
+或者
 ```solidity
 function envBadTokens() public {
   address[] memory defaultBadTokens = new address[](0);
   address[] memory badTokens = vm.envOr("BAD_TOKENS", ",", defaultBadTokens);
 }
-```
+``` 

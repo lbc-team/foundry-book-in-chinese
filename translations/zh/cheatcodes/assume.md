@@ -8,15 +8,16 @@ function assume(bool) external;
 
 ### 描述
 
-如果布尔表达式结果为假，模糊测试器将丢弃当前的测试输入，并开始新的运行。
+如果布尔表达式计算结果为 false，则模糊器将丢弃当前的模糊输入并开始新的模糊运行。
 
-`assume`作弊码主要用于特定情况检查以避免减慢测试速度，因为广泛测试会花费很多事件并且可能会因为达到测试失败的次数上限而被终止。因此，建议在使用`assume`作弊码时进行有针对性的、较为精确的检查。
+`assume` 作弊码主要用于非常狭窄的检查。
+广泛的检查会减慢测试速度，因为找到有效值需要一段时间，如果达到最大拒绝次数，测试可能会失败。
 
-您可以在`foundry.toml`文件中通过[`fuzz.max_test_rejects`][max-test-rejects]参数设置阈值。
+您可以通过在您的 `foundry.toml` 文件中设置 [`fuzz.max_test_rejects`][max-test-rejects] 来配置拒绝阈值。
 
-对于广泛的检查，例如检查 `uint256` 在特定范围内，您可以使用取模运算符或 Forge 标准库的 [`bound`][forge-std-bound] 方法来检查。
+对于广泛的检查，比如确保 `uint256` 落在某个范围内，您可以使用取模运算符或 Forge Standard 的 [`bound`][forge-std-bound] 方法来限制您的输入。
 
-通过 `assume` 进行过滤的更多信息参见如下 [链接][filtering-guide].
+有关通过 `assume` 进行过滤的更多信息，请参见[这里][filtering-guide]。
 
 ### 示例
 

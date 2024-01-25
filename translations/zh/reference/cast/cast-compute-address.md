@@ -27,4 +27,4 @@ cast-compute-address - 从给定的 nonce 和部署者地址计算合约地址�
 
 ### 请参阅
 
-[cast](./cast.md), [cast proof](./cast-proof.md)
+[cast](./cast.md), [cast proof](./cast-proof.md), [cast create2](./cast-create2.md)

@@ -1,6 +1,6 @@
 ## `envAddress`
 
-### Signature
+### 签名
 
 ```solidity
 function envAddress(string calldata key) external returns (address value);
@@ -10,18 +10,18 @@ function envAddress(string calldata key) external returns (address value);
 function envAddress(string calldata key, string calldata delimiter) external returns (address[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `address` or `address[]`.
+读取环境变量作为 `address` 或 `address[]`。
 
-### Tips
+### 提示
 
-- For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `ADDRESS_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`,
+#### 单个值
+使用环境变量 `ADDRESS_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`，
 ```solidity
 string memory key = "ADDRESS_VALUE";
 address expected = 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D;
@@ -29,8 +29,8 @@ address output = cheats.envAddress(key);
 assert(output == expected);
 ```
 
-#### Array
-With environment variable `ADDRESS_VALUES=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x0000000000000000000000000000000000000000`,
+#### 数组
+使用环境变量 `ADDRESS_VALUES=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x0000000000000000000000000000000000000000`，
 ```solidity
 string memory key = "ADDRESS_VALUES";
 string memory delimiter = ",";

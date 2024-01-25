@@ -107,6 +107,3 @@ gas_reports_ignore = ["Example"]
 │ setApprovalForAll     ┆ 24485           ┆ 24485  ┆ 24485  ┆ 24485  ┆ 12      │
 ╰───────────────────────┴─────────────────┴────────┴────────┴────────┴─────────╯
 ```
-
-
-有关忽略列表如何工作的更多详细信息，请参阅：[https://github.com/foundry-rs/foundry/pull/2528#issue-1323359692](https://github.com/foundry-rs/foundry/pull/2528#issue-1323359692)

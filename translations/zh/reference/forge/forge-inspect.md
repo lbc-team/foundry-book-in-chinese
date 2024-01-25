@@ -50,6 +50,11 @@ forge-inspect - 获得关于智能合约的专门信息
     forge inspect MyContract storage
     ```
 
+3 . 以漂亮的格式检查合约的 abi：
+   ```sh 
+   forge inspect --pretty MyContract abi
+   ```
+
 ### 另请参阅
 
 [forge](./forge.md), [forge build](./forge-build.md)

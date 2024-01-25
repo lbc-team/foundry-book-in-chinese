@@ -8,9 +8,9 @@ function addr(uint256 privateKey) external returns (address);
 
 ### 描述
 
-计算给定私钥所对应的地址
+计算给定私钥所对应的地址。
 
-### 示例
+### 例子
 
 ```solidity
 address alice = vm.addr(1);

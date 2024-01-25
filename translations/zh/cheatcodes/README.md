@@ -1,41 +1,48 @@
-## Cheatcodes 参考
+## 作弊码参考
 
-作弊码(Cheatcodes)允许用户使用断言、修改EVM状态、模拟数据以及其他强大的功能。
+作弊码(Cheatcodes)为您提供强大的断言，改变 EVM 状态的能力，模拟数据等功能。
 
-作弊码可以通过如下的地址进行使用 (`0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`)。
+通过使用作弊码地址（`0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`）来提供作弊码。
 
 > ℹ️ **注意**
 >
-> 如果您在模糊测试(fuzz test)中遇到了对于该地址的错误，您可以通过使用如下代码将该地址排除于模糊测试之外：
+> 如果在测试中使用模糊地址时遇到此地址的错误，您可能希望通过使用以下行将其从模糊测试中排除：
+
 >
 > ```solidity
 > vm.assume(address_ != 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
 > ```
 
-您也可以通过Forge标准库中的 [`Test`](../reference/forge-std/#forge-stds-test) 合约中提供的`vm`轻松使用作弊码。
+
+您还可以通过 Forge 标准库的 [`Test`](../reference/forge-std/#forge-stds-test) 合约中提供的 `vm` 轻松访问作弊码。
+
 ### Forge 标准库作弊码
 
-Forge标准库对作弊码进行了封装，在实现中将多个标准作弊码组合在一起，以此提高使用体验。严格而言，它们并不是作弊码本身，而是作弊码的组合。
+Forge 标准库实现了作弊码的包装器，这些包装器结合了多个标准作弊码，以改进开发体验。这些技术上不是作弊码，而是 Forge 作弊码的组合。
 
-您可以在 [参考部分](../reference/forge-std/std-cheats.md) 中查看Forge标准库封装作弊码的详情。 另外，您也可以参考 [Forge 标准库源代码](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) 了解其内部实现方法。
+您可以在[参考部分](../reference/forge-std/std-cheats.md)中查看 Forge 标准库作弊码包装器的列表。您可以参考[Forge 标准库源代码](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) 以了解包装器在内部是如何工作的。
 
-### Cheatcode 类型
+### 作弊码类型
 
-以下是根据作弊码功能所进行的分类：
+以下是有关不同 Forge 作弊码的一些子部分。
 
-- [Environment](./environment.md): 用于修改EVM状态的作弊码
-- [Assertions](./assertions.md): 提供断言功能的作弊码
-- [Fuzzer](./fuzzer.md): 设置模糊测试工具的作弊码
-- [External](./external.md): 与外部进行交互的作弊码 (例如：文件, 命令行, ...)
-- [Utilities](./utilities.md): 小功能组件
-- [Forking](./forking.md): 提供分叉模式的作弊码
-- [Snapshots](./snapshots.md): 提供快照功能的作弊码
-- [RPC](./rpc.md): 与RPC调用相关的作弊码
-- [File](./fs.md): 与文件处理相关的作弊码
+- [Environment](./environment.md): 改变以太坊虚拟机状态的作弊码。
+- [Assertions](./assertions.md): 强大的断言作弊码
+- [Fuzzer](./fuzzer.md): 配置模糊器的作弊码
+- [External](./external.md): 与外部状态（文件、命令等）交互的作弊码
+- [Utilities](./utilities.md): 较小的实用程序作弊码
+- [Forking](./forking.md): 分叉模式作弊码
+- [Snapshots](./snapshots.md): 快照作弊码
+- [RPC](./rpc.md): 与 RPC 相关的作弊码
+- [File](./fs.md): 用于处理文件的作弊码
 
-### Cheatcodes 接口
+### 添加新的作弊码
 
-这是一个用于Forge中所有作弊码的Solidity接口。
+如果您需要新功能，请考虑[贡献到 Foundry 的代码库](../contributing.md)以添加作弊码。
+
+### 作弊码接口
+
+这是 Forge 中所有作弊码的 Solidity 接口。
 
 ```solidity
 interface CheatCodes {
@@ -45,6 +52,76 @@ interface CheatCodes {
         bytes data;
     }
 
+    // 用于readCallers()的caller mode
+    enum CallerMode {
+        None,
+        Broadcast,
+        RecurrentBroadcast,
+        Prank,
+        RecurrentPrank
+    }
+
+    enum AccountAccessKind {
+        Call,
+        DelegateCall,
+        CallCode,
+        StaticCall,
+        Create,
+        SelfDestruct,
+        Resume
+    }
+
+    struct Wallet {
+        address addr;
+        uint256 publicKeyX;
+        uint256 publicKeyY;
+        uint256 privateKey;
+    }
+
+    struct ChainInfo {
+        uint256 forkId;
+        uint256 chainId;
+    }
+
+    struct AccountAccess {
+        ChainInfo chainInfo;
+        AccountAccessKind kind;
+        address account;
+        address accessor;
+        bool initialized;
+        uint256 oldBalance;
+        uint256 newBalance;
+        bytes deployedCode;
+        uint256 value;
+        bytes data;
+        bool reverted;
+        StorageAccess[] storageAccesses;
+    }
+
+    struct StorageAccess {
+        address account;
+        bytes32 slot;
+        bool isWrite;
+        bytes32 previousValue;
+        bytes32 newValue;
+        bool reverted;
+    }
+
+    // 从输入派生私钥，返回该输入命名的钱包
+    function createWallet(string calldata) external returns (Wallet memory);
+
+    // 从私钥派生钱包，返回钱包
+    function createWallet(uint256) external returns (Wallet memory);
+
+    // 从私钥派生钱包，返回该输入命名的钱包
+    function createWallet(uint256, string calldata) external returns (Wallet memory);
+
+    // 签发交易, (Wallet, digest) => (v, r, s)
+    function sign(Wallet calldata, bytes32) external returns (uint8, bytes32, bytes32);
+
+    // 获取钱包的 nonce 值
+    function getNonce(Wallet calldata) external returns (uint64);
+    
     // 设置 block.timestamp
     function warp(uint256) external;
 
@@ -56,6 +133,10 @@ interface CheatCodes {
 
     // 设置 block.difficulty
     function difficulty(uint256) external;
+    
+    // Set block.prevrandao
+    // Does not work before the Paris hard fork, and will revert instead.
+    function prevrandao(bytes32) external;
 
     // 设置 block.chainid
     function chainId(uint256) external;
@@ -165,12 +246,18 @@ interface CheatCodes {
     // 将后续调用的 msg.sender 重设为 `address(this)`
     function stopPrank() external;
 
+    // 从当前状态读取的 `msg.sender` 和 `tx.origin`
+    function readCallers() external returns (CallerMode callerMode, address msgSender, address txOrigin);
+    
     // 设置地址余额
     function deal(address who, uint256 newBalance) external;
 
     // 设置地址代码(code)
     function etch(address who, bytes calldata code) external;
-
+    
+    // 将测试标记跳过
+    function skip(bool skip) external;
+    
     // 期望调用中出现的错误
     function expectRevert() external;
     function expectRevert(bytes calldata) external;
@@ -183,6 +270,13 @@ interface CheatCodes {
     function accesses(address)
         external
         returns (bytes32[] memory reads, bytes32[] memory writes);
+    
+    // Record all account accesses as part of CREATE, CALL or SELFDESTRUCT opcodes in order,
+    // along with the context of the calls.
+    function startStateDiffRecording() external;
+
+    // Returns an ordered array of all account accesses from a `startStateDiffRecording` session.
+    function stopAndReturnStateDiff() external returns (AccountAccess[] memory accesses);
 
     // 记录所有交易 log
     function recordLogs() external;
@@ -201,7 +295,7 @@ interface CheatCodes {
     // 如果不明确期望调用的函数签名，那么所有函数都将会被模拟调用。
     function mockCall(address, bytes calldata, bytes calldata) external;
 
-    // 清除所有模拟调用
+    // 回滚模拟调用
     function clearMockedCalls() external;
 
     // 期望某个针对address的特定调用会返回特定数据
@@ -216,6 +310,9 @@ interface CheatCodes {
 
     // 在测试 traces 中标记特定地址
     function label(address addr, string calldata label) external;
+    
+    // Retrieve the label of an address
+    function getLabel(address addr) external returns (string memory);
 
     // 在模糊测试中当条件不满足时生成新测试输入
     function assume(bool) external;
@@ -230,6 +327,7 @@ interface CheatCodes {
     // 使用调用地址或者入参地址作为后续调用的调用者，创建交易并将其签名并发送。
     function startBroadcast() external;
     function startBroadcast(address) external;
+    function startBroadcast(uint256 privateKey) external;
 
     // 停止上述交易发送
     function stopBroadcast() external;
@@ -252,11 +350,24 @@ interface CheatCodes {
     // - 用户缺少删除文件权限.
     // (path) => ()
     function removeFile(string calldata) external;
+    // Returns true if the given path points to an existing entity, else returns false
+    // (path) => (bool)
+    function exists(string calldata) external returns (bool);
+    // Returns true if the path exists on disk and is pointing at a regular file, else returns false
+    // (path) => (bool)
+    function isFile(string calldata) external returns (bool);
+    // Returns true if the path exists on disk and is pointing at a directory, else returns false
+    // (path) => (bool)
+    function isDir(string calldata) external returns (bool);
     
     // 返回对应 'key' 的值
     function parseJson(string memory json, string memory key) external returns (bytes memory);
     // 返回整个 json 文件
     function parseJson(string memory json) external returns (bytes memory);
+    // Check if a key exists in a json string
+    function keyExists(string memory json, string memory key) external returns (bytes memory);
+    // Get list of keys in a json string
+    function parseJsonKeys(string memory json, string memory key) external returns (string[] memory);
 
     // 快照保存当前EVM状态，返回创建的快照id
     // 恢复快照状态使用 `revertTo`

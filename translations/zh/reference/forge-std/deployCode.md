@@ -31,3 +31,9 @@ calldata 参数可以是 `ContractFile.sol`（如果文件名和合约名称相�
 ```solidity
 address deployment = deployCode("MyContract.sol", abi.encode(arg1, arg2));
 ```
+
+### 另请参阅
+
+Forge 标准库
+
+- [`deployCodeTo`](./deployCodeTo.md)

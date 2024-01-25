@@ -37,13 +37,12 @@ assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
 Deploy a contract to an arbitrary address by combining `getCode` and [`etch`](./etch.md)
 
 ```solidity
-
 // Deploy
 bytes memory args = abi.encode(arg1, arg2);
 bytes memory bytecode = abi.encodePacked(vm.getCode("MyContract.sol:MyContract"), args);
 address deployed;
 assembly {
-deployed := create(0, add(bytecode, 0x20), mload(bytecode))
+    deployed := create(0, add(bytecode, 0x20), mload(bytecode))
 }
 
 // Set the bytecode of an arbitrary address
@@ -52,10 +51,12 @@ vm.etch(targetAddr, deployed.code);
 
 ### SEE ALSO
 
+[`getDeployedCode`](./get-deployed-code.md)
+[`eth`](./etch.md)
+
 Forge Standard Library
 
 [`deployCode`](../reference/forge-std/deployCode.md)
-[`getDeployedCode`](./get-deployed-code.md)
-[`eth`](./etch.md)
+[`deployCodeTo`](../reference/forge-std/deployCodeTo.md)
 
 [forge-std]: ../reference/forge-std

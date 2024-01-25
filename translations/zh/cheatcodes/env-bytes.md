@@ -1,8 +1,8 @@
 ## `envBytes`
 
-### Signature
+### 签名
 
-```solidity
+``` solidity
 function envBytes(bytes calldata key) external returns (bytes value);
 ```
 
@@ -10,18 +10,18 @@ function envBytes(bytes calldata key) external returns (bytes value);
 function envBytes(bytes calldata key, bytes calldata delimiter) external returns (bytes[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `bytes` or `bytes[]`.
+读取环境变量作为 `bytes` 或 `bytes[]`。
 
-### Tips
+### 提示
 
-- For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`;
+#### 单个值
+使用环境变量 `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`；
 ```solidity
 bytes memory key = "BYTES_VALUE";
 bytes expected = hex"7109709ECfa91a80626fF3989D68f67F5b1DD12D";
@@ -29,8 +29,8 @@ bytes output = cheats.envBytes(key);
 assertEq(output, expected);
 ```
 
-#### Array
-With environment variable `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x00`;
+#### 数组
+使用环境变量 `BYTES_VALUE=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x00`；
 ```solidity
 bytes memory key = "BYTES_VALUES";
 bytes memory delimiter = ",";

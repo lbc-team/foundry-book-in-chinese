@@ -48,6 +48,7 @@ Let's transfer some tokens from the lucky user to Alice using [`cast send`][cast
 # This calls Anvil and lets us impersonate our lucky user
 $ cast rpc anvil_impersonateAccount $LUCKY_USER
 $ cast send $DAI \
+--unlocked \
 --from $LUCKY_USER \
   "transfer(address,uint256)(bool)" \
   $ALICE \
@@ -71,7 +72,7 @@ $ cast call $DAI \
 70000000000000000000000000
 ```
 
-[anvil]: ../reference/anvil/README.md
-[cast]: ../reference/cast/README.md
+[anvil]: ../reference/anvil/
+[cast]: ../reference/cast/
 [cast-call]: ../reference/cast/cast-call.md
 [cast-send]: ../reference/cast/cast-send.md

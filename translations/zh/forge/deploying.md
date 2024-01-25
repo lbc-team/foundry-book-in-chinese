@@ -45,9 +45,10 @@ contract MyToken is ERC20 {
 ```sh
 $ forge create --rpc-url <your_rpc_url> \
     --constructor-args "ForgeUSD" "FUSD" 18 1000000000000000000000 \
-    --private-key <your_private_key> src/MyToken.sol:MyToken \
+    --private-key <your_private_key> \
     --etherscan-api-key <your_etherscan_api_key> \
-    --verify
+    --verify \
+    src/MyToken.sol:MyToken
 ```
 
 ## 验证已部署的合约
@@ -70,19 +71,25 @@ $ forge create --rpc-url <your_rpc_url> \
 - 优化次数，如果激活了 Solidity 优化器。 如果未指定，则会自动检测。
 - [链 ID](https://evm-chainlist.netlify.app/)，如果合约不在以太坊主网上
 
-假设您想验证 `MyToken`（见上文）。 您将 [优化次数](../reference/config/solidity-compiler.md#optimizer_runs) 设置为 100 万，使用 v0.8.10 对其进行编译，并将其部署到如上所示的 Kovan 测试网（链 ID : 42). 请注意，如果在验证时没有设置 `--num-of-optimizations` 将默认为 0，而如果在部署时没有设置则默认为 200，所以如果你使用默认的编译设置，请确保输入 `--num-of-optimizations 200`。
+假设您想验证 `MyToken`（见上文）。 您将 [优化次数](../reference/config/solidity-compiler.md#optimizer_runs) 设置为 100 万，使用 v0.8.10 对其进行编译，并将其部署到如上所示的 Sepolia 测试网（链 ID : 11155111). 请注意，如果在验证时没有设置 `--num-of-optimizations` 将默认为 0，而如果在部署时没有设置则默认为 200，所以如果你使用默认的编译设置，请确保输入 `--num-of-optimizations 200`。
 
 验证方法如下：
 
 ```bash
-$ forge verify-contract --chain-id 42 --num-of-optimizations 1000000 --watch --constructor-args \ 
-    $(cast abi-encode "constructor(string,string,uint256,uint256)" "ForgeUSD" "FUSD" 18 1000000000000000000000) \
-    --compiler-version v0.8.10+commit.fc410830 <the_contract_address> src/MyToken.sol:MyToken <your_etherscan_api_key>
+forge verify-contract \
+    --chain-id 11155111 \
+    --num-of-optimizations 1000000 \
+    --watch \
+    --constructor-args $(cast abi-encode "constructor(string,string,uint256,uint256)" "ForgeUSD" "FUSD" 18 1000000000000000000000) \
+    --etherscan-api-key <your_etherscan_api_key> \
+    --compiler-version v0.8.10+commit.fc410830 \
+    <the_contract_address> \
+    src/MyToken.sol:MyToken 
 
 Submitted contract for verification:
                 Response: `OK`
                 GUID: `a6yrbjp5prvakia6bqp5qdacczyfhkyi5j1r6qbds1js41ak1a`
-                url: https://kovan.etherscan.io//address/0x6a54…3a4c#code
+                url: https://sepolia.etherscan.io//address/0x6a54…3a4c#code
 ```
 
 建议在使用 `verify-contract` 命令的同时使用 [`--watch`](../reference/forge/forge-verify-contract.md#verify-contract-options) 标志
@@ -92,7 +99,7 @@ Submitted contract for verification:
 使用 [`forge verify-check`](../reference/forge/forge-verify-check.md) 命令检查验证状态：
 
 ```bash
-$ forge verify-check --chain-id 42 <GUID> <your_etherscan_api_key>
+$ forge verify-check --chain-id 11155111 <GUID> <your_etherscan_api_key>
 Contract successfully verified.
 ```
 

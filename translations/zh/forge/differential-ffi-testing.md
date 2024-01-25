@@ -92,7 +92,7 @@ Forge 运行 `npm --prefix differential_testing/scripts/ --silent run generate-r
 ```solidity
 import "openzeppelin-contracts/contracts/utils/cryptography/MerkleProof.sol";
 //...
-function testCompatabilityOpenZeppelinProver(bytes32[] memory _data, uint256 node) public {
+function testCompatibilityOpenZeppelinProver(bytes32[] memory _data, uint256 node) public {
     vm.assume(_data.length > 1);
     vm.assume(node < _data.length);
     bytes32 root = m.getRoot(_data);

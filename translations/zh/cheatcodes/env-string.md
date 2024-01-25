@@ -1,6 +1,6 @@
 ## `envString`
 
-### Signature
+### 签名
 
 ```solidity
 function envString(string calldata key) external returns (string value);
@@ -10,33 +10,32 @@ function envString(string calldata key) external returns (string value);
 function envString(string calldata key, string calldata delimiter) external returns (string[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `string` or `string[]`. In case the environment variable is not defined, Forge will fail
-with the following error message:
+读取环境变量作为 `string` 或 `string[]`。如果环境变量未定义，Forge 将失败，并显示以下错误消息：
 
 > [FAIL. Reason: Failed to get environment variable `FOO` as type `string`: environment variable not found]
 
-### Tips
+### 提示
 
-- You can put your environment variables in a `.env` file. Forge will automatically load them when running `forge test`.
-- For arrays, you can specify the delimiter used to separate the values with the `delimiter` parameter.
-- Choose a delimiter that doesn't appear in the string values, so that they can be correctly separated.
+- 您可以将环境变量放在 `.env` 文件中。运行 `forge test` 时，Forge 将在加载时自动加载它们。
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
+- 选择一个在字符串值中不出现的分隔符，以便它们可以被正确分隔。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `STRING_VALUE=hello, world!`,
+#### 单个值
+使用环境变量 `STRING_VALUE=hello, world!`，
 
 ```solidity
 string memory key = "STRING_VALUE";
-string expected = "hello, world!";
-string output = cheats.envString(key);
+string memory expected = "hello, world!";
+string memory output = vm.envString(key);
 assertEq(output, expected);
 ```
 
-#### Array
-With environment variable `STRING_VALUES=hello, world!|0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`;
+#### 数组
+使用环境变量 `STRING_VALUES=hello, world!|0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`;
 
 ```solidity
 string memory key = "STRING_VALUES";
@@ -45,7 +44,7 @@ string[2] memory expected = [
     "hello, world!",
     "0x7109709ECfa91a80626fF3989D68f67F5b1DD12D"
 ];
-string[] memory output = cheats.envString(key, delimiter);
+string[] memory output = vm.envString(key, delimiter);
 for (uint i = 0; i < expected.length; ++i) {
     assert(keccak256(abi.encodePacked((output[i]))) == keccak256(abi.encodePacked((expected[i]))));
 }

@@ -1,16 +1,16 @@
 ## `fee`
 
-### Signature
+### 签名
 
 ```solidity
 function fee(uint256) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.basefee`.
+设置 `block.basefee`.
 
-### Examples
+### 例子
 
 ```solidity
 vm.fee(25 gwei);

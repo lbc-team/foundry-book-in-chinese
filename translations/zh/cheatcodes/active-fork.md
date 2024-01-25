@@ -8,11 +8,11 @@ function activeFork() external returns (uint256);
 
 ### 描述
 
-返回当前 active 的分叉，如果不存在则 revert 。
+返回当前活动(active)分叉的标识符。如果当前没有活动分叉，则回滚(revert)。
 
 ### 示例
 
-获取当前 active 的分叉 id:
+获取当前活动(active)分叉的 id：
 
 ```solidity
 uint256 mainnetForkId = vm.createFork(MAINNET_RPC_URL);
@@ -27,7 +27,7 @@ vm.selectFork(optimismForkId);
 assertEq(vm.activeFork(), optimismForkId);
 ```
 
-### 参见
+### 另请参阅
 
 - [createFork](./create-fork.md)
 - [selectFork](./select-fork.md)

@@ -68,6 +68,9 @@ you can specify a file containing **space-separated** constructor arguments with
 
 {{#include ../common/retry-options.md}}
 
+`--show-standard-json-input`  
+&nbsp;&nbsp;&nbsp;&nbsp;Command outputs JSON suitable for saving to a file and uploading to block explorers for verification.
+
 `--watch`  
 &nbsp;&nbsp;&nbsp;&nbsp;Wait for verification result after submission.  
 &nbsp;&nbsp;&nbsp;&nbsp;Automatically runs `forge verify-check` until the verification either fails or succeeds.
@@ -104,7 +107,11 @@ you can specify a file containing **space-separated** constructor arguments with
     ```text
     ForgeUSD FUSD 18 1000000000000000000000
     ```
-
+    
+5. Verify a contract with Blockscout right after deployment (make sure you add "/api?" to the end of the Blockscout homepage explorer URL):
+    ```sh
+    forge create --rpc-url <rpc_https_endpoint> --private-key $devTestnetPrivateKey src/Contract.sol:SimpleStorage --verify --verifier blockscout --verifier-url <blockscout_homepage_explorer_url>/api? 
+    ```
 
 ### SEE ALSO
 
