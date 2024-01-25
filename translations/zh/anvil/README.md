@@ -2,7 +2,7 @@
 
 Anvil 是 Foundry 附带的本地测试网节点。 您可以使用它从前端测试您的合约或通过 RPC 进行交互。
 
-Anvil 是 Foundry 套件的一部分，与 `forge` 和 `cast` 一起安装。 如果您还没有安装 Foundry，请参阅 [Foundry installation](../getting-started/installation.md)。
+Anvil 是 Foundry 套件的一部分，与 `forge` 、 `cast` 和 `chisel` 一起安装。 如果您还没有安装 Foundry，请参阅 [Foundry installation](../getting-started/installation.md)。
 
 > 注意：如果您安装了旧版本的 Foundry，则需要重新安装 `foundryup` 才能下载 Anvil。
 

@@ -1,16 +1,16 @@
 ## `store`
 
-### Signature
+### 签名
 
 ```solidity
 function store(address account, bytes32 slot, bytes32 value) external;
 ```
 
-### Description
+### 描述
 
-Stores the value `value` in storage slot `slot` on account `account`.
+在账户 `account` 的存储槽 `slot` 中存储值 `value`。
 
-### Examples
+### 例子
 
 ```solidity
 /// contract LeetContract {
@@ -22,8 +22,8 @@ bytes32 leet = vm.load(address(leetContract), bytes32(uint256(0)));
 emit log_uint(uint256(leet)); // 31337
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
-[Std Storage](../reference/forge-std/std-storage.md)
+[Std Storage](../reference/forge-std/std-storage.md) 

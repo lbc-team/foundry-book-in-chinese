@@ -3,7 +3,42 @@
 This is a collection of common questions and answers. If you do not find your question listed here, hop in the [Telegram support channel][tg-support]
 and let us help you!
 
-### Help! I can't see my logs
+### I can't build from source!
+
+Make sure you're on the latest stable Rust toolchain:
+```sh
+rustup default stable
+rustup update stable
+```
+
+### `libusb` error when running `forge`/`cast`
+
+If you are using the binaries as released, you may see the following error on MacOS:
+
+```sh
+dyld: Library not loaded: /usr/local/opt/libusb/lib/libusb-1.0.0.dylib
+```
+
+In order to fix this, you must install the `libusb` library:
+
+```sh
+brew install libusb
+```
+
+### Out of date `GLIBC`
+
+If you run into an error resembling the following after using `foundryup`:
+
+```sh
+forge: /lib/x86_64-linux-gnu/libc.so.6: version 'GLIBC_2.29' not found (required by forge)
+```
+
+There are 2 workarounds:
+
+1. [Building from source](./getting-started/installation.md#building-from-source)
+2. [Using Docker](./getting-started/installation.md#using-foundry-with-docker)
+
+### Help! I can't see my logs!
 
 Forge does not display logs by default. If you want to see logs from Hardhat's `console.log` or from DSTest-style `log_*` events,
 you need to run [`forge test`][forge-test] with verbosity 2 (`-vv`).
@@ -11,7 +46,7 @@ you need to run [`forge test`][forge-test] with verbosity 2 (`-vv`).
 If you want to see other events your contracts emit, you need to run with traces enabled.
 To do that, set the verbosity to 3 (`-vvv`) to see traces for failing tests, or 4 (`-vvvv`) to see traces for all tests.
 
-### My tests are failing and I don't know why
+### My tests are failing and I don't know why!
 
 To gain better insight into why your tests are failing, try using traces. To enable traces, you need to increase the verbosity
 on [forge test][forge-test] to at least 3 (`-vvv`) but you can go as high as 5 (`-vvvvv`) for even more traces.
@@ -95,11 +130,9 @@ Forge will sometimes check for newer Solidity versions that fit your project. To
 
 All solc versions are installed under `~/.svm/`. If you encounter solc related errors, such as `SolcError: ...` please to nuke `~/.svm/` and try again, this will trigger a fresh install and usually resolves the issue.
 
-If you're on apple silion, please ensure the [`z3` thereom prover](https://github.com/Z3Prover/z3
-) is installed: `brew install z3`
+If you're on apple silicon, please ensure the [`z3` theorem prover](https://github.com/Z3Prover/z3) is installed: `brew install z3`
 
 > **Note**: native apple silicon builds are only available from `0.8.5` upwards. If you need older versions, you must enable apple silicon rosetta to run them.
-
 
 ### Forge fails in JavaScript monorepos (`pnpm`)
 
@@ -143,25 +176,9 @@ allow_paths = ["../node_modules"]
 
 Note that the path is relative to the Foundry workspace. See also [solc allowed-paths](https://docs.soliditylang.org/en/latest/path-resolution.html#allowed-paths)
 
-
-### How to install from source?
-
-> **NOTE:** please ensure your rust version is up-to-date: `rustup update`. Current msrv = "1.62"
-
-```sh
-git clone https://github.com/foundry-rs/foundry
-cd foundry
-# install cast + forge
-cargo install --path ./cli --profile local --bins --locked --force
-# install anvil
-cargo install --path ./anvil --profile local --locked --force
-```
-
-Or via `cargo install --git https://github.com/foundry-rs/foundry --profile local --locked foundry-cli anvil`.
-
 ### I'm getting `Permission denied (os error 13)`
 
-If you see an error like 
+If you see an error like
 
 ```console
 Failed to create artifact parent folder "/.../MyProject/out/IsolationModeMagic.sol": Permission denied (os error 13)
@@ -170,6 +187,19 @@ Failed to create artifact parent folder "/.../MyProject/out/IsolationModeMagic.s
 Then there's likely a folder permission issue. Ensure `user` has write access in the project root's folder.
 
 It has been [reported](https://github.com/foundry-rs/foundry/issues/3268) that on linux, canonicalizing paths can result in weird paths (`/_1/...`). This can be resolved by nuking the entire project folder and initializing again.
+
+### Connection refused when running `forge build`
+
+If you're unable to access github URLs called by `forge build`, you will see an error like
+
+```console
+Error:
+error sending request for url (https://raw.githubusercontent.com/roynalnaruto/solc-builds/ff4ea8a7bbde4488428de69f2c40a7fc56184f5e/macosx/aarch64/list.json): error trying to connect: tcp connect error: Connection refused (os error 61)
+```
+
+Connection failed because access to the URL from your location may be restricted. To solve this, you should set proxy.
+
+You could run `export http_proxy=http://127.0.0.1:7890 https_proxy=http://127.0.0.1:7890` first in the terminal then you will `forge build` successfully.
 
 [tg-support]: https://t.me/foundry_support
 [forge-test]: ./reference/forge/forge-test.md

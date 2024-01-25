@@ -49,10 +49,18 @@ Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 
 solmate-utils/=lib/solmate/src/utils/
 ```
 
+您还可以在 `foundry.toml` 中设置重映射。
+
+```toml
+remappings = [
+    "@solmate-utils/=lib/solmate/src/utils/",
+]
+```
+
 现在我们可以像这样导入 solmate repo的 `src/utils` 中的任何合约：
 
 ```solidity
-import "solmate-utils/Contract.sol"；
+import "solmate-utils/LibString.sol"；
 ```
 
 ### 更新依赖

@@ -16,15 +16,22 @@ You can select the profile to use by setting the `FOUNDRY_PROFILE` environment v
 
 ### Global configuration
 
-You can create a `foundry.toml` file in your home folder to configure Foundry globally.
+You can create a `foundry.toml` file in `~/.foundry` folder to configure Foundry globally.
 
 ### Environment variables
 
-Configuration can be overriden with `FOUNDRY_` and `DAPP_` prefixed environment variables.
+Configuration can be overridden with `FOUNDRY_` and `DAPP_` prefixed environment variables.
 
 Exceptions are:
 
-- `FOUNDRY_FFI`, `DAPP_FFI`
+- `FOUNDRY_FFI`, `DAPP_FFI`, `DAPP_TEST_FFI`
+- `FOUNDRY_PROFILE`
+- `FOUNDRY_REMAPPINGS`, `DAPP_REMAPPINGS`
+- `FOUNDRY_LIBRARIES`, `DAPP_LIBRARIES`
+- `FOUNDRY_FS_PERMISSIONS`, `DAPP_FS_PERMISSIONS`, `DAPP_TEST_FS_PERMISSIONS`
+- `DAPP_TEST_CACHE`
+- `DAPP_TEST_FUZZ_RUNS`
+- `DAPP_TEST_FUZZ_DEPTH`
 
 ### Configuration format
 

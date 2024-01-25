@@ -21,7 +21,7 @@ We can build the project with [`forge build`](../reference/forge/forge-build.md)
 {{#include ../output/hello_foundry/forge-build:all}}
 ```
 
-And run the tests with [`forge test`](../reference/forge/forge-init.md):
+And run the tests with [`forge test`](../reference/forge/forge-test.md):
 
 ```sh
 {{#include ../output/hello_foundry/forge-test:all}}
@@ -31,3 +31,5 @@ And run the tests with [`forge test`](../reference/forge/forge-init.md):
 > 💡 **Tip**
 > 
 > You can always print help for any subcommand (or their subcommands) by adding `--help` at the end.
+
+You can watch [these](../tutorials/learn-foundry.md) beginner tutorials if you are a visual learner.

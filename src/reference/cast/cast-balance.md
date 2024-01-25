@@ -22,7 +22,11 @@ The argument *who* can be an ENS name or an address.
 `--block` *block*  
 &nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+
+`-e` *ether*  
+`--ether` *ether*  
+&nbsp;&nbsp;&nbsp;&nbsp; If this flag is used then balance will be shown in ether
 
 #### RPC Options
 

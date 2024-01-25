@@ -33,8 +33,8 @@ Forge 在测试中使用以下关键字：
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic.t.sol:testFailSubtract43}}
 ```
-一个好的做法是将类似 `testCannot` 的东西与 [`expectRevert`](../cheatcodes/expect-revert.md) 作弊码（cheatcodes）结合使用（作弊码在后面 [介绍](./cheatcodes.md)）。
-这样不使用 `testFail`，可确切地知道 revert 了什么：
+一个好的实践是结合 [`expectRevert`](../cheatcodes/expect-revert.md) cheatcode 来使用 `test_Revert[If|When]_Condition` 模式（cheatcodes 在以下[部分](./cheatcodes.md)有更详细的解释）。此外，其他测试实践可以在 [Tutorials section](../tutorials/best-practices.md) 中找到。
+现在，不再使用 `testFail`，您可以确切地知道发生了什么并且出现了哪些错误：
 
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic2.t.sol:testCannotSubtract43}}

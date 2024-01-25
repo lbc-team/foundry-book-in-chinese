@@ -2,25 +2,22 @@
 
 ### 名称
 
-cast-basefee - 获取一个区块的基础费用。
+cast-base-fee - 获取一个区块的基础费用。
 
 ### 简介
 
-``cast basefee`` [*options*] *block*
+``cast base-fee`` [*options*] *block*
 
 ### 描述
 
 获取一个区块的基础费用。
 
+指定的 *block* 可以是块编号，也可以是以下任何标签之一：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
+
 ### 可选
 
 #### 查询选项
 
-`-B` *block*  
-`--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
-
-&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签:  `earliest`, `latest` 或者 `pending`。
 
 #### RPC 选项
 
@@ -32,12 +29,12 @@ cast-basefee - 获取一个区块的基础费用。
 
 1. 获取最新区块的基础费用：
     ```sh
-    cast basefee latest
+    cast base-fee
     ```
 
 2. 获取创世区块的基础费用：
     ```sh
-    cast basefee 1
+    cast base-fee 1
     ```
 
 ### 请参阅

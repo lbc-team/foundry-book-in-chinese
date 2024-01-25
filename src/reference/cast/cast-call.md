@@ -18,13 +18,28 @@ The destination (*to*) can be an ENS name or an address.
 
 ### OPTIONS
 
+`--trace`  
+&nbsp;&nbsp;&nbsp;&nbsp;Prints traces for the transaction.
+
+`--debug`  
+&nbsp;&nbsp;&nbsp;&nbsp;Opens an interactive debugger with the transaction. Needs `--trace`.
+
+`--verbose`  
+&nbsp;&nbsp;&nbsp;&nbsp;Prints a more verbose trace. Needs `--trace`.
+
+`--labels <address:label>`  
+&nbsp;&nbsp;&nbsp;&nbsp;Labels to apply to the traces, with the format `address:label`. Needs `--trace`.
+
+`--evm-version`  
+&nbsp;&nbsp;&nbsp;&nbsp;The EVM version to use. Needs `--trace`.
+
 #### Query Options
 
 `-B` *block*  
 `--block` *block*  
 &nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
 
 {{#include ../common/wallet-options.md}}
 

@@ -1,16 +1,16 @@
 ## `coinbase`
 
-### Signature
+### 签名
 
 ```solidity
 function coinbase(address) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.coinbase`.
+设置 `block.coinbase`.
 
-### Examples
+### 例子
 
 ```solidity
 emit log_address(block.coinbase); // 0x0000000000000000000000000000000000000000

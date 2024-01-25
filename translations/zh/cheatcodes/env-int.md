@@ -1,6 +1,6 @@
 ## `envInt`
 
-### Signature
+### 签名
 
 ```solidity
 function envInt(string calldata key) external returns (int256 value);
@@ -10,17 +10,17 @@ function envInt(string calldata key) external returns (int256 value);
 function envInt(string calldata key, string calldata delimiter) external returns (int256[] memory values);
 ```
 
-### Description
+### 描述
 
 Read an environment variable as `int256` or `int256[]`.
 
-### Tips
+### 提示
 
 - If the value starts with `0x`, `-0x` or `+0x`, it will be interpreted as a hex value, otherwise,
 it will be treated as a decimal number.
 - For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
 
-### Examples
+### 例子
 
 #### Single Value
 With environment variable `INT_VALUE=-57896044618658097711785492504343953926634992332820282019728792003956564819968`,

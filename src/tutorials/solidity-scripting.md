@@ -6,6 +6,17 @@ Solidity scripting is a way to declaratively deploy contracts using Solidity, in
 
 Solidity scripts are like the scripts you write when working with tools like Hardhat; what makes Solidity scripting different is that they are written in Solidity instead of JavaScript, and they are run on the fast Foundry EVM backend, which provides dry-run capabilities.
 
+### High Level Overview
+
+`forge script` does not work in a sync manner. First, it collects all transactions from the script, and only then does it broadcast them all. It can essentially be split into 4 phases:
+
+1. Local Simulation - The contract script is run in a local evm. If a rpc/fork url has been provided, it will execute the script in that context. Any **external call** (not static, not internal) from a `vm.broadcast` and/or `vm.startBroadcast` will be appended to a list. 
+2. Onchain Simulation - Optional. If a rpc/fork url has been provided, then it will sequentially execute all the collected transactions from the previous phase here.
+3. Broadcasting - Optional. If the `--broadcast` flag is provided and the previous phases have succeeded, it will broadcast the transactions collected at step `1`. and simulated at step `2`.
+4. Verification - Optional. If the `--verify` flag is provided, there's an API key, and the previous phases have succeeded it will attempt to verify the contract. (eg. etherscan).
+
+Given this flow, it's important to be aware that transactions whose behaviour can be influenced by external state/actors might have a different result than what was simulated on step `2`. Eg. frontrunning.
+
 ### Set Up
 
 Let’s try to deploy the NFT contract made in the solmate tutorial with solidity scripting. First of all, we would need to create a new Foundry project via:
@@ -30,7 +41,7 @@ Next, we have to delete the `Counter.sol` file in the `src` folder and create an
 rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
 ```
 
-![set up commands](https://img.learnblockchain.cn/pics/20230309091356.png)
+![set up commands](../images/solidity-scripting/set-up-commands.png)
 
 Once that’s done, you should open up your preferred code editor and copy the code below into the `NFT.sol` file.
 
@@ -39,8 +50,8 @@ Once that’s done, you should open up your preferred code editor and copy the c
 pragma solidity >=0.8.10;
 
 import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/utils/Strings.sol";
-import "openzeppelin-contracts/access/Ownable.sol";
+import "openzeppelin-contracts/contracts/utils/Strings.sol";
+import "openzeppelin-contracts/contracts/access/Ownable.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -108,7 +119,7 @@ forge build
 ```
 
 If your output looks like this, the contracts successfully compiled.
-![compile successful](../images/solidity-scripting%20/compile-successful.png)
+![compile successful](../images/solidity-scripting/compile-successful.png)
 
 ### Deploying our contract
 
@@ -192,7 +203,7 @@ contract MyScript is Script {
 We create a contract called `MyScript` and it inherits `Script` from Forge Std.
 
 ```solidity
- function run() external {
+function run() external {
 ```
 
 By default, scripts are executed by calling the function named `run`, our entrypoint.
@@ -201,8 +212,7 @@ By default, scripts are executed by calling the function named `run`, our entryp
 uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
 ```
 
-This loads in the private key from our `.env` file. **Note:** you must be careful when exposing private keys in a `.env` file and loading them into programs. This is only recommended for use with non-priviliged deployers or for local / test setups. For production setups please review the various [wallet options](../reference/forge/forge-script.md#wallet-options---raw) that Foundry supports.
-
+This loads in the private key from our `.env` file. **Note:** you must be careful when exposing private keys in a `.env` file and loading them into programs. This is only recommended for use with non-privileged deployers or for local / test setups. For production setups please review the various [wallet options](../reference/forge/forge-script.md#wallet-options---raw) that Foundry supports.
 
 ```solidity
 vm.startBroadcast(deployerPrivateKey);
@@ -211,7 +221,7 @@ vm.startBroadcast(deployerPrivateKey);
 This is a special cheatcode that records calls and contract creations made by our main script contract. We pass the `deployerPrivateKey` in order to instruct it to use that key for signing the transactions. Later, we will broadcast these transactions to deploy our NFT contract.
 
 ```solidity
- NFT nft = new NFT("NFT_tutorial", "TUT", "baseUri");
+NFT nft = new NFT("NFT_tutorial", "TUT", "baseUri");
 ```
 
 Here we just create our NFT contract. Because we called `vm.startBroadcast()` before this line, the contract creation will be recorded by Forge, and as mentioned previously, we can broadcast the transaction to deploy the contract on-chain. The broadcast transaction logs will be stored in the `broadcast` directory by default. You can change the logs location by setting [`broadcast`](../reference/config/project.md#broadcast) in your `foundry.toml` file.
@@ -232,7 +242,7 @@ forge script script/NFT.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --v
 
 Forge is going to run our script and broadcast the transactions for us - this can take a little while, since Forge will also wait for the transaction receipts. You should see something like this after a minute or so:
 
-![contract verified](../images/solidity-scripting%20/contract-verified.png)
+![contract verified](../images/solidity-scripting/contract-verified.png)
 
 This confirms that you have successfully deployed the `NFT` contract to the Goerli testnet and have also verified it on Etherscan, all with one command.
 
@@ -273,7 +283,7 @@ Start Anvil with the custom mnemonic:
 ```sh
 source .env
 
-anvil --m $MNEMONIC
+anvil -m $MNEMONIC
 ```
 
 Then run the following script:

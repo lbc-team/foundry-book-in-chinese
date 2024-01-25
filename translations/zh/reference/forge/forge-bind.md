@@ -63,7 +63,7 @@ forge-bind - 为智能合约生成 Rust 绑定。
 &nbsp;&nbsp;&nbsp;&nbsp;一个例子是，如果你使用 ethers 的额外功能，如 `ws`，`ipc`，或 `rustls`，并提示 `ethers-providers` 版本不匹配。
 
 `--skip-build`  
-&nbsp;&nbsp;&nbsp;&nbsp;在生成绑定之前跳过运行锻造构建。
+&nbsp;&nbsp;&nbsp;&nbsp;在生成绑定之前跳过运行 Forge 构建。
 &nbsp;&nbsp;&nbsp;&nbsp;这允许你跳过首先执行的默认 `forge build` 步骤，而是使用已经存在的 artifacts 生成绑定。
 
 `--select-all`  

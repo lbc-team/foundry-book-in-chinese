@@ -2,25 +2,19 @@
 
 ### NAME
 
-cast-basefee - Get the basefee of a block.
+cast-base-fee - Get the basefee of a block.
 
 ### SYNOPSIS
 
-``cast basefee`` [*options*] *block*
+``cast base-fee`` [*options*] [*block*]
 
 ### DESCRIPTION
 
 Get the basefee of a block.
 
+The specified *block* can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`. Default to `latest`.
+
 ### OPTIONS
-
-#### Query Options
-
-`-B` *block*  
-`--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
-
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `latest` or `pending`.
 
 #### RPC Options
 
@@ -32,12 +26,12 @@ Get the basefee of a block.
 
 1. Get the basefee of the latest block:
     ```sh
-    cast basefee latest
+    cast base-fee
     ```
 
 2. Get the basefee of the genesis block:
     ```sh
-    cast basefee 1
+    cast base-fee 1
     ```
 
 ### SEE ALSO

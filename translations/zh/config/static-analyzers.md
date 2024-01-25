@@ -6,30 +6,34 @@
 
 ```json
 {
-  "filter_paths": "lib",
-  "solc_remaps": [
-    "ds-test/=lib/ds-test/src/",
-    "forge-std/=lib/forge-std/src/"
-  ]
+  "filter_paths": "lib"
 }
 ```
 
-请注意，您需要使用 `solc-select` 将 Slither 使用的 `solc` 更新为 Forge 使用的相同版本：
+要在整个项目上运行 Slither，请在项目的根目录中使用以下命令：
 
-```ignore
-pip3 install slither-analyzer
-pip3 install solc-select
-solc-select install 0.8.13
-solc-select use 0.8.13
+```sh
+slither .
+```
+
+默认情况下（截至版本 0.10.0），这将跳过测试和脚本。要强制包含测试和脚本，请添加 `--foundry-compile-all` 标志。
+
+要在单个文件上运行 Slither，请使用以下命令：
+
+```sh
 slither src/Contract.sol
 ```
 
-有关详细信息，请参阅 [slither wiki](https://github.com/crytic/slither/wiki/Usage)。
+请注意，这需要在 [foundry 配置文件中配置 solc 版本](https://book.getfoundry.sh/reference/config/solidity-compiler#solc_version)。
 
-为了使用自定义配置，例如上面提到的示例 `slither.config.json`，使用 [slither-wiki](https://github.com/crytic/slither/wiki) 中提到的以下命令 /用法#配置文件）。 默认情况下，slither 会查找 `slither.config.json`，但您可以定义路径和选择其他的 `json` 文件：
+您无需通过 `solc_remaps` 选项提供重映射，因为 Slither 将自动检测 Foundry 项目中的重映射。Slither 将调用 `forge` 来执行构建。
 
-```sh 
-slither --config-file <path>/file.config.json Counter.sol
+有关更多信息，请参阅 [Slither wiki](https://github.com/crytic/slither/wiki/Usage)。
+
+为了使用自定义配置，例如上面提到的示例 `slither.config.json`，可以使用以下命令，如 [slither-wiki](https://github.com/crytic/slither/wiki/Usage#configuration-file) 中所述。默认情况下，slither 会查找 `slither.config.json`，但您可以定义路径和您选择的任何其他 `json` 文件：
+
+```sh
+slither --config-file <path>/file.config.json .
 ```
 
 示例输出（Raw）：
@@ -47,7 +51,7 @@ Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-
 Counter.sol analyzed (1 contracts with 78 detectors), 4 result(s) found
 ```
 
-Slither 还有一个用于 CI/CD 的 [github action](https://github.com/marketplace/actions/slither-action)。
+Slither 还有一个用于 CI/CD 的 [GitHub Action](https://github.com/marketplace/actions/slither-action)。
 
 ### Mythril
 

@@ -1,6 +1,6 @@
 ## `transact`
 
-### Signature
+### 签名
 
 ```solidity
 // Fetches the given transaction from the active fork and executes it on the current state
@@ -9,13 +9,13 @@ function transact(bytes32 txHash) external;
 function transact(uint256 forkId, bytes32 txHash) external;
 ```
 
-### Description
+### 描述
 
-In forking mode, fetches the Transaction from the provider and executes it on the current state
+在分叉模式下，从提供者获取交易并在当前状态上执行它。
 
-### Examples
+### 例子
 
-Enter forking mode and execute a transaction:
+进入分叉模式并执行一个交易：
 
 ```solidity
 // Enter forking mode at block: https://etherscan.io/block/15596646
@@ -31,7 +31,7 @@ address recipient = address(0x0C124046Fa7202f98E4e251B50488e34416Fc306);
 assertEq(sender.balance, 5764124000000000);
 assertEq(recipient.balance, 3936000000000000);
 
-// transfer amount: 0.000336 Ether
+// transfer amount: 0.003936 Ether
 uint256 transferAmount = 3936000000000000;
 
 // expected balance changes once the transaction is executed
@@ -49,7 +49,7 @@ assert(sender.balance < expectedSenderBalance);
 
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [roll](./roll.md)
 - [createFork](./create-fork.md)

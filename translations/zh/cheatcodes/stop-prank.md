@@ -1,11 +1,11 @@
 ## `stopPrank`
 
-### Signature
+### 签名
 
 ```solidity
 function stopPrank() external;
 ```
 
-### Description
+### 描述
 
-Stops an active prank started by [`startPrank`](./start-prank.md), resetting `msg.sender` and `tx.origin` to the values before `startPrank` was called.
+停止由 [`startPrank`](./start-prank.md) 启动的活动 Prank，将 `msg.sender` 和 `tx.origin` 重置为调用 `startPrank` 之前的值。
