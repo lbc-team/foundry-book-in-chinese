@@ -6,30 +6,36 @@ To test your project using [slither](https://github.com/crytic/slither), here is
 
 ```json
 {
-  "filter_paths": "lib",
-  "solc_remaps": [
-    "ds-test/=lib/ds-test/src/",
-    "forge-std/=lib/forge-std/src/"
-  ]
+  "filter_paths": "lib"
 }
 ```
 
-Note, you need to update `solc` used by Slither to the same version used by Forge with `solc-select`:
-```ignore
-pip3 install slither-analyzer
-pip3 install solc-select
-solc-select install 0.8.13
-solc-select use 0.8.13
+To run Slither on the entire project, use this command in the root of the project:
+
+```sh
+slither .
+```
+
+By default (as of version 0.10.0), this will skip tests and scripts. To force inclusion of the tests and scripts, add the `--foundry-compile-all` flag.
+
+To run Slither on a single file, use this command:
+
+```sh
 slither src/Contract.sol
 ```
 
-See the [slither wiki](https://github.com/crytic/slither/wiki/Usage) for more information.
+Note, this requires configuring the [solc version in the foundry config file](https://book.getfoundry.sh/reference/config/solidity-compiler#solc_version).
+
+You do not need to provide remappings via the `solc_remaps` option as Slither will automatically detect remappings in a Foundry project. Slither will invoke `forge` to perform the build.
+
+See the [Slither wiki](https://github.com/crytic/slither/wiki/Usage) for more information.
 
 In order to use a custom configuration, such as the sample `slither.config.json` mentioned above, the following command is used as mentioned in the [slither-wiki](https://github.com/crytic/slither/wiki/Usage#configuration-file). By default slither looks for the `slither.config.json` but you can define the path and any other `json` file of your choice:
 
-```sh 
-slither --config-file <path>/file.config.json Counter.sol
+```sh
+slither --config-file <path>/file.config.json .
 ```
+
 Example output (Raw):
 
 ```bash 
@@ -45,7 +51,7 @@ Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#public-
 Counter.sol analyzed (1 contracts with 78 detectors), 4 result(s) found
 ```
 
-Slither also has a [github action](https://github.com/marketplace/actions/slither-action) for CI/CD.
+Slither also has a [GitHub Action](https://github.com/marketplace/actions/slither-action) for CI/CD.
 
 ### Mythril
 
@@ -100,4 +106,4 @@ Solver time: 3.6820807456970215
 The analysis was completed successfully. No issues were detected.
 ```
 
-The findings will be listed at the end of this output if any. Since the default `Counter.sol` does't have any logic, `mythx` reports that no issues were found.
+The findings will be listed at the end of this output if any. Since the default `Counter.sol` doesn't have any logic, `mythx` reports that no issues were found.

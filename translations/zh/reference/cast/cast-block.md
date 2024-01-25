@@ -2,31 +2,23 @@
 
 ### 名称
 
-cast-block - 获取一个区块的信息。
+cast-block - 获取有关区块的信息。
 
-### 简介
+### 概要
 
-``cast block`` [*options*] `--block` *block*
+``cast block`` [*options*] [*block*]
 
 ### 描述
 
-获取一个区块的信息。
+获取有关区块的信息。
 
-如果指定了 *field*，那么就只显示该区块的指定字段。
+指定的 *block* 可以是区块编号，也可以是任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
 
-### 可选
-
-#### 查询选项
-
-`-B` *block*  
-`--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
-
-&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签:  `earliest`, `latest` 或者 `pending`.
+### 选项
 
 `-f` *field*  
 `--field` *field*  
-&nbsp;&nbsp;&nbsp;&nbsp;如果指定，只获取区块的给定字段。
+&nbsp;&nbsp;&nbsp;&nbsp; 如果指定，则仅获取区块的给定字段。
 
 {{#include ../common/display-options.md}}
 
@@ -36,18 +28,23 @@ cast-block - 获取一个区块的信息。
 
 {{#include common-options.md}}
 
-### 例子
+### 示例
 
-1. 获取最新区块:
+1. 获取最新的区块：
     ```sh
-    cast block --block latest
+    cast block
     ```
 
-2. 获取最新区块的哈希:
+2. 获取`finalized`区块：
     ```sh
-    cast block --block latest --field hash
+    cast block finalized
     ```
 
-### 请参阅
+3. 获取最新区块的哈希值：
+    ```sh
+    cast block latest -f hash
+    ```
+
+### 参见
 
 [cast](./cast.md), [cast basefee](./cast-basefee.md), [cast age](./cast-age.md)

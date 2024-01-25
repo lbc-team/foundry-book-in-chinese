@@ -1,11 +1,11 @@
 ## `clearMockedCalls`
 
-### Signature
+### 签名
 
 ```solidity
 function clearMockedCalls() external;
 ```
 
-### Description
+### 描述
 
-Clears all [mocked calls](./mock-call.md).
+清除所有 [mocked calls](./mock-call.md).

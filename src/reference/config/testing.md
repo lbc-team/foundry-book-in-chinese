@@ -194,57 +194,59 @@ The url of the rpc server that should be used for any rpc calls.
 
 The etherscan API key for RPC calls.
 
-##### `test_pattern`
+##### `match-test`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_TEST_PATTERN` or `DAPP_TEST_PATTERN`
+- Environment: `FOUNDRY_MATCH_TEST` or `DAPP_MATCH_TEST`
 
 Only run test methods matching regex.
 Equivalent to `forge test --match-test <TEST_PATTERN>`
 
-##### `test_pattern_inverse`
+##### `no-match-test`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_TEST_PATTERN_INVERSE` or `DAPP_TEST_PATTERN_INVERSE`
+- Environment: `FOUNDRY_NO_MATCH_TEST` or `DAPP_NO_MATCH_TEST`
 
 Only run test methods not matching regex.
 Equivalent to `forge test --no-match-test <TEST_PATTERN_INVERSE>`
 
-##### `contract_pattern`
+##### `match-contract`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_CONTRACT_PATTERN` or `DAPP_CONTRACT_PATTERN`
+- Environment: `FOUNDRY_MATCH_CONTRACT` or `DAPP_MATCH_CONTRACT`
 
 Only run test methods in contracts matching regex.
 Equivalent to `forge test --match-contract <CONTRACT_PATTERN>`
 
-##### `contract_pattern_inverse`
+##### `no-match-contract`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_CONTRACT_PATTERN_INVERSE` or `DAPP_CONTRACT_PATTERN_INVERSE`
+- Environment: `FOUNDRY_NO_MATCH_CONTRACT` or `DAPP_NO_MATCH_CONTRACT`
 
 Only run test methods in contracts not matching regex.
 Equivalent to `forge test --no-match-contract <CONTRACT_PATTERN_INVERSE>`
 
-##### `path_pattern`
+##### `match-path`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_PATH_PATTERN` or `DAPP_PATH_PATTERN`
+- Environment: `FOUNDRY_MATCH_PATH` or `DAPP_MATCH_PATH`
 
 Only runs test methods on files matching the path.
+Equivalent to `forge test --match-path <PATH_PATTERN>`
 
-##### `path_pattern_inverse`
+##### `no-match-path`
 
 - Type: regex
 - Default: none
-- Environment: `FOUNDRY_PATH_PATTERN_INVERSE` or `DAPP_PATH_PATTERN_INVERSE`
+- Environment: `FOUNDRY_NO_MATCH_PATH` or `DAPP_NO_MATCH_PATH`
 
 Only runs test methods on files not matching the path.
+Equivalent to `forge test --no-match-path <PATH_PATTERN_INVERSE>`
 
 ##### `block_gas_limit`
 
@@ -365,11 +367,11 @@ Configuration values for `[invariant]` section.
 >   section, these values will automatically be set to the values specified in
 >   the `[fuzz]` section.
 > * For any profile other than `default`:
->     * If the common entries are set in the `[invariant]` (same
->       as `[profile.default.invariant]`) section, then the values from
->       `[invariant]` section will be used.
->     * If the common entries are not set in the `[invariant]` section,
->       but are set in the `[fuzz]` (same as `[profile.default.fuzz]`) section,
+>     * If at least one entry is set in the `[invariant]` (same as
+>       `[profile.default.invariant]`) section, then the values from
+>       `[invariant]` section will be used, including defaults.
+>     * If no entry is set in the `[invariant]` section, but there are
+>       entries in the `[fuzz]` (same as `[profile.default.fuzz]`) section,
 >       then the values from the `[fuzz]` section will be used.
 >     * If it's none of the cases described above, then the defaults
 >       will be used.
@@ -385,7 +387,7 @@ The number of runs that must execute for each invariant test group. See also [fu
 ##### `depth`
 
 - Type: integer
-- Default: 256
+- Default: 15
 - Environment: `FOUNDRY_INVARIANT_DEPTH`
 
 The number of calls executed to attempt to break invariants in one run.
@@ -404,7 +406,7 @@ Fails the invariant fuzzing if a revert occurs.
 - Default: false
 - Environment: `FOUNDRY_INVARIANT_CALL_OVERRIDE`
 
-Allows overriding an unsafe external call when running invariant tests. eg. reentrancy checks.
+Overrides unsafe external calls when running invariant tests, useful for e.g. performing reentrancy checks.
 
 ##### `dictionary_weight`
 

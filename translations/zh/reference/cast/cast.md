@@ -64,6 +64,9 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast access-list](./cast-access-list.md)
 &nbsp;&nbsp;&nbsp;&nbsp;为一个交易创建一个访问列表。
 
+[cast logs](./cast-logs.md)
+&nbsp;&nbsp;&nbsp;&nbsp;按签名或主题获取日志
+
 #### Block 命令
 
 [cast find-block](./cast-find-block.md)
@@ -101,6 +104,9 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast code](./cast-code.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取一个合约的字节码。
 
+[cast codesize](./cast-codesize.md)
+&nbsp;&nbsp;&nbsp;&nbsp;获取合约的运行时字节码大小。
+
 #### ENS 命令
 
 [cast lookup-address](./cast-lookup-address.md)
@@ -119,6 +125,9 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 
 #### ABI 命令
 
+[cast abi-decode](./cast-abi-decode.md)
+&nbsp;&nbsp;&nbsp;&nbsp;解码 ABI 编码的输入或输出数据。
+
 [cast abi-encode](./cast-abi-encode.md)
 &nbsp;&nbsp;&nbsp;&nbsp;对给定的函数参数进行 ABI 编码，不包括选择器。
 
@@ -134,6 +143,9 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast calldata](./cast-calldata.md)
 &nbsp;&nbsp;&nbsp;&nbsp;ABI 编码一个带参数的函数。
 
+[cast calldata-decode](./cast-calldata-decode.md)
+&nbsp;&nbsp;&nbsp;&nbsp;解码 ABI 编码的输入数据。
+
 [cast pretty-calldata](./cast-pretty-calldata.md)
 &nbsp;&nbsp;&nbsp;&nbsp;漂亮地打印 Calldata。
 
@@ -148,46 +160,61 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 
 #### Conversion 命令
 
-[cast --format-bytes32-string](./cast--format-bytes32-string.md)
+[cast format-bytes32-string](./cast-format-bytes32-string.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个字符串转换成 bytes32 编码。
 
-[cast --from-bin](./cast--from-bin.md)
+[cast from-bin](./cast-from-bin.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将二进制数据转换为十六进制数据。
 
-[cast --from-fix](./cast--from-fix.md)
+[cast from-fix](./cast-from-fix.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个定点数转换成一个整数。
 
-[cast --from-utf8](./cast--from-utf8.md)
+[cast from-utf8](./cast-from-utf8.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将 UTF8 文本转换为十六进制。
 
-[cast --parse-bytes32-string](./cast--parse-bytes32-string.md)
+[cast from-wei](./cast-from-wei.md)
+&nbsp;&nbsp;&nbsp;&nbsp;将 wei 转换为 ETH 数量
+
+[cast parse-bytes32-address](./cast-parse-bytes32-address.md)
+&nbsp;&nbsp;&nbsp;&nbsp;从 bytes32 编码中解析出校验和地址。
+
+[cast parse-bytes32-string](./cast-parse-bytes32-string.md)
 &nbsp;&nbsp;&nbsp;&nbsp;从 bytes32 编码中解析出一个字符串。
 
-[cast --to-ascii](./cast--to-ascii.md)
+[cast to-ascii](./cast-to-ascii.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将十六进制数据转换为ASCII字符串。
 
-[cast --to-base](./cast--to-base.md)
+[cast to-base](./cast-to-base.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个进制底数转换为其它底数。
 
-[cast --to-bytes32](./cast--to-bytes32.md)
+[cast to-bytes32](./cast-to-bytes32.md)
 &nbsp;&nbsp;&nbsp;&nbsp;右移十六进制数据至 32 字节。
 
-[cast --to-fix](./cast--to-fix.md)
+[cast to-dec](./cast-to-dec.md)
+&nbsp;&nbsp;&nbsp;&nbsp;将一个基数的数字转换为十进制
+
+[cast to-fixed-point](./cast-to-fixed-point.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个整数转换成一个定点数。
 
-[cast --to-hexdata](./cast--to-hexdata.md)
+[cast to-hex](./cast-to-hex.md)
+&nbsp;&nbsp;&nbsp;&nbsp;将一个基数的数字转换为另一个基数
+
+[cast to-hexdata](./cast-to-hexdata.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将输入规范化为小写，0x- 前缀的十六进制。
 
-[cast --to-int256](./cast--to-int256.md)
+[cast to-int256](./cast-to-int256.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个数字转换为十六进制编码的 int256。
 
-[cast --to-uint256](./cast--to-uint256.md)
+[cast to-rlp](./cast-to-rlp.md)
+&nbsp;&nbsp;&nbsp;&nbsp;对十六进制数据或十六进制数据数组进行 RLP 编码
+
+[cast to-uint256](./cast-to-uint256.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个数字转换成十六进制编码的 uint256。
 
-[cast --to-unit](./cast--to-unit.md)
+[cast to-unit](./cast-to-unit.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个 eth 单位转换为另一个单位。 (ether, gwei, wei).
 
-[cast --to-wei](./cast--to-wei.md)
+[cast to-wei](./cast-to-wei.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将 eth 金额转换为 wei 单位。
 
 [cast shl](./cast-shl.md)
@@ -201,11 +228,17 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast sig](./cast-sig.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取一个函数的选择器。
 
+[cast sig-event](./cast-sig-event.md)
+&nbsp;&nbsp;&nbsp;&nbsp;从事件字符串生成事件签名。
+
 [cast keccak](./cast-keccak.md)
 &nbsp;&nbsp;&nbsp;&nbsp;使用 keccak-256 对任意数据进行哈希。
 
 [cast compute-address](./cast-compute-address.md)
 &nbsp;&nbsp;&nbsp;&nbsp;从给定的 nonce 和部署者地址计算合约地址。
+
+[cast create2](./cast-create2.md)
+&nbsp;&nbsp;&nbsp;&nbsp; 使用 CREATE2 生成确定性合约地址。
 
 [cast interface](./cast-interface.md)
 &nbsp;&nbsp;&nbsp;&nbsp;从一个给定的 ABI 生成一个 Solidity 接口。
@@ -213,19 +246,19 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast index](./cast-index.md)
 &nbsp;&nbsp;&nbsp;&nbsp;计算集合中条目的存储插槽位置。
 
-[cast --concat-hex](./cast--concat-hex.md)
+[cast concat-hex](./cast-concat-hex.md)
 &nbsp;&nbsp;&nbsp;&nbsp;串接十六进制字符串。
 
-[cast --max-int](./cast--max-int.md)
+[cast max-int](./cast-max-int.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取 int256 最大值。
 
-[cast --min-int](./cast--min-int.md)
+[cast min-int](./cast-min-int.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取 int256 最小值。
 
-[cast --max-uint](./cast--max-uint.md)
+[cast max-uint](./cast-max-uint.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取 uint256 最大值。
 
-[cast --to-checksum-address](./cast--to-checksum-address.md)
+[cast to-check-sum-address](./cast-to-check-sum-address.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将一个地址转换为校验过的格式 (EIP-55).
 
 #### Wallet Commands
@@ -270,7 +303,7 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 2. 解码原始的 calldata。
 
     ```sh
-    cast --calldata-decode "transfer(address,uint256)" \
+    cast calldata-decode "transfer(address,uint256)" \
       0xa9059cbb000000000000000000000000e78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0000000000000000000000000000000000000000000000000008a8e4b1a3d8000
     ```
 

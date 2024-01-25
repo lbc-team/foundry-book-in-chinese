@@ -1,13 +1,13 @@
 ## `label`
 
-### Signature
+### 签名
 
-```solidity
+```solidity 
 function label(address addr, string calldata label) external;
 ```
 
-### Description
+### 描述
 
-Sets a label `label` for `addr` in test traces.
+在测试跟踪中为 `addr` 设置标签 `label`。
 
-If an address is labelled, the label will show up in test traces instead of the address.
+如果一个地址被标记，标签将显示在测试跟踪中，而不是地址。

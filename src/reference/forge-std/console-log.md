@@ -3,7 +3,8 @@
 - Similar to Hardhat's console functions.
 - You can use it in calls and transactions. It works with view functions, but not in pure ones.
 - It always works, regardless of the call or transaction failing or being successful.
-- To use it you need to import forge-std/console.sol.
+- To use it you need import it:
+    - `import "forge-std/console.sol";`
 - You can call console.log with up to 4 parameters in any order of following types:
     - `uint`
     - `string`
@@ -32,6 +33,8 @@ The `console.log()` method prints a formatted string using the first argument as
 - `%s`: String will be used to convert all values to a human-readable string. `uint256`, `int256` and `bytes` values are converted to their `0x` hex encoded values.
 - `%d`: Number will be used to convert all values to a human-readable string. This is identical to `%s`.
 - `%i`: Works the same way as `%d`.
+- `%e`: The exponential representation of a number. For `uint256` and `int256` types.
+- `%x`: The hexadecimal representation of a number. For `uint256` and `int256` types.
 - `%o`: Object. A string representation of an object with generic JavaScript-styled object formatting. For solidity types, this basically surround the string representation of the value in single-quotes.
 - `%%`: single percent sign ('%'). This does not consume an argument.
 - Returns: `<string>` The formatted string

@@ -16,7 +16,7 @@ Foundry 的配置系统允许你对其工具进行配置。
 
 ### 全局配置
 
-你可以在主文件夹创建一个 `foundry.toml` 文件来全局配置 Foundry。
+你可以在 `~/.foundry` 创建一个 `foundry.toml` 文件来全局配置 Foundry。
 
 ### 环境变量
 
@@ -24,7 +24,14 @@ Foundry 的配置系统允许你对其工具进行配置。
 
 如下所示：
 
-- `FOUNDRY_FFI`, `DAPP_FFI`
+- `FOUNDRY_FFI`, `DAPP_FFI`, `DAPP_TEST_FFI`
+- `FOUNDRY_PROFILE`
+- `FOUNDRY_REMAPPINGS`, `DAPP_REMAPPINGS`
+- `FOUNDRY_LIBRARIES`, `DAPP_LIBRARIES`
+- `FOUNDRY_FS_PERMISSIONS`, `DAPP_FS_PERMISSIONS`, `DAPP_TEST_FS_PERMISSIONS`
+- `DAPP_TEST_CACHE`
+- `DAPP_TEST_FUZZ_RUNS`
+- `DAPP_TEST_FUZZ_DEPTH`
 
 ### Configuration format
 

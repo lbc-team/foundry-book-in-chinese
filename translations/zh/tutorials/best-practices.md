@@ -14,6 +14,7 @@
    - [最佳实践](#best-practices)
    - [污点分析](#taint-analysis)
 - [脚本](#scripts)
+- [私钥管理](#private-key-management)
 - [评论](#comments)
 - [资源](#resources)
 
@@ -67,17 +68,18 @@
 
 3. 对于单元测试，组织测试的方式主要有两种：
     1. 将合约视为描述块：
-       - `contract Add` 包含 `add` 方法的所有单元测试。
+       - `contract Add` 包含在 MyContract 合约中 `add` 方法的所有单元测试。
        - `contract Supply` 包含 `supply` 方法的所有测试。
        - `contract Constructor` 保存构造函数的所有测试。
        - 这种方法的一个好处是较小的合约应该比较大的合约编译得更快，因此随着测试套件变大，许多小型合约的这种方法应该可以节省时间。
     2. 每个被测合约都有一个测试合约，其中包含您想要的任意数量的 Utilities 和 Fixtures：
+       - `contract MyContractTest` 包含对 `MyContract` 合约进行的所有的单元测试.
        - `contract VaultTest` 对 `contract Vault` 进行测试，但它也继承自 `contract BaseTestFixture` 和 `contract TestUtilities`。
        - 测试函数的编写顺序应与被测合约中存在的原始函数相同。
        - 测试同一功能的所有测试功能都应连续存在于测试文件中。
 4. 集成测试应该放在同一个 `test` 目录中，并有明确的命名约定。 这些可能位于专用文件中，或者它们可能与现有测试文件中的相关单元测试相邻。
 
-5. 测试命名保持一致，因为它有助于过滤测试（例如，对于 Gas 报告，您可能希望过滤掉 revert 的测试）。 组合命名约定时，请按字母顺序排列。
+5. 保持测试命名一致，这对于筛选测试非常有帮助（例如，对于 Gas 报告，您可能希望筛选掉 revert 测试）。在结合命名约定时，保持它们按字母顺序排列。下面是一些有效名称的示例。可以在[这里](https://github.com/ScopeLift/scopelint/blob/1857e3940bfe92ac5a136827374f4b27ff083971/src/check/validators/test_names.rs#L106-L143)找到有效和无效示例的全面列表。
 
     - `test_Description` 用于标准测试的。
     - `testFuzz_Description` 用于模糊测试。
@@ -85,15 +87,17 @@
     - `testFork_Description` 用于从网络分叉的测试。
     - `testForkFuzz_Revert[If|When]_Condition` 用于分叉并期望 revert 的模糊测试。
 
-6. 当使用像 `assertEq` 这样的断言时，考虑利用最后一个字符串参数来更容易地识别失败。 这些可以保持简短，甚至只是数字——它们基本上可以替代显示 revert 的行号，例如 `assertEq(x, y, "1")` 或 `assertEq(x, y, "sum1")`。 _（注意：[foundry-rs/foundry#2328](https://github.com/foundry-rs/foundry/issues/2328) 跟踪本地集成）。_
+6. 使用`ALL_CAPS_WITH_UNDERSCORES`命名您的常量和不可变量，以便更容易区分它们与变量和函数。
 
-7. 测试事件时，最好将所有 `expectEmit` 参数设置为 `true`，即 `vm.expectEmit(true, true, true, true)`。 好处：
+7. 当使用像 `assertEq` 这样的断言时，考虑利用最后一个字符串参数来更容易地识别失败。 这些可以保持简短，甚至只是数字——它们基本上可以替代显示 revert 的行号，例如 `assertEq(x, y, "1")` 或 `assertEq(x, y, "sum1")`。 _（注意：[foundry-rs/foundry#2328](https://github.com/foundry-rs/foundry/issues/2328) 跟踪本地集成）。_
+
+8. 测试事件时，最好将所有 `expectEmit` 参数设置为 `true`，即 `vm.expectEmit(true, true, true, true)`。 好处：
 
     - 这可确保您测试事件中的所有内容。
     - 如果您添加一个 topic（即一个新的索引参数），它现在默认进行测试。
     - 即使你只有 1 个 topic，额外的 `true` 参数也没有坏处。
 
-8. 记得写不变量测试！ 对于断言字符串，使用不变量的冗长英文描述：`assertEq(x + y, z, "Invariant violated: the sum of x and y must always equal z")`。 有关最佳实践的更多信息即将推出。
+9. 记得写不变量测试！ 对于断言字符串，使用不变量的冗长英文描述：`assertEq(x + y, z, "Invariant violated: the sum of x and y must always equal z")`。 有关最佳实践的更多信息即将推出。
 
 
 ### 分叉测试
@@ -101,14 +105,17 @@
 1. 不要觉得你需要给分叉测试特殊待遇，并自由使用它们：
 
     - 闭源 web2 开发中_需要_模拟——您必须模拟 API 响应，因为该 API 的代码不是开源的，所以您不能直接在本地运行它。 但对于区块链而言，情况并非如此：您正在与之交互的任何已部署代码都可以在本地执行，甚至可以免费修改。 所以，如果不需要，为什么要引入错误模拟的风险呢？
-    - 避免分叉测试而更喜欢模拟的一个常见原因是分叉测试很慢。 但这并不总是正确的。 通过固定到一个块号，forge 缓存 RPC 响应，因此只有第一次运行速度较慢，而后续运行速度明显更快。 请参阅[this benchmark](https://github.com/mds1/convex-shutdown-simulation/)，第一次使用远程 RPC 运行需要 7 分钟，但一旦数据被缓存结果只需要半秒。 Alchemy 和 Infura 都提供免费存档数据，因此固定到一个块应该没有问题。 （请注意，您可能需要配置 CI 以缓存运行之间的 RPC 响应）。
+    - 避免分叉测试而更喜欢模拟的一个常见原因是分叉测试很慢。 但这并不总是正确的。 通过固定到一个块号，forge 缓存 RPC 响应，因此只有第一次运行速度较慢，而后续运行速度明显更快。 请参阅[this benchmark](https://github.com/mds1/convex-shutdown-simulation/)，第一次使用远程 RPC 运行需要 7 分钟，但一旦数据被缓存结果只需要半秒。 [Alchemy](https://alchemy.com) 、 [Infura](https://infura.io) 和 [Tenderly](https://tenderly.co) 都提供免费存档数据，因此固定到一个块应该没有问题。 （请注意，您可能需要配置 CI 以缓存运行之间的 RPC 响应）。
+    - 请注意，[foundry-toolchain](https://github.com/foundry-rs/foundry-toolchain) GitHub Action 默认情况下会在 CI 中缓存 RPC 响应，并且在更新 fork 测试时也会更新缓存。
 
-2. 小心使用分叉上的模糊测试，以避免使用非确定性模糊测试破坏 RPC 请求。 如果你的分叉模糊测试的输入是一些在 RPC 调用中使用的参数来获取数据（例如查询地址的代币余额），每次运行模糊测试至少使用 1 个 RPC 请求，所以你会很快遇到速率限制或使用限制。 可以考虑的解决方案：
+2. 在 fork 上小心使用模糊测试，以避免通过非确定性模糊测试消耗 RPC 请求。如果您的 fork 模糊测试的输入是用于获取数据的 RPC 调用中的某个参数（例如查询地址的代币余额），每次运行模糊测试都会使用至少 1 个 RPC 请求，因此您很快就会达到速率限制或使用限制。需要考虑的解决方案：
 
-     - 用单个 [multicall](https://github.com/mds1/multicall) 替换多个 RPC 调用。
-     - 指定模糊/不变 [seed](/src/reference/config/testing.md#seed)：这确保每个 `forge test` 调用都使用相同的模糊输入。 RPC 结果缓存在本地，因此您只会在第一次查询节点。
-     - 结构化您的测试，使您模糊测试的数据由您的合约在本地计算，而不是 RPC 调用中使用的数据（根据您正在做的事情可能可行也可能不可行）。
-     - 最后，您当然可以始终运行本地节点或修改您的 RPC 订阅计划。
+   - 用单个 [multicall](https://github.com/mds1/multicall) 替换多个 RPC 调用。
+   - 指定一个模糊/不变的 [seed](/src/reference/config/testing.md#seed)：这可以确保每次 `forge test` 调用使用相同的模糊输入。RPC 结果会在本地缓存，因此您只会在第一次查询节点。
+   - 在 CI 中，考虑使用 [计算环境变量](https://github.com/sablier-labs/v2-core/blob/d1157b49ed4bceeff0c4e437c9f723e88c134d3a/.github/workflows/ci.yml#L252-L254) 设置模糊种子，使其每天或每周更改一次。这样可以灵活地权衡增加随机性以发现更多错误与使用种子以减少 RPC 请求之间的权衡。
+   - 构造您的测试，使您进行模糊测试的数据由您的合约在本地计算，而不是在 RPC 调用中使用的数据（根据您的操作可能可行或不可行）。
+   - 最后，您当然可以始终运行本地节点或升级您的 RPC 计划。
+
 3. 编写分叉测试时，不要使用 `--fork-url` 标志。 相反，更喜欢以下方法，因为它提高了灵活性：
 
     - 在 `foundry.toml` 配置文件中定义 `[rpc_endpoints]` 并使用 [forking cheatcodes](../forge/fork-testing.md#forking-cheatcodes)。
@@ -156,7 +163,7 @@ contract MyContractHarness is MyContract {
 
 Harnesses 还可用于公开原始智能合约中不可用的功能或信息。 最直接的例子是当我们想要测试公共数组的长度时。 这些函数应遵循以下模式：`workaround_<function_name>`，例如 `workaround_queueLength()`。
 
-另一个用例是跟踪您不会在生产中跟踪的数据，以帮助测试不变量。 例如，您可以存储所有代币持有者的列表，以简化不变式“所有余额的总和必须等于总供应量”的验证。 这些通常被称为“幽灵变量”。 您可以在 [Rikard Hjort](https://twitter.com/rikardhjort) 的 [工作 DeFi 开发的正式方法](https://youtu.be/TiuEWMo6w8U?t=3142) 演讲中了解更多相关信息。
+另一个用例是跟踪您不会在生产中跟踪的数据，以帮助测试不变量。 例如，您可以存储所有代币持有者的列表，以简化不变式“所有余额的总和必须等于总供应量”的验证。 这些通常被称为“幽灵变量”。 您可以在 [Rikard Hjort](https://twitter.com/rikardhjort) 的 [工作 DeFi 开发的正式方法](https://youtu.be/ETlNhV9jYJw) 演讲中了解更多相关信息。
 
 ### 最佳实践
 
@@ -192,6 +199,7 @@ _污点汇聚点（sink）_ 是发生某些重要操作的代码的一部分。 
 
     - 通过编写测试来对它们进行单元测试，这些测试断言运行脚本所做的状态更改。
     - 通过运行该脚本编写您的部署脚本和脚手架测试。 然后，针对生产部署脚本产生的状态运行所有测试。 这是获得对部署脚本的信心的好方法。
+    - 在您的脚本中使用 `require` 语句（或者如果您喜欢的话，使用 `if (condition) revert()` 模式）来在脚本出现问题时停止执行。例如，`require(computedAddress == deployedAddress, "address mismatch")`。使用 `assertEq` 辅助函数将不会停止执行。
 
 5. **仔细审核广播了哪些交易**。 未广播的事务仍在测试上下文中执行，因此缺少广播或额外广播很容易成为上一步中的错误来源。
 
@@ -229,9 +237,31 @@ function readInput(string memory input) internal returns (string memory) {
   string memory inputDir = string.concat(vm.projectRoot(), "/script/input/");
   string memory chainDir = string.concat(vm.toString(block.chainid), "/");
   string memory file = string.concat(input, ".json");
-  return vm.readFile(string.concat(root, chainInputFolder, input));
+  return vm.readFile(string.concat(inputDir, chainDir, file));
 }
 ```
+
+### 私钥管理
+
+脚本执行需要私钥来发送交易。该私钥控制账户中的所有资金，因此必须小心保护。通过脚本安全广播交易有几种选择：
+
+1. **使用硬件钱包。** Ledger 和 Trezor 等硬件钱包将种子短语存储在安全隔离区中。Forge 可以向钱包发送原始交易，然后钱包将对交易进行签名。签名后的交易返回给 Forge 和广播者。这样，私钥永远不会离开硬件钱包，使其成为非常安全的方法。要在脚本中使用硬件钱包，请参阅 `--ledger` 和 `--trezor` [flags](../reference/forge/forge-script.md)。
+
+2. **直接使用私钥。** 通过这种方法，在您的设备上暴露了一个私钥，使其比上述选项更有风险。因此，直接使用私钥的建议方式是为执行脚本生成一个新钱包，并仅向该钱包发送足够的资金来运行脚本。然后，在脚本完成后停止使用该密钥。这样，如果密钥被泄露，只会丢失该一次性密钥上的资金，而不是失去钱包中的所有资金。
+
+   1. 通过这种方法，非常重要的是，您的脚本或合约不依赖于 `msg.sender`，因为发送方将不是一个打算再次使用的账户。例如，如果部署脚本配置了合同所有者，请确保所有者是构造函数参数，而不是设置为 `msg.sender`。
+   2. 要使用这种方法，您可以将私钥存储在环境变量中并使用秘籍代码来读取它，或者使用 `--private-key` 标志直接提供密钥。
+
+3. **使用密钥库。** 这可以被视为上述两种方法之间的折衷方案。使用 [`cast wallet import`](../reference/cast/cast-wallet-import.md) 导入私钥并使用密码对其进行加密。这仍会在您的设备上暴露您的私钥，但它会被加密，您将提供密码来解密它以运行脚本。
+
+在使用脚本时的额外安全预防措施：
+
+1. 在测试和开发中使用单独的钱包，而不是使用带有真实资金的主要钱包。多样化可以最大程度地减少如果您的开发钱包受到损害而丢失资金的风险。
+2. 如果您意外地将私钥或种子短语推送到 GitHub，或者通过其他方式在线暴露它，即使是短暂的，也要视为已泄露。立即采取行动将您的资金转移到更安全的地方。
+3. 如果对钱包是否包含真实资金存在疑问，请假设它包含。在开发过程中始终确保钱包的余额和状态。使用 [blockscan](https://blockscan.com/) 轻松检查许多链以查看地址的使用情况。
+4. 请记住，在像 Metamask 这样的钱包中添加账户会生成一个新的私钥。但是，该私钥是从相同助记词派生的，与该钱包中生成的其他账户相同。因此，永远不要暴露助记词，因为这可能会危及您所有的账户。
+
+*本节内容灵感来自 [The Pledge](https://github.com/smartcontractkit/full-blockchain-solidity-course-js/discussions/5) 由 [Patrick Collins](https://twitter.com/PatrickAlphaC) 提供。* 
 
 ## 注释
 
@@ -258,6 +288,8 @@ function readInput(string memory input) internal returns (string memory) {
 
 Foundry 在行动：
 
-- [Nomad Monorepo](https://github.com/nomad-xyz/monorepo)：所有 `contracts-*` 包。 使用许多 Foundry 功能的好例子，包括模糊测试、`ffi` 和各种作弊代码。
-- [Uniswap Periphery](https://github.com/gakonst/v3-periphery-foundry)：使用继承来隔离测试装置的好例子。
-- [awesome-foundry](https://github.com/crisgarner/awesome-foundry)：精选的 Foundry 开发框架列表。
+- [awesome-foundry](https://github.com/crisgarner/awesome-foundry): 一个由 Foundry 开发框架精心策划的精彩清单。
+- [Nomad Monorepo](https://github.com/nomad-xyz/monorepo): 所有 `contracts-*` 包。是使用许多 Foundry 功能的良好示例，包括模糊测试、`ffi` 和各种作弊代码。
+- [Sablier V2 Core](https://github.com/sablier-labs/v2-core): 另一个使用了许多 Foundry 功能的良好示例。也是状态树测试方法的先驱，查看 `*.tree` 文件。
+- [Uniswap Periphery](https://github.com/gakonst/v3-periphery-foundry): 使用继承来隔离测试装置的良好示例。
+- [PRBMath](https://github.com/PaulRBerg/prb-math): 用于 Solidity 的固定点算术库，具有许多利用 Foundry 的参数化测试。

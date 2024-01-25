@@ -1,11 +1,11 @@
 ## `projectRoot`
 
-### Signature
+### 签名
 
 ```solidity
 function projectRoot() external returns (string memory);
 ```
 
-### Description
+### 描述
 
-Returns the root directory of the current Foundry project.
+返回当前 Foundry 项目的根目录。

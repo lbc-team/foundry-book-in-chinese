@@ -1,7 +1,5 @@
 ## `envBytes32`
 
-### Signature
-
 ```solidity
 function envBytes32(string calldata key) external returns (bytes32 value);
 ```
@@ -10,18 +8,18 @@ function envBytes32(string calldata key) external returns (bytes32 value);
 function envBytes32(string calldata key, string calldata delimiter) external returns (bytes32[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `bytes32` or `address[]`.
+以 `bytes32` 或 `address[]` 的形式读取环境变量。
 
-### Tips
+### 提示
 
-- For arrays, you can specify the delimiter used to seperate the values with the `delimiter` parameter.
+- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 例子
 
-#### Single Value
-With environment variable `BYTES32_VALUE=0x00`,
+#### 单个值
+使用环境变量 `BYTES32_VALUE=0x00`,
 ```solidity
 string memory key = "BYTES32_VALUE";
 bytes32 expected = bytes32(0x0000000000000000000000000000000000000000000000000000000000000000);
@@ -29,8 +27,8 @@ bytes32 output = cheats.envBytes32(key);
 assert(output == expected);
 ```
 
-#### Array
-With environment variable `BYTES32_VALUES=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x00`,
+#### 数组
+使用环境变量 `BYTES32_VALUES=0x7109709ECfa91a80626fF3989D68f67F5b1DD12D,0x00`,
 ```solidity
 string memory key = "BYTES32_VALUES";
 string memory delimiter = ",";

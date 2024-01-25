@@ -1,11 +1,12 @@
 ## `getRecordedLogs`
 
-### Signature
+### 签名
 
 ```solidity
 struct Log {
   bytes32[] topics;
   bytes data;
+  address emitter;
 }
 
 function getRecordedLogs()
@@ -15,13 +16,13 @@ returns (
 );
 ```
 
-### Description
+### 描述
 
-Gets the emitted events recorded by [`recordLogs`](./record-logs.md).
+获取由 [`recordLogs`](./record-logs.md) 记录的发出的事件。
 
-This function will consume the recorded logs when called.
+调用此函数将消耗记录的日志。
 
-### Examples
+### 例子
 
 ```solidity
 /// event LogTopic1(

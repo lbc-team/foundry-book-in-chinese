@@ -35,7 +35,7 @@ cast-proof - 为一个给定的存储槽生成一个存储证明。
 `--block` *block*  
 &nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签： `earliest`, `latest` 或者 `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签： `earliest`, `latest`, `finalized`, `safe` 或者 `pending`.
 
 #### RPC 选项
 

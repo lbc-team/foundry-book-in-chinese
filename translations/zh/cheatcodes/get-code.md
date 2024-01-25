@@ -1,24 +1,24 @@
 ## `getCode`
 
-### Signature
+### 签名
 
 ```solidity
 function getCode(string calldata) external returns (bytes memory);
 ```
 
-### Description
+### 描述
 
-Returns the **creation** bytecode for a contract in the project given the path to the contract.
+根据合约的路径返回项目中合约的 **创建** 字节码。
 
-The calldata parameter can either be in the form `ContractFile.sol` (if the filename and contract name are the same), `ContractFile.sol:ContractName`, or the path to an artifact, relative to the root of your project.
+calldata 参数可以是 `ContractFile.sol`（如果文件名和合约名相同），`ContractFile.sol:ContractName`，或者是相对于项目根目录的工件路径。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> `getCode` requires read permission for the output directory, see [file cheatcodes](./fs.md).
+> `getCode` 需要输出目录的读取权限，请参阅 [文件作弊码](./fs.md) 。
 >
-> To grant read access set `fs_permissions = [{ access = "read", path = "./out"}]` in your `foundry.toml`.
+> 要授予读取访问权限，请在您的 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
 
-### Examples
+### 例子
 
 ```solidity
 MyContract myContract = new MyContract(arg1, arg2);
@@ -34,7 +34,7 @@ assembly {
 assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
 ```
 
-Deploy a contract to an arbitrary address by combining `getCode` and [`etch`](./etch.md)
+通过结合 `getCode` 和 [`etch`](./etch.md) 将合约部署到任意地址
 
 ```solidity
 
@@ -50,12 +50,14 @@ deployed := create(0, add(bytecode, 0x20), mload(bytecode))
 vm.etch(targetAddr, deployed.code);
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
-
-[`deployCode`](../reference/forge-std/deployCode.md)
 [`getDeployedCode`](./get-deployed-code.md)
 [`eth`](./etch.md)
+
+Forge 标准库
+
+[`deployCode`](../reference/forge-std/deployCode.md)
+[`deployCodeTo`](../reference/forge-std/deployCodeTo.md)
 
 [forge-std]: ../reference/forge-std

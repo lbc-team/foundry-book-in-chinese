@@ -1,24 +1,24 @@
 ## `makePersistent`
 
-### Signature
+### 签名
 
 ```solidity
-function makePersistent(address) external;
-function makePersistent(address, address) external;
-function makePersistent(address, address, address) external;
-function makePersistent(address[] calldata) external;
+function makePersistent(address account) external;
+function makePersistent(address account0, address account1) external;
+function makePersistent(address account0, address account1, address account2) external;
+function makePersistent(address[] calldata accounts) external;
 ```
 
-### Description
+### 描述
 
-Each fork ([`createFork`](./create-fork.md)) has its own independent storage, which is also replaced when another fork is selected ([`selectFork`](./select-fork.md)).
-By default, only the test contract account and the caller are persistent across forks, which means that changes to the state of the test contract (variables) are preserved when different forks are selected. This way data can be shared by storing it in the contract's variables. 
+每个分叉（[`createFork`](./create-fork.md)）都有其独立的存储空间，当选择另一个分叉时（[`selectFork`](./select-fork.md)），存储空间也会被替换。
+默认情况下，只有测试合约账户和调用者在不同分叉之间是持久的，这意味着在选择不同分叉时，测试合约的状态（变量）的更改会被保留。这样一来，数据可以通过将其存储在合约的变量中来共享。
 
-However, with this cheatcode, it is possible to mark the specified accounts as persistent, which means that their state is available regardless of which fork is currently active.
+然而，使用此作弊码，可以将指定的账户标记为持久的，这意味着它们的状态在当前活动的分叉是什么并不重要。
 
-### Examples
+### 例子
 
-Mark a new contract as persistent
+将新合约标记为持久的
 
 ```solidity
 contract SimpleStorageContract {
@@ -62,7 +62,7 @@ function testMarkPersistent() public {
 }
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [isPersistent](./is-persistent.md)
 - [revokePersistent](./revoke-persistent.md)

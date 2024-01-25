@@ -1,11 +1,11 @@
 ## `resumeGasMetering`
 
-### Signature
+### 签名
 
 ```solidity
 function resumeGasMetering() external;
 ```
 
-### Description
+### 描述
 
-Resumes gas metering (i.e. `gasleft()` will decrease as operations are executed). Gas usage will resume at the same amount at which it was paused.
+恢复 Gas 计量（即 `gasleft()` 会随着操作的执行而减少）。Gas 使用量将在暂停时的相同数量上恢复。

@@ -15,9 +15,9 @@ compinit -i
 然后运行：
 
 ```sh
-forge completions zsh > /usr/local/share/zsh/site-functions/_forge
-cast completions zsh > /usr/local/share/zsh/site-functions/_cast
-anvil completions zsh > /usr/local/share/zsh/site-functions/_anvil
+forge completions zsh | sudo tee /usr/local/share/zsh/site-functions/_forge
+cast completions zsh | sudo tee /usr/local/share/zsh/site-functions/_cast
+anvil completions zsh | sudo tee /usr/local/share/zsh/site-functions/_anvil
 ```
 
 对于基于 ARM 的系统：

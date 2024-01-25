@@ -39,6 +39,9 @@ cast-send - 签署并发布一项交易。
 
 {{#include ../common/wallet-options.md}}
 
+`--unlocked`  
+&nbsp;&nbsp;&nbsp;&nbsp;通过 `eth_sendTransaction` 使用 `--from` 参数或者 `$ETH_FROM` 作为发送者发送。
+
 {{#include ../common/rpc-options.md}}
 
 {{#include ../common/etherscan-options.md}}
@@ -71,11 +74,11 @@ cast-send - 签署并发布一项交易。
     }
     ```
 
-    结构体被编码为元组 (请参阅 [struct encoding](./misc/struct-encoding.md))
+    结构体被编码为元组 (请参阅 [struct encoding](../../misc/struct-encoding.md))
 
     ```sh
     cast send 0x... "myfunction((address,uint256))" "(0x...,1)"
     ```
 ### 请参阅
 
-[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [struct encoding](./misc/struct-encoding.md)
+[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [struct encoding](../../misc/struct-encoding.md)

@@ -1,6 +1,6 @@
 ## `startPrank`
 
-### Signature
+### 签名
 
 ```solidity
 function startPrank(address) external;
@@ -10,14 +10,14 @@ function startPrank(address) external;
 function startPrank(address sender, address origin) external;
 ```
 
-### Description
+### 描述
 
-Sets `msg.sender` **for all subsequent calls** until [`stopPrank`](./stop-prank.md) is called.
+设置 `msg.sender` **用于所有后续调用**，直到调用 [`stopPrank`](./stop-prank.md) 为止。
 
-If the alternative signature of `startPrank` is used, then `tx.origin` is set as well for all subsequent calls.
+如果使用了 `startPrank` 的另一种签名，则还会为所有后续调用设置 `tx.origin`。
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
 [`startHoax`](../reference/forge-std/startHoax.md), [`changePrank`](../reference/forge-std/change-prank.md)

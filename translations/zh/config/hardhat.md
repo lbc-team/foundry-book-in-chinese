@@ -1,119 +1,91 @@
 ## 与 Hardhat 集成
 
-可以让您的 Foundry 项目与 [Hardhat](https://hardhat.org/) 一起工作。 这假设您有一个正在运行的 Foundry 项目并且想要添加 Hardhat，并且你很熟悉 Hardhat。
+可以让您的 Foundry 项目与 [Hardhat](https://hardhat.org/) 一起工作。本文假设您的系统中已安装了 Foundry 和 node。本文还假定您对 Foundry 和 Hardhat 都很熟悉。
 
 ### 为什么这不能开箱即用？
 
 默认情况下，Hardhat 希望将库安装在 `node_modules` 中，这是所有 NodeJS 依赖项的默认文件夹。 Foundry 希望它们在 `lib` 中。 当然 [我们可以配置 Foundry](../reference/config/overview.md) 但不容易配置到 `node_modules` 的目录结构。
 
-因此，推荐的设置是使用 [hardhat-preprocessor](https://www.npmjs.com/package/hardhat-preprocessor)。 顾名思义，Hardhat-preprocessor 是一个 Hardhat 插件，它允许我们在合约通过 Solidity 编译器运行之前对其进行预处理。
+因此，推荐的设置是使用 [hardhat-preprocessor](https://www.npmjs.com/package/hardhat-preprocessor)。 当正确安装和使用 hardhat-foundry 时，Hardhat 将使用与 Foundry 相同的合约目录，并且能够使用使用 forge install 安装的依赖项。
 
-我们使用它来修改 Solidity 文件中的导入指令，以在 Hardhat 尝试编译它们之前根据 Foundry `remappings.txt` 文件解析库的绝对路径。 这当然只是发生在内存中，所以你实际的 Solidity 文件永远不会改变。 现在，Hardhat 很乐意遵循并使用您用 Foundry 安装的库进行编译。
+本文将涵盖以下两种情况：
+
+1. 将 Hardhat 添加到 Foundry 项目中，以及
+2. 将 Foundry 添加到 Hardhat 项目中。
 
 ### 给我看看示例 repo！
 
 [Enjoy！](https://github.com/foundry-rs/hardhat-foundry-template)
 
-如果您想将其改编到已有的 Foundry 项目或了解其工作原理，请阅读以下内容：
+如果您想将其适配到已有的 Foundry 项目或了解其工作原理，请阅读以下内容：
 
 ### 指示
 
 在您的 Foundry 项目工作目录中：
 
-1. `npm init` - 照常设置您的项目详细信息。
-2. `npm install --save-dev hardhat` - 安装 Hardhat。
-3. `npx hardhat` - 在同一目录中设置您认为合适的 Hardhat 项目。
-4. `forge remappings > remappings.txt` - 每次在 Foundry 中修改库时都需要重新运行它。
+1. `npm init -y` - 这将设置一个 `package.json` 文件。
+2. `npm i --save-dev hardhat` - 将 Hardhat 作为开发依赖项安装到您的项目中。
+3. `npx hardhat init` - 在相同目录中初始化您的 Hardhat 项目，并选择 “**创建一个空的 hardhat.config.js**” 选项。这将创建一个基本的 `hardhat.config.js` 文件。
+4. `npm i --save-dev @nomicfoundation/hardhat-foundry @nomicfoundation/hardhat-toolbox` - 这将安装 hardhat-foundry 插件和 Hardhat 工具包插件，后者是运行 Hardhat 测试所需的所有基本依赖项的组合。
 
-现在您需要对 Hardhat 项目进行以下更改。 以下假定 TypeScript 设置：
+为使插件工作，您的 hardhat.config.js 文件应如下所示：
 
-1. `npm install --save-dev hardhat-preprocessor` - [hardhat-preprocessor 的详细信息](https://www.npmjs.com/package/hardhat-preprocessor)
-2. 添加 `import "hardhat-preprocessor";` 到您的 `hardhat.config.ts` 文件。
-3. 确保存在以下函数（您可以将其添加到您的 `hardhat.config.ts` 文件或其他地方并导入它 - 还要确保 `import fs from "fs";` 存在于添加的文件中） :
-
-```typescript
-function getRemappings() {
-  return fs
-    .readFileSync("remappings.txt", "utf8")
-    .split("\n")
-    .filter(Boolean) // remove empty lines
-    .map((line) => line.trim().split("="));
-}
+```javascript
+require("@nomicfoundation/hardhat-toolbox");
+require("@nomicfoundation/hardhat-foundry");
+/** @type import('hardhat/config').HardhatUserConfig */
+module.exports = {
+  solidity: "0.8.19",
+};
 ```
 
-*感谢 [@DrakeEvansV1](https://twitter.com/drakeevansv1) 和 [@colinnielsen](https://github.com/colinnielsen) 提供此片段*
+5. 默认情况下，Foundry 项目附带一个简单的 `Counter.sol` 合约和一些测试。在 `test` 目录中创建一个名为 `Counter.t.js` 的文件，与默认的 `Counter.t.sol` 文件并列。
+6. 将以下代码添加到 `Counter.t.js` 文件中：
 
-4. 将以下内容添加到导出的 `HardhatUserConfig` 对象中：
+```javascript
+const { expect } = require("chai");
+const hre = require("hardhat");
+const { loadFixture } = require("@nomicfoundation/hardhat-toolbox/network-helpers");
 
-```typescript
-...
-preprocess: {
-  eachLine: (hre) => ({
-    transform: (line: string) => {
-      if (line.match(/^\s*import /i)) {
-        for (const [from, to] of getRemappings()) {
-          if (line.includes(from)) {
-            line = line.replace(from, to);
-            break;
-          }
-        }
-      }
-      return line;
-    },
-  }),
-},
-paths: {
-  sources: "./src",
-  cache: "./cache_hardhat",
-},
-...
+describe("Counter contract", function () {
+  async function CounterLockFixture() {
+    const counter = await ethers.deployContract("Counter");
+    await counter.setNumber(0);
+
+    return { counter };
+  }
+
+  it("Should increment the number correctly", async function () {
+    const { counter } = await loadFixture(CounterLockFixture);
+    await counter.increment();
+    expect(await counter.number()).to.equal(1);
+  });
+
+  // This is not a fuzz test because Hardhat does not support fuzzing yet.
+  it("Should set the number correctly", async function () {
+    const { counter } = await loadFixture(CounterLockFixture);
+    await counter.setNumber(100);
+    expect(await counter.number()).to.equal(100);
+  });
+});
 ```
 
-现在，Hardhat 应该可以很好地与 Foundry 配合使用。 您可以运行 Foundry 测试或 Hardhat 测试/脚本并访问您的合约。
+这段代码将执行与默认的 `Counter.t.sol` 文件相同的测试。
 
-### 在现有的 Hardhat 项目中使用 Foundry
+就是这样！
+您可以在同一个 `test` 目录中创建 Hardhat 和 Foundry 测试，并分别使用 `npx hardhat test` 和 `forge test` 运行它们。
+查看 [Hardhat 的文档](https://hardhat.org/docs)以了解更多信息。
 
-假设您已经有一个 Hardhat 项目，其中包含一些依赖项，例如目录 `node_modules/` 中的 `@OpenZeppelin/contracts`。
+### 将 Foundry 添加到 Hardhat 项目中
 
-您可以通过 4 个步骤在此项目中使用 Foundry 测试。
+在您的 Hardhat 项目工作目录中：
 
-在我们开始之前，让我们看一下目录：
+1. `npm i --save-dev @nomicfoundation/hardhat-foundry` - 安装 hardhat-foundry 插件。
+2. 将 `require("@nomicfoundation/hardhat-foundry");` 添加到您的 `hardhat.config.js` 文件顶部。
 
-- 合约在 `contracts` 中
-- Hardhat 单元测试在 `test` 中，我们会将 Foundry 测试文件放在 `test/foundry` 中
-- Hardhat 将其缓存放在 `cache` 中，我们将把 Foundry 缓存放在 `forge-cache` 中
+> ℹ️ **注意**
+> 如果您的目录尚未初始化为 git 存储库，则步骤 3 将无法正常工作。如果尚未初始化，请运行 `git init`。
 
-### 添加 Foundry 测试的 4 个步骤
+3. 在终端中运行 `npx hardhat init-foundry`。这将基于您的 Hardhat 项目的现有配置生成一个 `foundry.toml` 文件，并安装 `forge-std` 库。
 
-1. 将新创建的空 Foundry 项目中的 `lib/forge-std` 复制到 Hardhat 项目目录中。 注意：您还可以运行 `forge init --force` 在这个非空目录中初始化一个 Foundry 项目，并删除由 Foundry init 创建的不需要的目录。
-2. 将 `foundry.toml` 配置复制到这个 Hardhat 项目目录，并更改其中的 `src`、`out`、`test`、`cache_path`：
-
-```toml
-[profile.default]
-src = 'contracts'
-out = 'out'
-libs = ['node_modules', 'lib']
-test = 'test/foundry'
-cache_path  = 'forge-cache'
-
-# See more config options https://book.getfoundry.sh/reference/config.html
-```
-
-3. 创建一个 `remappings.txt` 使 Foundry 项目与 VS Code Solidity 扩展一起工作：
-
-```ignore
-ds-test/=lib/forge-std/lib/ds-test/src/
-forge-std/=lib/forge-std/src/
-```
-
-查看有关 `remappings.txt` 和 VS Code Solidity 扩展的更多信息：[Remapping dependencies](../projects/dependencies.md?#remapping-dependencies), [Integrating with VSCode](vscode.md)
-
-4. 创建一个子目录 `test/foundry` 并在其中编写 Foundry 测试。
-
-让我们将示例测试文件 `Contract.t.sol` 放在这个目录中并运行 Foundry 测试
-
-```bash
-forge test
-```
-
-现在，Foundry 测试可以在这个现有的 Hardhat 项目中进行。 由于 Hardhat 项目没有被触及，它可以像以前一样工作。
+Hardhat 现在将在相同目录中设置一个基本的 Foundry 项目，并在 `foundry.toml` 文件中进行一些配置，以确保 Foundry 知道在哪里查找您的合约、测试和依赖项。您始终可以通过编辑 `foundry.toml` 文件来更改这些配置。

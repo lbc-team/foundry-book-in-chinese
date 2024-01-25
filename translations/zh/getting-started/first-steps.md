@@ -21,7 +21,7 @@ $ cd hello_foundry
 {{#include ../output/hello_foundry/forge-build:all}}
 ```
 
-并使用 [`forge test`](../reference/forge/forge-init.md) 运行测试：
+并使用 [`forge test`](../reference/forge/forge-test.md) 运行测试：
 
 ```sh
 {{#include ../output/hello_foundry/forge-test:all}}
@@ -31,3 +31,5 @@ $ cd hello_foundry
 > 💡 **提示**
 >
 > 您始终可以通过在末尾添加 `--help` 来打印任何子命令（或它们的子命令）的帮助。
+
+你可以观看 [这些](../tutorials/learn-foundry.md)初学者教程，如果你是一个视频学习者。

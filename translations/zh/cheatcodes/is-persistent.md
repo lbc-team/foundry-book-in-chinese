@@ -1,18 +1,18 @@
 ## `isPersistent`
 
-### Signature
+### 签名
 
 ```solidity
  function isPersistent(address) external returns (bool);
 ```
 
-### Description
+### 描述
 
-Returns whether an account is marked as persistent ([`makePersistent`](./make-persistent.md)). 
+返回一个账户是否被标记为持久化（[`makePersistent`](./make-persistent.md)）。
 
-### Examples
+### 例子
 
-Check default status of `msg.sender` and the current test account
+检查 `msg.sender` 的默认状态和当前测试账户
 
 ```solidity
 // By default the `sender` and the test contract itself are persistent
@@ -20,7 +20,7 @@ assert(cheats.isPersistent(msg.sender));
 assert(cheats.isPersistent(address(this)));
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [makePersistent](./make-persistent.md)
-- [revokePersistent](./revoke-persistent.md)
+- [revokePersistent](./revoke-persistent.md)  

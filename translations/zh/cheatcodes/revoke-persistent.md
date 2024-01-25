@@ -1,19 +1,19 @@
 ## `revokePersistent`
 
-### Signature
+### 签名
 
 ```solidity
     function revokePersistent(address) external;
     function revokePersistent(address[] calldata) external;
 ```
 
-### Description
+### 描述
 
-The counterpart of [`makePersistent`](./make-persistent.md), that makes the given contract not persistent across fork swaps
+[`makePersistent`](./make-persistent.md)的对应函数，使给定的合约在分叉交换中不再持久化
 
-### Examples
+### 例子
 
-Revoke a persistent status of a contract
+撤销合约的持久状态
 
 ```solidity
 contract SimpleStorageContract {
@@ -48,9 +48,9 @@ function testRevokePersistent() public {
 }
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [isPersistent](./is-persistent.md)
-- [revokePersistent](./revoke-persistent.md)
+- [ revokePersistent](./revoke-persistent.md)
 - [createFork](./create-fork.md)
 - [selectFork](./select-fork.md)

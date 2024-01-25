@@ -34,6 +34,9 @@ forge-snapshot - 创建每个测试的 Gas 使用快照。
 `--max` *max_gas*  
 &nbsp;&nbsp;&nbsp;&nbsp;只包括使用了小于给定数量的 Gas 的测试。
 
+`--tolerance` *threshold*  
+&nbsp;&nbsp;&nbsp;&nbsp;容忍指定百分比范围内的 gas 偏差 (0-100)。
+
 `--diff` *path*  
 &nbsp;&nbsp;&nbsp;&nbsp;输出一个与预先存在的快照的差异。
 

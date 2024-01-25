@@ -1,6 +1,6 @@
 ## `accesses`
 
-### Signature
+### 签名
 
 ```solidity
 function accesses(
@@ -13,17 +13,17 @@ returns (
 );
 ```
 
-### Description
+### 描述
 
-Gets all storage slots that have been read (`reads`) or written to (`writes`) on an address.
+获取在地址上已读取（`reads`）或已写入（`writes`）的所有存储槽。
 
-Note that [`record`](./record.md) must be called first.
+请注意，必须首先调用 [`record`](./record.md)。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Every write also counts as an additional read.
+> 每次写入也算作额外的读取。
 
-### Examples
+### 示例
 
 ```solidity
 /// contract NumsContract {

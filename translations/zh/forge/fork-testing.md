@@ -92,8 +92,8 @@ contract ForkTest is Test {
     
     //Access variables from .env file via vm.envString("varname")
     //Replace ALCHEMY_KEY by your alchemy key or Etherscan key, change RPC url if need
-    //inside your .env file e.g: 
-    //MAINNET_RPC_URL = 'https://eth-mainnet.g.alchemy.com//v2/ALCHEMY_KEY'
+    //inside your .env file e.g:
+    //MAINNET_RPC_URL = 'https://eth-mainnet.g.alchemy.com/v2/ALCHEMY_KEY'
     //string MAINNET_RPC_URL = vm.envString("MAINNET_RPC_URL");
     //string OPTIMISM_RPC_URL = vm.envString("OPTIMISM_RPC_URL");
 
@@ -159,8 +159,8 @@ contract ForkTest is Test {
     
     //Access variables from .env file via vm.envString("varname")
     //Replace ALCHEMY_KEY by your alchemy key or Etherscan key, change RPC url if need
-    //inside your .env file e.g: 
-    //MAINNET_RPC_URL = 'https://eth-mainnet.g.alchemy.com//v2/ALCHEMY_KEY'
+    //inside your .env file e.g:
+    //MAINNET_RPC_URL = 'https://eth-mainnet.g.alchemy.com/v2/ALCHEMY_KEY'
     //string MAINNET_RPC_URL = vm.envString("MAINNET_RPC_URL");
     //string OPTIMISM_RPC_URL = vm.envString("OPTIMISM_RPC_URL");
 

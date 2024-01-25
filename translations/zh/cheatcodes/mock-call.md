@@ -1,6 +1,6 @@
 ## `mockCall`
 
-### Signature
+### 签名
 
 ```solidity
 function mockCall(address where, bytes calldata data, bytes calldata retdata) external;
@@ -15,34 +15,33 @@ function mockCall(
 ) external;
 ```
 
-### Description
+### 描述
 
-Mocks all calls to an address `where` if the call data either strictly or loosely matches `data` and returns `retdata`.
+如果调用数据严格或宽松匹配 `data`，则模拟对地址 `where` 的所有调用，并返回 `retdata`。
 
-When a call is made to `where` the call data is first checked to see if it matches in its entirety with `data`.
-If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.
+当对 `where` 进行调用时，首先检查调用数据是否与 `data` 完全匹配。
+如果不匹配，则检查调用数据是否部分匹配，匹配从调用数据的第一个字节开始。
 
-If a match is found, then `retdata` is returned from the call.
+如果找到匹配项，则从调用返回 `retdata`。
 
+**使用第二个签名**，我们可以模拟具有特定 `msg.value` 的调用。在存在歧义的情况下，`calldata` 匹配优先于 `msg.value`。
 
-**Using the second signature** we can mock the calls with a specific `msg.value`. `Calldata` match takes precedence over `msg.value` in case of ambiguity.
+模拟的调用有效，直到调用 [`clearMockedCalls`](./clear-mocked-calls.md)。
 
-Mocked calls are in effect until [`clearMockedCalls`](./clear-mocked-calls.md) is called.
-
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Calls to mocked addresses may revert if there is no code on the address.
-> This is because Solidity inserts an `extcodesize` check before some contract calls.
+> 对模拟地址的调用可能会引发还原，如果地址上没有代码。
+> 这是因为 Solidity 在某些合约调用之前插入了 `extcodesize` 检查。
 >
-> To circumvent this, use the [`etch`](./etch.md) cheatcode if the mocked address has no code.
+> 为了规避这一点，如果模拟地址没有代码，请使用[`etch`](./etch.md) cheatcode。
 
-> ℹ️ **Internal calls**
+> ℹ️ **内部调用**
 >
-> This cheatcode does not currently work on internal calls. See issue [#432](https://github.com/foundry-rs/foundry/issues/432).
+> 此作弊码目前无法在内部调用上使用。请参见问题 [#432](https://github.com/foundry-rs/foundry/issues/432)。
 
-### Examples
+### 例子
 
-Mocking an exact call:
+模拟精确调用：
 
 ```solidity
 function testMockCall() public {
@@ -55,7 +54,7 @@ function testMockCall() public {
 }
 ```
 
-Mocking an entire function:
+模拟整个函数：
 
 ```solidity
 function testMockCall() public {
@@ -69,8 +68,7 @@ function testMockCall() public {
 }
 ```
 
-Mocking a call with a given `msg.value`:
-
+模拟具有给定 `msg.value` 的调用：
 
 ```solidity
 function testMockCall() public {
@@ -84,5 +82,32 @@ function testMockCall() public {
     );
     assertEq(example.pay{value: 10}(1), 99);
     assertEq(example.pay{value: 1}(2), 2);
+}
+```
+
+模拟公开的参数：
+
+
+```solidity
+contract Example {
+    uint256 public number = 10;
+}
+
+contract ExampleTest is Test {
+    Example public example;
+
+    function setUp() public {
+        example = new Example();
+    }
+
+    function testMockPublicVariable() public {
+        assertEq(example.number(), 10);
+        vm.mockCall(
+            address(example),
+            abi.encodeWithSelector(bytes4(keccak256("number()"))),
+            abi.encode(5)
+        );
+        assertEq(example.number(), 5);
+    }
 }
 ```

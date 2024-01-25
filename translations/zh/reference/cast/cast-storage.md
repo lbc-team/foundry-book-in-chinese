@@ -2,27 +2,29 @@
 
 ### 名称
 
-cast-storage - 获取一个合约的存储槽的原始值。
+cast-storage - 获取合约存储槽的原始值或其完整存储布局。
 
-### 简介
+### 概要
 
-``cast storage`` [*options*] *address* *slot*
+``cast storage`` [*选项*] *地址* *槽*
 
 ### 描述
 
-获取一个合约的存储槽的原始值。 (大于 18446744073709551615(u64::MAX) 的槽位应以十六进制给出。使用`cast index` 来计算映射槽。)
+获取合约存储槽的原始值。（大于 18446744073709551615（u64::MAX）的槽位置应以十六进制给出。使用 `cast index` 计算映射槽。）
+
+发出槽号以获取完整的存储布局（需要合约在 Etherscan 上经过验证，并且使用的 Solidity 版本大于 0.6.5，或者您必须在具有与部署的字节码匹配的本地合约的 Forge 项目中）。
 
 地址（*address*）可以是 ENS 名称或地址。
 
-### 可选
+### 选项
 
 #### 查询选项
 
-`-B` *block*  
-`--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
+`-B` *block*
+`--block` *block*
+&nbsp;&nbsp;&nbsp;&nbsp;您要查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;可以是一个区块编号，或任何一个标签：`earliest`, `latest` 或者 `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或任何标签：`earliest`，`finalized`，`safe`，`latest` 或 `pending`。
 
 #### RPC 选项
 
@@ -30,13 +32,18 @@ cast-storage - 获取一个合约的存储槽的原始值。
 
 {{#include common-options.md}}
 
-### 例子
+### 示例
 
-1. 获取 WETH 合约上 0 号槽的值。
+1. 获取 WETH 合约上槽 0 的值。
     ```sh
     cast storage 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 0
     ```
 
-### 请参阅
+2. 获取 Milady 合约的完整存储布局。
+    ```sh
+    cast storage 0x5Af0D9827E0c53E4799BB226655A1de152A425a5
+    ```
+
+### 参见
 
 [cast](./cast.md), [cast proof](./cast-proof.md)

@@ -1,34 +1,43 @@
 ## File cheat codes
 
-### Signature
+### 签名
 
 ```solidity
-    // Reads the entire content of file to string, (path) => (data)
-    function readFile(string calldata) external returns (string memory);
-    // Reads next line of file to string, (path) => (line)
-    function readLine(string calldata) external returns (string memory);
-    // Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
-    // (path, data) => ()
-    function writeFile(string calldata, string calldata) external;
-    // Writes line to file, creating a file if it does not exist.
-    // (path, data) => ()
-    function writeLine(string calldata, string calldata) external;
-    // Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
-    // (path) => ()
-    function closeFile(string calldata) external;
-    // Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
-    // - Path points to a directory.
-    // - The file doesn't exist.
-    // - The user lacks permissions to remove the file.
-    // (path) => ()
-    function removeFile(string calldata) external;
+// Reads the entire content of file to string, (path) => (data)
+function readFile(string calldata) external returns (string memory);
+// Reads next line of file to string, (path) => (line)
+function readLine(string calldata) external returns (string memory);
+// Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
+// (path, data) => ()
+function writeFile(string calldata, string calldata) external;
+// Writes line to file, creating a file if it does not exist.
+// (path, data) => ()
+function writeLine(string calldata, string calldata) external;
+// Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
+// (path) => ()
+function closeFile(string calldata) external;
+// Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
+// - Path points to a directory.
+// - The file doesn't exist.
+// - The user lacks permissions to remove the file.
+// (path) => ()
+function removeFile(string calldata) external;
+// Returns true if the given path points to an existing entity, else returns false
+// (path) => (bool)
+function exists(string calldata) external returns (bool);
+// Returns true if the path exists on disk and is pointing at a regular file, else returns false
+// (path) => (bool)
+function isFile(string calldata) external returns (bool);
+// Returns true if the path exists on disk and is pointing at a directory, else returns false
+// (path) => (bool)
+function isDir(string calldata) external returns (bool);
 ```
 
-### Description
+### 描述 
 
-These cheatcodes provided by [forge-std](https://github.com/foundry-rs/forge-std) can be used for filesystem manipulation operations.
+这些作弊码由 [forge-std](https://github.com/foundry-rs/forge-std) 提供，可用于文件系统操作。
 
-By default, filesystem access is disallowed and requires the `fs_permission` setting in `foundry.toml`:
+默认情况下，文件系统访问被禁止，并且需要在`foundry.toml`中设置`fs_permission`：
 
 ```toml
 # Configures permissions for cheatcodes that touch the filesystem like `vm.writeFile`
@@ -44,11 +53,11 @@ By default, filesystem access is disallowed and requires the `fs_permission` set
 fs_permissions = [] # default: all file cheat codes are disabled
 ```
 
-### Examples
+### 例子 
 
-Append a line to a file, this will create the file if it does not exist yet
+向文件追加一行，如果文件尚不存在，则会创建该文件
 
-This requires read access to the file / project root
+这需要对文件/项目根目录具有读取权限
 
 ```toml
 fs_permissions = [{ access = "read", path = "./"}]
@@ -64,9 +73,9 @@ string memory line2 = "second line";
 vm.writeLine(path, line2);
 ```
 
-Write to and read from a file
+写入并从文件中读取
 
-This requires read-write access to file / project root:
+这需要对文件/项目根目录具有读写权限：
 
 ```toml
 fs_permissions = [{ access = "read-write", path = "./"}]
@@ -80,9 +89,9 @@ vm.writeFile(path, data);
 assertEq(vm.readFile(path), data);
 ```
 
-Remove a file
+删除文件
 
-This requires write access to file / project root:
+这需要对文件/项目根目录具有写入权限：
 
 ```toml
 fs_permissions = [{ access = "write", path = "./"}]
@@ -90,8 +99,27 @@ fs_permissions = [{ access = "write", path = "./"}]
 
 ```solidity
 string memory path = "file.txt";
-string memory data = "hello world";
-vm.writeFile(path, data);
+vm.removeFile(path);
 
-assertEq(vm.readFile(path), data);
+assertFalse(vm.exists(validPath));
+```
+
+Verify that a filesystem path is valid
+
+```solidity
+// Verify that path 'foo/files/bar.txt' exists
+string memory validPath = "foo/files/bar.txt";
+assertTrue(vm.exists(validPath));
+```
+
+Verify that a filesystem path points to a file or directory
+
+```solidity
+// Verify that path 'foo/file/bar.txt' points to a file
+string memory validFilePath = "foo/files/bar.txt";
+assertTrue(vm.isFile(validFilePath));
+
+// Verify that 'foo/file' points to a directory
+string memory validDirPath = "foo/files";
+assertTrue(vm.isDir(validDirPath));
 ```
