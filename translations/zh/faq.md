@@ -60,7 +60,7 @@ Forge 默认不显示日志。 如果你想查看来自 Hardhat 的 `console.log
 你需要导入它:
 
 ```solidity
-import "forge-std/console.sol";
+import {console} from "forge-std/console.sol";
 ```
 
 ### 我该如何运行特定的测试?
@@ -124,9 +124,9 @@ Forge 有时会检查适合您项目的较新 Solidity 版本。要离线使用 
 
 ### 我遇到了 Solc 错误
 
-[solc-bin](https://binaries.soliditylang.org/) 不提供 Apple 芯片的静态构建。Foundry 依靠 [svm](https://github.com/roynalnaruto/svm-rs) 来安装 Apple 芯片的本地构建。
+[solc-bin](https://binaries.soliditylang.org/) 不提供 Apple 芯片的静态构建。Foundry 依靠 [svm](https://github.com/alloy-rs/svm-rs) 来安装 Apple 芯片的本地构建。
 
-所有 solc 版本都安装在 `~/.svm/` 下。如果你遇到与 solc 有关的错误，例如 `SolcError: ...`，请将 `~/.svm/` 删除并重新尝试，这将触发一个新的安装，通常会解决这个问题。
+如果目录已经存在，所有的 solc 版本都会安装在 `~/.svm/` 下。如果不存在，则使用 `$XDG_DATA_HOME/svm/`，在 Linux 上通常映射到 `$HOME/.local/share/svm/`，在 MacOS 上映射到 `$HOME/Library/Application Support/svm/`。如果遇到与 solc 相关的错误，例如 `SolcError: ...`，请删除 `~/.svm/` 目录并重试，这将触发全新安装，通常可以解决问题。
 
 如果你使用的是 Apple 芯片，请确保 [`z3` thereom prover](https://github.com/Z3Prover/z3)已经安装。`brew install z3`.
 

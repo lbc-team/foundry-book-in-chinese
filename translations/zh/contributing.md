@@ -13,4 +13,4 @@
 以下是一些文章，帮助你迈出第一步：
 
 - [做出第一次贡献](https://dev.to/teddav/foundry-open-source-contribution-1k2d)
-- [添加一个作弊码](https://dev.to/teddav/foundry-add-a-cheatcode-5hc8)
+- [添加一个作弊码](https://dev.to/teddav/foundry-add-a-cheatcode-5hc8) (已过时, 见 [Foundry dev docs](https://github.com/foundry-rs/foundry/blob/master/docs/dev/cheatcodes.md#adding-a-new-cheatcode) 以获取短但最新的教程)

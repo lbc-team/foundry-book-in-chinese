@@ -44,6 +44,7 @@ Foundry 配置指引:
 - [Shell 命令补全](./config/shell-autocompletion.md)
 - [静态代码分析器](./config/static-analyzers.md)
 - [与 Hardhat 集成](./config/hardhat.md)
+- [Vyper 支持](./config/vyper.md)
 
 **教程**
 
