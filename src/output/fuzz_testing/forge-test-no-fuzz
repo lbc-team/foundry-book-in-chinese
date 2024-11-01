@@ -3,12 +3,14 @@
 $ forge test
 // ANCHOR_END: command
 // ANCHOR: output
-Compiling 6 files with 0.8.10
-Solc 0.8.10 finished in 3.78s
-Compiler run successful
+Compiling 24 files with Solc 0.8.10
+Solc 0.8.10 finished in 1.11s
+Compiler run successful!
 
-Running 1 test for test/Safe.t.sol:SafeTest
-[PASS] testWithdraw() (gas: 19462)
-Test result: ok. 1 passed; 0 failed; finished in 873.70µs
+Ran 1 test for test/Safe.t.sol:SafeTest
+[PASS] test_Withdraw() (gas: 19463)
+Suite result: ok. 1 passed; 0 failed; 0 skipped; finished in 381.15µs (43.90µs CPU time)
+
+Ran 1 test suite in 5.93ms (381.15µs CPU time): 1 tests passed, 0 failed, 0 skipped (1 total tests)
 // ANCHOR_END: output
 // ANCHOR_END: all
