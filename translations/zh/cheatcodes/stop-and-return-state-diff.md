@@ -10,7 +10,11 @@ enum AccountAccessKind {
     StaticCall,
     Create,
     SelfDestruct,
-    Resume
+    Resume,
+    Balance,
+    Extcodesize,
+    Extcodehash,
+    Extcodecopy
 }
 
 struct ChainInfo {
@@ -31,6 +35,7 @@ struct AccountAccess {
     bytes data;
     bool reverted;
     StorageAccess[] storageAccesses;
+    uint64 depth;
 }
 
 struct StorageAccess {
@@ -72,6 +77,10 @@ function stopAndReturnStateDiff() external returns (AccountAccess[] memory acces
 - `Create` - 创建了该帐户
 - `SelfDestruct` - 自毁了该帐户
 - `Resume` - 表示已恢复先前被抢占的帐户访问
+- `Balance` - 账户的代码大小被读取
+- `Extcodesize` - 账户的代码大小被读取
+- `Extcodehash` - 账户的代码哈希被读取
+- `Extcodecopy` - 账户的代码被复制
 
 ### `AccountAccess`
 
@@ -91,6 +100,7 @@ function stopAndReturnStateDiff() external returns (AccountAccess[] memory acces
 - `data` - 在 `CREATE` 或 `CALL` 类型访问的情况下提供的输入数据（即 `msg.data`）。
 - `reverted` - 如果此访问在当前上下文或父上下文中回滚。
 - `storageAccesses` - 在帐户访问为非抢占时进行的存储访问的有序列表。
+- `depth` - 在记录状态差异时遍历的调用深度。
 
 ### `StorageAccess`
 

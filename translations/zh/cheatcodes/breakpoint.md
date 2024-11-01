@@ -11,7 +11,7 @@ function breakpoint(string, bool) external;
 
 在调试器视图中设置断点。
 
-调用 `vm.breakpoint('<char>, true)` 等同于 `vm.breakpoint('<char>)`，但调用 `vm.breakpoint('<char, false)` 将会删除 `'<char` 处的断点。
+调用 `vm.breakpoint('<char>, true)` 等同于 `vm.breakpoint('<char>)`，但调用 `vm.breakpoint('<char>, false)` 将会删除 `'<char>` 处的断点。
 
 如果字符被覆盖，只有在执行步骤中访问的最后一个字符会被考虑。
 

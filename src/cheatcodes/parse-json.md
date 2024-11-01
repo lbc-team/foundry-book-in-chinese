@@ -5,7 +5,7 @@
 ```solidity
 // Return the value(s) that correspond to 'key'
 vm.parseJson(string memory json, string memory key)
-// Return the entire json file
+// Return the entire JSON file
 vm.parseJson(string memory json);
 ```
 
@@ -19,18 +19,21 @@ The cheatcode accepts either a `key` to search for a specific value in the JSON,
 
 ### JSONpath Key
 
-`parseJson` uses a syntax called JSONpath to form arbitrary keys for arbitrary json files. The same syntax (or rather a dialect) is used by the tool [`jq`](https://stedolan.github.io/jq/).
+`parseJson` uses a syntax called JSONpath to form arbitrary keys for arbitrary JSON files. The same syntax (or rather a dialect) is used by the tool [`jq`](https://stedolan.github.io/jq/).
 
 To read more about the syntax, you can visit the [README](https://crates.io/crates/jsonpath-rust) of the rust library that we use under the hood to implement the feature. That way you can be certain that you are using the correct dialect of jsonPath.
 
 ### JSON Encoding Rules
 
-We use the terms `number`, `string`, `object`, `array`, `boolean` as they are defined in the [JSON spec](https://www.w3schools.com/js/js_json_datatypes.asp).
+We use the terms `number`, `string`, `object`, `array`, `boolean`, `null` as they are defined in the [JSON spec](https://www.w3schools.com/js/js_json_datatypes.asp).
 
 **Encoding Rules**
 
+- `null` is encoded as `bytes32(0)`
 - Numbers >= 0 are encoded as `uint256`
 - Negative numbers are encoded as `int256`
+- Floating point numbers with decimal digitals are not allowed.
+- Floating point numbers using the scientific notation can be `uint256` or `int256` depending on the value.
 - A string that can be decoded into a type of `H160` and starts with `0x` is encoded as an `address`. In other words, if it can be decoded into an address, it's probably an address
 - A string that starts with `0x` is encoded as `bytes32` if it has a length of `66` or else to `bytes`
 - A string that is neither an `address`, a `bytes32` or `bytes`, is encoded as a `string`
@@ -39,7 +42,7 @@ We use the terms `number`, `string`, `object`, `array`, `boolean` as they are de
 
 ### Type Coercion
 
-As described above, parseJSON needs to deduce the type of JSON value and that has some inherent limitations. For that reason, there is a sub-family of `parseJson*` cheatcodes that coerce the type of the returned value.
+As described above, `parseJson` needs to deduce the type of JSON value and that has some inherent limitations. For that reason, there is a sub-family of `parseJson*` cheatcodes that coerce the type of the returned value.
 
 For example `vm.parseJsonUint(json, key)` will coerce the value to a `uint256`. That means that it can parse all the following values and return them as a `uint256`. That includes a number as type `number`, a stringified number as a `string` and of course it's hex representation.
 
@@ -59,7 +62,7 @@ JSON objects are encoded as tuples, and can be decoded via tuples or structs. Th
 
 For example:
 
-The following JSON
+The following JSON:
 
 ```json
 {
@@ -105,6 +108,74 @@ struct Json {
 
 The reason is that it would try to decode the string `"sigma"` as a uint. To be exact, it would be decoded, but it would result to a wrong number, since it would interpret the bytes incorrectly.
 
+Another example, given the following JSON:
+
+```json
+{
+    "apples": [
+        {
+            "sweetness": 7,
+            "sourness": 3,
+            "color": "Red"
+        },
+        {
+            "sweetness": 5,
+            "sourness": 5,
+            "color": "Green"
+        },
+        {
+            "sweetness": 9,
+            "sourness": 1,
+            "color": "Yellow"
+        }
+    ],
+    "name": "Fresh Fruit"
+}
+```
+
+And Solidity structs defined as follows:
+
+```solidity
+struct Apple {
+    string color;
+    uint8 sourness;
+    uint8 sweetness;
+}
+
+struct FruitStall {
+    Apple[] apples;
+    string name;
+}
+```
+
+One would decode the JSON as follows:
+
+```solidity
+string memory root = vm.projectRoot();
+string memory path = string.concat(root, "/src/test/fixtures/fruitstall.json");
+string memory json = vm.readFile(path);
+bytes memory data = vm.parseJson(json);
+FruitStall memory fruitstall = abi.decode(data, (FruitStall));
+
+// Logs: Welcome to Fresh Fruit
+console2.log("Welcome to", fruitstall.name);
+
+for (uint256 i = 0; i < fruitstall.apples.length; i++) {
+    Apple memory apple = fruitstall.apples[i];
+
+    // Logs:
+    // Color: Red, Sourness: 3, Sweetness: 7
+    // Color: Green, Sourness: 5, Sweetness: 5
+    // Color: Yellow, Sourness: 1, Sweetness: 9
+    console2.log(
+        "Color: %s, Sourness: %d, Sweetness: %d",
+        apple.color,
+        apple.sourness,
+        apple.sweetness
+    );
+}
+```
+
 ### Decoding JSON Objects, a tip
 
 If your JSON object has `hex numbers`, they will be encoded as bytes. The way to decode them as `uint` for better UX, is to define two `struct`, one intermediary with the definition of these values as `bytes` and then a final `struct` that will be consumed by the user.
@@ -115,7 +186,7 @@ If your JSON object has `hex numbers`, they will be encoded as bytes. The way to
 
 ### How to use StdJson
 
-1. Import the library `import "../StdJson.sol";`
+1. Import the library `import {stdJson} from "forge-std/StdJson.sol";`
 2. Define its usage with `string`: `using stdJson for string;`
 3. If you want to parse simple values (numbers, address, etc.) use the helper functions
 4. If you want to parse entire JSON objects:

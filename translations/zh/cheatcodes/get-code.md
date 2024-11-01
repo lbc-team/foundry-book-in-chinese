@@ -50,6 +50,17 @@ deployed := create(0, add(bytecode, 0x20), mload(bytecode))
 vm.etch(targetAddr, deployed.code);
 ```
 
+
+### Supported formats
+
+你可以通过合约路径或合约名称获取构件。也支持获取特定版本的构件。如果未提供版本，cheatcode 将默认为正在执行的测试版本或构件编译时的唯一版本。
+```solidity
+vm.getCode("MyContract.sol:MyContract");
+vm.getCode("MyContract");
+vm.getCode("MyContract.sol:0.8.18");
+vm.getCode("MyContract:0.8.18");
+```
+
 ### 另请参阅
 
 [`getDeployedCode`](./get-deployed-code.md)

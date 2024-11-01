@@ -1,5 +1,9 @@
 ## `keyExists`
 
+### Status
+
+`keyExists` 正在被弃用，建议使用 `keyExistsJson`。它将在未来的版本中被移除。
+
 ### 签名
 
 ```solidity

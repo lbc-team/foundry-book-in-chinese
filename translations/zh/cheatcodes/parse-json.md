@@ -5,7 +5,7 @@
 ```solidity
 // Return the value(s) that correspond to 'key'
 vm.parseJson(string memory json, string memory key)
-// Return the entire json file
+// Return the entire JSON file
 vm.parseJson(string memory json);
 ```
 
@@ -25,12 +25,15 @@ vm.parseJson(string memory json);
 
 ### JSON 编码规则
 
-我们使用 `number`、`string`、`object`、`array`、`boolean` 这些术语，因为它们在 [JSON 规范](https://www.w3schools.com/js/js_json_datatypes.asp)中有定义。
+我们使用 `number`、`string`、`object`、`array`、`boolean`、`null` 这些术语，因为它们在 [JSON 规范](https://www.w3schools.com/js/js_json_datatypes.asp)中有定义。
 
 **编码规则**
 
+- `null` 被编码为 `bytes32(0)`
 - 大于等于 0 的数字被编码为 `uint256`
 - 负数被编码为 `int256`
+- 不允许使用带小数位的浮点数。
+- 使用科学计数法的浮点数可以是 `uint256` 或 `int256`，具体取决于值。
 - 可以解码为 `H160` 类型并以 `0x` 开头的字符串被编码为 `address`。换句话说，如果它可以解码为地址，那么它很可能是一个地址
 - 以 `0x` 开头的字符串，如果长度为 `66`，则被编码为 `bytes32`，否则编码为 `bytes`
 - 既不是 `address`、`bytes32` 或 `bytes` 的字符串被编码为 `string`
@@ -39,7 +42,7 @@ vm.parseJson(string memory json);
 
 ### 类型强制转换
 
-如上所述，parseJSON 需要推断 JSON 值的类型，这具有一些固有的限制。因此，有一个 `parseJson*` 作弊码子系，用于强制转换返回值的类型。
+如上所述，`parseJSON` 需要推断 JSON 值的类型，这具有一些固有的限制。因此，有一个 `parseJson*` 作弊码子系，用于强制转换返回值的类型。
 
 例如，`vm.parseJsonUint(json, key)` 将强制将值转换为 `uint256`。这意味着它可以解析以下所有值并将它们作为 `uint256` 返回。这包括类型为 `number` 的数字，作为 `string` 的数字化值，当然还包括其十六进制表示。
 
@@ -59,7 +62,7 @@ JSON 对象被编码为元组，可以通过元组或结构体进行解码。这
 
 例如：
 
-以下 JSON
+以下 JSON：
 
 ```json
 {
@@ -105,6 +108,74 @@ struct Json {
 
 原因是它会尝试将字符串 `"sigma"` 解码为 uint。确切地说，它会被解码，但会得到一个错误的数字，因为它会错误地解释字节。
 
+另一个例子，给定以下 JSON：
+
+```json
+{
+    "apples": [
+        {
+            "sweetness": 7,
+            "sourness": 3,
+            "color": "Red"
+        },
+        {
+            "sweetness": 5,
+            "sourness": 5,
+            "color": "Green"
+        },
+        {
+            "sweetness": 9,
+            "sourness": 1,
+            "color": "Yellow"
+        }
+    ],
+    "name": "Fresh Fruit"
+}
+```
+
+And Solidity structs defined as follows:
+
+```solidity
+struct Apple {
+    string color;
+    uint8 sourness;
+    uint8 sweetness;
+}
+
+struct FruitStall {
+    Apple[] apples;
+    string name;
+}
+```
+
+One would decode the JSON as follows:
+
+```solidity
+string memory root = vm.projectRoot();
+string memory path = string.concat(root, "/src/test/fixtures/fruitstall.json");
+string memory json = vm.readFile(path);
+bytes memory data = vm.parseJson(json);
+FruitStall memory fruitstall = abi.decode(data, (FruitStall));
+
+// Logs: Welcome to Fresh Fruit
+console2.log("Welcome to", fruitstall.name);
+
+for (uint256 i = 0; i < fruitstall.apples.length; i++) {
+    Apple memory apple = fruitstall.apples[i];
+
+    // Logs:
+    // Color: Red, Sourness: 3, Sweetness: 7
+    // Color: Green, Sourness: 5, Sweetness: 5
+    // Color: Yellow, Sourness: 1, Sweetness: 9
+    console2.log(
+        "Color: %s, Sourness: %d, Sweetness: %d",
+        apple.color,
+        apple.sourness,
+        apple.sweetness
+    );
+}
+```
+
 ### 解码 JSON 对象的提示
 
 如果您的 JSON 对象中有 `十六进制数`，它们将被编码为 `bytes`。为了更好的用户体验，将它们解码为 `uint` 的方法是定义两个 `struct`，一个中间 `struct` 定义这些值为 `bytes`，然后一个最终 `struct` 供用户使用。
@@ -115,7 +186,7 @@ struct Json {
 
 ### 如何使用 StdJson
 
-1. 导入库 `import "../StdJson.sol";`
+1. 导入库 `import {stdJson} from "forge-std/StdJson.sol";`
 2. 使用 `string` 定义其用法：`using stdJson for string;`
 3. 如果要解析简单值（数字、地址等），请使用辅助函数
 4. 如果要解析整个 JSON 对象：

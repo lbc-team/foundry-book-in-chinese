@@ -10,7 +10,11 @@ enum AccountAccessKind {
     StaticCall,
     Create,
     SelfDestruct,
-    Resume
+    Resume,
+    Balance,
+    Extcodesize,
+    Extcodehash,
+    Extcodecopy
 }
 
 struct ChainInfo {
@@ -31,6 +35,7 @@ struct AccountAccess {
     bytes data;
     bool reverted;
     StorageAccess[] storageAccesses;
+    uint64 depth;
 }
 
 struct StorageAccess {
@@ -65,13 +70,17 @@ If kind is Create, then the account is the newly created account.
 If kind is SelfDestruct, then the account is the selfdestruct recipient.
 If kind is a Resume, then account represents an execution context that had resumed.
 
-- `Call` - The account was called 
+- `Call` - The account was called
 - `DelegateCall` - The account was called via delegate call
 - `CallCode` - The account was called via callcode
 - `StaticCall` - The account was called via staticcall
 - `Create` - The account was created
 - `SelfDestruct` - The account was selfdestructed
 - `Resume` - Indicates that a previously pre-emptyed account access was resumed
+- `Balance` - The account's codesize was read
+- `Extcodesize` - The account's codesize was read
+- `Extcodehash` - The account's codehash was read
+- `Extcodecopy` - The account's code was copied
 
 ### `AccountAccess`
 
@@ -92,6 +101,7 @@ That is, all balance changes are recorded here, even if reverts occurred.
 - `data` - Input data provided (i.e. `msg.data`) in the case of a `CREATE` or `CALL` type access.
 - `reverted` - If this access reverted in either the current or parent context.
 - `storageAccesses` - An ordered list of storage accesses made while the account access is non-preemptive.
+- `depth` - Call depth traversed during the recording of state differences.
 
 ### `StorageAccess`
 

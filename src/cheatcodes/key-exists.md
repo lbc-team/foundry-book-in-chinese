@@ -1,5 +1,9 @@
 ## `keyExists`
 
+### Status
+
+`keyExists` is being deprecated in favor of `keyExistsJson`. It will be removed in future versions.
+
 ### Signature
 
 ```solidity

@@ -47,6 +47,17 @@ assertEq(
 )
 ```
 
+### Supported formats
+
+你可以通过合约路径或合约名称获取构件。也支持获取特定版本的构件。如果未提供版本，cheatcode 将默认为正在执行的测试版本或构件编译时的唯一版本。
+```solidity
+vm.getDeployedCode("MyContract.sol:MyContract");
+vm.getDeployedCode("MyContract");
+vm.getDeployedCode("MyContract.sol:0.8.18");
+vm.getDeployedCode("MyContract:0.8.18");
+```
+
+
 ### 另请参阅
 
 Forge 标准库

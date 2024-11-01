@@ -14,6 +14,10 @@ function expectRevert(bytes4 message) external;
 function expectRevert(bytes calldata message) external;
 ```
 
+```solidity
+function expectPartialRevert(bytes4 message) external;
+```
+
 ### 描述
 
 如果 **下一次调用** 没有以期望的数据 `message` 回滚，那么 `expectRevert` 会执行回滚。
@@ -22,11 +26,33 @@ function expectRevert(bytes calldata message) external;
 
 这意味着，例如，我们可以在回滚调用之前立即调用 [`prank`](./prank.md)。
 
-有 3 个签名：
+`expectRevert` 有 3 个签名：
 
 - **没有参数**：断言下一次调用会回滚，无论消息是什么。
-- **带有`bytes4`**：断言下一次调用会以指定的 4 个字节回滚。
+- **带有`bytes4`**：断言下一次调用会以指定的 4 个字节回滚并且完全匹配回滚数据。
 - **带有`bytes`**：断言下一次调用会以指定的字节回滚。
+
+`expectPartialRevert` 有一个签名：
+- **`bytes4`**：断言下一个调用会回退，并且指定的 4 字节与回滚数据的前 4 字节匹配。
+
+> ℹ️  **注意：**
+> 
+> 自定义错误可能包含在测试环境中有时难以计算的参数，或者它们可能与当前测试无关（例如，在第三方合约的内部函数中计算的值）。在这种情况下，可以使用 `expectPartialRevert` 来忽略参数，仅匹配自定义错误的选择器。例如，测试一个使用 `WrongNumber(uint256 number)` 自定义错误回退的函数：
+> ```solidity
+> function count() public {
+>     revert WrongNumber(0);
+> }
+> ```
+> should pass when using `expectPartialRevert`:
+> ```solidity
+> vm.expectPartialRevert(Counter.WrongNumber.selector);
+> counter.count();
+> ```
+> but fails if exact match expected:
+> ```solidity
+> vm.expectRevert(Counter.WrongNumber.selector);
+> counter.count();
+> ```
 
 > ⚠️ **注意：与低级调用一起使用**
 >
@@ -102,6 +128,12 @@ function testMultipleExpectReverts() public {
     vm.expectRevert("INVALID_ADDRESS");
     vault.send(address(0), 200);
 }
+```
+
+要在 `expectPartialRevert` 中使用自定义的[错误类型][error-type] ，请使用它的选择器。
+
+```solidity
+vm.expectRevert(CustomError.selector);
 ```
 
 ### 参见

@@ -82,7 +82,8 @@ function serializeBytes(string calldata objectKey, string calldata valueKey, byt
 
 作弊码返回**到目前为止**正在被序列化的 JSON 对象。这样用户可以序列化内部 JSON 对象，然后将它们序列化为更大的 JSON 对象，从而使用户能够创建任意的 JSON 对象。
 
-最后，用户可以使用 [writeJson](./write-json.md) 将 JSON 对象写入文件。
+最后，用户可以使用 [writeJson](./write-json.md) 将 JSON 对象写入 JSON 文件。
+或者，用户可以使用 [writeToml](./write-toml.md) 将 JSON 对象写入 TOML 文件。
 
 **记住：** 文件路径需要在允许的路径中。在 [File cheatcodes](./fs.md)中阅读更多信息。
 
