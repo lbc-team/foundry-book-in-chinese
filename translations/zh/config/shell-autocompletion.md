@@ -20,7 +20,7 @@ cast completions zsh | sudo tee /usr/local/share/zsh/site-functions/_cast
 anvil completions zsh | sudo tee /usr/local/share/zsh/site-functions/_anvil
 ```
 
-对于基于 ARM 的系统：
+对于基于 macOS 的系统：
 
 ```sh
 forge completions zsh > /opt/homebrew/completions/zsh/_forge

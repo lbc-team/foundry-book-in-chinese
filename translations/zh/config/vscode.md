@@ -51,4 +51,39 @@
 
 ```toml
 solc = "0.8.17"
-``` 
+```
+
+### 使用 OpenZeppelin 合约和非标准项目布局的示例。
+
+```bash
+.
+└── project
+└── contracts
+═── lib
+│ ═── forge-std
+│ └── openzeppelin-contracts
+═── script
+═── src
+└── test
+```
+
+在 `remappings.txt` 文件中添加一行 ([`forge remapping`](../projects/dependencies.md#remapping-dependencies)):
+
+```solidity
+@openzeppelin/=lib/openzeppelin-contracts/
+```
+
+在 `.vscode/settings.json` 文件中添加一行 (solidity 扩展设置):
+
+```json
+{
+"solidity.remappings": [
+"@openzeppelin/=project/contracts/lib/openzeppelin-contracts/"
+]
+}
+```
+
+现在可以使用 OpenZeppelin 文档中的所有合约。
+
+```javascript 从 "@openzeppelin/contracts/token/ERC20/ERC20.sol" 导入 {ERC20}；
+````
