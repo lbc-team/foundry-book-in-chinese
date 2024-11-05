@@ -1,32 +1,53 @@
-# 不变性测试
+# 不变量测试
 ## 概述
 
-不变性测试允许针对预定义合约的预定义函数调用的随机序列测试一组不变性表达式。在执行每个函数调用后，会对所有定义的不变性进行断言。
+不变量测试允许对预定义合约中的预定义函数调用序列进行随机化测试，以验证一组不变量表达式。在每次函数调用执行后，都会断言所有定义的不变量。
 
-不变性测试是暴露协议中不正确逻辑的强大工具。由于函数调用序列是随机的，并且具有模糊输入，不变性测试可以暴露边缘情况和高度复杂协议状态中的错误假设和不正确逻辑。
+不变量测试是揭示协议中错误逻辑的强大工具。由于函数调用序列是随机化的，并且输入是模糊的，不变量测试可以在边缘情况和高度复杂的协议状态中揭示错误的假设和不正确的逻辑。
 
-不变性测试活动有两个维度，即 `runs `和 `depth`：
-- `runs`：生成和运行函数调用序列的次数。
-- `depth`：在给定的 `run` 中进行的函数调用次数。在进行每个函数调用后，都会对所有定义的不变性进行断言。如果函数调用回滚，则 `depth` 计数器仍会递增。
+不变量测试活动有两个维度，`runs` 和 `depth`：
+- `runs`：生成并运行函数调用序列的次数。
+- `depth`：在给定的 `run` 中进行的函数调用次数。在每次函数调用后都会断言不变量。如果函数调用回退，`depth` 计数器仍然递增。
 
-这些以及其他不变性配置方面的内容在 [`此处`](#configuring-invariant-test-execution) 有详细说明。
+> ℹ️ **注意**
+>
+> 在实现不变量测试时，重要的是要注意对于每个 `invariant_*` 函数，会创建一个不同的 EVM 执行器，因此不变量不会针对相同的 EVM 状态进行断言。这意味着如果定义了 `invariant_A()` 和 `invariant_B()` 函数，那么 `invariant_B()` 不会针对 `invariant_A()` 的 EVM 状态进行断言（反之亦然）。
+>
+> 如果你想同时断言所有不变量，可以将它们分组并在多个作业上运行。例如，使用两个作业断言所有不变量可以实现为：
+> ```Solidity
+>function invariant_job1() public {
+>    assertInvariants();
+>}
+>
+>function invariant_job2() public {
+>    assertInvariants();
+>}
+>
+>function assertInvariants() internal {
+>    assertEq(val1, val2);
+>    assertEq(val3, val4);
+>}
+> ```
 
-与在 Foundry 中运行标准测试的方式类似，通过在函数名前加上 `test` 前缀来运行不变性测试，通过在函数名前加上 `invariant` 前缀来表示不变性测试（例如，`function invariant_A()`）。
+这些和其他不变量配置方面的内容在 [`这里`](#configuring-invariant-test-execution) 进行了说明。
 
-### 配置不变性测试执行
+类似于在 Foundry 中通过在函数名称前加上 `test` 来运行标准测试，不变量测试通过在函数名称前加上 `invariant` 来表示（例如，`function invariant_A()`）。
 
-不变性测试执行由用户可以通过 Forge 配置基元控制的参数来管理。配置可以全局应用或针对每个测试进行应用。有关此主题的详细信息，请参考
- 📚 [`全局配置`](../reference/config/testing.md) 和 📚 [`内联配置`](../reference/config/inline-test-config.md)。
+`afterInvariant()` 函数在每次不变量运行结束时调用（如果声明了），允许进行后期活动处理。此函数可用于记录活动指标（例如选择器被调用的次数）和后期模糊活动测试（例如关闭所有头寸并断言所有资金能够退出系统）。
 
-## 定义不变性
+### 配置不变量测试执行
 
-不变性是应该在模糊测试活动期间始终成立的条件表达式。一个良好的不变性测试套件应该尽可能多地包含不变性，并且可以针对不同的协议状态具有不同的测试套件。
+不变量测试的执行由用户通过 Forge 配置原语控制的参数管理。配置可以全局应用或按测试应用。有关此主题的详细信息，请参阅 📚 [`全局配置`](../reference/config/testing.md) 和 📚 [`内联配置`](../reference/config/inline-test-config.md)。
 
-不变性的示例包括：
-- 对于 Uniswap，*“xy=k公式始终成立”*。
-- 对于 ERC-20 代币，*“所有用户余额的总和等于总供应量”*。
+## 定义不变量
 
-有不同的方法来断言不变性，如下表所述：
+不变量是在模糊测试活动过程中应始终保持为真的条件表达式。一个好的不变量测试套件应尽可能多地包含不变量，并且可以为不同的协议状态提供不同的测试套件。
+
+不变量的示例包括：
+- *"xy=k 公式始终成立"* 对于 Uniswap
+- *"所有用户余额的总和等于总供应量"* 对于 ERC-20 代币。
+
+有不同的方法来断言不变量，如下表所示：
 
 <table>
 <tr><th>类型</th><th>解释</th><th>示例</th></tr>
@@ -34,7 +55,7 @@
 <tr>
 
 <td>直接断言</td>
-<td>查询协议智能合约并断言值是否符合预期。</td>
+<td>查询协议智能合约并断言值符合预期。</td>
 <td>
 
 ```solidity
@@ -50,7 +71,7 @@ assertGe(
 <tr>
 
 <td>幽灵变量断言</td>
-<td>查询协议智能合约并将其与在测试环境中持久化的值（幽灵变量）进行比较。</td>
+<td>查询协议智能合约并将其与测试环境中持久化的值（幽灵变量）进行比较。</td>
 <td>
 
 ```solidity
@@ -66,7 +87,7 @@ assertEq(
 <tr>
 
 <td>去优化（天真实现断言）</td>
-<td>查询协议智能合约并将其与相同期望逻辑的天真且通常高度耗气的实现进行比较。</td>
+<td>查询协议智能合约并将其与同一逻辑的天真且通常是高 gas 消耗的实现进行比较。</td>
 <td>
 
 ```solidity
@@ -80,11 +101,11 @@ assertEq(
 </tr>
 </table>
 
-### 条件不变性
+### 条件不变量
 
-不变性必须在给定模糊测试活动期间始终成立，但这并不意味着它们在每种情况下都必须成立。在特定情况下（例如，在清算期间）可能会引入/移除某些不变性。
+不变量必须在给定的模糊测试活动过程中保持，但这并不意味着它们必须在每种情况下都成立。在某些场景中，可能会引入/移除某些不变量（例如，在清算期间）。
 
-不建议在不变性断言中引入条件逻辑，因为它们可能会因为不正确的代码路径而引入错误的阳性结果。例如：
+不建议在不变量断言中引入条件逻辑，因为它们可能会因为不正确的代码路径而引入误报。例如：
 
 ```solidity
 function invariant_example() external {
@@ -94,7 +115,7 @@ function invariant_example() external {
 }
 ```
 
-在这种情况下，如果 `protocolCondition == true`，则根本不会断言不变性。有时这可能是期望的行为，但如果 `protocolCondition` 意外地在整个模糊测试活动期间为 true，或者条件本身存在逻辑错误，则可能会引发问题。因此，最好尝试为该条件定义另一个不变性，例如：
+在这种情况下，如果 `protocolCondition == true`，则不变量根本不会被断言。有时这可能是期望的行为，但如果 `protocolCondition` 在整个模糊测试活动中意外为真，或者条件本身存在逻辑错误，则可能会导致问题。因此，最好为该条件定义一个替代不变量，例如：
 
 ```solidity
 function invariant_example() external {
@@ -107,67 +128,72 @@ function invariant_example() external {
 }
 ```
 
-处理协议状态下不同不变性的另一种方法是利用不同场景的专用不变性测试合约。这些场景可以使用 `setUp` 函数进行引导，但更强大的方法是利用 *不变性目标* 来控制模糊器的行为，从而仅产生特定结果（例如，避免清算）。
+处理不同协议状态下的不同不变量的另一种方法是为不同场景使用专用的不变量测试合约。这些场景可以使用 `setUp` 函数进行引导，但利用*不变量目标*来引导模糊器以仅产生某些结果的方式行为更为强大（例如，避免清算）。
 
-## 不变性目标
+## 不变量目标
 
-**目标合约**：在给定的不变性测试模糊活动期间将被调用的合约集。这组合约默认为在 `setUp` 函数中部署的所有合约，但可以进行定制以允许更高级的不变性测试。
+**目标合约**：在给定的不变量测试模糊活动过程中将被调用的合约集。此合约集默认为在 `setUp` 函数中部署的所有合约，但可以自定义以允许更高级的不变量测试。
 
-**目标发送方**：不变性测试模糊器默认情况下会随机选择 `msg.sender` 的值进行模糊测试活动，以模拟系统中的多个参与者。如果需要，可以在 `setUp` 函数中定制发送方集。
+**目标发送者**：不变量测试模糊器在执行模糊活动时随机选择 `msg.sender` 的值，以默认模拟系统中的多个参与者。如果需要，可以在 `setUp` 函数中自定义发送者集。
 
-**目标选择器**：用于不变性测试的模糊器的函数选择器集。这些可以用于在给定目标合约中使用函数的子集。
+**目标接口**：在 `setUp` 期间未部署但在分叉环境中模糊的地址及其项目标识符集（例如 `[(0x1, ["IERC20"]), (0x2, ("IOwnable"))]`）。这使得可以针对委托代理和使用 `create` 或 `create2` 部署的合约进行目标设置。
 
-**目标工件**：要用于给定合约的期望 ABI。这些可以用于代理合约配置。
+**目标选择器**：模糊器用于不变量测试的函数选择器集。这些可以用于在给定目标合约中使用函数的子集。
 
-**目标工件选择器**：要在给定合约的给定 ABI 中使用的函数选择器的期望子集。这些可以用于代理合约配置。
+**目标工件**：用于给定合约的所需 ABI。这些可以用于代理合约配置。
 
-在目标冲突的情况下，不变性模糊器的优先级为：
+**目标工件选择器**：用于给定合约的所需 ABI 中的函数选择器子集。这些可以用于代理合约配置。
 
-`目标选择器 | 目标工件选择器 > 排除合约 | 排除工件 > 目标合约 | 目标工件`
+在目标冲突情况下，不变量模糊器的优先级为：
+
+`targetInterfaces | targetSelectors > excludeSelectors | targetArtifactSelectors > excludeContracts | excludeArtifacts > targetContracts | targetArtifacts`
 
 ### 函数调用概率分布
 
-这些合约的函数将以随机方式进行模糊测试活动。函数被调用的概率按合约和函数进行了详细说明。
+这些合约中的函数将以随机方式（具有均匀分布的概率）被调用，并带有模糊输入。
 
 例如：
 
 ```text
-targetContract1: 50%
-├─ function1: 50% (25%)
-└─ function2: 50% (25%)
+targetContract1:
+├─ function1: 20%
+└─ function2: 20%
 
-targetContract2: 50%
-├─ function1: 25% (12.5%)
-├─ function2: 25% (12.5%)
-├─ function3: 25% (12.5%)
-└─ function4: 25% (12.5%)
+targetContract2:
+├─ function1: 20%
+├─ function2: 20%
+└─ function3: 20%
 ```
 
-在设计目标合约时需要注意这一点，因为函数较少的目标合约由于这种概率分布，每个函数被调用的次数会更多。
+这在设计目标合约时需要注意，因为由于这种概率分布，功能较少的目标合约每个功能将更频繁地被调用。
 
-### 不变性测试辅助函数
-不变性测试辅助函数包含在 [`forge-std`](https://github.com/foundry-rs/forge-std/blob/master/src/StdInvariant.sol) 中，以允许可配置的不变性测试设置。以下是这些辅助函数的概述：
+### 不变量测试辅助函数
+
+不变量测试辅助函数包含在 [`forge-std`](https://github.com/foundry-rs/forge-std/blob/master/src/StdInvariant.sol) 中，以允许配置不变量测试设置。辅助函数概述如下：
 
 | 函数 | 描述 |
 |-|-|
-| `excludeContract(address newExcludedContract_)` | 将给定地址添加到 `_excludedContracts` 数组中。这组合约明确地从目标合约中排除。|
-| `excludeSender(address newExcludedSender_)` | 将给定地址添加到 `_excludedSenders` 数组中。这组地址明确地从目标发送方中排除。 |
-| `excludeArtifact(string memory newExcludedArtifact_)` | 将给定字符串添加到 `_excludedArtifacts` 数组中。这组字符串明确地从目标工件中排除。 |
-| `targetArtifact(string memory newTargetedArtifact_)` | 将给定字符串添加到 `_targetedArtifacts` 数组中。这组字符串用于目标工件。  |
-| `targetArtifactSelector(FuzzSelector memory newTargetedArtifactSelector_)` | 将给定的 `FuzzSelector` 添加到 `_targetedArtifactSelectors` 数组中。这组 `FuzzSelector` 用于目标工件选择器。 |
-| `targetContract(address newTargetedContract_)` | 将给定地址添加到 `_targetedContracts` 数组中。这组地址用于目标合约。该数组会覆盖在 `setUp` 期间部署的合约集。 |
-| `targetSelector(FuzzSelector memory newTargetedSelector_)` | 将给定的 `FuzzSelector` 添加到 `_targetedSelectors` 数组中。这组 `FuzzSelector` 用于目标合约选择器。 |
-| `targetSender(address newTargetedSender_)` | 将给定地址添加到 `_targetedSenders` 数组中。这组地址用于目标发送方。 |
+| `excludeContract(address newExcludedContract_)` | 将给定的地址添加到`_excludedContracts`数组中。此合同集被明确排除在目标合同之外。|
+| `excludeSelector(FuzzSelector memory newExcludedSelector_)` | 将给定的`FuzzSelector`添加到`_excludedSelectors`数组中。此选择器集被明确排除在目标合约选择器之外。 |
+| `excludeSender(address newExcludedSender_)` | 将给定的地址添加到`_excludedSenders`数组中。此地址集被明确排除在目标发送者之外。 |
+| `excludeArtifact(string memory newExcludedArtifact_)` | 将给定的字符串添加到`_excludedArtifacts`数组中。此字符串集被明确排除在目标工件之外。 |
+| `targetArtifact(string memory newTargetedArtifact_)` | 将给定的字符串添加到`_targetedArtifacts`数组中。此字符串集用于目标工件。 |
+| `targetArtifactSelector(FuzzArtifactSelector memory newTargetedArtifactSelector_)` | 将给定的`FuzzArtifactSelector`添加到`_targetedArtifactSelectors`数组中。此选择器集用于目标工件选择器。 |
+| `targetContract(address newTargetedContract_)` | 将给定的地址添加到`_targetedContracts`数组中。此地址集用于目标合同。此数组覆盖在`setUp`期间部署的合同集。 |
+| `targetSelector(FuzzSelector memory newTargetedSelector_)` | 将给定的`FuzzSelector`添加到`_targetedSelectors`数组中。此选择器集用于目标合约选择器。 |
+| `targetSender(address newTargetedSender_)` | 将给定的地址添加到`_targetedSenders`数组中。此地址集用于目标发送者。 |
+| `targetInterface(FuzzInterface memory newTargetedInterface_)` | 将给定的`FuzzInterface`添加到`_targetedInterfaces`数组中。此接口集扩展了要模糊化的合约和选择器，并使目标地址在`setUp`期间没有部署的环境下使用，例如在分叉环境中进行模糊测试时。此外，还可以针对使用`create`或`create2`部署的代理和合约。 |
+
 ### 目标合约设置
 
-可以使用以下三种方法设置目标合约：
-1. 手动添加到 `targetContracts` 数组中的合约将被添加到目标合约集合中。
-2. 在 `setUp` 函数中部署的合约将自动添加到目标合约集合中（仅在没有使用选项 1 手动添加合约时有效）。
-3. 在 `setUp` 中部署的合约可以从目标合约中 **移除** ，如果它们被添加到 `excludeContracts` 数组中。
+目标合约可以通过以下三种方法进行设置：
+1. 手动添加到`targetContracts`数组中的合约将被添加到目标合约集。
+2. 在`setUp`函数中部署的合约会自动添加到目标合约集中（仅在没有通过选项 1 手动添加任何合约时有效）。
+3. 如果在`setUp`中部署的合约被添加到`excludeContracts`数组中，则可以从目标合约中**移除**这些合约。
 
 ## 开放测试
 
-目标合约的默认配置设置为在设置期间部署的所有合约。对于较小的模块和更多的算术合约，这种方法效果很好。例如：
+针对目标合约的默认配置设置为在设置期间部署的所有合约。对于较小的模块和更多算术合约，这种方式效果不错。例如：
 
 ```solidity
 contract ExampleContract1 {
@@ -189,7 +215,7 @@ contract ExampleContract1 {
 }
 ```
 
-可以使用默认目标合约模式部署和测试此合约：
+此合约可以使用默认的目标合约模式进行部署和测试：
 
 ```solidity
 contract InvariantExample1 is Test {
@@ -205,17 +231,17 @@ contract InvariantExample1 is Test {
     }
 
     function invariant_B() external {
-        assertGe(foo.val1() + foo.val2(), foo.val1());
+        assertGe(foo.val1() + foo.val2(), foo.val3());
     }
 
 }
 ```
 
-此设置将使用模糊输入以 50%-50%的概率分布调用`foo.addToA()`和`foo.addToB()`。不可避免地，输入将开始引起溢出，并且函数调用将开始回滚。由于不变量测试中的默认配置为`fail_on_revert = false`，这不会导致测试失败。不变量将在模糊测试活动的其余过程中保持不变，测试将通过。输出将类似于：
+此设置将以 50%-50%的概率分布调用`foo.addToA()`和`foo.addToB()`，输入经过模糊测试。在测试过程中，输入将不可避免地导致溢出，并且函数调用将开始恢复。由于不变量测试的默认配置是`fail_on_revert = false`，这不会导致测试失败。整个模糊测试过程中不变量将维持，并且测试将成功通过。输出如下：
 
 ```text
-[PASS] invariant_A() (runs: 50, calls: 10000, reverts: 5533)
-[PASS] invariant_B() (runs: 50, calls: 10000, reverts: 5533)
+[PASS] invariant_A() (运行: 50, 调用: 10000, 恢复: 5533)
+[PASS] invariant_B() (运行: 50, 调用: 10000, 恢复: 5533)
 ```
 
 ## 基于处理程序的测试

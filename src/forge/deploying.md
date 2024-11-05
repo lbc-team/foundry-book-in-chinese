@@ -2,7 +2,9 @@
 
 Forge can deploy smart contracts to a given network with the [`forge create`](../reference/forge/forge-create.md) command.
 
-Forge can deploy only one contract at a time.
+Forge CLI can deploy only one contract at a time.
+
+For deploying and verifying multiple smart contracts in one go, Forge's [Solidity scripting](../tutorials/solidity-scripting.md#deploying-our-contract) would be the more efficient approach.
 
 To deploy a contract, you must provide a RPC URL (env: `ETH_RPC_URL`) and the private key of the account that will deploy the contract.
 
@@ -57,7 +59,7 @@ Note that for Etherscan [`ETHERSCAN_API_KEY`](../reference/config/etherscan.md#e
 
 If you are verifying an already deployed contract, read on.
 
-You can verify a contract on Etherscan, Sourcify or Blockscout with the [`forge verify-contract`](../reference/forge/forge-verify-contract.md) command.
+You can verify a contract on Etherscan, Sourcify, oklink or Blockscout with the [`forge verify-contract`](../reference/forge/forge-verify-contract.md) command.
 
 You must provide:
 - the contract address
@@ -114,9 +116,9 @@ Contract successfully verified.
 
 ### Troubleshooting
 
-##### `Invalid character 'x' at position 1`
+##### `missing hex prefix ("0x") for hex string`
 
-Make sure the private key string does not begin with `0x`.
+Make sure the private key string begins with `0x`.
 
 ##### `EIP-1559 not activated`
 EIP-1559 is not supported or not activated on the RPC server. Pass the `--legacy` flag to use legacy transactions instead of the EIP-1559 ones. If you do development in a local environment, you can use Hardhat instead of Ganache.

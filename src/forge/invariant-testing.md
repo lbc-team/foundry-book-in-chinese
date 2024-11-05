@@ -7,11 +7,33 @@ Invariant testing is a powerful tool to expose incorrect logic in protocols. Due
 
 Invariant testing campaigns have two dimensions, `runs` and `depth`:
 - `runs`: Number of times that a sequence of function calls is generated and run.
-- `depth`: Number of function calls made in a given `run`. All defined invariants are asserted after each function call is made. If a function call reverts, the `depth` counter still increments.
+- `depth`: Number of function calls made in a given `run`. Invariants are asserted after each function call is made. If a function call reverts, the `depth` counter still increments.
+
+> ℹ️ **Note**
+>
+> When implementing invariant tests is important to be aware that for each `invariant_*` function a different EVM executor is created, therefore invariants are not asserted against same EVM state. This means that if `invariant_A()` and `invariant_B()` functions are defined then `invariant_B()` won't be asserted against EVM state of `invariant_A()` (and the other way around).
+>
+> If you want to assert all invariants at the same time then they can be grouped and run on multiple jobs. For example, assert all invariants using two jobs can be implemented as:
+> ```Solidity
+>function invariant_job1() public {
+>    assertInvariants();
+>}
+>
+>function invariant_job2() public {
+>    assertInvariants();
+>}
+>
+>function assertInvariants() internal {
+>    assertEq(val1, val2);
+>    assertEq(val3, val4);
+>}
+> ```
 
 These and other invariant configuration aspects are explained [`here`](#configuring-invariant-test-execution).
 
 Similar to how standard tests are run in Foundry by prefixing a function name with `test`, invariant tests are denoted by prefixing the function name with `invariant` (e.g., `function invariant_A()`).
+
+`afterInvariant()` function is called at the end of each invariant run (if declared), allowing post campaign processing. This function can be used for logging campaign metrics (e.g. how many times a selector was called) and post fuzz campaign testing (e.g. close out all positions and assert all funds are able to exit the system).
 
 ### Configuring invariant test execution
 
@@ -115,6 +137,8 @@ Another approach to handle different invariants across protocol states is to uti
 
 **Target Senders**: The invariant test fuzzer picks values for `msg.sender` at random when performing fuzz campaigns to simulate multiple actors in a system by default. If desired, the set of senders can be customized in the `setUp` function.
 
+**Target Interfaces**: The set of addresses and their project identifiers that are not deployed during `setUp` but fuzzed in a forked environment (E.g. `[(0x1, ["IERC20"]), (0x2, ("IOwnable"))]`). This enables targeting of delegate proxies and contracts deployed with `create` or `create2`.
+
 **Target Selectors**: The set of function selectors that are used by the fuzzer for invariant testing. These can be used to use a subset of functions within a given target contract.
 
 **Target Artifacts**: The desired ABI to be used for a given contract. These can be used for proxy contract configurations.
@@ -123,24 +147,23 @@ Another approach to handle different invariants across protocol states is to uti
 
 Priorities for the invariant fuzzer in the cases of target clashes are:
 
-`targetSelectors | targetArtifactSelectors > excludeContracts | excludeArtifacts > targetContracts | targetArtifacts`
+`targetInterfaces | targetSelectors > excludeSelectors | targetArtifactSelectors > excludeContracts | excludeArtifacts > targetContracts | targetArtifacts`
 
 ### Function Call Probability Distribution
 
-Functions from these contracts will be called at random with fuzzed inputs. The probability of a function being called is broken down by contract and then by function.
+Functions from these contracts will be called at random (with a uniformly distributed probability) with fuzzed inputs.
 
 For example:
 
 ```text
-targetContract1: 50%
-├─ function1: 50% (25%)
-└─ function2: 50% (25%)
+targetContract1:
+├─ function1: 20%
+└─ function2: 20%
 
-targetContract2: 50%
-├─ function1: 25% (12.5%)
-├─ function2: 25% (12.5%)
-├─ function3: 25% (12.5%)
-└─ function4: 25% (12.5%)
+targetContract2:
+├─ function1: 20%
+├─ function2: 20%
+└─ function3: 20%
 ```
 
 This is something to be mindful of when designing target contracts, as target contracts with less functions will have each function called more often due to this probability distribution.
@@ -151,14 +174,15 @@ Invariant test helper functions are included in [`forge-std`](https://github.com
 | Function | Description |
 |-|-|
 | `excludeContract(address newExcludedContract_)` | Adds a given address to the `_excludedContracts` array. This set of contracts is explicitly excluded from the target contracts.|
+| `excludeSelector(FuzzSelector memory newExcludedSelector_)` | Adds a given `FuzzSelector` to the `_excludedSelectors` array. This set of `FuzzSelector`s is explicitly excluded from the target contract selectors. |
 | `excludeSender(address newExcludedSender_)` | Adds a given address to the `_excludedSenders` array. This set of addresses is explicitly excluded from the target senders. |
 | `excludeArtifact(string memory newExcludedArtifact_)` | Adds a given string to the `_excludedArtifacts` array. This set of strings is explicitly excluded from the target artifacts. |
 | `targetArtifact(string memory newTargetedArtifact_)` | Adds a given string to the `_targetedArtifacts` array. This set of strings is used for the target artifacts.  |
-| `targetArtifactSelector(FuzzSelector memory newTargetedArtifactSelector_)` | Adds a given `FuzzSelector` to the to `_targetedArtifactSelectors` array. This set of `FuzzSelector`s is used for the target artifact selectors. |
-| `targetContract(address newTargetedContract_)` | Adds a given address to the to `_targetedContracts` array. This set of addresses is used for the target contracts. This array overwrites the set of contracts that was deployed during the `setUp`. |
-| `targetSelector(FuzzSelector memory newTargetedSelector_)` | Adds a given `FuzzSelector` to the to `_targetedSelectors` array. This set of `FuzzSelector`s is used for the target contract selectors. |
-| `targetSender(address newTargetedSender_)` | Adds a given address to the to `_targetedSenders` array. This set of addresses is used for the target senders. |
-
+| `targetArtifactSelector(FuzzArtifactSelector memory newTargetedArtifactSelector_)` | Adds a given `FuzzArtifactSelector` to the `_targetedArtifactSelectors` array. This set of `FuzzArtifactSelector`s is used for the target artifact selectors. |
+| `targetContract(address newTargetedContract_)` | Adds a given address to the `_targetedContracts` array. This set of addresses is used for the target contracts. This array overwrites the set of contracts that was deployed during the `setUp`. |
+| `targetSelector(FuzzSelector memory newTargetedSelector_)` | Adds a given `FuzzSelector` to the `_targetedSelectors` array. This set of `FuzzSelector`s is used for the target contract selectors. |
+| `targetSender(address newTargetedSender_)` | Adds a given address to the `_targetedSenders` array. This set of addresses is used for the target senders. |
+| `targetInterface(FuzzInterface memory newTargetedInterface_)` | Adds a given `FuzzInterface` to the `_targetedInterfaces` array. This set of `FuzzInterface` extends the contracts and selectors to fuzz and enables targeting of addresses that are not deployed during `setUp` such as when fuzzing in a forked environment. Also enables targeting of delegate proxies and contracts deployed with `create` or `create2`. |
 
 ### Target Contract Setup
 
@@ -208,7 +232,7 @@ contract InvariantExample1 is Test {
     }
 
     function invariant_B() external {
-        assertGe(foo.val1() + foo.val2(), foo.val1());
+        assertGe(foo.val1() + foo.val2(), foo.val3());
     }
 
 }

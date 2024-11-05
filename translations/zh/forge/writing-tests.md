@@ -21,24 +21,27 @@ DSTest 提供基本的日志记录和断言功能。 要访问这些函数，请
 Forge 在测试中使用以下关键字：
 
 - `setUp`：在每个测试用例运行之前调用的可选函数
+
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic.t.sol:setUp}}
 ```
-- `test`：以 `test` 为前缀的函数作为测试用例运行
+
+- `test`: Functions prefixed with `test` are run as a test case.
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic.t.sol:testNumberIs42}}
 ```
-
-- `testFail`: `test` 前缀的测试的反面 - 如果函数没有 revert，则测试失败
+- `testFail`: The inverse of the `test` prefix - if the function does not revert, the test fails.
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic.t.sol:testFailSubtract43}}
 ```
+
 一个好的实践是结合 [`expectRevert`](../cheatcodes/expect-revert.md) cheatcode 来使用 `test_Revert[If|When]_Condition` 模式（cheatcodes 在以下[部分](./cheatcodes.md)有更详细的解释）。此外，其他测试实践可以在 [Tutorials section](../tutorials/best-practices.md) 中找到。
 现在，不再使用 `testFail`，您可以确切地知道发生了什么并且出现了哪些错误：
 
 ```solidity
 {{#include ../../projects/writing_tests/test/Basic2.t.sol:testCannotSubtract43}}
 ```
+
 <br>
 
 测试合约部署到 `0xb4c79daB8f259C7Aee6E5b2Aa729821864227e84`。 如果您在测试中部署合约，则
@@ -49,6 +52,60 @@ Forge 在测试中使用以下关键字：
 >
 > 测试函数必须具有`external`或`public`可见性。 声明为`internal`或
 > `private` 不会被 Forge 选中，即使它们以 `test` 为前缀。
+
+### 测试前设置
+
+单元和模糊测试是无状态的，并作为单个交易执行，这意味着测试修改的状态不会用于不同的测试（相反，它们将使用由 `setUp` 调用创建的相同状态）。
+可以通过实现 `beforeTestSetup` 函数，在单个测试中通过依赖树模拟多个交易。
+
+- `beforeTestSetup`：可选函数，用于配置在测试之前执行的一组交易。
+
+```solidity
+function beforeTestSetup(
+    bytes4 testSelector
+) public returns (bytes[] memory beforeTestCalldata)
+```
+
+其中
+- `bytes4 testSelector` 是应用于测试的选择器
+- `bytes[] memory beforeTestCalldata` 是在测试执行之前应用的任意 calldata 数组
+
+> 💡 **提示**
+>
+> 这种设置可用于链式测试或在某些场景下需要在测试运行之前提交某些交易（例如使用 `selfdestruct`）。
+> 如果任何配置的交易被回滚，测试将失败。
+
+例如，在下面的合约中，`testC` 被配置为使用由 `testA` 和 `setB(uint256)` 函数修改的状态：
+```solidity
+contract ContractTest is Test {
+    uint256 a;
+    uint256 b;
+
+    function beforeTestSetup(
+        bytes4 testSelector
+    ) public pure returns (bytes[] memory beforeTestCalldata) {
+        if (testSelector == this.testC.selector) {
+            beforeTestCalldata = new bytes[](2);
+            beforeTestCalldata[0] = abi.encodePacked(this.testA.selector);
+            beforeTestCalldata[1] = abi.encodeWithSignature("setB(uint256)", 1);
+        }
+    }
+
+    function testA() public {
+        require(a == 0);
+        a += 1;
+    }
+
+    function setB(uint256 value) public {
+        b = value;
+    }
+
+    function testC() public {
+        assertEq(a, 1);
+        assertEq(b, 1);
+    }
+}
+```
 
 ### 共享设置
 

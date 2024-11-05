@@ -14,7 +14,7 @@ Forge Standard Library（简称 Forge Std）是一个有用的合约集合，可
 简单的导入 `Test.sol` 并在测试合约中继承 `Test` ：
 
 ```solidity
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract ContractTest is Test { ...
 ```
@@ -39,17 +39,17 @@ deal(address(dai), alice, 10000e18);
 要单独导入 `Vm`  接口或 `console` 库：
 
 ```solidity
-import "forge-std/Vm.sol";
+import {Vm} from "forge-std/Vm.sol";
 ```
 
 ```solidity
-import "forge-std/console.sol";
+import {console} from "forge-std/console.sol";
 ```
 
 **注意：** `console2.sol` 包含 `console.sol` 的补丁，允许 Forge 解码控制台调用的跟踪，但它与 `Hardhat` 不兼容。
 
 ```solidity
-import "forge-std/console2.sol";
+import {console2} from "forge-std/console2.sol";
 ```
 
 ### 标准库

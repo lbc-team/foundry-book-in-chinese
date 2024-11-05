@@ -72,3 +72,61 @@ function testFuzz_Withdraw(uint96 amount) public {
 
 模糊测试执行受用户通过 Forge 配置原语控制的参数的约束。配置可以全局应用，也可以基于每个测试进行应用。有关此主题的详细信息，请参阅
  📚 [`全局配置`](../reference/config/testing.md) 和 📚 [`内联配置`](../reference/config/inline-test-config.md)。
+
+ #### 模糊测试固定装置
+
+当你想确保一组特定的值被用作模糊参数的输入时，可以定义模糊测试固定装置。
+这些固定装置可以在测试中被声明为：
+
+- 以 `fixture` 为前缀的存储数组，后跟要进行模糊处理的参数名称。例如，要用于模糊处理 `uint32` 类型的参数 `amount` 的固定装置可以定义如下：
+
+```solidity
+uint32[] public fixtureAmount = [1, 5, 555];
+```
+
+- 以 `fixture` 为前缀命名的函数，后跟要进行模糊处理的参数名称。函数应返回一个（固定大小或动态的）数组，作为模糊处理所需的值。例如，要用于模糊处理名称为 `owner` 的 `address` 类型的参数的固定装置可以定义为具有以下签名的函数：
+
+```solidity
+function fixtureOwner() public returns (address[] memory)
+```
+
+如果提供的固定值的类型与要进行模糊处理的命名参数的类型不一致，则会被拒绝并引发错误。
+
+一个使用固定装置的例子是复现 `DSChief` 漏洞。考虑以下两个函数：
+
+```solidity
+    function etch(address yay) public returns (bytes32 slate) {
+        bytes32 hash = keccak256(abi.encodePacked(yay));
+
+        slates[hash] = yay;
+
+        return hash;
+    }
+
+    function voteSlate(bytes32 slate) public {
+        uint weight = deposits[msg.sender];
+        subWeight(weight, votes[msg.sender]);
+        votes[msg.sender] = slate;
+        addWeight(weight, votes[msg.sender]);
+    }
+```
+
+该漏洞可以通过在调用 `etch` 之前调用 `voteSlate`，使用 `yay` 地址的哈希值作为 `slate` 值来重现。
+为了确保模糊测试器在同一轮运行中包含从 `yay` 地址派生的 `slate` 值，可以定义以下固定装置：
+
+```solidity
+    address[] public fixtureYay = [
+        makeAddr("yay1"),
+        makeAddr("yay2"),
+        makeAddr("yay3")
+    ];
+
+    bytes32[] public fixtureSlate = [
+        keccak256(abi.encodePacked(makeAddr("yay1"))),
+        keccak256(abi.encodePacked(makeAddr("yay2"))),
+        keccak256(abi.encodePacked(makeAddr("yay3")))
+    ];
+```
+
+以下图片显示了模糊测试器在声明固定装置前后的值生成情况：
+![Fuzzer](../images/fuzzer.png)

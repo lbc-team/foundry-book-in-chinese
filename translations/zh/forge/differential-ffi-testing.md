@@ -23,7 +23,7 @@ Forge 可用于差异测试（differential testing）和差异模糊测试（dif
 [`ffi`](../cheatcodes/ffi.md) 允许您执行任意 shell 命令并捕获输出。 这是一个模拟示例：
 
 ```solidity
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract TestContract is Test {
 
@@ -90,7 +90,7 @@ Forge 运行 `npm --prefix differential_testing/scripts/ --silent run generate-r
 您可能希望对另一个 Solidity 实现使用差异测试。 在这种情况下，不需要 `ffi`。 相反，只需要把参考实现直接导入到测试中。
 
 ```solidity
-import "openzeppelin-contracts/contracts/utils/cryptography/MerkleProof.sol";
+import {MerkleProof} from "openzeppelin-contracts/contracts/utils/cryptography/MerkleProof.sol";
 //...
 function testCompatibilityOpenZeppelinProver(bytes32[] memory _data, uint256 node) public {
     vm.assume(_data.length > 1);

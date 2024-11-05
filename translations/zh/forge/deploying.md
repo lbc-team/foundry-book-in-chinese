@@ -2,7 +2,9 @@
 
 Forge 可以使用 [`forge create`](../reference/forge/forge-create.md) 命令将智能合约部署到指定网络。
 
-Forge 一次只能部署一个合约。
+Forge CLI 一次只能部署一个合约。
+
+为了一次性部署和验证多个智能合约，Forge 的 [Solidity 脚本](../tutorials/solidity-scripting.md#deploying-our-contract) 将是更有效的方法。
 
 要部署合约，您必须提供 RPC URL（env：`ETH_RPC_URL`）和部署合约的帐户私钥。
 
@@ -58,7 +60,7 @@ $ forge create --rpc-url <your_rpc_url> \
 
 如果您正在验证已部署的合约，请继续阅读。
 
-您可以使用 [`forge verify-contract`](../reference/forge/forge-verify-contract.md) 命令在 Etherscan、Sourcify 或 Blockscout 上验证合约。
+您可以使用 [`forge verify-contract`](../reference/forge/forge-verify-contract.md) 命令在 Etherscan、Sourcify、oklink 或 Blockscout 上验证合约。
 
 您必须提供：
 - 合约地址
@@ -114,9 +116,9 @@ Contract successfully verified.
 
 ### 故障排除
 
-##### `Invalid character 'x' at position 1`
+##### `十六进制字符串缺少十六进制前缀（“0x”）`
 
-确保私钥字符串不以 `0x` 开头。
+确保私钥字符串以 `0x` 开头。
 
 ##### `EIP-1559 not activated`
 RPC 服务器不支持或未激活 EIP-1559。 传递 `--legacy` 标志以使用旧交易而不是 EIP-1559 交易。 如果您在本地环境中进行开发，则可以使用 Hardhat 而不是 Ganache。

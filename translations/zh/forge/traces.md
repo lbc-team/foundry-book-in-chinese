@@ -42,3 +42,12 @@ Forge 将尝试解码尽可能多的签名和值，但有时这是不可能的�
   [<Gas Usage>] <Address>::<Calldata>
     └─ ← <Return Data>
 ```
+
+有些追踪信息可能乍一看很难理解。包括以下几点：
+
+- 简写 `OOG` 代表“Out Of Gas”（用尽 gas）。
+- 缩写 `EOF` 代表“Ethereum Object Format”（以太坊对象格式），它为 EVM 字节码引入了一种可扩展且版本化的容器格式。欲了解更多信息，请阅读[这里](https://evmobjectformat.org/) 。
+- `NotActivated` 表示功能或操作码未激活。某些版本的 EVM 仅支持特定的操作码。你可能需要使用更近期的版本，并使用 `--evm_version` 标志。例如，`PUSH0` 操作码仅自从 [上海](https://www.evm.codes/?fork=shanghai) 硬分叉后可用。
+- `InvalidFEOpcode` 表示在执行过程中遇到了未定义的字节码值。EVM 捕获未知字节码并返回值为 `0xFE` 的 `INVALID` 操作码。你可以在[这里](https://www.evm.codes/#fe)找到更多信息。
+
+若要深入了解各种追踪信息，可以探索 [revm 源代码](https://github.com/bluealloy/revm/blob/main/crates/interpreter/src/instruction_result.rs)。
