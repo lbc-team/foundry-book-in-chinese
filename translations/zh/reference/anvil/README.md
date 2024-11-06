@@ -29,6 +29,8 @@ anvil --block-time 10
 anvil --no-mining
 ```
 
+为了加速区块的最终确定，你可以使用 `--slots-in-an-epoch` 标志，例如设置为 `1`。这将导致高度为 `N-2` 的区块被最终确定，其中 `N` 是最新的区块。
+
 #### 支持的传输层
 支持 HTTP 和 Websocket 连接。服务器的默认监听端口为 8545，但可以通过运行以下命令来改变：
 
@@ -359,23 +361,26 @@ Anvil 在没有分叉的情况下，包含地址为 `0x4e59b44847b379578588920ca
 &nbsp;&nbsp;&nbsp;&nbsp; 通过远程端点获取状态，而不是从一个空的状态开始
 
 `--fork-block-number <BLOCK>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 通过一个远程端点从一个特定的区块号中获取状态（必须在同一个命令行中传递--fork-url）。
+&nbsp;&nbsp;&nbsp;&nbsp; 通过一个远程端点从一个特定的区块号中获取状态（必须在同一个命令行中传递 `--fork-url`）。
 
 `--fork-retry-backoff <BACKOFF>`  
 &nbsp;&nbsp;&nbsp;&nbsp; 初始化遇到错误时的重试退避。
 
+`--fork-transaction-hash <TRANSACTION>`
+&nbsp;&nbsp;&nbsp;&nbsp; 通过远程端点从特定交易哈希获取状态（必须在同一命令行中传递 `--fork-url`）。
+
 `--retries <retries>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 虚拟网络（超时请求）的重试次数。[默认值=5］
+&nbsp;&nbsp;&nbsp;&nbsp; 虚拟网络（超时请求）的重试次数。[默认值：5］
 
 `--timeout <timeout>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 在分叉模式下向远程 JSON-RPC 服务器发送请求的超时，单位为ms。[默认值= 45000]
+&nbsp;&nbsp;&nbsp;&nbsp; 在分叉模式下向远程 JSON-RPC 服务器发送请求的超时，单位为ms。[默认值： 45000]
 
 `--compute-units-per-second <CUPS>`  
-&nbsp;&nbsp;&nbsp;&nbsp; 设置该 provider 假设每秒可用的并发数量[默认值=330] 。
+&nbsp;&nbsp;&nbsp;&nbsp; 设置该 provider 假设每秒可用的并发数量[默认值：330] 。
 &nbsp;&nbsp;&nbsp;&nbsp; 另请参阅， [Alchemy 速率限制](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups)
 
 `--no-rate-limit`
-&nbsp;&nbsp;&nbsp;&nbsp; 禁用该节点 provider 的速率限制。如果存在的话，将总是覆盖 `---compute-units-per-second`。[默认值= false]
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用该节点 provider 的速率限制。如果存在的话，将总是覆盖 `---compute-units-per-second`。[默认值： false]
 &nbsp;&nbsp;&nbsp;&nbsp; 另请参阅， [Alchemy 速率限制](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups)
 
 `--no-storage-caching>`  
@@ -457,3 +462,45 @@ Anvil 在没有分叉的情况下，包含地址为 `0x4e59b44847b379578588920ca
 ### 在Docker中的使用
 
 为了在 Github Actions 中使用 [Docker容器](./tutorials/foundry-docker.md) 作为服务运行 anvil，在不能向入口命令传递参数的情况下，使用 `ANVIL_IP_ADDR` 环境变量来设置主机的 IP。`ANVIL_IP_ADDR=0.0.0.0` 等同于提供 `--host <ip>` 选项。
+
+#### 使用 `genesis.json` 
+
+Anvil 中的 `genesis.json` 文件与 Geth 中的作用类似，定义了网络的初始状态、共识规则以及预分配账户，以确保所有节点一致启动并保持网络完整性。包括余额、gas 限制等在内的所有数值都需要定义为十六进制。
+
+- `chainId`：区块链的标识符，每个网络唯一。
+- `nonce`：在哈希算法中使用的计数器，以确保数据完整性。
+- `timestamp`：创世区块的创建时间，以 Unix 时间表示。
+- `extraData`：创世区块创建者可以包含的附加数据。
+- `gasLimit`：区块中可以使用的最大 gas 量。
+- `difficulty`：挖掘新区块的难度程度。
+- `mixHash`：证明区块有足够计算量的唯一标识符。
+- `coinbase`：挖出此区块的矿工的以太坊地址。
+- `stateRoot`：状态树的根，反映所有交易后的最终状态。
+- `alloc`：允许为一组地址预分配具有预定义余额的以太币。
+- `number`：区块编号，创世区块为 0。
+- `gasUsed`：区块中使用的总 gas 量。
+- `parentHash`：父区块的哈希值，创世区块为零值，因为没有父块。
+
+模拟主网的创世文件示例可以在[此处](https://github.com/paradigmxyz/reth/blob/8f3e4a15738d8174d41f4aede5570ecead141a77/crates/primitives/res/genesis/mainnet.json)找到。
+
+```json
+{
+  "chainId": "0x2323",
+  "nonce": "0x42",
+  "timestamp": "0x0",
+  "extraData": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+  "gasLimit": "0x1388",
+  "difficulty": "0x400000000",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "stateRoot": "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544",
+  "alloc": {
+    "000d836201318ec6899a67540690382780743280": {
+      "balance": "0xad78ebc5ac6200000"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+```
