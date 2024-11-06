@@ -46,7 +46,7 @@ You can customize these remappings by creating a `remappings.txt` file in the ro
 Let's create a remapping called `solmate-utils` that points to the `utils` folder in the solmate repository!
 
 ```sh
-solmate-utils/=lib/solmate/src/utils/
+@solmate-utils/=lib/solmate/src/utils/
 ```
 
 You can also set remappings in `foundry.toml`.
@@ -60,7 +60,7 @@ remappings = [
 Now we can import any of the contracts in `src/utils` of the solmate repository like so:
 
 ```solidity
-import "@solmate-utils/LibString.sol";
+import {LibString} from "@solmate-utils/LibString.sol";
 ```
 
 ### Updating dependencies

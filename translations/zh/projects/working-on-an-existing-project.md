@@ -10,6 +10,7 @@
 $ git clone https://github.com/PaulRBerg/foundry-template
 $ cd foundry-template
 $ forge install
+$ bun install # 安装 Solhint, Prettier, 以及其他 Node.js 依赖项。
 ```
 
 我们运行 [`forge install`][install] 来安装项目中的子模块依赖项。

@@ -46,7 +46,7 @@ Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 
 让我们创建一个名为 `solmate-utils` 的重映射，它指向 solmate repo中的 `utils` 文件夹！
 
 ```sh
-solmate-utils/=lib/solmate/src/utils/
+@solmate-utils/=lib/solmate/src/utils/
 ```
 
 您还可以在 `foundry.toml` 中设置重映射。
@@ -60,7 +60,7 @@ remappings = [
 现在我们可以像这样导入 solmate repo的 `src/utils` 中的任何合约：
 
 ```solidity
-import "solmate-utils/LibString.sol"；
+import {LibString} from "@solmate-utils/LibString.sol";
 ```
 
 ### 更新依赖
