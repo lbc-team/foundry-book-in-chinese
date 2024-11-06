@@ -145,7 +145,22 @@ contract SigUtils {
 - 为所有者铸造一个测试代币
 
 ```solidity
-contract ERC20Test is Test {
+
+contract Token_ERC20 is MockERC20 {
+    constructor(string memory name, string memory symbol, uint8 decimals) {
+        initialize(name, symbol, decimals);
+    }
+
+    function mint(address to, uint256 value) public virtual {
+        _mint(to, value);
+    }
+
+    function burn(address from, uint256 value) public virtual {
+        _burn(from, value);
+    }
+}
+
+contract Token_ERC20 is Test {
     MockERC20 internal token;
     SigUtils internal sigUtils;
 
@@ -156,7 +171,7 @@ contract ERC20Test is Test {
     address internal spender;
 
     function setUp() public {
-        token = new MockERC20();
+        token = new Token_ERC20("Token", "TKN", 18);
         sigUtils = new SigUtils(token.DOMAIN_SEPARATOR());
 
         ownerPrivateKey = 0xA11CE;

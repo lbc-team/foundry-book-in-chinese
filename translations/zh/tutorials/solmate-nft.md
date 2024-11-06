@@ -27,8 +27,8 @@ forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 contract NFT is ERC721 {
     uint256 public currentTokenId;
@@ -62,8 +62,8 @@ Compiler run failed
 error[6275]: ParserError: Source "lib/openzeppelin-contracts/contracts/contracts/utils/Strings.sol" not found: File not found. Searched the following locations: "/PATH/TO/REPO".
  --> src/NFT.sol:5:1:
   |
-5 | import "openzeppelin-contracts/contracts/utils/Strings.sol";
-  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5 | import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
 这可以通过设置正确的重映射来解决。 在您的项目中创建一个文件 `remappings.txt` 并添加以下行
@@ -115,9 +115,9 @@ cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <contractAddress> "owner
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -125,8 +125,8 @@ error NonExistentTokenURI();
 error WithdrawTransfer();
 
 contract NFT is ERC721, Ownable {
-
     using Strings for uint256;
+
     string public baseURI;
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
@@ -136,7 +136,7 @@ contract NFT is ERC721, Ownable {
         string memory _name,
         string memory _symbol,
         string memory _baseURI
-    ) ERC721(_name, _symbol) {
+    ) ERC721(_name, _symbol) Ownable(msg.sender) {
         baseURI = _baseURI;
     }
 
@@ -144,10 +144,11 @@ contract NFT is ERC721, Ownable {
         if (msg.value != MINT_PRICE) {
             revert MintPriceNotPaid();
         }
-        uint256 newTokenId = ++currentTokenId;
+        uint256 newTokenId = currentTokenId + 1;
         if (newTokenId > TOTAL_SUPPLY) {
             revert MaxSupply();
         }
+        currentTokenId = newTokenId;
         _safeMint(recipient, newTokenId);
         return newTokenId;
     }
@@ -169,19 +170,22 @@ contract NFT is ERC721, Ownable {
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
-        uint256 balance = address(this).balance;
-        (bool transferTx, ) = payee.call{value: balance}("");
-        if (!transferTx) {
+        if (address(this).balance == 0) {
             revert WithdrawTransfer();
         }
+        
+        payable(payee).transfer(address(this).balance);
+    }
+
+    function _checkOwner() internal view override {
+        require(msg.sender == owner(), "Ownable: caller is not the owner");
     }
 }
 ```
 
-
 除此之外，我们还添加了元数据，可以通过调用 NFT 合约上的 `tokenURI` 方法从任何前端应用程序（如 OpenSea）查询这些元数据。
 
-> **注意**：如果您想在部署时向构造函数提供真实 URL，并托管此 NFT 合约的元数据，请按照[此处](https://docs.opensea.io/docs/part-3-adding-metadata-and-payments-to-your-contract#intro-to-nft-metadata）。
+> **注意**：如果您想在部署时向构造函数提供真实 URL，并托管此 NFT 合约的元数据，请按照[此处](https://docs.opensea.io/docs/deploying-a-seadrop-compatible-contract).
 
 让我们测试一些添加的功能，以确保它按预期工作。 Foundry 通过 Forge 提供了一个极快的 EVM 原生测试框架。
 
@@ -191,8 +195,8 @@ contract NFT is ERC721, Ownable {
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.10;
 
-import "forge-std/Test.sol";
-import "../src/NFT.sol";
+import {Test} from "forge-std/Test.sol";
+import {NFT} from "../src/NFT.sol";
 
 contract NFTTest is Test {
     using stdStorage for StdStorage;
@@ -235,7 +239,7 @@ contract NFTTest is Test {
         uint256 slotOfNewOwner = stdstore
             .target(address(nft))
             .sig(nft.ownerOf.selector)
-            .with_key(1)
+            .with_key(address(1))
             .find();
 
         uint160 ownerOfTokenIdOne = uint160(

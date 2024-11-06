@@ -26,13 +26,6 @@ In general, it's recommended to handle as much as possible with [`forge fmt`](..
    - Good: `import {MyContract} from "src/MyContract.sol"` to only import `MyContract`.
    - Bad: `import "src/MyContract.sol"` imports everything in `MyContract.sol`. (Importing `forge-std/Test` or `Script` can be an exception here, so you get the console library, etc).
 
-1. Sort imports by `forge-std/` first, then dependencies, `test/`, `script/`, and finally `src/`. Within each, sort alphabetically by path (not by the explicit named items being imported). _(Note: This may be removed once [foundry-rs/foundry#3396](https://github.com/foundry-rs/foundry/issues/3396) is merged)._
-
-1. Similarly, sort named imports. _(Note: This may be removed once [foundry-rs/foundry#3396](https://github.com/foundry-rs/foundry/issues/3396) is resolved)._
-
-   - Good: `import {bar, foo} from "src/MyContract.sol"`
-   - Bad: `import {foo, bar} from "src/MyContract.sol"`
-
 1. Note the tradeoffs between absolute and relative paths for imports (where absolute paths are relative to the repo root, e.g. `"src/interfaces/IERC20.sol"`), and choose the best approach for your project:
 
    - Absolute paths make it easier to see where files are from and reduce churn when moving files around.
@@ -212,42 +205,40 @@ You should _ensure_ that no _tainted_ data ever reaches a _sink_. That means tha
 1. **Carefully audit which transactions are broadcast**. Transactions not broadcast are still executed in the context of a test, so missing broadcasts or extra broadcasts are easy sources of error in the previous step.
 
 1. **Watch out for frontrunning**. Forge simulates your script, generates transaction data from the simulation results, then broadcasts the transactions. Make sure your script is robust against chain-state changing between the simulation and broadcast. A sample script vulnerable to this is below:
-
-```solidity
-// Pseudo-code, may not compile.
-contract VulnerableScript is Script {
-   function run() public {
-      vm.startBroadcast();
-
-      // Transaction 1: Deploy a new Gnosis Safe with CREATE.
-      // Because we're using CREATE instead of CREATE2, the address of the new
-      // Safe is a function of the nonce of the gnosisSafeProxyFactory.
-      address mySafe = gnosisSafeProxyFactory.createProxy(singleton, data);
-
-      // Transaction 2: Send tokens to the new Safe.
-      // We know the address of mySafe is a function of the nonce of the
-      // gnosisSafeProxyFactory. If someone else deploys a Gnosis Safe between
-      // the simulation and broadcast, the address of mySafe will be different,
-      // and this script will send 1000 DAI to the other person's Safe. In this
-      // case, we can protect ourselves from this by using CREATE2 instead of
-      // CREATE, but every situation may have different solutions.
-      dai.transfer(mySafe, 1000e18);
-
-      vm.stopBroadcast();
-   }
-}
-```
+    ```solidity
+    // Pseudo-code, may not compile.
+    contract VulnerableScript is Script {
+       function run() public {
+          vm.startBroadcast();
+    
+          // Transaction 1: Deploy a new Gnosis Safe with CREATE.
+          // Because we're using CREATE instead of CREATE2, the address of the new
+          // Safe is a function of the nonce of the gnosisSafeProxyFactory.
+          address mySafe = gnosisSafeProxyFactory.createProxy(singleton, data);
+    
+          // Transaction 2: Send tokens to the new Safe.
+          // We know the address of mySafe is a function of the nonce of the
+          // gnosisSafeProxyFactory. If someone else deploys a Gnosis Safe between
+          // the simulation and broadcast, the address of mySafe will be different,
+          // and this script will send 1000 DAI to the other person's Safe. In this
+          // case, we can protect ourselves from this by using CREATE2 instead of
+          // CREATE, but every situation may have different solutions.
+          dai.transfer(mySafe, 1000e18);
+    
+          vm.stopBroadcast();
+       }
+    }
+    ```
 
 1. For scripts that read from JSON input files, put the input files in `script/input/<chainID>/<description>.json`. Then have `run(string memory input)` (or take multiple string inputs if you need to read from multiple files) as the script's signature, and use the below method to read the JSON file.
-
-```solidity
-function readInput(string memory input) internal returns (string memory) {
-  string memory inputDir = string.concat(vm.projectRoot(), "/script/input/");
-  string memory chainDir = string.concat(vm.toString(block.chainid), "/");
-  string memory file = string.concat(input, ".json");
-  return vm.readFile(string.concat(inputDir, chainDir, file));
-}
-```
+    ```solidity
+    function readInput(string memory input) internal returns (string memory) {
+      string memory inputDir = string.concat(vm.projectRoot(), "/script/input/");
+      string memory chainDir = string.concat(vm.toString(block.chainid), "/");
+      string memory file = string.concat(input, ".json");
+      return vm.readFile(string.concat(inputDir, chainDir, file));
+    }
+    ```
 
 ### Private Key Management
 

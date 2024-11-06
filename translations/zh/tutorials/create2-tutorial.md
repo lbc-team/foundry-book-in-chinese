@@ -2,7 +2,14 @@
 
 ### 介绍
 
-作为 2019 年 [Constantinople fork](https://ethereum.org/en/history/#constantinople) 的一部分，`CREATE2` 作为 [EIP-1014](https://eips.ethereum.org/EIPS/eip-1014) 的一部分被纳入 EVM。`CREATE2` 允许您根据部署者控制的参数将智能合约部署到确定性地址。因此，它经常被提及为实现“假设性”部署的工具，您可以与尚未创建的地址进行交互，因为 CREATE2 可以保证已知代码可以放置在该地址。这与 `CREATE` 操作码形成对比，其中部署的合约地址是部署者 nonce 的函数。使用 `CREATE2`，即使地址具有不同的 nonce，您也可以使用相同的部署者帐户将合约部署到多个网络上。
+作为 [Constantinople 分叉](https://ethereum.org/en/history/#constantinople) 的一部分，`CREATE2` 在 2019 年被纳入 EVM。`CREATE2` 是一个从 [EIP-1014](https://eips.ethereum.org/EIPS/eip-1014) 开始的操作码。
+`CREATE2` 允许你基于由部署者控制的参数，将智能合约部署到确定的地址。
+因此，它通常被提及为启用“反事实”部署，你可以与尚未创建的地址进行交互，因为 `CREATE2` 保证已知代码可以放置在该地址。
+这与 `CREATE` 操作码形成对比，后者的部署合约地址是部署者的 nonce 的函数。
+使用 `CREATE2`，你可以使用相同的部署者账户在多个网络上将合约部署到相同的地址，即使该地址的 nonce 不同。
+
+> ℹ️ **注意**
+>本指南旨在帮助理解 `CREATE2`。在大多数用例中，你不需要编写和使用自己的部署者，可以使用现有的确定性部署者。在 forge 脚本中，使用 `new MyContract{salt: salt}()` 将使用位于 [0x4e59b44847b379578588920ca78fbf26c0b4956c](https://github.com/Arachnid/deterministic-deployment-proxy) 的确定性部署者。
 
 在本教程中，我们将：
 
@@ -155,7 +162,7 @@ keccak256(0xff ++ address ++ salt ++ keccak256(bytecode))[12:]
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
 
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {Counter} from "../src/Counter.sol";
 import {Create2} from "../src/Create2.sol";
 

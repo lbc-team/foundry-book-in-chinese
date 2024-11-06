@@ -26,8 +26,8 @@ We are then going to rename the boilerplate contract in `src/Contract.sol` to `s
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 contract NFT is ERC721 {
     uint256 public currentTokenId;
@@ -61,8 +61,8 @@ Compiler run failed
 error[6275]: ParserError: Source "lib/openzeppelin-contracts/contracts/contracts/utils/Strings.sol" not found: File not found. Searched the following locations: "/PATH/TO/REPO".
  --> src/NFT.sol:5:1:
   |
-5 | import "openzeppelin-contracts/contracts/utils/Strings.sol";
-  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5 | import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
 this can be fixed by setting up the correct remapping. Create a file `remappings.txt` in your project and add the line
@@ -115,9 +115,9 @@ Let's extend our NFT by adding metadata to represent the content of our NFTs, as
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -125,8 +125,8 @@ error NonExistentTokenURI();
 error WithdrawTransfer();
 
 contract NFT is ERC721, Ownable {
-
     using Strings for uint256;
+
     string public baseURI;
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
@@ -136,7 +136,7 @@ contract NFT is ERC721, Ownable {
         string memory _name,
         string memory _symbol,
         string memory _baseURI
-    ) ERC721(_name, _symbol) {
+    ) ERC721(_name, _symbol) Ownable(msg.sender) {
         baseURI = _baseURI;
     }
 
@@ -144,10 +144,11 @@ contract NFT is ERC721, Ownable {
         if (msg.value != MINT_PRICE) {
             revert MintPriceNotPaid();
         }
-        uint256 newTokenId = ++currentTokenId;
+        uint256 newTokenId = currentTokenId + 1;
         if (newTokenId > TOTAL_SUPPLY) {
             revert MaxSupply();
         }
+        currentTokenId = newTokenId;
         _safeMint(recipient, newTokenId);
         return newTokenId;
     }
@@ -169,18 +170,22 @@ contract NFT is ERC721, Ownable {
     }
 
     function withdrawPayments(address payable payee) external onlyOwner {
-        uint256 balance = address(this).balance;
-        (bool transferTx, ) = payee.call{value: balance}("");
-        if (!transferTx) {
+        if (address(this).balance == 0) {
             revert WithdrawTransfer();
         }
+        
+        payable(payee).transfer(address(this).balance);
+    }
+
+    function _checkOwner() internal view override {
+        require(msg.sender == owner(), "Ownable: caller is not the owner");
     }
 }
 ```
 
 Among other things, we have added metadata that can be queried from any front-end application like OpenSea, by calling the `tokenURI` method on our NFT contract.
 
-> **Note**: If you want to provide a real URL to the constructor at deployment, and host the metadata of this NFT contract please follow the steps outlined [here](https://docs.opensea.io/docs/part-3-adding-metadata-and-payments-to-your-contract#intro-to-nft-metadata).
+> **Note**: If you want to provide a real URL to the constructor at deployment, and host the metadata of this NFT contract please follow the steps outlined [here](https://docs.opensea.io/docs/deploying-a-seadrop-compatible-contract).
 
 Let's test some of this added functionality to make sure it works as intended. Foundry offers an extremely fast EVM native testing framework through Forge.
 
@@ -190,8 +195,8 @@ Within your test folder rename the current `Contract.t.sol` test file to `NFT.t.
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity 0.8.10;
 
-import "forge-std/Test.sol";
-import "../src/NFT.sol";
+import {Test} from "forge-std/Test.sol";
+import {NFT} from "../src/NFT.sol";
 
 contract NFTTest is Test {
     using stdStorage for StdStorage;
@@ -234,7 +239,7 @@ contract NFTTest is Test {
         uint256 slotOfNewOwner = stdstore
             .target(address(nft))
             .sig(nft.ownerOf.selector)
-            .with_key(1)
+            .with_key(address(1))
             .find();
 
         uint160 ownerOfTokenIdOne = uint160(

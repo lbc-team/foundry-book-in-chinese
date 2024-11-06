@@ -25,21 +25,14 @@
     - Good：`import {MyContract} from "src/MyContract.sol"` 只导入 `MyContract`。
     - Bad：`import "src/MyContract.sol"` 导入 `MyContract.sol` 中的所有内容。 （导入 `forge-std/Test` 或 `Script` 在这里可能是个例外，这样您可以获得控制台库等）。
 
-2. 首先按 `forge-std/` 对导入进行排序，然后是依赖项、`test/`、`script/`，最后是 `src/`。 在每个导入中，按路径字母顺序排序（而不是按导入的显式命名项）。 _（注意：一旦 [foundry-rs/foundry#3396](https://github.com/foundry-rs/foundry/issues/3396) 合并，这可能会被删除）。_
-
-3. 同样，对命名导入进行排序。 _（注意：一旦 [foundry-rs/foundry#3396](https://github.com/foundry-rs/foundry/issues/3396) 得到解决，这可能会被删除）。_
-
-    - Good：`import {bar, foo} from "src/MyContract.sol"`
-    - Bad：`import {foo, bar} from "src/MyContract.sol"`
-
-4. 注意导入的绝对路径和相对路径之间的权衡（绝对路径是相对于 repo 根目录的，例如 `"src/interfaces/IERC20.sol"`），并为您的项目选择最佳方法：
+2. 注意导入的绝对路径和相对路径之间的权衡（绝对路径是相对于 repo 根目录的，例如 `"src/interfaces/IERC20.sol"`），并为您的项目选择最佳方法：
 
     - 绝对路径可以更轻松地查看文件的来源并减少移动文件时的变动。
     - 相对路径使您的编辑器更有可能提供 linting 和自动完成等功能，因为编辑器/扩展可能无法理解您的重新映射。
 
-5. 如果从依赖项中复制库（而不是导入它），请在配置文件中使用 `ignore = []` 选项以避免格式化该文件。 这使得审阅者和审计员可以更轻松地将其与原始版本进行比较。
+3. 如果从依赖项中复制库（而不是导入它），请在配置文件中使用 `ignore = []` 选项以避免格式化该文件。 这使得审阅者和审计员可以更轻松地将其与原始版本进行比较。
 
-6. 同样，随意使用 `// forgefmt: disable-*` 注释指令来忽略手动格式化后看起来更好的代码行/段。 `*` 支持的值是：
+4. 同样，随意使用 `// forgefmt: disable-*` 注释指令来忽略手动格式化后看起来更好的代码行/段。 `*` 支持的值是：
 
     - `disable-line`
     - `disable-next-line`
@@ -205,41 +198,39 @@ _污点汇聚点（sink）_ 是发生某些重要操作的代码的一部分。 
 
 6. **注意抢跑**。 Forge 模拟您的脚本，根据模拟结果生成交易数据，然后广播交易。 确保您的脚本对模拟和广播之间的链状态变化具有很好的防护。 下面是一个容易受到此影响的示例脚本：
 
-```solidity
-// Pseudo-code, may not compile.
-contract VulnerableScript is Script {
-   function run() public {
-      vm.startBroadcast();
-
-      // Transaction 1: Deploy a new Gnosis Safe with CREATE.
-      // Because we're using CREATE instead of CREATE2, the address of the new
-      // Safe is a function of the nonce of the gnosisSafeProxyFactory.
-      address mySafe = gnosisSafeProxyFactory.createProxy(singleton, data);
-
-      // Transaction 2: Send tokens to the new Safe.
-      // We know the address of mySafe is a function of the nonce of the
-      // gnosisSafeProxyFactory. If someone else deploys a Gnosis Safe between
-      // the simulation and broadcast, the address of mySafe will be different,
-      // and this script will send 1000 DAI to the other person's Safe. In this
-      // case, we can protect ourselves from this by using CREATE2 instead of
-      // CREATE, but every situation may have different solutions.
-      dai.transfer(mySafe, 1000e18);
-
-      vm.stopBroadcast();
-   }
-}
-```
+    ```solidity
+        // 伪代码，可能无法编译。
+        contract VulnerableScript is Script {
+        function run() public {
+            vm.startBroadcast();
+        
+            // 交易 1：使用 CREATE 部署一个新的 Gnosis Safe。
+            // 因为我们使用的是 CREATE 而不是 CREATE2，新 Safe 的地址是
+            // gnosisSafeProxyFactory 的 nonce 的函数。
+            address mySafe = gnosisSafeProxyFactory.createProxy(singleton, data);
+        
+            // 交易 2：向新的 Safe 发送代币。
+            // 我们知道 mySafe 的地址是 gnosisSafeProxyFactory 的 nonce 的函数。
+            // 如果在模拟和广播之间有人部署了一个 Gnosis Safe，mySafe 的地址将会不同，
+            // 这个脚本将会把 1000 DAI 发送到其他人的 Safe。在这种情况下，我们可以通过
+            // 使用 CREATE2 而不是 CREATE 来保护自己，但每种情况可能有不同的解决方案。
+            dai.transfer(mySafe, 1000e18);
+        
+            vm.stopBroadcast();
+        }
+        }
+    ```
 
 1. 对于从 JSON 输入文件读取的脚本，将输入文件放在 `script/input/<chainID>/<description>.json` 中。 然后将 `run(string memory input)`（如果需要读取多个文件，则采用多个字符串输入）作为脚本的签名，并使用以下方法读取 JSON 文件。
 
-```solidity
-function readInput(string memory input) internal returns (string memory) {
-  string memory inputDir = string.concat(vm.projectRoot(), "/script/input/");
-  string memory chainDir = string.concat(vm.toString(block.chainid), "/");
-  string memory file = string.concat(input, ".json");
-  return vm.readFile(string.concat(inputDir, chainDir, file));
-}
-```
+    ```solidity
+    function readInput(string memory input) internal returns (string memory) {
+    string memory inputDir = string.concat(vm.projectRoot(), "/script/input/");
+    string memory chainDir = string.concat(vm.toString(block.chainid), "/");
+    string memory file = string.concat(input, ".json");
+    return vm.readFile(string.concat(inputDir, chainDir, file));
+    }
+    ```
 
 ### 私钥管理
 

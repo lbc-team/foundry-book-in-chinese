@@ -32,13 +32,13 @@ Since the NFT contract from the solmate tutorial inherits both `solmate` and `Op
 cd solidity-scripting
 
 # Install Solmate and OpenZeppelin contracts as dependencies
-forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
+forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts@v5.0.1
 ```
 
 Next, we have to delete the `Counter.sol` file in the `src` folder and create another file called `NFT.sol`. You can do this by running:
 
 ```sh
-rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
+rm src/Counter.sol test/Counter.t.sol script/Counter.s.sol && touch src/NFT.sol && ls src
 ```
 
 ![set up commands](../images/solidity-scripting/set-up-commands.png)
@@ -49,9 +49,9 @@ Once that’s done, you should open up your preferred code editor and copy the c
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -59,8 +59,8 @@ error NonExistentTokenURI();
 error WithdrawTransfer();
 
 contract NFT is ERC721, Ownable {
-
     using Strings for uint256;
+
     string public baseURI;
     uint256 public currentTokenId;
     uint256 public constant TOTAL_SUPPLY = 10_000;
@@ -70,7 +70,7 @@ contract NFT is ERC721, Ownable {
         string memory _name,
         string memory _symbol,
         string memory _baseURI
-    ) ERC721(_name, _symbol) {
+    ) ERC721(_name, _symbol) Ownable(msg.sender) {
         baseURI = _baseURI;
     }
 
@@ -123,9 +123,9 @@ If your output looks like this, the contracts successfully compiled.
 
 ### Deploying our contract
 
-We’re going to deploy the `NFT` contract to the Goerli testnet, but to do this we’ll need to configure Foundry a bit, by setting things like a Goerli RPC URL, the private key of an account that’s funded with Goerli Eth, and an Etherscan key for the verification of the NFT contract.
+We’re going to deploy the `NFT` contract to the Sepolia testnet, but to do this we’ll need to configure Foundry a bit, by setting things like a Sepolia RPC URL, the private key of an account that’s funded with Sepolia Eth, and an Etherscan key for the verification of the NFT contract.
 
-> 💡 Note: You can get some Goerli testnet ETH [here](https://faucet.paradigm.xyz/) .
+> 💡 Note: You can get some Sepolia testnet ETH [here](https://sepoliafaucet.com/) .
 
 #### Environment Configuration
 
@@ -134,7 +134,7 @@ Once you have all that create a `.env` file and add the variables. Foundry autom
 The .env file should follow this format:
 
 ```sh
-GOERLI_RPC_URL=
+SEPOLIA_RPC_URL=
 PRIVATE_KEY=
 ETHERSCAN_API_KEY=
 ```
@@ -145,13 +145,13 @@ Add the following lines to the end of the file:
 
 ```toml
 [rpc_endpoints]
-goerli = "${GOERLI_RPC_URL}"
+sepolia = "${SEPOLIA_RPC_URL}"
 
 [etherscan]
-goerli = { key = "${ETHERSCAN_API_KEY}" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
 ```
 
-This creates a [RPC alias](../cheatcodes/rpc.md) for Goerli and loads the Etherscan API key.
+This creates a [RPC alias](../cheatcodes/rpc.md) for Sepolia and loads the Etherscan API key.
 
 #### Writing the Script
 
@@ -163,8 +163,8 @@ The contents of `NFT.s.sol` should look like this:
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Script.sol";
-import "../src/NFT.sol";
+import {Script} from "forge-std/Script.sol";
+import {NFT} from "../src/NFT.sol";
 
 contract MyScript is Script {
     function run() external {
@@ -188,8 +188,8 @@ pragma solidity ^0.8.13;
 Remember even if it’s a script it still works like a smart contract, but is never deployed, so just like any other smart contract written in Solidity the `pragma version` has to be specified.
 
 ```solidity
-import "forge-std/Script.sol";
-import "../src/NFT.sol";
+import {Script} from "forge-std/Script.sol";
+import {NFT} from "../src/NFT.sol";
 ```
 
 Just like we may import Forge Std to get testing utilities when writing tests, Forge Std also provides some scripting utilities that we import here.
@@ -200,7 +200,7 @@ The next line just imports the `NFT` contract.
 contract MyScript is Script {
 ```
 
-We create a contract called `MyScript` and it inherits `Script` from Forge Std.
+We have created a contract called `MyScript` and it inherits `Script` from Forge Std.
 
 ```solidity
 function run() external {
@@ -224,7 +224,13 @@ This is a special cheatcode that records calls and contract creations made by ou
 NFT nft = new NFT("NFT_tutorial", "TUT", "baseUri");
 ```
 
-Here we just create our NFT contract. Because we called `vm.startBroadcast()` before this line, the contract creation will be recorded by Forge, and as mentioned previously, we can broadcast the transaction to deploy the contract on-chain. The broadcast transaction logs will be stored in the `broadcast` directory by default. You can change the logs location by setting [`broadcast`](../reference/config/project.md#broadcast) in your `foundry.toml` file.
+Here we have just created our NFT contract. Because we called `vm.startBroadcast()` before this line, the contract creation will be recorded by Forge, and as mentioned previously, we can broadcast the transaction to deploy the contract on-chain. The broadcast transaction logs will be stored in the `broadcast` directory by default. You can change the logs location by setting [`broadcast`](../reference/config/project.md#broadcast) in your `foundry.toml` file.
+
+The broadcasting sender is determined by checking the following in order:
+
+1. If `--sender` argument was provided, that address is used.
+2. If exactly one signer (e.g. private key, hardware wallet, keystore) is set, that signer is used.
+3. Otherwise, the default Foundry sender (`0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38`) is attempted to be used.
 
 Now that you’re up to speed about what the script smart contract does, let’s run it.
 
@@ -237,14 +243,14 @@ At the root of the project run:
 source .env
 
 # To deploy and verify our contract
-forge script script/NFT.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
+forge script --chain sepolia script/NFT.s.sol:MyScript --rpc-url $SEPOLIA_RPC_URL --broadcast --verify -vvvv
 ```
 
 Forge is going to run our script and broadcast the transactions for us - this can take a little while, since Forge will also wait for the transaction receipts. You should see something like this after a minute or so:
 
 ![contract verified](../images/solidity-scripting/contract-verified.png)
 
-This confirms that you have successfully deployed the `NFT` contract to the Goerli testnet and have also verified it on Etherscan, all with one command.
+This confirms that you have successfully deployed the `NFT` contract to the Sepolia testnet and have also verified it on Etherscan, all with one command.
 
 ### Deploying locally
 

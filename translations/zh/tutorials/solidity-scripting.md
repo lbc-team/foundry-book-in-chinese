@@ -32,13 +32,13 @@ forge init solidity-scripting
 cd solidity-scripting
 
 # Install Solmate and OpenZeppelin contracts as dependencies
-forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
+forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts@v5.0.1
 ```
 
 接下来，我们必须删除 `src` 文件夹中的 `Counter.sol` 文件并创建另一个名为 `NFT.sol` 的文件。 为此，你可以运行：
 
 ```sh
-rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
+rm src/Counter.sol test/Counter.t.sol script/Counter.s.sol && touch src/NFT.sol && ls src
 ```
 
 ![set up commands](https://img.learnblockchain.cn/pics/20230309091416.png)
@@ -50,9 +50,9 @@ rm src/Counter.sol test/Counter.t.sol && touch src/NFT.sol && ls src
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity >=0.8.10;
 
-import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {ERC721} from "solmate/tokens/ERC721.sol";
+import {Ownable} from "openzeppelin-contracts/contracts/access/Ownable.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -71,7 +71,7 @@ contract NFT is ERC721, Ownable {
         string memory _name,
         string memory _symbol,
         string memory _baseURI
-    ) ERC721(_name, _symbol) {
+    ) ERC721(_name, _symbol) Ownable(msg.sender) {
         baseURI = _baseURI;
     }
 
@@ -124,9 +124,9 @@ forge build
 
 ### 部署我们的合约
 
-我们准备把 `NFT` 合约部署到 Goerli 测试网，但为此我们需要稍微配置 Foundry，通过设置 Goerli RPC URL 之类的东西，这是一个由 Goerli Eth 资助的账户的私钥 ，以及用于验证 NFT 合约的 Etherscan 密钥。
+我们将把 `NFT` 合约部署到 Sepolia 测试网，但为此我们需要对 Foundry 进行一些配置，比如设置 Sepolia RPC URL、一个有 Sepolia Eth 资金的账户的私钥，以及用于验证 NFT 合约的 Etherscan 密钥。
 
-> 💡 注意：您可以在 [此处](https://faucet.paradigm.xyz/) 获得一些 Goerli 测试网 ETH。
+> 💡 注意：你可以在[这里](https://sepoliafaucet.com/)获取一些 Sepolia 测试网 ETH。
 
 #### 环境配置
 
@@ -135,7 +135,7 @@ forge build
  `.env` 文件应遵循以下格式：
 
 ```sh
-GOERLI_RPC_URL=
+SEPOLIA_RPC_URL=
 PRIVATE_KEY=
 ETHERSCAN_API_KEY=
 ```
@@ -146,13 +146,13 @@ ETHERSCAN_API_KEY=
 
 ```toml
 [rpc_endpoints]
-goerli = "${GOERLI_RPC_URL}"
+sepolia = "${SEPOLIA_RPC_URL}"
 
 [etherscan]
-goerli = { key = "${ETHERSCAN_API_KEY}" }
+sepolia = { key = "${ETHERSCAN_API_KEY}" }
 ```
 
-这将为 Goerli 测试网创建一个 [RPC 别名](../cheatcodes/rpc.md) 并加载 Etherscan 的 API 密钥。
+这将为 Sepolia 测试网创建一个 [RPC 别名](../cheatcodes/rpc.md) 并加载 Etherscan 的 API 密钥。
 
 #### 编写脚本
 
@@ -164,8 +164,8 @@ goerli = { key = "${ETHERSCAN_API_KEY}" }
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
-import "forge-std/Script.sol";
-import "../src/NFT.sol";
+import {Script} from "forge-std/Script.sol";
+import {NFT} from "../src/NFT.sol";
 
 contract MyScript is Script {
     function run() external {
@@ -189,8 +189,8 @@ pragma solidity ^0.8.13;
 请记住，即使它是一个脚本，它仍然像智能合约一样工作，但从未部署过，所以就像任何其他用 Solidity 编写的智能合约一样，必须指定 `pragma version`。
 
 ```solidity
-import "forge-std/Script.sol";
-import "../src/NFT.sol";
+import {Script} from "forge-std/Script.sol";
+import {NFT} from "../src/NFT.sol";
 ```
 
 就像我们在编写测试时可能会导入 Forge Std 来获取测试实用程序一样，Forge Std 也提供了一些我们在这里导入的脚本实用程序。
@@ -201,7 +201,7 @@ import "../src/NFT.sol";
 contract MyScript is Script {
 ```
 
-我们创建一个名为 `MyScript` 的合约，它从 Forge Std 继承了 `Script`。
+我们创建了一个名为 `MyScript` 的合约，它从 Forge Std 继承了 `Script`。
 
 ```solidity
  function run() external {
@@ -225,7 +225,13 @@ vm.startBroadcast(deployerPrivateKey);
  NFT nft = new NFT("NFT_tutorial", "TUT", "baseUri");
 ```
 
-在这里，我们只是创建我们的 NFT 合约。 因为我们在这行之前调用了 `vm.startBroadcast()`，合约创建将被 Forge 记录下来，并且如前所述，我们可以广播交易将合约部署到链上。 默认情况下，广播事务日志将存储在 `broadcast` 目录中。 您可以通过在 `foundry.toml` 文件中设置 [`broadcast`](../reference/config/project.md#broadcast) 来更改日志位置。
+在这里，我们刚刚创建了我们的 NFT 合约。因为我们在这行代码之前调用了 `vm.startBroadcast()`，所以合约的创建将被 Forge 记录下来，如前所述，我们可以将交易广播以在链上部署合约。广播交易日志将默认存储在 `broadcast` 目录中。你可以通过在 `foundry.toml` 文件中设置 [`broadcast`](../reference/config/project.md#broadcast) 来更改日志的位置。
+
+广播发送者的确定顺序如下：
+
+1. 如果提供了 `--sender` 参数，则使用该地址。
+2. 如果仅设置了一个签名者（例如私钥、硬件钱包、密钥库），则使用该签名者。
+3. 否则，将尝试使用 Foundry 默认的发送者 (`0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38`)。
 
 现在您已经了解了智能合约脚本的功能，让我们运行它。
 
@@ -238,14 +244,14 @@ vm.startBroadcast(deployerPrivateKey);
 source .env
 
 # To deploy and verify our contract
-forge script script/NFT.s.sol:MyScript --rpc-url $GOERLI_RPC_URL --broadcast --verify -vvvv
+forge script --chain sepolia script/NFT.s.sol:MyScript --rpc-url $SEPOLIA_RPC_URL --broadcast --verify -vvvv
 ```
 
 Forge 将运行我们的脚本并为我们广播交易——这可能需要一些时间，因为 Forge 还将等待交易收据。 大约一分钟后，您应该会看到类似这样的内容：
 
 ![contract verified](https://img.learnblockchain.cn/pics/20230309091435.png)
 
-这确认您已成功将 `NFT` 合约部署到 Goerli 测试网，并已在 Etherscan 上对其进行了验证，所有这些都通过一个命令完成。
+这确认您已成功将 `NFT` 合约部署到 Sepolia 测试网，并已在 Etherscan 上对其进行了验证，所有这些都通过一个命令完成。
 
 ### 本地部署
 
