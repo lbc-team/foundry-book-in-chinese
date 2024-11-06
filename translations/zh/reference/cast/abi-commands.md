@@ -8,4 +8,5 @@
 - [cast pretty-calldata](./cast-pretty-calldata.md)
 - [cast --abi-decode](./cast--abi-decode.md)
 - [cast --calldata-decode](./cast--calldata-decode.md)
+- [cast selectors](./cast-selectors.md)
 - [cast upload-signature](./cast-upload-signature.md)

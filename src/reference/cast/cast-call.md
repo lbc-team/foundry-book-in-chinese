@@ -24,14 +24,16 @@ The destination (*to*) can be an ENS name or an address.
 `--debug`  
 &nbsp;&nbsp;&nbsp;&nbsp;Opens an interactive debugger with the transaction. Needs `--trace`.
 
-`--verbose`  
-&nbsp;&nbsp;&nbsp;&nbsp;Prints a more verbose trace. Needs `--trace`.
-
 `--labels <address:label>`  
 &nbsp;&nbsp;&nbsp;&nbsp;Labels to apply to the traces, with the format `address:label`. Needs `--trace`.
 
 `--evm-version`  
 &nbsp;&nbsp;&nbsp;&nbsp;The EVM version to use. Needs `--trace`.
+
+`--data` data\
+&nbsp;&nbsp;&nbsp;&nbsp;Allows setting the data field directly without providing
+sig [args…].\
+&nbsp;&nbsp;&nbsp;&nbsp;Data needs to be in hexadecimal format.
 
 #### Query Options
 

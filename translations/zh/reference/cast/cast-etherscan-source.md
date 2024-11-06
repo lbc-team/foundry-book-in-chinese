@@ -22,6 +22,10 @@ cast-etherscan-source - 从 Etherscan 获取合约的源代码。
 &nbsp;&nbsp;&nbsp;&nbsp;输出目录，将源码输出到其中。
 &nbsp;&nbsp;&nbsp;&nbsp;如果不提供，源码将被输出到 stdout。
 
+`-f`  
+`--flatten`  
+&nbsp;&nbsp;&nbsp;&nbsp;是否展开源代码。
+
 {{#include ../common/etherscan-options.md}}
 
 {{#include common-options.md}}

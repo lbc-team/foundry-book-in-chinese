@@ -79,6 +79,23 @@ The destination (*to*) can be an ENS name or an address.
     ```sh
     cast send 0x... "myfunction((address,uint256))" "(0x...,1)"
     ```
+
+4. Send a transaction with hex data in the `input` field of the transaction object:
+    ```sh
+    cast send 0x... 0x68656c6c6f20776f726c64
+    ```
+
+5. Sign an EIP-7702 authorization and attach it to a transaction from a different sender:
+    ```sh
+    cast send $(cast az) --private-key <sender-pk> --auth $(cast wallet sign-auth <address> --private-key <delegator-pk>)
+    ```
+
+6. Send an EIP-7702 transaction delegating the sender to `<address>`:
+    ```sh
+    cast send $(cast az) --auth <address>
+    ```
+
+
 ### SEE ALSO
 
-[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [struct encoding](../../misc/struct-encoding.md)
+[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [cast mktx](./cast-mktx.md), [struct encoding](../../misc/struct-encoding.md)

@@ -43,11 +43,11 @@ cast logs - 通过签名或 topic 获取日志。
 
 1. 使用签名获取日志：
     ```sh
-    cast logs --from-block 15537393 --to-block latest 'Transfer (address indexed from, address indexed to, uint256 value)' 0x2e8ABfE042886E4938201101A63730D04F160A82
+    cast logs --from-block 15537393 --to-block latest 'Transfer (address indexed from, address indexed to, uint256 value)' --address 0x2e8ABfE042886E4938201101A63730D04F160A82
     ```
 2. 使用 topic 获取日志：
     ```sh
-    cast logs --from-block 15537393 --to-block latest 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef 0x0000000000000000000000002e8abfe042886e4938201101a63730d04f160a82
+    cast logs --from-block 15537393 --to-block latest 0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef --address 0x0000000000000000000000002e8abfe042886e4938201101a63730d04f160a82
     ```
 
 ### 参见

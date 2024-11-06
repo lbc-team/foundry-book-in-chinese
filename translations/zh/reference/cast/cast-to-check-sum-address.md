@@ -16,6 +16,13 @@ cast-to-check-sum-address - 将地址转换为校验和格式（[EIP-55][eip55]�
 
 {{#include common-options.md}}
 
+### 示例
+
+1. 将地址转换为校验和格式：
+    ```sh
+    cast to-check-sum-address 0xDf99A0839818B3f120EBAC9B73f82B617Dc6A555
+    ```
+
 ### 参见
 
 [cast](./cast.md)

@@ -39,4 +39,4 @@ cast-publish - 向网络发布一个原始交易。
 
 ### 请参阅
 
-[cast](./cast.md), [cast call](./cast-call.md), [cast send](./cast-send.md), [cast receipt](./cast-receipt.md)
+[cast](./cast.md), [cast call](./cast-call.md), [cast send](./cast-send.md), [cast receipt](./cast-receipt.md), [cast mktx](./cast-mktx.md)

@@ -40,6 +40,13 @@ cast-balance - 获取一个账户的余额，单位为 Wei。
     ```sh
     cast balance beer.eth
     ```
+2. 使用 RPC URL 获取任意地址的 ERC20 余额
+   ```sh
+   # 加载 .env 文件中的变量
+   source .env
+
+   # 获取币安的 USDT 余额
+   cast balance --erc20 0xdAC17F958D2ee523a2206206994597C13D831ec7 0xF977814e90dA44bFA03b6295A0616a897441aceC --rpc-url $MAINNET_RPC_URL
 
 ### 请参阅
 

@@ -79,6 +79,23 @@ cast-send - 签署并发布一项交易。
     ```sh
     cast send 0x... "myfunction((address,uint256))" "(0x...,1)"
     ```
+
+4. 在交易对象的 `input` 字段中发送带有十六进制数据的交易：
+    ```sh
+    cast send 0x... 0x68656c6c6f20776f726c64
+    ```
+
+5. 签署一个 EIP-7702 授权，并将其附加到来自不同发送者的交易中：
+    ```sh
+    cast send $(cast az) --private-key <sender-pk> --auth $(cast wallet sign-auth <address> --private-key <delegator-pk>)
+    ```
+
+6. 发送一个 EIP-7702 交易，将发送者委托给 `<address>`：
+    ```sh
+    cast send $(cast az) --auth <address>
+    ```
+
+
 ### 请参阅
 
-[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [struct encoding](../../misc/struct-encoding.md)
+[cast](./cast.md), [cast call](./cast-call.md), [cast publish](./cast-publish.md), [cast receipt](./cast-receipt.md), [cast mktx](./cast-mktx.md), [struct encoding](../../misc/struct-encoding.md)

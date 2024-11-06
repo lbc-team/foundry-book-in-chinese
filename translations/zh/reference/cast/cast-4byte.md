@@ -25,4 +25,4 @@ cast-4byte - 从 <https://sig.eth.samczsun.com> 中获取指定选择器的函�
 
 ### 请参阅
 
-[cast](./cast.md), [cast 4byte-decode](./cast-4byte-decode.md), [cast 4byte-event](./cast-4byte-event.md)
+[cast](./cast.md), [cast 4byte-decode](./cast-4byte-decode.md), [cast 4byte-event](./cast-4byte-event.md), [cast selectors](./cast-selectors.md)

@@ -149,11 +149,8 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 [cast pretty-calldata](./cast-pretty-calldata.md)
 &nbsp;&nbsp;&nbsp;&nbsp;漂亮地打印 Calldata。
 
-[cast --abi-decode](./cast--abi-decode.md)
-&nbsp;&nbsp;&nbsp;&nbsp;解码 ABI 编码的输入或输出数据。
-
-[cast --calldata-decode](./cast--calldata-decode.md)
-&nbsp;&nbsp;&nbsp;&nbsp;解码 ABI 编码的输入数据。
+[cast selectors](./cast-selectors.md)
+&nbsp;&nbsp;&nbsp;&nbsp;从字节码中提取函数选择器和参数
 
 [cast upload-signature](./cast-upload-signature.md)
 &nbsp;&nbsp;&nbsp;&nbsp;将指定的签名上传到 https://sig.eth.samczsun.com.
@@ -224,6 +221,9 @@ cast - 从你的命令行中舒适地执行 Ethereum RPC 调用。
 &nbsp;&nbsp;&nbsp;&nbsp;进行右移操作。
 
 #### Utility Commands
+
+[cast address-zero](./cast-address-zero.md)
+&nbsp;&nbsp;&nbsp;&nbsp;打印零地址.
 
 [cast sig](./cast-sig.md)
 &nbsp;&nbsp;&nbsp;&nbsp;获取一个函数的选择器。

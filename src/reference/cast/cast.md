@@ -149,6 +149,9 @@ This program is a set of tools to interact with Ethereum and perform conversions
 [cast pretty-calldata](./cast-pretty-calldata.md)
 &nbsp;&nbsp;&nbsp;&nbsp;Pretty print calldata.
 
+[cast selectors](./cast-selectors.md)
+&nbsp;&nbsp;&nbsp;&nbsp;Extracts function selectors and arguments from bytecode
+
 [cast upload-signature](./cast-upload-signature.md)
 &nbsp;&nbsp;&nbsp;&nbsp;Upload the given signatures to https://sig.eth.samczsun.com.
 
@@ -218,6 +221,9 @@ This program is a set of tools to interact with Ethereum and perform conversions
 &nbsp;&nbsp;&nbsp;&nbsp;Perform a right shifting operation.
 
 #### Utility Commands
+
+[cast address-zero](./cast-address-zero.md)
+&nbsp;&nbsp;&nbsp;&nbsp;Prints the zero address.
 
 [cast sig](./cast-sig.md)
 &nbsp;&nbsp;&nbsp;&nbsp;Get the selector for a function.

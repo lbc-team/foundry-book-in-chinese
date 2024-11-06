@@ -24,14 +24,15 @@ cast-call - 在不发布交易的情况下对账户进行调用。
 `--debug`  
 &nbsp;&nbsp;&nbsp;&nbsp;使用交易的交互式调试器。需要 `--trace`。
 
-`--verbose`  
-&nbsp;&nbsp;&nbsp;&nbsp;打印更详细的跟踪信息。需要 `--trace`。
-
 `--labels <address:label>`  
 &nbsp;&nbsp;&nbsp;&nbsp;要应用于跟踪的标签，格式为 `address:label`。需要 `--trace`。
 
 `--evm-version`  
 &nbsp;&nbsp;&nbsp;&nbsp;要使用的 EVM 版本。需要 `--trace`。
+
+`--data` data\
+    允许直接设置数据字段而不提供 sig [args…]。\
+    数据需要是十六进制格式。
 
 #### 查询选项
 
