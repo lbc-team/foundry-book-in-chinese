@@ -7,13 +7,13 @@ $ cast wallet sign-auth --help
 ```
 
 ```txt
-Usage: cast wallet sign-auth [OPTIONS] <ADDRESS>
+用法： cast wallet sign-auth [OPTIONS] <ADDRESS>
 
-Arguments:
+参数：
   <ADDRESS>
           Address to sign authorization for
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

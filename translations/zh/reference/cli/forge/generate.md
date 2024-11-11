@@ -4,12 +4,12 @@
 
 ```bash
 $ forge generate --help
-Usage: forge generate <COMMAND>
+用法： forge generate <COMMAND>
 
 Commands:
   test  Scaffolds test file for given contract
   help  Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -h, --help  Print help
 ```

@@ -4,13 +4,13 @@
 
 ```bash
 $ cast wallet verify --help
-Usage: cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
+用法： cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
 
-Arguments:
+参数：
   <MESSAGE>    The original message
   <SIGNATURE>  The signature to verify
 
-Options:
+选项：
   -a, --address <ADDRESS>  The address of the message signer
   -h, --help               Print help
 ```

@@ -4,16 +4,16 @@
 
 ```bash
 $ cast storage --help
-Usage: cast storage [OPTIONS] <ADDRESS> [SLOT]
+用法： cast storage [OPTIONS] <ADDRESS> [SLOT]
 
-Arguments:
+参数：
   <ADDRESS>
           The contract address
 
   [SLOT]
           The storage slot number
 
-Options:
+选项：
   -b, --block <BLOCK>
           The block height to query at.
           

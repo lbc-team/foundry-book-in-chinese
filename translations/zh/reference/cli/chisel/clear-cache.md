@@ -4,8 +4,8 @@
 
 ```bash
 $ chisel clear-cache --help
-Usage: chisel clear-cache
+用法： chisel clear-cache
 
-Options:
+选项：
   -h, --help  Print help
 ```

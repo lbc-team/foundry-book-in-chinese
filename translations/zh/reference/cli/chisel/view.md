@@ -4,11 +4,11 @@
 
 ```bash
 $ chisel view --help
-Usage: chisel view <ID>
+用法： chisel view <ID>
 
-Arguments:
+参数：
   <ID>  The ID of the session to load
 
-Options:
+选项：
   -h, --help  Print help
 ```

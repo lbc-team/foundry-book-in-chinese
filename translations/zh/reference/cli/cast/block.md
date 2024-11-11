@@ -4,15 +4,15 @@
 
 ```bash
 $ cast block --help
-Usage: cast block [OPTIONS] [BLOCK]
+用法： cast block [OPTIONS] [BLOCK]
 
-Arguments:
+参数：
   [BLOCK]
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
+选项：
   -f, --field <FIELD>
           If specified, only get the given field of the block
 

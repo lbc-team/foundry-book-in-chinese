@@ -4,11 +4,11 @@
 
 ```bash
 $ cast parse-bytes32-address --help
-Usage: cast parse-bytes32-address [BYTES]
+用法： cast parse-bytes32-address [BYTES]
 
-Arguments:
+参数：
   [BYTES]  
 
-Options:
+选项：
   -h, --help  Print help
 ```

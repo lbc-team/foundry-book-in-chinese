@@ -4,8 +4,8 @@
 
 ```bash
 $ cast generate-fig-spec --help
-Usage: cast generate-fig-spec
+用法： cast generate-fig-spec
 
-Options:
+选项：
   -h, --help  Print help
 ```

@@ -4,8 +4,11 @@
 
 ```bash
 $ anvil generate-fig-spec --help
-Usage: anvil generate-fig-spec
+```
 
-Options:
+```txt
+用法： anvil generate-fig-spec
+
+选项：
   -h, --help  Print help
 ```

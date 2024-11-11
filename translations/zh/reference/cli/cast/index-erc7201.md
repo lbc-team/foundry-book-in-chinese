@@ -7,12 +7,12 @@ $ cast index-erc7201 --help
 ```
 
 ```txt
-Usage: cast index-erc7201 [OPTIONS] [ID]
+用法： cast index-erc7201 [OPTIONS] [ID]
 
-Arguments:
+参数：
   [ID]  The arbitrary identifier
 
-Options:
+选项：
       --formula-id <FORMULA_ID>
           The formula ID. Currently the only supported formula is `erc7201`
           [default: erc7201]

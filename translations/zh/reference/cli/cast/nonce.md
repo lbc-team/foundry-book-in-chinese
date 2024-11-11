@@ -4,13 +4,13 @@
 
 ```bash
 $ cast nonce --help
-Usage: cast nonce [OPTIONS] <WHO>
+用法： cast nonce [OPTIONS] <WHO>
 
-Arguments:
+参数：
   <WHO>
           The address to get the nonce for
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

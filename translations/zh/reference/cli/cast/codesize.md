@@ -4,13 +4,13 @@
 
 ```bash
 $ cast codesize --help
-Usage: cast codesize [OPTIONS] <WHO>
+用法： cast codesize [OPTIONS] <WHO>
 
-Arguments:
+参数：
   <WHO>
           The contract address
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

@@ -4,12 +4,12 @@
 
 ```bash
 $ forge install --help
-Usage: forge install [OPTIONS] [DEPENDENCIES]...
+用法： forge install [OPTIONS] [DEPENDENCIES]...
     forge install [OPTIONS] <github username>/<github project>@<tag>...
     forge install [OPTIONS] <alias>=<github username>/<github project>@<tag>...
     forge install [OPTIONS] <https:// git url>...
 
-Arguments:
+参数：
   [DEPENDENCIES]...
           The dependencies to install.
           
@@ -21,7 +21,7 @@ Arguments:
           
           Target installation directory can be added via `<alias>=` suffix. The dependency will installed to `lib/<alias>`.
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

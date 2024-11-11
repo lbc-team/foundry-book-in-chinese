@@ -4,13 +4,13 @@
 
 ```bash
 $ cast shl --help
-Usage: cast shl [OPTIONS] <VALUE> <BITS>
+用法： cast shl [OPTIONS] <VALUE> <BITS>
 
-Arguments:
+参数：
   <VALUE>  The value to shift
   <BITS>   The number of bits to shift
 
-Options:
+选项：
       --base-in <BASE_IN>    The input base
       --base-out <BASE_OUT>  The output base [default: 16]
   -h, --help                 Print help

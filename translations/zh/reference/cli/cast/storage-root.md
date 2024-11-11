@@ -7,16 +7,16 @@ $ cast storage-root --help
 ```
 
 ```txt
-Usage: cast storage-root [OPTIONS] <WHO> [SLOTS]...
+用法： cast storage-root [OPTIONS] <WHO> [SLOTS]...
 
-Arguments:
+参数：
   <WHO>
           The address to get the storage root for
 
   [SLOTS]...
           The storage slot numbers (hex or decimal)
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

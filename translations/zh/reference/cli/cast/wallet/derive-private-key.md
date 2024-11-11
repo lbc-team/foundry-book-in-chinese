@@ -4,12 +4,12 @@
 
 ```bash
 $ cast wallet derive-private-key --help
-Usage: cast wallet derive-private-key <MNEMONIC> [MNEMONIC_INDEX]
+用法： cast wallet derive-private-key <MNEMONIC> [MNEMONIC_INDEX]
 
-Arguments:
+参数：
   <MNEMONIC>        
   [MNEMONIC_INDEX]  
 
-Options:
+选项：
   -h, --help  Print help
 ```

@@ -4,15 +4,15 @@
 
 ```bash
 $ cast bind --help
-Usage: cast bind [OPTIONS] <PATH_OR_ADDRESS>
+用法： cast bind [OPTIONS] <PATH_OR_ADDRESS>
 
-Arguments:
+参数：
   <PATH_OR_ADDRESS>
           The contract address, or the path to an ABI Directory
           
           If an address is specified, then the ABI is fetched from Etherscan.
 
-Options:
+选项：
   -o, --output-dir <PATH>
           Path to where bindings will be stored
 

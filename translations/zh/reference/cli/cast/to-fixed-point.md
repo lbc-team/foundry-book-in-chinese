@@ -4,12 +4,12 @@
 
 ```bash
 $ cast to-fixed-point --help
-Usage: cast to-fixed-point [DECIMALS] [VALUE]
+用法： cast to-fixed-point [DECIMALS] [VALUE]
 
-Arguments:
+参数：
   [DECIMALS]  The number of decimals to use
   [VALUE]     The value to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

@@ -7,11 +7,11 @@ $ chisel eval --help
 ```
 
 ```txt
-Usage: chisel eval <COMMAND>
+用法： chisel eval <COMMAND>
 
-Arguments:
+参数：
   <COMMAND>  The command to be evaluated
 
-Options:
+选项：
   -h, --help  Print help
 ```

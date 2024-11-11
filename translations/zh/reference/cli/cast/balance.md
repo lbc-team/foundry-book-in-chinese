@@ -4,13 +4,13 @@
 
 ```bash
 $ cast balance --help
-Usage: cast balance [OPTIONS] <WHO>
+用法： cast balance [OPTIONS] <WHO>
 
-Arguments:
+参数：
   <WHO>
           The account to query
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

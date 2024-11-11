@@ -7,12 +7,12 @@ $ cast wallet decrypt-keystore --help
 ```
 
 ```txt
-Usage: cast wallet decrypt-keystore [OPTIONS] <ACCOUNT_NAME>
+用法： cast wallet decrypt-keystore [OPTIONS] <ACCOUNT_NAME>
 
-Arguments:
+参数：
   <ACCOUNT_NAME>  The name for the account in the keystore
 
-Options:
+选项：
   -k, --keystore-dir <KEYSTORE_DIR>
           If not provided, keystore will try to be located at the default
           keystores directory (~/.foundry/keystores)

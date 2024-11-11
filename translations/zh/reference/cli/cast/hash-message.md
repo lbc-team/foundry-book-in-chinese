@@ -7,11 +7,11 @@ $ cast hash-message --help
 ```
 
 ```txt
-Usage: cast hash-message [MESSAGE]
+用法： cast hash-message [MESSAGE]
 
-Arguments:
+参数：
   [MESSAGE]  The message to hash
 
-Options:
+选项：
   -h, --help  Print help
 ```

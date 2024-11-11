@@ -7,11 +7,11 @@ $ cast decode-eof --help
 ```
 
 ```txt
-Usage: cast decode-eof [EOF]
+用法： cast decode-eof [EOF]
 
-Arguments:
+参数：
   [EOF]  
 
-Options:
+选项：
   -h, --help  Print help
 ```

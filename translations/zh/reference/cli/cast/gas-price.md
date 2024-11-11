@@ -4,9 +4,9 @@
 
 ```bash
 $ cast gas-price --help
-Usage: cast gas-price [OPTIONS]
+用法： cast gas-price [OPTIONS]
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

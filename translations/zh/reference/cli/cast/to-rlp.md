@@ -4,11 +4,11 @@ RLP 对十六进制数据或十六进制数据数组进行编码
 
 ```bash
 $ cast to-rlp --help
-Usage: cast to-rlp [VALUE]
+用法： cast to-rlp [VALUE]
 
-Arguments:
+参数：
   [VALUE]  The value to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

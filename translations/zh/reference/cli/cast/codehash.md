@@ -7,16 +7,16 @@ $ cast codehash --help
 ```
 
 ```txt
-Usage: cast codehash [OPTIONS] <WHO> [SLOTS]...
+用法： cast codehash [OPTIONS] <WHO> [SLOTS]...
 
-Arguments:
+参数：
   <WHO>
           The address to get the codehash for
 
   [SLOTS]...
           The storage slot numbers (hex or decimal)
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

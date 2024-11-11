@@ -4,11 +4,13 @@
 
 ```bash
 $ anvil completions --help
-Usage: anvil completions <SHELL>
+```
 
-Arguments:
+```txt
+用法： anvil completions <SHELL>
+参数：
   <SHELL>  [possible values: bash, elvish, fish, powershell, zsh]
 
-Options:
+选项：
   -h, --help  Print help
 ```

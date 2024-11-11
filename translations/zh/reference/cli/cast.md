@@ -4,7 +4,7 @@
 
 ```bash
 $ cast --help
-Usage: cast <COMMAND>
+用法： cast <COMMAND>
 
 Commands:
   4byte                  Get the function signatures for the given selector from https://openchain.xyz [aliases: 4, 4b]
@@ -91,7 +91,7 @@ Commands:
   upload-signature       Upload the given signatures to https://openchain.xyz [aliases: ups]
   wallet                 Wallet management utilities [aliases: w]
 
-Options:
+选项：
   -h, --help     Print help
   -V, --version  Print version
 

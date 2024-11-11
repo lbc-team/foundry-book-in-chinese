@@ -4,8 +4,8 @@
 
 ```bash
 $ cast from-bin --help
-Usage: cast from-bin
+用法： cast from-bin
 
-Options:
+选项：
   -h, --help  Print help
 ```

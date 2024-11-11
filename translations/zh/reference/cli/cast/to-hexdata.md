@@ -4,13 +4,13 @@
 
 ```bash
 $ cast to-hexdata --help
-Usage: cast to-hexdata [INPUT]
+用法： cast to-hexdata [INPUT]
 
-Arguments:
+参数：
   [INPUT]
           The input to normalize
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 ```

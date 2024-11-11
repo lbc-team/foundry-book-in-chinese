@@ -4,9 +4,9 @@
 
 ```bash
 $ cast to-wei --help
-Usage: cast to-wei [VALUE] [UNIT]
+用法： cast to-wei [VALUE] [UNIT]
 
-Arguments:
+参数：
   [VALUE]
           The value to convert
 
@@ -15,7 +15,7 @@ Arguments:
           
           [default: eth]
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 ```

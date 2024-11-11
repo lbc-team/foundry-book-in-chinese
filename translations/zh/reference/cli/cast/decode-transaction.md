@@ -4,11 +4,11 @@
 
 ```bash
 $ cast decode-transaction --help
-Usage: cast decode-transaction [TX]
+用法： cast decode-transaction [TX]
 
-Arguments:
+参数：
   [TX]  
 
-Options:
+选项：
   -h, --help  Print help
 ```

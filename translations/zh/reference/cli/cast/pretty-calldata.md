@@ -4,13 +4,13 @@
 
 ```bash
 $ cast pretty-calldata --help
-Usage: cast pretty-calldata [OPTIONS] [CALLDATA]
+用法： cast pretty-calldata [OPTIONS] [CALLDATA]
 
-Arguments:
+参数：
   [CALLDATA]
           The calldata
 
-Options:
+选项：
   -o, --offline
           Skip the https://openchain.xyz lookup
 

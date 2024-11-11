@@ -4,13 +4,13 @@
 
 ```bash
 $ cast resolve-name --help
-Usage: cast resolve-name [OPTIONS] [WHO]
+用法： cast resolve-name [OPTIONS] [WHO]
 
-Arguments:
+参数：
   [WHO]
           The name to lookup
 
-Options:
+选项：
   -v, --verify
           Perform a reverse lookup to verify that the name is correct
 

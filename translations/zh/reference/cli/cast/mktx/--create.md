@@ -7,7 +7,7 @@ $ cast mktx --create --help
 ```
 
 ```txt
-Usage: cast mktx --create <CODE> [SIG] [ARGS]...
+用法： cast mktx --create <CODE> [SIG] [ARGS]...
 
 参数：
   <CODE>     要部署合约的初始化字节码

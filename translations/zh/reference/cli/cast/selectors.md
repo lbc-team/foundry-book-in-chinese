@@ -7,12 +7,12 @@ $ cast selectors --help
 ```
 
 ```txt
-Usage: cast selectors [OPTIONS] <BYTECODE>
+用法： cast selectors [OPTIONS] <BYTECODE>
 
-Arguments:
+参数：
   <BYTECODE>  The hex encoded bytecode
 
-Options:
+选项：
   -r, --resolve  Resolve the function signatures for the extracted selectors
                  using https://openchain.xyz
   -h, --help     Print help

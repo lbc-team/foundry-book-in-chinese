@@ -4,8 +4,8 @@
 
 ```bash
 $ cast wallet list --help
-Usage: cast wallet list
+用法： cast wallet list
 
-Options:
+选项：
   -h, --help  Print help
 ```

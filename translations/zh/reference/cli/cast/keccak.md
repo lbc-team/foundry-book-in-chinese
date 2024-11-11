@@ -4,11 +4,11 @@
 
 ```bash
 $ cast keccak --help
-Usage: cast keccak [DATA]
+用法： cast keccak [DATA]
 
-Arguments:
+参数：
   [DATA]  The data to hash
 
-Options:
+选项：
   -h, --help  Print help
 ```

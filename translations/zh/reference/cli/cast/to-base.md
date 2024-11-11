@@ -4,13 +4,13 @@
 
 ```bash
 $ cast to-base --help
-Usage: cast to-base [OPTIONS] [VALUE] [BASE]
+用法： cast to-base [OPTIONS] [VALUE] [BASE]
 
-Arguments:
+参数：
   [VALUE]  The value to convert
   [BASE]   The output base
 
-Options:
+选项：
   -i, --base-in <BASE_IN>  The input base
   -h, --help               Print help
 ```

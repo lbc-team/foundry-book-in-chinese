@@ -4,9 +4,9 @@
 
 ```bash
 $ cast access-list --help
-Usage: cast access-list [OPTIONS] [TO] [SIG] [ARGS]...
+用法： cast access-list [OPTIONS] [TO] [SIG] [ARGS]...
 
-Arguments:
+参数：
   [TO]
           The destination of the transaction
 
@@ -16,7 +16,7 @@ Arguments:
   [ARGS]...
           The arguments of the function to call
 
-Options:
+选项：
       --data <DATA>
           The data for the transaction
 

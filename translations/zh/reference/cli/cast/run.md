@@ -4,13 +4,13 @@
 
 ```bash
 $ cast run --help
-Usage: cast run [OPTIONS] <TX_HASH>
+用法： cast run [OPTIONS] <TX_HASH>
 
-Arguments:
+参数：
   <TX_HASH>
           The transaction hash
 
-Options:
+选项：
   -d, --debug
           Opens the transaction in the debugger
 

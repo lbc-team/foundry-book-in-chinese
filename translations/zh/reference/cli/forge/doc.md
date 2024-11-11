@@ -4,9 +4,9 @@
 
 ```bash
 $ forge doc --help
-Usage: forge doc [OPTIONS]
+用法： forge doc [OPTIONS]
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

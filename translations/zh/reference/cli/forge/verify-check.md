@@ -4,9 +4,9 @@
 
 ```bash
 $ forge verify-check --help
-Usage: forge verify-check [OPTIONS] <ID>
+用法： forge verify-check [OPTIONS] <ID>
 
-Arguments:
+参数：
   <ID>
           The verification ID.
           
@@ -14,7 +14,7 @@ Arguments:
           
           For Sourcify - Contract Address.
 
-Options:
+选项：
       --retries <RETRIES>
           Number of attempts for retrying verification
           

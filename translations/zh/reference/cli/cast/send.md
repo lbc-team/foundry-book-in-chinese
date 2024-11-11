@@ -4,13 +4,13 @@
 
 ```bash
 $ cast send --help
-Usage: cast send [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
+用法： cast send [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
 
 Commands:
   --create  Use to deploy raw contract bytecode
   help      Print this message or the help of the given subcommand(s)
 
-Arguments:
+参数：
   [TO]
           The destination of the transaction.
           
@@ -22,7 +22,7 @@ Arguments:
   [ARGS]...
           The arguments of the function to call
 
-Options:
+选项：
       --async
           Only print the transaction hash and exit immediately
           

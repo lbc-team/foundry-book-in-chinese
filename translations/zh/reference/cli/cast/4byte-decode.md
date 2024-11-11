@@ -4,11 +4,11 @@
 
 ```bash
 $ cast 4byte-decode --help
-Usage: cast 4byte-decode [CALLDATA]
+用法： cast 4byte-decode [CALLDATA]
 
-Arguments:
+参数：
   [CALLDATA]  The ABI-encoded calldata
 
-Options:
+选项：
   -h, --help  Print help
 ```

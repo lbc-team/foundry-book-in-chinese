@@ -4,11 +4,11 @@
 
 ```bash
 $ cast 4byte --help
-Usage: cast 4byte [SELECTOR]
+用法： cast 4byte [SELECTOR]
 
-Arguments:
+参数：
   [SELECTOR]  The function selector
 
-Options:
+选项：
   -h, --help  Print help
 ```

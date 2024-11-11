@@ -4,11 +4,11 @@
 
 ```bash
 $ cast disassemble --help
-Usage: cast disassemble <BYTECODE>
+用法： cast disassemble <BYTECODE>
 
-Arguments:
+参数：
   <BYTECODE>  The hex encoded bytecode
 
-Options:
+选项：
   -h, --help  Print help
 ```

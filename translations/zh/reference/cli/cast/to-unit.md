@@ -4,9 +4,9 @@
 
 ```bash
 $ cast to-unit --help
-Usage: cast to-unit [VALUE] [UNIT]
+用法： cast to-unit [VALUE] [UNIT]
 
-Arguments:
+参数：
   [VALUE]
           The value to convert
 
@@ -15,7 +15,7 @@ Arguments:
           
           [default: wei]
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 ```

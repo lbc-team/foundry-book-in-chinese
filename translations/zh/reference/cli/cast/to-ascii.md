@@ -4,11 +4,11 @@
 
 ```bash
 $ cast to-ascii --help
-Usage: cast to-ascii [HEXDATA]
+用法： cast to-ascii [HEXDATA]
 
-Arguments:
+参数：
   [HEXDATA]  The hex data to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

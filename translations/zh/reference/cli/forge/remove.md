@@ -4,13 +4,13 @@
 
 ```bash
 $ forge remove --help
-Usage: forge remove [OPTIONS] [DEPENDENCIES]...
+用法： forge remove [OPTIONS] [DEPENDENCIES]...
 
-Arguments:
+参数：
   [DEPENDENCIES]...
           The dependencies you want to remove
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

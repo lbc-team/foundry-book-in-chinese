@@ -4,8 +4,8 @@
 
 ```bash
 $ cast hash-zero --help
-Usage: cast hash-zero
+用法： cast hash-zero
 
-Options:
+选项：
   -h, --help  Print help
 ```

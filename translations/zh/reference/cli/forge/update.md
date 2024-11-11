@@ -4,13 +4,13 @@
 
 ```bash
 $ forge update --help
-Usage: forge update [OPTIONS] [DEPENDENCIES]...
+用法： forge update [OPTIONS] [DEPENDENCIES]...
 
-Arguments:
+参数：
   [DEPENDENCIES]...
           The dependencies you want to update
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

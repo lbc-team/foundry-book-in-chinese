@@ -4,11 +4,11 @@
 
 ```bash
 $ cast sig-event --help
-Usage: cast sig-event [EVENT_STRING]
+用法： cast sig-event [EVENT_STRING]
 
-Arguments:
+参数：
   [EVENT_STRING]  The event string
 
-Options:
+选项：
   -h, --help  Print help
 ```

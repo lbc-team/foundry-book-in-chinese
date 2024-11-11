@@ -4,16 +4,16 @@
 
 ```bash
 $ forge verify-contract --help
-Usage: forge verify-contract [OPTIONS] <ADDRESS> <CONTRACT>
+用法： forge verify-contract [OPTIONS] <ADDRESS> <CONTRACT>
 
-Arguments:
+参数：
   <ADDRESS>
           The address of the contract to verify
 
   <CONTRACT>
           The contract identifier in the form `<path>:<contractname>`
 
-Options:
+选项：
       --constructor-args <ARGS>
           The ABI-encoded constructor arguments
 

@@ -4,16 +4,16 @@
 
 ```bash
 $ cast proof --help
-Usage: cast proof [OPTIONS] <ADDRESS> [SLOTS]...
+用法： cast proof [OPTIONS] <ADDRESS> [SLOTS]...
 
-Arguments:
+参数：
   <ADDRESS>
           The contract address
 
   [SLOTS]...
           The storage slot numbers (hex or decimal)
 
-Options:
+选项：
   -B, --block <BLOCK>
           The block height to query at.
           

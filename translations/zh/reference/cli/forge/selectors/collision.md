@@ -4,16 +4,16 @@
 
 ```bash
 $ forge selectors collision --help
-Usage: forge selectors collision [OPTIONS] <FIRST_CONTRACT> <SECOND_CONTRACT>
+用法： forge selectors collision [OPTIONS] <FIRST_CONTRACT> <SECOND_CONTRACT>
 
-Arguments:
+参数：
   <FIRST_CONTRACT>
           The first of the two contracts for which to look selector collisions for, in the form `(<path>:)?<contractname>`
 
   <SECOND_CONTRACT>
           The second of the two contracts for which to look selector collisions for, in the form `(<path>:)?<contractname>`
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

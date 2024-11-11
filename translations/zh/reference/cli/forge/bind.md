@@ -4,9 +4,9 @@
 
 ```bash
 $ forge bind --help
-Usage: forge bind [OPTIONS]
+用法： forge bind [OPTIONS]
 
-Options:
+选项：
   -b, --bindings-path <PATH>
           Path to where the contract artifacts are stored
 

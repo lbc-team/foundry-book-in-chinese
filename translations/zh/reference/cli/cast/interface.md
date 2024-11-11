@@ -4,15 +4,15 @@
 
 ```bash
 $ cast interface --help
-Usage: cast interface [OPTIONS] <PATH_OR_ADDRESS>
+用法： cast interface [OPTIONS] <PATH_OR_ADDRESS>
 
-Arguments:
+参数：
   <PATH_OR_ADDRESS>
           The contract address, or the path to an ABI file.
           
           If an address is specified, then the ABI is fetched from Etherscan.
 
-Options:
+选项：
   -n, --name <NAME>
           The name to use for the generated interface
 

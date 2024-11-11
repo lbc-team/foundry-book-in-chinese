@@ -4,8 +4,8 @@
 
 ```bash
 $ forge generate-fig-spec --help
-Usage: forge generate-fig-spec
+用法： forge generate-fig-spec
 
-Options:
+选项：
   -h, --help  Print help
 ```

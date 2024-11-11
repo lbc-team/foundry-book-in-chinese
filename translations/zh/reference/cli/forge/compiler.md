@@ -7,13 +7,13 @@ $ forge compiler --help
 ```
 
 ```txt
-Usage: forge compiler <COMMAND>
+用法： forge compiler <COMMAND>
 
 Commands:
   resolve  Retrieves the resolved version(s) of the compiler within the project
            [aliases: r]
   help     Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -h, --help  Print help
 ```

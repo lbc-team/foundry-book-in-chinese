@@ -4,7 +4,7 @@
 
 ```bash
 $ forge --help
-Usage: forge <COMMAND>
+用法： forge <COMMAND>
 
 Commands:
   bind               Generate Rust bindings for smart contracts
@@ -39,7 +39,7 @@ Commands:
   verify-check       Check verification status on Etherscan [aliases: vc]
   verify-contract    Verify smart contracts on Etherscan [aliases: v]
 
-Options:
+选项：
   -h, --help     Print help
   -V, --version  Print version
 

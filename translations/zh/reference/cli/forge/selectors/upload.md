@@ -4,13 +4,13 @@
 
 ```bash
 $ forge selectors upload --help
-Usage: forge selectors upload [OPTIONS] [CONTRACT]
+用法： forge selectors upload [OPTIONS] [CONTRACT]
 
-Arguments:
+参数：
   [CONTRACT]
           The name of the contract to upload selectors for
 
-Options:
+选项：
       --all
           Upload selectors for all contracts in the project
 

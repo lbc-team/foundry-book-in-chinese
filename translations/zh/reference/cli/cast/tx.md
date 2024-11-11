@@ -4,16 +4,16 @@
 
 ```bash
 $ cast tx --help
-Usage: cast tx [OPTIONS] <TX_HASH> [FIELD]
+用法： cast tx [OPTIONS] <TX_HASH> [FIELD]
 
-Arguments:
+参数：
   <TX_HASH>
           The transaction hash
 
   [FIELD]
           If specified, only get the given field of the transaction. If "raw", the RLP encoded transaction will be printed
 
-Options:
+选项：
       --raw
           Print the raw RLP encoded transaction
 

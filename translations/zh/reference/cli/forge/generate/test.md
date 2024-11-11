@@ -4,9 +4,9 @@
 
 ```bash
 $ forge generate test --help
-Usage: forge generate test --contract-name <CONTRACT_NAME>
+用法： forge generate test --contract-name <CONTRACT_NAME>
 
-Options:
+选项：
   -c, --contract-name <CONTRACT_NAME>  Contract name for test generation
   -h, --help                           Print help
 ```

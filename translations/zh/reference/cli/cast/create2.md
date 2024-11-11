@@ -4,9 +4,9 @@
 
 ```bash
 $ cast create2 --help
-Usage: cast create2 [OPTIONS]
+用法： cast create2 [OPTIONS]
 
-Options:
+选项：
   -s, --starts-with <HEX>      Prefix for the contract address
   -e, --ends-with <HEX>        Suffix for the contract address
   -m, --matching <HEX>         Sequence that the address has to match

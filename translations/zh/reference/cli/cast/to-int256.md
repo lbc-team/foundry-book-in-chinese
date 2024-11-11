@@ -4,11 +4,11 @@
 
 ```bash
 $ cast to-int256 --help
-Usage: cast to-int256 [VALUE]
+用法： cast to-int256 [VALUE]
 
-Arguments:
+参数：
   [VALUE]  The value to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

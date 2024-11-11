@@ -4,11 +4,11 @@
 
 ```bash
 $ cast max-uint --help
-Usage: cast max-uint [TYPE]
+用法： cast max-uint [TYPE]
 
-Arguments:
+参数：
   [TYPE]  The unsigned integer type to get the maximum value of [default: uint256]
 
-Options:
+选项：
   -h, --help  Print help
 ```

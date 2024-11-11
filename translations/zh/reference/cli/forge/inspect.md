@@ -4,9 +4,9 @@
 
 ```bash
 $ forge inspect --help
-Usage: forge inspect [OPTIONS] <CONTRACT> <FIELD>
+用法： forge inspect [OPTIONS] <CONTRACT> <FIELD>
 
-Arguments:
+参数：
   <CONTRACT>
           The identifier of the contract to inspect in the form `(<path>:)?<contractname>`
 
@@ -15,7 +15,7 @@ Arguments:
           
           [possible values: abi, bytecode, deployedBytecode, assembly, assemblyOptimized, methodIdentifiers, gasEstimates, storageLayout, devdoc, ir, irOptimized, metadata, userdoc, ewasm, errors, events]
 
-Options:
+选项：
       --pretty
           Pretty print the selected field, if supported
 

@@ -4,13 +4,13 @@
 
 ```bash
 $ forge geiger --help
-Usage: forge geiger [OPTIONS] [PATH]...
+用法： forge geiger [OPTIONS] [PATH]...
 
-Arguments:
+参数：
   [PATH]...
           Paths to files or directories to detect
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

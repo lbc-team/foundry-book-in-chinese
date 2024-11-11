@@ -7,11 +7,11 @@ $ cast to-utf8 --help
 ```
 
 ```txt
-Usage: cast to-utf8 [HEXDATA]
+用法： cast to-utf8 [HEXDATA]
 
-Arguments:
+参数：
   [HEXDATA]  The hex data to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

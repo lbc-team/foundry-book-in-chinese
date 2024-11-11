@@ -4,9 +4,9 @@
 
 ```bash
 $ cast rpc --help
-Usage: cast rpc [OPTIONS] <METHOD> [PARAMS]...
+用法： cast rpc [OPTIONS] <METHOD> [PARAMS]...
 
-Arguments:
+参数：
   <METHOD>
           RPC method name
 
@@ -17,7 +17,7 @@ Arguments:
           
           cast rpc eth_getBlockByNumber 0x123 false => {"method": "eth_getBlockByNumber", "params": ["0x123", false] ... }
 
-Options:
+选项：
   -w, --raw
           Send raw JSON parameters
           

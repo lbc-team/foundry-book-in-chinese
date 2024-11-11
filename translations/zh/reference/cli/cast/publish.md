@@ -4,13 +4,13 @@
 
 ```bash
 $ cast publish --help
-Usage: cast publish [OPTIONS] <RAW_TX>
+用法： cast publish [OPTIONS] <RAW_TX>
 
-Arguments:
+参数：
   <RAW_TX>
           The raw transaction
 
-Options:
+选项：
       --async
           Only print the transaction hash and exit immediately
           

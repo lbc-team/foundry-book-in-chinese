@@ -4,9 +4,9 @@
 
 ```bash
 $ cast wallet vanity --help
-Usage: cast wallet vanity [OPTIONS]
+用法： cast wallet vanity [OPTIONS]
 
-Options:
+选项：
       --starts-with <HEX>
           Prefix for the vanity address
 

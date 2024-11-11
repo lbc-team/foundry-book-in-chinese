@@ -4,9 +4,9 @@
 
 ```bash
 $ cast block-number --help
-Usage: cast block-number [OPTIONS]
+用法： cast block-number [OPTIONS]
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

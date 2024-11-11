@@ -4,13 +4,13 @@
 
 ```bash
 $ forge fmt --help
-Usage: forge fmt [OPTIONS] [PATH]...
+用法： forge fmt [OPTIONS] [PATH]...
 
-Arguments:
+参数：
   [PATH]...
           Path to the file, directory or '-' to read from stdin
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

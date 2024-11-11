@@ -4,9 +4,9 @@
 
 ```bash
 $ cast wallet sign --help
-Usage: cast wallet sign [OPTIONS] <MESSAGE>
+用法： cast wallet sign [OPTIONS] <MESSAGE>
 
-Arguments:
+参数：
   <MESSAGE>
           The message or typed data to sign.
           
@@ -15,7 +15,7 @@ Arguments:
           Typed data can be provided as a json string or a file name. Use --data flag to denote the message is a string of typed data. Use --data --from-file to denote the message is a file name containing
           typed data. The data will be combined and hashed using the EIP712 specification before signing. The data should be formatted as JSON.
 
-Options:
+选项：
       --data
           If provided, the message will be treated as typed data
 

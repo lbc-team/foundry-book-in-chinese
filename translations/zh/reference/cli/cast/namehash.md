@@ -4,11 +4,11 @@
 
 ```bash
 $ cast namehash --help
-Usage: cast namehash [NAME]
+用法： cast namehash [NAME]
 
-Arguments:
+参数：
   [NAME]  
 
-Options:
+选项：
   -h, --help  Print help
 ```

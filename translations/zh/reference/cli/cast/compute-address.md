@@ -4,13 +4,13 @@
 
 ```bash
 $ cast compute-address --help
-Usage: cast compute-address [OPTIONS] [ADDRESS]
+用法： cast compute-address [OPTIONS] [ADDRESS]
 
-Arguments:
+参数：
   [ADDRESS]
           The deployer address
 
-Options:
+选项：
       --nonce <NONCE>
           The nonce of the deployer address
 

@@ -4,11 +4,11 @@
 
 ```bash
 $ cast format-bytes32-string --help
-Usage: cast format-bytes32-string [STRING]
+用法： cast format-bytes32-string [STRING]
 
-Arguments:
+参数：
   [STRING]  The string to format
 
-Options:
+选项：
   -h, --help  Print help
 ```

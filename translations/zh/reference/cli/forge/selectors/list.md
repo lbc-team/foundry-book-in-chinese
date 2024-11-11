@@ -4,13 +4,13 @@
 
 ```bash
 $ forge selectors list --help
-Usage: forge selectors list [OPTIONS] [CONTRACT]
+用法： forge selectors list [OPTIONS] [CONTRACT]
 
-Arguments:
+参数：
   [CONTRACT]
           The name of the contract to list selectors for.
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

@@ -4,15 +4,15 @@
 
 ```bash
 $ cast base-fee --help
-Usage: cast base-fee [OPTIONS] [BLOCK]
+用法： cast base-fee [OPTIONS] [BLOCK]
 
-Arguments:
+参数：
   [BLOCK]
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

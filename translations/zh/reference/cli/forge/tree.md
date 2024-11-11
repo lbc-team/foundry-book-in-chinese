@@ -4,9 +4,9 @@
 
 ```bash
 $ forge tree --help
-Usage: forge tree [OPTIONS]
+用法： forge tree [OPTIONS]
 
-Options:
+选项：
       --no-dedupe
           Do not de-duplicate (repeats all shared dependencies)
 

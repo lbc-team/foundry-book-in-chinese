@@ -4,16 +4,16 @@
 
 ```bash
 $ cast calldata-decode --help
-Usage: cast calldata-decode <SIG> <CALLDATA>
+用法： cast calldata-decode <SIG> <CALLDATA>
 
-Arguments:
+参数：
   <SIG>
           The function signature in the format `<name>(<in-types>)(<out-types>)`
 
   <CALLDATA>
           The ABI-encoded calldata
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 ```

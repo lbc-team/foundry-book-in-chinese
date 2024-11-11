@@ -4,9 +4,9 @@
 
 ```bash
 $ forge remappings --help
-Usage: forge remappings [OPTIONS]
+用法： forge remappings [OPTIONS]
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

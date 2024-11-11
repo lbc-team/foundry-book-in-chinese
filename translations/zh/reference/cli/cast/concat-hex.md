@@ -4,11 +4,11 @@
 
 ```bash
 $ cast concat-hex --help
-Usage: cast concat-hex [DATA]...
+用法： cast concat-hex [DATA]...
 
-Arguments:
+参数：
   [DATA]...  The data to concatenate
 
-Options:
+选项：
   -h, --help  Print help
 ```

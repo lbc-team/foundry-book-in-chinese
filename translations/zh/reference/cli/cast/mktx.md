@@ -7,13 +7,13 @@ $ cast mktx --help
 ```
 
 ```txt
-Usage: cast mktx [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
+用法： cast mktx [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
 
 Commands:
   --create  Use to deploy raw contract bytecode
   help      Print this message or the help of the given subcommand(s)
 
-Arguments:
+参数：
   [TO]
           The destination of the transaction.
           
@@ -25,7 +25,7 @@ Arguments:
   [ARGS]...
           The arguments of the function to call
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

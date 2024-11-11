@@ -4,11 +4,11 @@
 
 ```bash
 $ cast min-int --help
-Usage: cast min-int [TYPE]
+用法： cast min-int [TYPE]
 
-Arguments:
+参数：
   [TYPE]  The integer type to get the minimum value of [default: int256]
 
-Options:
+选项：
   -h, --help  Print help
 ```

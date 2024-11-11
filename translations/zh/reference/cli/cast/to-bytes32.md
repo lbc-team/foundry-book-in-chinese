@@ -4,11 +4,11 @@
 
 ```bash
 $ cast to-bytes32 --help
-Usage: cast to-bytes32 [BYTES]
+用法： cast to-bytes32 [BYTES]
 
-Arguments:
+参数：
   [BYTES]  The hex data to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

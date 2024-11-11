@@ -4,13 +4,13 @@
 
 ```bash
 $ cast from-rlp --help
-Usage: cast from-rlp [VALUE]
+用法： cast from-rlp [VALUE]
 
-Arguments:
+参数：
   [VALUE]
           The value to convert
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 ```

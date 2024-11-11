@@ -4,9 +4,9 @@
 
 ```bash
 $ cast chain --help
-Usage: cast chain [OPTIONS]
+用法： cast chain [OPTIONS]
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

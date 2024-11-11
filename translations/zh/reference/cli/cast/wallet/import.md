@@ -4,13 +4,13 @@
 
 ```bash
 $ cast wallet import --help
-Usage: cast wallet import [OPTIONS] <ACCOUNT_NAME>
+用法： cast wallet import [OPTIONS] <ACCOUNT_NAME>
 
-Arguments:
+参数：
   <ACCOUNT_NAME>
           The name for the account in the keystore
 
-Options:
+选项：
   -k, --keystore-dir <KEYSTORE_DIR>
           If provided, keystore will be saved here instead of the default keystores directory (~/.foundry/keystores)
 

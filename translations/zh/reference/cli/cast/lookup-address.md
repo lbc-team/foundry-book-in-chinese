@@ -4,13 +4,13 @@
 
 ```bash
 $ cast lookup-address --help
-Usage: cast lookup-address [OPTIONS] [WHO]
+用法： cast lookup-address [OPTIONS] [WHO]
 
-Arguments:
+参数：
   [WHO]
           The account to perform the lookup for
 
-Options:
+选项：
   -v, --verify
           Perform a normal lookup to verify that the address is correct
 

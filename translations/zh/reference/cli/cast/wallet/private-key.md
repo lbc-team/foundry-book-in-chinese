@@ -7,9 +7,9 @@ $ cast wallet private-key --help
 ```
 
 ```txt
-Usage: cast wallet private-key [OPTIONS] [MNEMONIC] [MNEMONIC_INDEX_OR_DERIVATION_PATH]
+用法： cast wallet private-key [OPTIONS] [MNEMONIC] [MNEMONIC_INDEX_OR_DERIVATION_PATH]
 
-Arguments:
+参数：
   [MNEMONIC]
           If provided, the private key will be derived from the specified
           menomonic phrase
@@ -18,7 +18,7 @@ Arguments:
           If provided, the private key will be derived using the specified
           mnemonic index (if integer) or derivation path
 
-Options:
+选项：
   -v, --verbose
           Verbose mode, print the address and private key
 

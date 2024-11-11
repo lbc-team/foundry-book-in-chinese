@@ -4,16 +4,16 @@
 
 ```bash
 $ cast logs --help
-Usage: cast logs [OPTIONS] [SIG_OR_TOPIC] [TOPICS_OR_ARGS]...
+用法： cast logs [OPTIONS] [SIG_OR_TOPIC] [TOPICS_OR_ARGS]...
 
-Arguments:
+参数：
   [SIG_OR_TOPIC]
           The signature of the event to filter logs by which will be converted to the first topic or a topic to filter on
 
   [TOPICS_OR_ARGS]...
           If used with a signature, the indexed fields of the event to filter by. Otherwise, the remaining topics of the filter
 
-Options:
+选项：
       --from-block <FROM_BLOCK>
           The block height to start query at.
           

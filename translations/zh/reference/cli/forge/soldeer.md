@@ -7,7 +7,7 @@ $ forge soldeer --help
 ```
 
 ```txt
-Usage: Native Solidity Package Manager, `run forge soldeer [COMMAND] --help` for more details
+用法： Native Solidity Package Manager, `run forge soldeer [COMMAND] --help` for more details
 
 Commands:
   init       Convert a Foundry project to use Soldeer
@@ -19,6 +19,6 @@ Commands:
   version    Display the version of Soldeer
   help       Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -h, --help  Print help
 ```

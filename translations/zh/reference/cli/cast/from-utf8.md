@@ -4,11 +4,11 @@
 
 ```bash
 $ cast from-utf8 --help
-Usage: cast from-utf8 [TEXT]
+用法： cast from-utf8 [TEXT]
 
-Arguments:
+参数：
   [TEXT]  The text to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

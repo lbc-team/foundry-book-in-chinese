@@ -4,11 +4,11 @@
 
 ```bash
 $ cast parse-bytes32-string --help
-Usage: cast parse-bytes32-string [BYTES]
+用法： cast parse-bytes32-string [BYTES]
 
-Arguments:
+参数：
   [BYTES]  The string to parse
 
-Options:
+选项：
   -h, --help  Print help
 ```

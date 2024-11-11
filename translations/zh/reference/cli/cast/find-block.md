@@ -4,13 +4,13 @@
 
 ```bash
 $ cast find-block --help
-Usage: cast find-block [OPTIONS] <TIMESTAMP>
+用法： cast find-block [OPTIONS] <TIMESTAMP>
 
-Arguments:
+参数：
   <TIMESTAMP>
           The UNIX timestamp to search for, in seconds
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

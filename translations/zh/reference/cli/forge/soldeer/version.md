@@ -7,7 +7,7 @@ $ forge soldeer version --help
 ```
 
 ```txt
-Usage: forge soldeer version
+用法： forge soldeer version
 
 选项:
   -h, --help  Print help

@@ -4,15 +4,15 @@
 
 ```bash
 $ forge init --help
-Usage: forge init [OPTIONS] [PATH]
+用法： forge init [OPTIONS] [PATH]
 
-Arguments:
+参数：
   [PATH]
           The root directory of the new project
           
           [default: .]
 
-Options:
+选项：
   -t, --template <TEMPLATE>
           The template to start from
 

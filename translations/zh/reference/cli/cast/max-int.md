@@ -4,11 +4,11 @@
 
 ```bash
 $ cast max-int --help
-Usage: cast max-int [TYPE]
+用法： cast max-int [TYPE]
 
-Arguments:
+参数：
   [TYPE]  The integer type to get the maximum value of [default: int256]
 
-Options:
+选项：
   -h, --help  Print help
 ```

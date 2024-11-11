@@ -4,9 +4,9 @@
 
 ```bash
 $ forge clean --help
-Usage: forge clean [OPTIONS]
+用法： forge clean [OPTIONS]
 
-Options:
+选项：
       --root <PATH>
           The project's root path.
           

@@ -4,9 +4,9 @@
 
 ```bash
 $ forge snapshot --help
-Usage: forge snapshot [OPTIONS]
+用法： forge snapshot [OPTIONS]
 
-Options:
+选项：
       --diff [<SNAPSHOT_FILE>]
           Output a diff against a pre-existing snapshot.
           

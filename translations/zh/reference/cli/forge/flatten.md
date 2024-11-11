@@ -4,13 +4,13 @@
 
 ```bash
 $ forge flatten --help
-Usage: forge flatten [OPTIONS] <PATH>
+用法： forge flatten [OPTIONS] <PATH>
 
-Arguments:
+参数：
   <PATH>
           The path to the contract to flatten
 
-Options:
+选项：
   -o, --output <PATH>
           The path to output the flattened contract.
           

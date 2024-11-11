@@ -4,11 +4,11 @@
 
 ```bash
 $ forge completions --help
-Usage: forge completions <SHELL>
+用法： forge completions <SHELL>
 
-Arguments:
+参数：
   <SHELL>  [possible values: bash, elvish, fish, powershell, zsh]
 
-Options:
+选项：
   -h, --help  Print help
 ```

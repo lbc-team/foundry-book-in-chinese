@@ -4,9 +4,9 @@
 
 ```bash
 $ cast client --help
-Usage: cast client [OPTIONS]
+用法： cast client [OPTIONS]
 
-Options:
+选项：
   -r, --rpc-url <URL>
           The RPC endpoint
           

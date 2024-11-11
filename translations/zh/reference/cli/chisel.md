@@ -4,7 +4,7 @@
 
 ```bash
 $ chisel --help
-Usage: chisel [OPTIONS] [COMMAND]
+用法： chisel [OPTIONS] [COMMAND]
 
 Commands:
   list         List all cached sessions
@@ -13,7 +13,7 @@ Commands:
   clear-cache  Clear all cached chisel sessions from the cache directory
   help         Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

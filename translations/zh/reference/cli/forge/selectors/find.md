@@ -7,13 +7,13 @@ $ forge selectors find --help
 ```
 
 ```txt
-Usage: forge selectors find [OPTIONS] <SELECTOR>
+用法： forge selectors find [OPTIONS] <SELECTOR>
 
-Arguments:
+参数：
   <SELECTOR>
           The selector to search for (with or without 0x prefix)
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

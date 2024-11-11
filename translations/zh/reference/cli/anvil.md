@@ -4,14 +4,14 @@
 
 ```bash
 $ anvil --help
-Usage: anvil [OPTIONS] [COMMAND]
+用法： anvil [OPTIONS] [COMMAND]
 
 Commands:
   completions        Generate shell completions script [aliases: com]
   generate-fig-spec  Generate Fig autocompletion spec [aliases: fig]
   help               Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -a, --accounts <NUM>
           Number of dev accounts to generate and configure
           

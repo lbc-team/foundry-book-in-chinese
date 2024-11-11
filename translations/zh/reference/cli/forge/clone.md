@@ -7,9 +7,9 @@ $ forge clone --help
 ```
 
 ```txt
-Usage: forge clone [OPTIONS] <ADDRESS> [PATH]
+用法： forge clone [OPTIONS] <ADDRESS> [PATH]
 
-Arguments:
+参数：
   <ADDRESS>
           The contract address to clone
 
@@ -18,7 +18,7 @@ Arguments:
           
           [default: .]
 
-Options:
+选项：
       --no-remappings-txt
           Do not generate the remappings.txt file. Instead, keep the remappings
           in the configuration

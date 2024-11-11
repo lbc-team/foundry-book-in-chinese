@@ -4,9 +4,9 @@
 
 ```bash
 $ forge test --help
-Usage: forge test [OPTIONS]
+用法： forge test [OPTIONS]
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

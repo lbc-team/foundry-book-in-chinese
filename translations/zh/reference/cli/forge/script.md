@@ -4,9 +4,9 @@
 
 ```bash
 $ forge script --help
-Usage: forge script [OPTIONS] <PATH> [ARGS]...
+用法： forge script [OPTIONS] <PATH> [ARGS]...
 
-Arguments:
+参数：
   <PATH>
           The contract you want to run. Either the file path or contract name.
           
@@ -15,7 +15,7 @@ Arguments:
   [ARGS]...
           Arguments to pass to the script function
 
-Options:
+选项：
       --target-contract <CONTRACT_NAME>
           The name of the contract you want to run
           

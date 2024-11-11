@@ -4,13 +4,13 @@
 
 ```bash
 $ forge create --help
-Usage: forge create [OPTIONS] <CONTRACT>
+用法： forge create [OPTIONS] <CONTRACT>
 
-Arguments:
+参数：
   <CONTRACT>
           The contract identifier in the form `<path>:<contractname>`
 
-Options:
+选项：
       --constructor-args <ARGS>...
           The constructor arguments
 

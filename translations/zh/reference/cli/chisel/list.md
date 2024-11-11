@@ -4,8 +4,8 @@
 
 ```bash
 $ chisel list --help
-Usage: chisel list
+用法： chisel list
 
-Options:
+选项：
   -h, --help  Print help
 ```

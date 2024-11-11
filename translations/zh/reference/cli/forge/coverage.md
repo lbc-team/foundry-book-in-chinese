@@ -4,9 +4,9 @@
 
 ```bash
 $ forge coverage --help
-Usage: forge coverage [OPTIONS]
+用法： forge coverage [OPTIONS]
 
-Options:
+选项：
       --report <REPORT>
           The report type to use for coverage.
           

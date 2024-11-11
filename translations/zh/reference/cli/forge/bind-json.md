@@ -7,13 +7,13 @@ $ forge bind-json --help
 ```
 
 ```txt
-Usage: forge bind-json [OPTIONS] [PATH]
+用法： forge bind-json [OPTIONS] [PATH]
 
-Arguments:
+参数：
   [PATH]
           The path to write bindings to
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

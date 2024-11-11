@@ -4,16 +4,16 @@
 
 ```bash
 $ cast receipt --help
-Usage: cast receipt [OPTIONS] <TX_HASH> [FIELD]
+用法： cast receipt [OPTIONS] <TX_HASH> [FIELD]
 
-Arguments:
+参数：
   <TX_HASH>
           The transaction hash
 
   [FIELD]
           If specified, only get the given field of the transaction
 
-Options:
+选项：
       --confirmations <CONFIRMATIONS>
           The number of confirmations until the receipt is fetched
           

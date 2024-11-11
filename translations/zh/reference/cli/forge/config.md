@@ -4,9 +4,9 @@
 
 ```bash
 $ forge config --help
-Usage: forge config [OPTIONS]
+用法： forge config [OPTIONS]
 
-Options:
+选项：
       --basic
           Print only a basic set of the currently set config values
 

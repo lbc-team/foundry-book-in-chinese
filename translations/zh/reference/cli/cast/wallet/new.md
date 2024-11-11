@@ -4,13 +4,13 @@
 
 ```bash
 $ cast wallet new --help
-Usage: cast wallet new [OPTIONS] [PATH]
+用法： cast wallet new [OPTIONS] [PATH]
 
-Arguments:
+参数：
   [PATH]
           If provided, then keypair will be written to an encrypted JSON keystore
 
-Options:
+选项：
   -p, --password
           Triggers a hidden password prompt for the JSON keystore.
           

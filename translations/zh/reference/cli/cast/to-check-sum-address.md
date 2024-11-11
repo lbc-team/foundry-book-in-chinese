@@ -4,11 +4,11 @@
 
 ```bash
 $ cast to-check-sum-address --help
-Usage: cast to-check-sum-address [ADDRESS]
+用法： cast to-check-sum-address [ADDRESS]
 
-Arguments:
+参数：
   [ADDRESS]  The address to convert
 
-Options:
+选项：
   -h, --help  Print help
 ```

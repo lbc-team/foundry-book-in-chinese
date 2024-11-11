@@ -4,12 +4,12 @@
 
 ```bash
 $ cast sig --help
-Usage: cast sig [SIG] [OPTIMIZE]
+用法： cast sig [SIG] [OPTIMIZE]
 
-Arguments:
+参数：
   [SIG]       The function signature, e.g. transfer(address,uint256)
   [OPTIMIZE]  Optimize signature to contain provided amount of leading zeroes in selector
 
-Options:
+选项：
   -h, --help  Print help
 ```

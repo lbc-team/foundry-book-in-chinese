@@ -4,13 +4,13 @@
 
 ```bash
 $ forge cache --help
-Usage: forge cache <COMMAND>
+用法： forge cache <COMMAND>
 
 Commands:
   clean  Cleans cached data from the global foundry directory
   ls     Shows cached data from the global foundry directory
   help   Print this message or the help of the given subcommand(s)
 
-Options:
+选项：
   -h, --help  Print help
 ```

@@ -4,12 +4,12 @@
 
 ```bash
 $ cast to-dec --help
-Usage: cast to-dec [OPTIONS] [VALUE]
+用法： cast to-dec [OPTIONS] [VALUE]
 
-Arguments:
+参数：
   [VALUE]  The value to convert
 
-Options:
+选项：
   -i, --base-in <BASE_IN>  The input base
   -h, --help               Print help
 ```

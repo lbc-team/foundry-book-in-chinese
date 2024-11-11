@@ -4,13 +4,13 @@
 
 ```bash
 $ cast index --help
-Usage: cast index <KEY_TYPE> <KEY> <SLOT_NUMBER>
+用法： cast index <KEY_TYPE> <KEY> <SLOT_NUMBER>
 
-Arguments:
+参数：
   <KEY_TYPE>     The mapping key type
   <KEY>          The mapping key
   <SLOT_NUMBER>  The storage slot of the mapping
 
-Options:
+选项：
   -h, --help  Print help
 ```

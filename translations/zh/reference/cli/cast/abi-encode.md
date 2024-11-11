@@ -4,12 +4,12 @@
 
 ```bash
 $ cast abi-encode --help
-Usage: cast abi-encode <SIG> [ARGS]...
+用法： cast abi-encode <SIG> [ARGS]...
 
-Arguments:
+参数：
   <SIG>      The function signature
   [ARGS]...  The arguments of the function
 
-Options:
+选项：
   -h, --help  Print help
 ```

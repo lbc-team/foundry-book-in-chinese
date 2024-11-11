@@ -4,11 +4,11 @@
 
 ```bash
 $ cast 4byte-event --help
-Usage: cast 4byte-event [TOPIC_0]
+用法： cast 4byte-event [TOPIC_0]
 
-Arguments:
+参数：
   [TOPIC_0]  Topic 0
 
-Options:
+选项：
   -h, --help  Print help
 ```

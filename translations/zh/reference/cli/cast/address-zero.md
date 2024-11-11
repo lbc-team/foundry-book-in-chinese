@@ -4,8 +4,8 @@
 
 ```bash
 $ cast address-zero --help
-Usage: cast address-zero
+用法： cast address-zero
 
-Options:
+选项：
   -h, --help  Print help
 ```

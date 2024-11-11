@@ -4,13 +4,13 @@
 
 ```bash
 $ cast wallet address --help
-Usage: cast wallet address [OPTIONS] [PRIVATE_KEY]
+用法： cast wallet address [OPTIONS] [PRIVATE_KEY]
 
-Arguments:
+参数：
   [PRIVATE_KEY]
           If provided, the address will be derived from the specified private key
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 

@@ -4,13 +4,13 @@
 
 ```bash
 $ cast call --help
-Usage: cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
+用法： cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
 
 Commands:
   --create  ignores the address field and simulates creating a contract
   help      Print this message or the help of the given subcommand(s)
 
-Arguments:
+参数：
   [TO]
           The destination of the transaction
 
@@ -20,7 +20,7 @@ Arguments:
   [ARGS]...
           The arguments of the function to call
 
-Options:
+选项：
       --data <DATA>
           Data for the transaction
 

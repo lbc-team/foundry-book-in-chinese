@@ -4,9 +4,9 @@
 
 ```bash
 $ forge build --help
-Usage: forge build [OPTIONS]
+用法： forge build [OPTIONS]
 
-Options:
+选项：
   -h, --help
           Print help (see a summary with '-h')
 
