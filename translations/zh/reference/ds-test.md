@@ -5,7 +5,7 @@ Dappsys Test（简称DSTest）提供基本的日志和断言功能。它被包�
 要获得这些函数，请导入 `forge-std/Test.sol` 并在你的测试合约中继承 `Test`。
 
 ```solidity
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract ContractTest is Test {
     // ... tests ...

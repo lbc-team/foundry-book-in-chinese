@@ -9,31 +9,31 @@ Forge 标准库（简称 Forge Std）是一个有用的合约的集合，使编�
 - `Vm.sol`: 最新的 [作弊码接口](../../cheatcodes/#cheatcodes-interface)
 
     ```solidity
-    import "forge-std/Vm.sol";
+    import {Vm} from "forge-std/Vm.sol";
     ```
 
 - [`console.sol`](./console-log.md) 和 `console2.sol`: Hardhat 样式的日志功能
 
     ```solidity
-    import "forge-std/console.sol";
+    import {console} from "forge-std/console.sol";
     ```
 
     **注意：** `console2.sol` 包含 `console.sol` 的补丁，允许Forge 解码对控制台的调用追踪，但它与 Hardhat 不兼容。
 
     ```solidity
-    import "forge-std/console2.sol";
+    import {console2} from "forge-std/console2.sol";
     ```
 
 - `Script.sol`: 用于 [Solidity scripting](../../tutorials/solidity-scripting.md) 的基础工具类。
 
     ```solidity
-    import "forge-std/Script.sol";
+    import {Script} from "forge-std/Script.sol";
     ```
 
 - `Test.sol`: 完整的 Forge Std 体验 (更多细节 [如下](#forge-stds-test))
 
     ```solidity
-    import "forge-std/Test.sol";
+    import {Test} from "forge-std/Test.sol";
     ```
 
 ### Forge Std's `Test`
@@ -43,7 +43,7 @@ Forge 标准库（简称 Forge Std）是一个有用的合约的集合，使编�
 只需导入 `Test.sol` 并在你的测试合约中继承 `Test`。
 
 ```solidity
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 
 contract ContractTest is Test { ...
 ```

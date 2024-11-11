@@ -1,9 +1,10 @@
 ## Console Logging
 
 - 与 Hardhat 的控制台功能类似。
-- 你可以在调用和事务中使用它。它可以与视图函数一起使用，但不能在纯函数中使用。
+- 你可以在调用和事务中使用它。它也可以与视图函数和纯函数中使用。
 - 无论调用或交易失败还是成功，它总是有效的。
-- 要使用它，你需要导入 forge-std/console.sol。
+- 要使用它，你需要导入：
+    - `import {console} from "forge-std/console.sol";`
 - 你可以用以下类型的任何顺序的最多 4 个参数调用 console.log：
     - `uint`
     - `string`

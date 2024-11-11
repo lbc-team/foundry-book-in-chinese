@@ -1,5 +1,9 @@
 ## `changePrank`
 
+### 状态
+
+`changePrank` 已废弃.
+
 ### 签名
 
 ```solidity

@@ -3,16 +3,26 @@
 ### 签名
 
 ```solidity
-function assertApproxEqRel(uint256 a, uint256 b, uint256 maxPercentDelta) internal virtual;
+function assertApproxEqRel(uint256 left, uint256 right, uint256 maxPercentDelta) internal;
 ```
 
 ```solidity
-function assertApproxEqRel(uint256 a, uint256 b, uint256 maxPercentDelta, string memory err) internal virtual;
+function assertApproxEqRel(uint256 left, uint256 right, uint256 maxPercentDelta, string memory err) internal;
+```
+
+```solidity
+function assertApproxEqRel(int256 left, int256 right, uint256 maxPercentDelta) internal;
+```
+
+```solidity
+function assertApproxEqRel(int256 left, int256 right, uint256 maxPercentDelta, string memory err) internal;
 ```
 
 ### 描述
 
-断言 `a` 近似等于 `b`，delta 为百分比，其中 `1e18` 为100%。
+断言 `left` 与 `right` 在百分比上大致相等，`1e18` 表示 100%。
+
+可选地在回退字符串中包含错误消息。
 
 ### 例子
 
@@ -33,3 +43,8 @@ Logs:
    Max % Delta: 0.400000000000000000
        % Delta: 0.500000000000000000
 ```
+
+### 参见
+
+- [`assertApproxEqRelDecimal`](./assertApproxEqRelDecimal.md)
+- [`assertApproxEqAbs`](./assertApproxEqAbs.md)
