@@ -248,6 +248,23 @@ Equivalent to `forge test --match-path <PATH_PATTERN>`
 Only runs test methods on files not matching the path.
 Equivalent to `forge test --no-match-path <PATH_PATTERN_INVERSE>`
 
+##### `threads`
+
+- Type: integer
+- Default: none
+- Environment: `FOUNDRY_THREADS`
+
+Number of threads to use.
+Not set or zero specifies the number of logical cores.
+
+##### `show_progress`
+
+- Type: boolean
+- Default: false
+- Environment: `FOUNDRY_SHOW_PROGRESS`
+
+Whether to show test execution progress.
+
 ##### `block_gas_limit`
 
 - Type: integer
@@ -300,6 +317,14 @@ optimism = "https://optimism.alchemyapi.io/v2/..."
 mainnet = "${RPC_MAINNET}"
 ```
 
+##### `prompt_timeout`
+
+- Type: integer
+- Default: 120
+- Environment: `FOUNDRY_PROMPT_TIMEOUT`
+
+The number of seconds to wait before `vm.prompt` reverts with a timeout.
+
 ### Fuzz
 
 Configuration values for `[fuzz]` section.
@@ -335,7 +360,7 @@ Optional seed for the fuzzing RNG algorithm.
 - Default: 40
 - Environment: `FOUNDRY_FUZZ_DICTIONARY_WEIGHT`
 
-The weight of the dictionary.
+The weight of the dictionary. A higher dictionary weight will bias the fuzz inputs towards "interesting" values, e.g. boundary values like `type(uint256).max` or contract addresses from your environment.
 
 ##### `include_storage`
 
@@ -352,6 +377,15 @@ The flag indicating whether to include values from storage.
 - Environment: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
 
 The flag indicating whether to include push bytes values.
+
+##### `show_logs`
+
+- Type: boolean
+- Default: false
+- Environment: `FOUNDRY_FUZZ_SHOW_LOGS`
+
+The flag indicates whether to display console logs in fuzz tests or not. Note that in order to enable displaying console logs, you'll need to set `show_logs = true` and then use `forge test -vv` or set `verbosity >= 2`.
+
 
 ### Invariant
 
@@ -387,7 +421,7 @@ The number of runs that must execute for each invariant test group. See also [fu
 ##### `depth`
 
 - Type: integer
-- Default: 15
+- Default: 500
 - Environment: `FOUNDRY_INVARIANT_DEPTH`
 
 The number of calls executed to attempt to break invariants in one run.
@@ -431,3 +465,11 @@ The flag indicating whether to include values from storage. See also [fuzz.inclu
 - Environment: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
 
 The flag indicating whether to include push bytes values. See also [fuzz.include_push_bytes](#include_push_bytes)
+
+##### `shrink_run_limit`
+
+- Type: integer
+- Default: 5000
+- Environment: `FOUNDRY_INVARIANT_SHRINK_RUN_LIMIT`
+
+The maximum number of attempts to shrink a failed the sequence. Shrink process is disabled if set to 0.

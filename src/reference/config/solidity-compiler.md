@@ -29,13 +29,13 @@ A remapping _remaps_ Solidity imports to different directories. For example, the
 with an import like
 
 ```solidity
-import "@openzeppelin/contracts/utils/Context.sol";
+import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 ```
 
 becomes
 
 ```solidity
-import "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Context.sol";
+import {Context} from "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Context.sol";
 ```
 
 ##### `auto_detect_remappings`
@@ -106,6 +106,21 @@ If enabled, Foundry will not attempt to download any missing solc versions.
 
 If both `offline` and `auto-detect-solc` are set to `true`, the required version(s) of solc will be auto detected but any missing versions will _not_ be installed.
 
+##### `ignored_warnings_from`
+
+- Type: array of strings (file paths)
+- Default: none
+- Environment: `FOUNDRY_IGNORED_WARNINGS_FROM` OR `DAPP_IGNORED_WARNINGS_FROM`
+
+An array of file paths from which warnings should be ignored during the compulation process. This is useful when you have a specific
+directories of files that produce known warnings and you wish to suppress these warnings without affecting others.
+
+Each entry in the array should be a path to a directory or a specific file. For Example:
+
+`ignored_warnings_from = ["path/to/warnings/file1.sol", "path/to/warnings/file2.sol"]`
+
+This configuration will cause the compiler to ignore any warnings that originate from the specified paths.
+
 ##### `ignored_error_codes`
 
 - Type: array of integers/strings
@@ -129,6 +144,10 @@ Valid values are:
 - `unnamed-return`: 6321
 - `unreachable`: 5740
 - `pragma-solidity`: 3420
+- `constructor-visibility`: 2462
+- `init-code-size`: 3860
+- `transient-storage`: 2394
+- `too-many-warnings`: 4591
 
 ##### `deny_warnings`
 
@@ -141,7 +160,7 @@ If enabled, Foundry will treat Solidity compiler warnings as errors, stopping ar
 ##### `evm_version`
 
 - Type: string
-- Default: london
+- Default: paris
 - Environment: `FOUNDRY_EVM_VERSION` or `DAPP_EVM_VERSION`
 
 The EVM version to use during tests. The value **must** be an EVM hardfork name, such as `london`, `byzantium`, etc.
@@ -236,7 +255,9 @@ Whether or not to enable the Solidity optimizer.
 - Default: 200
 - Environment: `FOUNDRY_OPTIMIZER_RUNS` or `DAPP_OPTIMIZER_RUNS`
 
-The amount of optimizer runs to perform.
+The number of runs specifies roughly how often each opcode of the deployed code will be executed across the life-time of the contract. This means it is a trade-off parameter between code size (deploy cost) and code execution cost (cost after deployment). A `optimizer_runs` parameter of `1` will produce short but expensive code. In contrast, a larger `optimizer_runs` parameter will produce longer but more gas efficient code. The maximum value of the parameter is `2**32-1`.
+
+A common misconception is that this parameter specifies the number of iterations of the optimizer. This is not true: The optimizer will always run as many times as it can still improve the code.
 
 ##### `via_ir`
 
@@ -246,17 +267,24 @@ The amount of optimizer runs to perform.
 
 If set to true, changes compilation pipeline to go through the new IR optimizer.
 
+##### `use_literal_content`
+
+- Type: boolean
+- Default: false
+
+If set to true, changes compilation to only use literal content and not URLs.
+
 ##### `[optimizer_details]`
 
 The optimizer details section is used to tweak how the Solidity optimizer behaves. There are several configurable values in this section (each of them are booleans):
 
 - `peephole`
 - `inliner`
-- `jumpdest_remover`
-- `order_literals`
+- `jumpdestRemover`
+- `orderLiterals`
 - `deduplicate`
 - `cse`
-- `constant_optimizer`
+- `constantOptimizer`
 - `yul`
 
 Refer to the Solidity [compiler input description](https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description) for the default values.

@@ -248,6 +248,23 @@ gas_limit = "18446744073709551615" # u64::MAX
 只在与路径不匹配的文件运行测试方法。
 等同于 `forge test --no-match-path <PATH_PATTERN_INVERSE>`
 
+##### `threads`
+
+- 类型：整数
+- 默认值：无
+- 环境变量：`FOUNDRY_THREADS`
+
+要使用的线程数。
+未设置或为零表示逻辑核心的数量。
+
+##### `show_progress`
+
+- 类型：布尔值
+- 默认值：false
+- 环境变量：`FOUNDRY_SHOW_PROGRESS`
+
+是否显示测试执行进度。
+
 ##### `block_gas_limit`
 
 - 类型: integer
@@ -300,6 +317,16 @@ optimism = "https://optimism.alchemyapi.io/v2/..."
 mainnet = "${RPC_MAINNET}"
 ```
 
+##### `prompt_timeout`
+
+- 类型：整数
+- 默认值：120
+- 环境变量：`FOUNDRY_PROMPT_TIMEOUT`
+
+在 `vm.prompt` 由于超时而回退之前等待的秒数。
+
+字典的权重。更高的字典权重将使模糊输入偏向“有趣”的值，例如边界值如 `type(uint256).max` 或来自你环境的合约地址。
+
 ### Fuzz
 
 `[fuzz]` 部分的配置值。
@@ -335,7 +362,7 @@ mainnet = "${RPC_MAINNET}"
 - 默认值: 40
 - 环境变量: `FOUNDRY_FUZZ_DICTIONARY_WEIGHT`
 
-字典的权重。
+字典的权重。更高的字典权重将使模糊输入偏向“有趣”的值，例如边界值如 `type(uint256).max` 或来自你环境的合约地址。
 
 ##### `include_storage`
 
@@ -352,6 +379,14 @@ mainnet = "${RPC_MAINNET}"
 - 环境变量: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
 
 标志是否包含推送字节值。
+
+##### `show_logs`
+
+- 类型：布尔值
+- 默认值：false
+- 环境变量：`FOUNDRY_FUZZ_SHOW_LOGS`
+
+该标志指示是否在模糊测试中显示控制台日志。请注意，为了启用显示控制台日志，你需要设置 `show_logs = true`，然后使用 `forge test -vv` 或设置 `verbosity >= 2`。
 
 ### Invariant
 
@@ -387,7 +422,7 @@ mainnet = "${RPC_MAINNET}"
 ##### `depth`
 
 - 类型: integer
-- 默认值: 15
+- 默认值: 500
 - 环境变量: `FOUNDRY_INVARIANT_DEPTH`
 
 在一次运行中为尝试破坏不变量而执行的调用次数。
@@ -431,3 +466,11 @@ mainnet = "${RPC_MAINNET}"
 - 环境变量: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
 
 指示是否包含推送字节值的标志。 另见 [fuzz.include_push_bytes](#include_push_bytes)
+
+##### `shrink_run_limit`
+
+- 类型：整数
+- 默认值：5000
+- 环境变量：`FOUNDRY_INVARIANT_SHRINK_RUN_LIMIT`
+
+缩小失败序列的最大尝试次数。如果设置为 0，则禁用缩小过程。

@@ -9,6 +9,7 @@ Foundry 用户可以使用 `foundry.toml` 中的 ENV 变量和配置语句来指
 contract MyTest is Test {
   /// forge-config: default.fuzz.runs = 100
   /// forge-config: ci.fuzz.runs = 500
+  /// forge-config: default.fuzz.show-logs = true
   function test_SimpleFuzzTest(uint256 x) public {
     // --- snip ---
   }
@@ -25,6 +26,7 @@ contract MyTest is Test {
   /**
    * forge-config: default.fuzz.runs = 1024
    * forge-config: default.fuzz.max-test-rejects = 500
+   * forge-config: default.fuzz.show-logs = true
    */
   function test_SimpleFuzzTest(uint256 x) public {
     // --- snip ---
@@ -39,12 +41,14 @@ contract MyTest is Test {
 |-|-|-|
 |`runs`|整数|执行此特定测试用例的模糊运行次数。[`参考`][testing]|
 |`max-test-rejects`|整数|在整个测试中可能被拒绝的组合输入的最大数量。[`参考`][Max test rejects]|
+|`show-logs`|布尔值| 该标志指示是否在模糊测试中显示控制台日志。 当 `verbosity >= 2` 时有效。 [`参考`][Fuzz show logs]. |
 
 模糊配置示例
 ```solidity
 contract MyFuzzTest is Test {
   /// forge-config: default.fuzz.runs = 100
   /// forge-config: default.fuzz.max-test-rejects = 2
+  /// forge-config: default.fuzz.show-logs = true
   function test_InlineConfig(uint256 x) public {
     // --- snip ---
   }
@@ -81,6 +85,7 @@ contract MyInvariantTest is Test {
 [Testing Reference]: ./testing.md
 [testing]: ./testing.md#runs
 [Max test rejects]: ./testing.md#max_test_rejects
+[Fuzz show logs]: ./testing.md#show_logs
 [Invariant runs]: ./testing.md#runs-1
 [Invariant depth]: ./testing.md#depth
 [Fail on revert]: ./testing.md#fail_on_revert

@@ -29,13 +29,13 @@
 导入方式如
 
 ```solidity
-import "@openzeppelin/contracts/utils/Context.sol";
+import {Context} from "@openzeppelin/contracts/utils/Context.sol";
 ```
 
 变成了
 
 ```solidity
-import "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Context.sol";
+import {Context} from "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Context.sol";
 ```
 
 ##### `auto_detect_remappings`
@@ -106,6 +106,20 @@ import "node_modules/@openzeppelin/openzeppelin-contracts/contracts/utils/Contex
 
 如果 `offline` 和 `auto-detect-solc` 都被设置为 `true`，所需的 solc 版本将被自动检测，但任何缺失的版本将 _不会_ 被安装。
 
+##### `ignored_warnings_from`
+
+- 类型：字符串数组（文件路径）
+- 默认值：无
+- 环境变量：`FOUNDRY_IGNORED_WARNINGS_FROM` 或 `DAPP_IGNORED_WARNINGS_FROM`
+
+一个文件路径数组，在编译过程中应忽略这些路径中的警告。当你有特定的文件目录产生已知警告，并希望在不影响其他警告的情况下抑制这些警告时，这非常有用。
+
+数组中的每个条目应为一个目录或特定文件的路径。例如：
+
+`ignored_warnings_from = ["path/to/warnings/file1.sol", "path/to/warnings/file2.sol"]`
+
+此配置将导致编译器忽略来自指定路径的任何警告。
+
 ##### `ignored_error_codes`
 
 - 类型: array of integers/strings
@@ -129,11 +143,15 @@ Valid values are:
 - `unnamed-return`: 6321
 - `unreachable`: 5740
 - `pragma-solidity`: 3420
+- `constructor-visibility`: 2462
+- `init-code-size`: 3860
+- `transient-storage`: 2394
+- `too-many-warnings`: 4591
 
 ##### `evm_version`
 
 - 类型: string
-- 默认值: london
+- Default: paris
 - 环境变量: `FOUNDRY_EVM_VERSION` or `DAPP_EVM_VERSION`
 
 测试中使用的 EVM 版本。该值必须是 EVM 的硬分叉名称，如 `london`，`byzantium` 等等。
@@ -228,7 +246,9 @@ extra_output = [
 - 默认值: 200
 - 环境变量: `FOUNDRY_OPTIMIZER_RUNS` 或 `DAPP_OPTIMIZER_RUNS`
 
-要执行的优化器 runs 的数量。
+运行次数大致指定了在合约生命周期内，每个已部署代码的操作码将被执行的频率。这意味着它是在代码大小（部署成本）和代码执行成本（部署后的成本）之间的权衡参数。`optimizer_runs` 参数为 `1` 将生成短但昂贵的代码。相反，较大的 `optimizer_runs` 参数将生成更长但更节省 gas 的代码。该参数的最大值为 `2**32-1`。
+
+一个常见的误解是该参数指定了优化器的迭代次数。这并不正确：优化器将始终运行尽可能多的次数，只要它仍然能够改善代码。
 
 ##### `via_ir`
 
@@ -238,17 +258,24 @@ extra_output = [
 
 如果设置为 `true`，通过新的 IR 优化器改变编译管道.
 
+##### `use_literal_content`
+
+- 类型：布尔值
+- 默认值：false
+
+如果设置为 true，则编译将仅使用文字内容而不使用 URL。
+
 ##### `[optimizer_details]`
 
 优化器细节部分用于调整 Solidity 优化器的行为方式。在此部分有几个可配置的值（每个都是布尔值）。
 
 - `peephole`
 - `inliner`
-- `jumpdest_remover`
-- `order_literals`
+- `jumpdestRemover`
+- `orderLiterals`
 - `deduplicate`
 - `cse`
-- `constant_optimizer`
+- `constantOptimizer`
 - `yul`
 
 关于默认值，请参考 Solidity [编译器输入说明](https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-input-and-output-json-description)。
