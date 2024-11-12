@@ -1,228 +1,297 @@
 # anvil
 
-一个快速的本地以太坊开发节点 
+一个快速的本地以太坊开发节点
 
 ```bash
 $ anvil --help
-用法： anvil [OPTIONS] [COMMAND]
+```
 
-Commands:
-  completions        Generate shell completions script [aliases: com]
-  generate-fig-spec  Generate Fig autocompletion spec [aliases: fig]
-  help               Print this message or the help of the given subcommand(s)
+```txt
+用法: anvil [选项] [命令]
 
-选项：
+命令:
+  completions        生成 shell 完成脚本 [别名: com]
+  generate-fig-spec  生成 Fig 自动补全规范 [别名: fig]
+  help               打印此消息或给定子命令的帮助
+
+选项:
   -a, --accounts <NUM>
-          Number of dev accounts to generate and configure
+          生成和配置的开发账户数量
           
-          [default: 10]
+          [默认: 10]
 
   -b, --block-time <SECONDS>
-          Block time in seconds for interval mining
+          间隔挖矿的区块时间（秒）
           
-          [aliases: blockTime]
+          [别名: blockTime]
 
       --balance <NUM>
-          The balance of every dev account in Ether
+          每个开发账户的以太余额
           
-          [default: 10000]
+          [默认: 10000]
 
       --config-out <OUT_FILE>
-          Writes output of `anvil` as json to user-specified file
+          将 `anvil` 的输出以 json 格式写入用户指定的文件
 
       --derivation-path <DERIVATION_PATH>
-          Sets the derivation path of the child key to be derived.
+          设置要派生的子密钥的派生路径。
           
-          [default: m/44'/60'/0'/0/]
+          [默认: m/44'/60'/0'/0/]
 
       --dump-state <PATH>
-          Dump the state of chain on exit to the given file.
+          在退出时将链的状态和区块环境转储到给定文件。
           
-          If the value is a directory, the state will be written to `<VALUE>/state.json`.
+          如果值是一个目录，状态将写入
+          `<VALUE>/state.json`。
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助（使用 '-h' 查看摘要）
 
       --hardfork <HARDFORK>
-          The EVM hardfork to use.
+          要使用的 EVM 硬分叉。
           
-          Choose the hardfork by name, e.g. `shanghai`, `paris`, `london`, etc... [default: latest]
+          通过名称选择硬分叉，例如 `shanghai`、`paris`、`london`，
+          等等... [默认: latest]
 
       --init <PATH>
-          Initialize the genesis block with the given `genesis.json` file
+          使用给定的 `genesis.json` 文件初始化创世区块
 
       --ipc [<PATH>]
-          Launch an ipc server at the given path or default path = `/tmp/anvil.ipc`
+          在给定路径或默认路径 `/tmp/anvil.ipc` 启动 ipc 服务器
           
-          [aliases: ipcpath]
+          [别名: ipcpath]
 
       --load-state <PATH>
-          Initialize the chain from a previously saved state snapshot
+          从先前保存的状态快照初始化链
 
   -m, --mnemonic <MNEMONIC>
-          BIP39 mnemonic phrase used for generating accounts. Cannot be used if `mnemonic_random` or `mnemonic_seed` are used
+          用于生成账户的 BIP39 助记词短语。如果使用了
+          `mnemonic_random` 或 `mnemonic_seed`，则不能使用
+
+      --max-persisted-states <MAX_PERSISTED_STATES>
+          磁盘上要持久化的最大状态数量。
+          
+          请注意，`prune_history` 将覆盖 `max_persisted_states` 为 0。
+
+      --mixed-mining
+          [别名: mixed-mining]
 
       --mnemonic-random [<MNEMONIC_RANDOM>]
-          Automatically generates a BIP39 mnemonic phrase, and derives accounts from it. Cannot be used with other `mnemonic` options You can specify the number of words you want in the mnemonic. [default:
-          12]
+          自动生成 BIP39 助记词短语，并从中派生账户。
+          不能与其他 `mnemonic` 选项一起使用。你可以指定
+          助记词中要包含的单词数量。 [默认: 12]
 
       --mnemonic-seed-unsafe <MNEMONIC_SEED>
-          Generates a BIP39 mnemonic phrase from a given seed Cannot be used with other `mnemonic` options
+          从给定种子生成 BIP39 助记词短语。不能与其他
+          `mnemonic` 选项一起使用。
           
-          CAREFUL: this is NOT SAFE and should only be used for testing. Never use the private keys generated in production.
+          小心: 这不是安全的，只应在测试中使用。切勿在生产中使用生成的私钥。
 
       --no-mining
-          Disable auto and interval mining, and mine on demand instead
+          禁用自动和间隔挖矿，而是按需挖矿
           
-          [aliases: no-mine]
+          [别名: no-mine]
 
       --order <ORDER>
-          How transactions are sorted in the mempool
+          交易在内存池中的排序方式
           
-          [default: fees]
+          [默认: fees]
 
   -p, --port <NUM>
-          Port number to listen on
+          监听的端口号
           
-          [default: 8545]
+          [默认: 8545]
+
+      --preserve-historical-states
+          在转储状态时保留历史状态快照。
+          
+          这将保存链在特定区块哈希时的内存状态。
+          
+          当使用 `--load-state` / `--state` 时，这些历史状态将被加载到内存中，并有助于超出转储状态的区块的 RPC 调用。
 
       --prune-history [<PRUNE_HISTORY>]
-          Don't keep full chain history. If a number argument is specified, at most this number of states is kept in memory
+          不保留完整的链历史。如果指定了数字参数，最多保留此数量的状态在内存中。
+          
+          如果启用，则不会在磁盘上持久化任何状态，因此
+          `max_persisted_states` 将为 0。
 
   -s, --state-interval <SECONDS>
-          Interval in seconds at which the status is to be dumped to disk.
+          状态和区块环境转储到磁盘的间隔（秒）。
           
-          See --state and --dump-state
+          参见 --state 和 --dump-state
 
       --silent
-          Don't print anything on startup and don't print logs
+          启动时不打印任何内容，并且不打印日志
+
+      --slots-in-an-epoch <SLOTS_IN_AN_EPOCH>
+          每个纪元中的插槽数量
+          
+          [默认: 32]
 
       --state <PATH>
-          This is an alias for both --load-state and --dump-state.
+          这是 --load-state 和 --dump-state 的别名。
           
-          It initializes the chain with the state stored at the file, if it exists, and dumps the chain's state on exit.
+          如果文件存在，它将使用存储在文件中的状态和区块环境初始化链，并在退出时转储链的状态。
 
       --timestamp <NUM>
-          The timestamp of the genesis block
+          创世区块的时间戳
 
       --transaction-block-keeper <TRANSACTION_BLOCK_KEEPER>
-          Number of blocks with transactions to keep in memory
+          内存中要保留的交易区块数量
 
   -V, --version
-          Print version
+          打印版本
 
-Server options:
+服务器选项:
       --allow-origin <ALLOW_ORIGIN>
-          Set the CORS allow_origin
+          cors `allow_origin` 头部
           
-          [default: *]
+          [默认: *]
 
       --host <IP_ADDR>
-          The hosts the server will listen on
+          服务器将监听的主机
           
-          [env: ANVIL_IP_ADDR=]
-          [default: 127.0.0.1]
+          [环境: ANVIL_IP_ADDR=]
+          [默认: 127.0.0.1]
 
       --no-cors
-          Disable CORS
+          禁用 CORS
 
-Fork config:
+      --no-request-size-limit
+          禁用默认的请求体大小限制。撰写时默认限制为 2MB
+
+分叉配置:
       --compute-units-per-second <CUPS>
-          Sets the number of assumed available compute units per second for this provider
+          设置此提供者每秒假定可用的计算单位数量
           
-          default value: 330
+          默认值: 330
           
-          See --fork-url. See also, https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
+          另请参见 --fork-url 和
+          <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
 
   -f, --fork-url <URL>
-          Fetch state over a remote endpoint instead of starting from an empty state.
+          从远程端点获取状态，而不是从空状态开始。
           
-          If you want to fetch state from a specific block number, add a block number like `http://localhost:8545@1400000` or use the `--fork-block-number` argument.
+          如果你想从特定区块号获取状态，请添加区块号，例如 `http://localhost:8545@1400000` 或使用
+          `--fork-block-number` 参数。
           
-          [aliases: rpc-url]
+          [别名: rpc-url]
 
       --fork-block-number <BLOCK>
-          Fetch state from a specific block number over a remote endpoint.
+          从远程端点获取特定区块号的状态。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --fork-chain-id <CHAIN>
-          Specify chain id to skip fetching it from remote endpoint. This enables offline-start mode.
+          指定链 ID，以跳过从远程端点获取。启用离线启动模式。
           
-          You still must pass both `--fork-url` and `--fork-block-number`, and already have your required state cached on disk, anything missing locally would be fetched from the remote.
+          你仍然必须传递 `--fork-url` 和 `--fork-block-number`，并且已经在磁盘上缓存了所需的状态，任何本地缺失的内容将从远程获取。
 
       --fork-header <HEADERS>
-          Headers to use for the rpc client, e.g. "User-Agent: test-agent"
+          用于 rpc 客户端的头部，例如 "User-Agent: test-agent"
           
-          See --fork-url.
+          参见 --fork-url。
 
       --fork-retry-backoff <BACKOFF>
-          Initial retry backoff on encountering errors.
+          遇到错误时的初始重试退避。
           
-          See --fork-url.
+          参见 --fork-url。
+
+      --fork-transaction-hash <TRANSACTION>
+          从远程端点获取特定交易哈希的状态。
+          
+          参见 --fork-url。
 
       --no-rate-limit
-          Disables rate limiting for this node's provider.
+          禁用此节点提供者的速率限制。
           
-          default value: false
+          默认值: false
           
-          See --fork-url. See also, https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
+          另请参见 --fork-url 和
+          <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
           
-          [aliases: no-rpc-rate-limit]
+          [别名: no-rpc-rate-limit]
 
       --no-storage-caching
-          Explicitly disables the use of RPC caching.
+          明确禁用 RPC 缓存的使用。
           
-          All storage slots are read entirely from the endpoint.
+          所有存储插槽都完全从端点读取。
           
-          This flag overrides the project's configuration file.
+          此标志会覆盖项目的配置文件。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --retries <retries>
-          Number of retry requests for spurious networks (timed out requests)
+          对于虚假网络（超时请求）的重试请求数量
           
-          Default value 5
+          默认值 5
 
       --timeout <timeout>
-          Timeout in ms for requests sent to remote JSON-RPC server in forking mode.
+          在分叉模式下发送到远程 JSON-RPC 服务器的请求超时（毫秒）。
           
-          Default value 45000
+          默认值 45000
 
-Environment config:
+环境配置:
       --block-base-fee-per-gas <FEE>
-          The base fee in a block
+          区块中的基本费用
           
-          [aliases: base-fee]
+          [别名: base-fee]
 
       --chain-id <CHAIN_ID>
-          The chain ID
+          链 ID
 
       --code-size-limit <CODE_SIZE>
-          EIP-170: Contract code size limit in bytes. Useful to increase this because of tests. By default, it is 0x6000 (~25kb)
+          EIP-170: 合约代码大小限制（字节）。由于测试，增加此限制是有用的。要完全禁用，请使用
+          `--disable-code-size-limit`。默认值为 0x6000 (~25kb)
 
       --disable-block-gas-limit
-          Disable the `call.gas_limit <= block.gas_limit` constraint
+          禁用 `call.gas_limit <= block.gas_limit` 约束
+
+      --disable-code-size-limit
+          禁用 EIP-170: 合约代码大小限制
+
+      --disable-min-priority-fee
+          禁用强制最低建议优先费用
+          
+          [别名: no-priority-fee]
 
       --gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --gas-price <GAS_PRICE>
-          The gas price
+          gas 价格
 
-EVM options:
-      --auto-impersonate
-          Enable autoImpersonate on startup
+EVM 选项:
+      --alphanet
+          启用 Alphanet 功能
           
-          [aliases: auto-impersonate]
+          [别名: odyssey]
+
+      --auto-impersonate
+          启动时启用 autoImpersonate
+          
+          [别名: auto-impersonate]
+
+      --disable-console-log
+          禁用将 `console.log` 调用打印到 stdout
+          
+          [别名: no-console-log]
+
+      --disable-default-create2-deployer
+          禁用默认的 create2 部署者
+          
+          [别名: no-create2]
+
+      --memory-limit <MEMORY_LIMIT>
+          每次 EVM 执行的内存限制（字节）
 
       --optimism
-          Run an Optimism chain
+          运行 Optimism 链
           
-          [aliases: optimism]
+          [别名: optimism]
 
       --steps-tracing
-          Enable steps tracing used for debug calls returning geth-style traces
+          启用用于调试调用的步骤跟踪，返回 geth 风格的跟踪
           
-          [aliases: tracing]
+          [别名: tracing]
 ```
