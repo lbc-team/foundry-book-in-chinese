@@ -1,10 +1,13 @@
 # cast run
 
-在本地环境中运行已发布的事务并打印跟踪结果
+在本地环境中运行已发布的交易并打印跟踪
 
 ```bash
 $ cast run --help
-用法： cast run [OPTIONS] <TX_HASH>
+```
+
+```txt
+用法：cast run [OPTIONS] <TX_HASH>
 
 参数：
   <TX_HASH>
@@ -13,6 +16,9 @@ $ cast run --help
 选项：
   -d, --debug
           Opens the transaction in the debugger
+
+      --decode-internal
+          Whether to identify internal functions in traces
 
   -t, --trace-printer
           Print out opcode traces
@@ -36,38 +42,54 @@ $ cast run --help
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL (https://rpc.flashbots.net)
+          Use the Flashbots RPC URL with fast mode
+          (<https://rpc.flashbots.net/fast>).
+          
+          This shares the transaction privately with all registered builders.
+          
+          See:
+          <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
           JWT Secret for the RPC endpoint.
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be used to simulate a CL `engine_forkchoiceUpdated` call:
+          The JWT secret will be used to create a JWT for a RPC. For example,
+          the following can be used to simulate a CL `engine_forkchoiceUpdated`
+          call:
           
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2 '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc", "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
+          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
+          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
           
           [env: ETH_RPC_JWT_SECRET=]
 
   -e, --evm-version <EVM_VERSION>
-          The evm version to use.
+          The EVM version to use.
           
           Overrides the version specified in the config.
 
       --compute-units-per-second <CUPS>
-          Sets the number of assumed available compute units per second for this provider
+          Sets the number of assumed available compute units per second for this
+          provider
           
           default value: 330
           
-          See also, https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
+          See also,
+          https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
 
       --no-rate-limit
           Disables rate limiting for this node's provider.
           
           default value: false
           
-          See also, https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
+          See also,
+          https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second
           
           [aliases: no-rpc-rate-limit]
+
+      --alphanet
+          Enables Alphanet features
 
   -h, --help
           Print help (see a summary with '-h')

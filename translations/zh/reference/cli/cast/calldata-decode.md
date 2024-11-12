@@ -4,7 +4,10 @@
 
 ```bash
 $ cast calldata-decode --help
-用法： cast calldata-decode <SIG> <CALLDATA>
+```
+
+```txt
+用法：cast calldata-decode [OPTIONS] <SIG> <CALLDATA>
 
 参数：
   <SIG>
@@ -16,4 +19,8 @@ $ cast calldata-decode --help
 选项：
   -h, --help
           Print help (see a summary with '-h')
+
+Display options:
+  -j, --json
+          Print the decoded calldata as JSON
 ```

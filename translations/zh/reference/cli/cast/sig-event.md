@@ -1,10 +1,13 @@
-# cast sig-event
+# 生成事件签名
 
 从事件字符串生成事件签名
 
 ```bash
 $ cast sig-event --help
-用法： cast sig-event [EVENT_STRING]
+```
+
+```txt
+用法：cast sig-event [EVENT_STRING]
 
 参数：
   [EVENT_STRING]  The event string

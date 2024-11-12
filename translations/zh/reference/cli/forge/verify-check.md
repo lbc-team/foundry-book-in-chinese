@@ -1,10 +1,13 @@
 # forge verify-check
 
-检查 Etherscan 上的验证状态
+检查在 Etherscan 上的验证状态
 
 ```bash
 $ forge verify-check --help
-用法： forge verify-check [OPTIONS] <ID>
+```
+
+```txt
+用法：forge verify-check [OPTIONS] <ID>
 
 参数：
   <ID>
@@ -21,7 +24,7 @@ $ forge verify-check --help
           [default: 5]
 
       --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
+          Optional delay to apply in between verification attempts, in seconds
           
           [default: 5]
 
@@ -43,7 +46,7 @@ Verifier options:
           The contract verification provider to use
           
           [default: etherscan]
-          [possible values: etherscan, sourcify, blockscout]
+          [possible values: etherscan, sourcify, blockscout, oklink]
 
       --verifier-url <VERIFIER_URL>
           The verifier URL, if using a custom provider

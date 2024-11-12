@@ -4,7 +4,10 @@
 
 ```bash
 $ cast decode-transaction --help
-用法： cast decode-transaction [TX]
+```
+
+```txt
+用法：cast decode-transaction [TX]
 
 参数：
   [TX]  

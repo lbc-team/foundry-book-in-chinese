@@ -4,7 +4,10 @@
 
 ```bash
 $ cast abi-decode --help
-用法： cast abi-decode [OPTIONS] <SIG> <CALLDATA>
+```
+
+```txt
+用法：cast abi-decode [OPTIONS] <SIG> <CALLDATA>
 
 参数：
   <SIG>
@@ -20,4 +23,8 @@ $ cast abi-decode --help
 Decode input data instead of output data:
   -i, --input
           Whether to decode the input or output data
+
+Display options:
+  -j, --json
+          Print the decoded calldata as JSON
 ```

@@ -1,10 +1,13 @@
-# cast to-bytes32
+# 转换为-bytes32
 
-右移十六进制数据至 32 字节
+将十六进制数据右填充至 32 字节
 
 ```bash
 $ cast to-bytes32 --help
-用法： cast to-bytes32 [BYTES]
+```
+
+```txt
+用法：cast to-bytes32 [BYTES]
 
 参数：
   [BYTES]  The hex data to convert

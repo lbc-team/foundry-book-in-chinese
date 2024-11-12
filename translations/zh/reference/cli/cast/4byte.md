@@ -4,7 +4,10 @@
 
 ```bash
 $ cast 4byte --help
-用法： cast 4byte [SELECTOR]
+```
+
+```txt
+用法：cast 4byte [SELECTOR]
 
 参数：
   [SELECTOR]  The function selector

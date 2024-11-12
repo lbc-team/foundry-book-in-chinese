@@ -1,10 +1,13 @@
-# cast max-int
+# 转换最大整数
 
-打印 int 类型的最大值
+打印给定整数类型的最大值
 
 ```bash
 $ cast max-int --help
-用法： cast max-int [TYPE]
+```
+
+```txt
+用法：cast max-int [TYPE]
 
 参数：
   [TYPE]  The integer type to get the maximum value of [default: int256]

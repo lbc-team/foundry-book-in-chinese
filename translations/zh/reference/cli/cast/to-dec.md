@@ -1,10 +1,13 @@
-# cast to-dec
+# 转换为十进制
 
-将一个基数的数转换为十进制数
+将一个基数的数字转换为十进制
 
 ```bash
 $ cast to-dec --help
-用法： cast to-dec [OPTIONS] [VALUE]
+```
+
+```txt
+用法：cast to-dec [OPTIONS] [VALUE]
 
 参数：
   [VALUE]  The value to convert

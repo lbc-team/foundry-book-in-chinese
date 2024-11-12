@@ -4,7 +4,10 @@
 
 ```bash
 $ cast concat-hex --help
-用法： cast concat-hex [DATA]...
+```
+
+```txt
+用法：cast concat-hex [DATA]...
 
 参数：
   [DATA]...  The data to concatenate

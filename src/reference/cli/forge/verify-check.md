@@ -4,6 +4,9 @@ Check verification status on Etherscan
 
 ```bash
 $ forge verify-check --help
+```
+
+```txt
 Usage: forge verify-check [OPTIONS] <ID>
 
 Arguments:
@@ -21,7 +24,7 @@ Options:
           [default: 5]
 
       --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
+          Optional delay to apply in between verification attempts, in seconds
           
           [default: 5]
 
@@ -43,7 +46,7 @@ Verifier options:
           The contract verification provider to use
           
           [default: etherscan]
-          [possible values: etherscan, sourcify, blockscout]
+          [possible values: etherscan, sourcify, blockscout, oklink]
 
       --verifier-url <VERIFIER_URL>
           The verifier URL, if using a custom provider

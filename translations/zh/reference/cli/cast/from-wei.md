@@ -1,10 +1,13 @@
 # cast from-wei
 
-将 wei 转换成 ETH 数量。
+将 wei 转换为 ETH 数量。
 
 ```bash
 $ cast from-wei --help
-用法： cast from-wei [VALUE] [UNIT]
+```
+
+```txt
+用法：cast from-wei [VALUE] [UNIT]
 
 参数：
   [VALUE]

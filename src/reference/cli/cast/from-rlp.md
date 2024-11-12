@@ -1,16 +1,17 @@
 # cast from-rlp
 
-Decodes RLP encoded data.
+Decodes RLP hex-encoded data
 
 ```bash
 $ cast from-rlp --help
+```
+
+```txt
 Usage: cast from-rlp [VALUE]
 
 Arguments:
-  [VALUE]
-          The value to convert
+  [VALUE]  The RLP hex-encoded data
 
 Options:
-  -h, --help
-          Print help (see a summary with '-h')
+  -h, --help  Print help
 ```

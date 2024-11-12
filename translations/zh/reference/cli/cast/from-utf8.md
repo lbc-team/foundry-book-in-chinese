@@ -4,7 +4,10 @@
 
 ```bash
 $ cast from-utf8 --help
-用法： cast from-utf8 [TEXT]
+```
+
+```txt
+用法：cast from-utf8 [TEXT]
 
 参数：
   [TEXT]  The text to convert

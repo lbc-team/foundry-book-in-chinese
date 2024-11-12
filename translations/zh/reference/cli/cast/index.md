@@ -1,10 +1,13 @@
-# cast index
+# 计算索引
 
-为映射中的条目计算存储位置
+计算映射中某个条目的存储槽
 
 ```bash
 $ cast index --help
-用法： cast index <KEY_TYPE> <KEY> <SLOT_NUMBER>
+```
+
+```txt
+用法：cast index <KEY_TYPE> <KEY> <SLOT_NUMBER>
 
 参数：
   <KEY_TYPE>     The mapping key type

@@ -4,7 +4,10 @@
 
 ```bash
 $ cast format-bytes32-string --help
-用法： cast format-bytes32-string [STRING]
+```
+
+```txt
+用法：cast format-bytes32-string [STRING]
 
 参数：
   [STRING]  The string to format

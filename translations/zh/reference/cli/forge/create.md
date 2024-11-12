@@ -4,7 +4,10 @@
 
 ```bash
 $ forge create --help
-用法： forge create [OPTIONS] <CONTRACT>
+```
+
+```txt
+用法：forge create [OPTIONS] <CONTRACT>
 
 参数：
   <CONTRACT>
@@ -21,12 +24,19 @@ $ forge create --help
           Verify contract after creation
 
       --unlocked
-          Send via `eth_sendTransaction` using the `--from` argument or `$ETH_FROM` as sender
+          Send via `eth_sendTransaction` using the `--from` argument or
+          `$ETH_FROM` as sender
 
       --show-standard-json-input
           Prints the standard json compiler input if `--verify` is provided.
           
-          The standard json compiler input can be used to manually submit contract verification in the browser.
+          The standard json compiler input can be used to manually submit
+          contract verification in the browser.
+
+      --timeout <TIMEOUT>
+          Timeout to use for broadcasting transactions
+          
+          [env: ETH_TIMEOUT=]
 
   -h, --help
           Print help (see a summary with '-h')
@@ -42,6 +52,18 @@ Cache options:
 Build options:
       --no-cache
           Disable the cache
+
+      --eof
+          Use EOF-enabled solc binary. Enables via-ir and sets EVM version to
+          Prague. Requires Docker to be installed.
+          
+          Note that this is a temporary solution until the EOF support is merged
+          into the main solc release.
+
+      --skip <SKIP>...
+          Skip building files whose names contain the given filter.
+          
+          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
 
 Linker options:
       --libraries <LIBRARIES>
@@ -62,7 +84,8 @@ Compiler options:
       --use <SOLC_VERSION>
           Specify the solc version, or a path to a local solc, to build with.
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          Valid values are in the format `x.y.z`, `solc:x.y.z` or
+          `path/to/solc`.
 
       --offline
           Do not access the network.
@@ -72,24 +95,42 @@ Compiler options:
       --via-ir
           Use the Yul intermediate representation compilation pipeline
 
+      --no-metadata
+          Do not append any metadata to the bytecode.
+          
+          This is equivalent to setting `bytecode_hash` to `none` and
+          `cbor_metadata` to `false`.
+
       --silent
           Don't print anything on startup
+
+      --ast
+          Includes the AST as JSON in the compiler output
 
       --evm-version <VERSION>
           The target EVM version
 
-      --optimize
+      --optimize [<OPTIMIZE>]
           Activate the Solidity optimizer
+          
+          [possible values: true, false]
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          The number of runs specifies roughly how often each opcode of the
+          deployed code will be executed across the life-time of the contract.
+          This means it is a trade-off parameter between code size (deploy cost)
+          and code execution cost (cost after deployment). An `optimizer_runs`
+          parameter of `1` will produce short but expensive code. In contrast, a
+          larger `optimizer_runs` parameter will produce longer but more gas
+          efficient code
 
       --extra-output <SELECTOR>...
           Extra output to include in the contract's artifact.
           
           Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
           
-          For a full description, see https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description
+          For a full description, see
+          <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
           Extra output to write to separate files.
@@ -103,7 +144,8 @@ Project options:
       --revert-strings <REVERT>
           Revert string configuration.
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert strings) and "verboseDebug"
+          Possible values are "default", "strip" (remove), "debug"
+          (Solidity-generated revert strings) and "verboseDebug"
 
       --build-info
           Generate build info files
@@ -114,7 +156,8 @@ Project options:
       --root <PATH>
           The project's root path.
           
-          By default root of the Git repository, if in one, or the current working directory.
+          By default root of the Git repository, if in one, or the current
+          working directory.
 
   -C, --contracts <PATH>
           The contracts source directory
@@ -134,7 +177,8 @@ Project options:
       --hardhat
           Use the Hardhat-style project layout.
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          This is the same as using: `--contracts contracts --lib-paths
+          node_modules`.
           
           [aliases: hh]
 
@@ -148,7 +192,11 @@ Transaction options:
           [env: ETH_GAS_LIMIT=]
 
       --gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
+          Gas price for legacy transactions, or max fee per gas for EIP1559
+          transactions, either specified in wei, or as a string with a unit
+          type.
+          
+          Examples: 1ether, 10gwei, 0.01ether
           
           [env: ETH_GAS_PRICE=]
 
@@ -158,7 +206,8 @@ Transaction options:
           [env: ETH_PRIORITY_GAS_PRICE=]
 
       --value <VALUE>
-          Ether to send in the transaction, either specified in wei, or as a string with a unit type.
+          Ether to send in the transaction, either specified in wei, or as a
+          string with a unit type.
           
           Examples: 1ether, 10gwei, 0.01ether
 
@@ -170,6 +219,26 @@ Transaction options:
           
           This is automatically enabled for common networks without EIP1559.
 
+      --blob
+          Send a EIP-4844 blob transaction
+
+      --blob-gas-price <BLOB_PRICE>
+          Gas price for EIP-4844 blob transaction
+          
+          [env: ETH_BLOB_GAS_PRICE=]
+
+      --auth <AUTH>
+          EIP-7702 authorization list.
+          
+          Can be either a hex-encoded signed authorization or an address.
+
+      --access-list [<ACCESS_LIST>]
+          EIP-2930 access list.
+          
+          Accepts either a JSON-encoded access list or an empty value to create
+          the access list via an RPC call to `eth_createAccessList`. To retrieve
+          only the access list portion, use the `cast access-list` command.
+
 Ethereum options:
   -r, --rpc-url <URL>
           The RPC endpoint
@@ -177,15 +246,25 @@ Ethereum options:
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL (https://rpc.flashbots.net)
+          Use the Flashbots RPC URL with fast mode
+          (<https://rpc.flashbots.net/fast>).
+          
+          This shares the transaction privately with all registered builders.
+          
+          See:
+          <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
           JWT Secret for the RPC endpoint.
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be used to simulate a CL `engine_forkchoiceUpdated` call:
+          The JWT secret will be used to create a JWT for a RPC. For example,
+          the following can be used to simulate a CL `engine_forkchoiceUpdated`
+          call:
           
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2 '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc", "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
+          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
+          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
           
           [env: ETH_RPC_JWT_SECRET=]
 
@@ -235,7 +314,7 @@ Wallet options - raw:
           [default: 5]
 
       --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
+          Optional delay to apply in between verification attempts, in seconds
           
           [default: 5]
 
@@ -246,7 +325,8 @@ Wallet options - keystore:
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          Use a keystore from the default keystores folder
+          (~/.foundry/keystores) by its filename
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
@@ -269,7 +349,7 @@ Wallet options - hardware wallet:
   -t, --trezor
           Use a Trezor hardware wallet
 
-Wallet options - AWS KMS:
+Wallet options - remote:
       --aws
           Use AWS Key Management Service
 
@@ -278,7 +358,7 @@ Verifier options:
           The contract verification provider to use
           
           [default: etherscan]
-          [possible values: etherscan, sourcify, blockscout]
+          [possible values: etherscan, sourcify, blockscout, oklink]
 
       --verifier-url <VERIFIER_URL>
           The verifier URL, if using a custom provider

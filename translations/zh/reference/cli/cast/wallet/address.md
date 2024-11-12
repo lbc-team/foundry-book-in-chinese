@@ -1,14 +1,18 @@
-# cast wallet address
+# 转换钱包地址
 
-将密钥转换为地址
+将私钥转换为地址
 
 ```bash
 $ cast wallet address --help
-用法： cast wallet address [OPTIONS] [PRIVATE_KEY]
+```
+
+```txt
+用法：cast wallet address [OPTIONS] [PRIVATE_KEY]
 
 参数：
   [PRIVATE_KEY]
-          If provided, the address will be derived from the specified private key
+          If provided, the address will be derived from the specified private
+          key
 
 选项：
   -h, --help
@@ -51,7 +55,8 @@ Wallet options - keystore:
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          Use a keystore from the default keystores folder
+          (~/.foundry/keystores) by its filename
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
@@ -74,7 +79,7 @@ Wallet options - hardware wallet:
   -t, --trezor
           Use a Trezor hardware wallet
 
-Wallet options - AWS KMS:
+Wallet options - remote:
       --aws
           Use AWS Key Management Service
 ```

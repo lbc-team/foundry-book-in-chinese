@@ -1,10 +1,13 @@
-# cast min-int
+# 转换最小整数
 
-打印 int 类型的最小值
+打印给定整数类型的最小值
 
 ```bash
 $ cast min-int --help
-用法： cast min-int [TYPE]
+```
+
+```txt
+用法：cast min-int [TYPE]
 
 参数：
   [TYPE]  The integer type to get the minimum value of [default: int256]

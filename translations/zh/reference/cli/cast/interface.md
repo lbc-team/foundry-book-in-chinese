@@ -1,20 +1,26 @@
 # cast interface
 
-根据给定的 ABI 生成 Solidity 接口。
+从给定的 ABI 生成一个 Solidity 接口。
 
 ```bash
 $ cast interface --help
-用法： cast interface [OPTIONS] <PATH_OR_ADDRESS>
+```
+
+```txt
+用法：cast interface [OPTIONS] <CONTRACT>
 
 参数：
-  <PATH_OR_ADDRESS>
-          The contract address, or the path to an ABI file.
-          
-          If an address is specified, then the ABI is fetched from Etherscan.
+  <CONTRACT>
+          The target contract, which can be one of: - A file path to an ABI JSON
+          file. - A contract identifier in the form `<path>:<contractname>` or
+          just `<contractname>`. - An Ethereum address, for which the ABI will
+          be fetched from Etherscan
 
 选项：
   -n, --name <NAME>
-          The name to use for the generated interface
+          The name to use for the generated interface.
+          
+          Only relevant when retrieving the ABI from a file.
 
   -p, --pragma <VERSION>
           Solidity pragma version
@@ -27,7 +33,8 @@ $ cast interface --help
           If not specified, the interface will be output to stdout.
 
   -j, --json
-          If specified, the interface will be output as JSON rather than Solidity
+          If specified, the interface will be output as JSON rather than
+          Solidity
 
   -e, --etherscan-api-key <KEY>
           The Etherscan (or equivalent) API key

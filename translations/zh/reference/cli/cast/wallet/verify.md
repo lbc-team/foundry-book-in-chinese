@@ -1,10 +1,13 @@
 # cast wallet verify
 
-验证信息的签名
+验证消息的签名
 
 ```bash
 $ cast wallet verify --help
-用法： cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
+```
+
+```txt
+用法：cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
 
 参数：
   <MESSAGE>    The original message

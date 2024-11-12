@@ -1,10 +1,13 @@
 # forge update
 
-更新一个或多个依赖项
+更新一个或多个依赖项。
 
 ```bash
 $ forge update --help
-用法： forge update [OPTIONS] [DEPENDENCIES]...
+```
+
+```txt
+用法：forge update [OPTIONS] [DEPENDENCIES]...
 
 参数：
   [DEPENDENCIES]...
@@ -14,7 +17,8 @@ $ forge update --help
       --root <PATH>
           The project's root path.
           
-          By default root of the Git repository, if in one, or the current working directory.
+          By default root of the Git repository, if in one, or the current
+          working directory.
 
   -f, --force
           Override the up-to-date check

@@ -1,10 +1,13 @@
 # cast pretty-calldata
 
-漂亮地打印 calldata。
+美化打印 calldata。
 
 ```bash
 $ cast pretty-calldata --help
-用法： cast pretty-calldata [OPTIONS] [CALLDATA]
+```
+
+```txt
+用法：cast pretty-calldata [OPTIONS] [CALLDATA]
 
 参数：
   [CALLDATA]

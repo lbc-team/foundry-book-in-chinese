@@ -1,14 +1,18 @@
 # cast wallet new
 
-创建新的随机密钥对
+创建一个新的随机密钥对
 
 ```bash
 $ cast wallet new --help
-用法： cast wallet new [OPTIONS] [PATH]
+```
+
+```txt
+用法：cast wallet new [OPTIONS] [PATH]
 
 参数：
   [PATH]
-          If provided, then keypair will be written to an encrypted JSON keystore
+          If provided, then keypair will be written to an encrypted JSON
+          keystore
 
 选项：
   -p, --password

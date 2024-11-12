@@ -1,10 +1,13 @@
-# cast namehash
+# 计算 namehash
 
-计算名称的 ENS 名称哈希
+计算一个名称的 ENS namehash
 
 ```bash
 $ cast namehash --help
-用法： cast namehash [NAME]
+```
+
+```txt
+用法：cast namehash [NAME]
 
 参数：
   [NAME]  

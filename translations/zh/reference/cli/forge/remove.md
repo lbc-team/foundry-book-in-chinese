@@ -1,20 +1,24 @@
 # forge remove
 
-删除一个或多个依赖项
+移除一个或多个依赖项
 
 ```bash
 $ forge remove --help
-用法： forge remove [OPTIONS] [DEPENDENCIES]...
+```
+
+```txt
+用法：forge remove [OPTIONS] <DEPENDENCIES>...
 
 参数：
-  [DEPENDENCIES]...
+  <DEPENDENCIES>...
           The dependencies you want to remove
 
 选项：
       --root <PATH>
           The project's root path.
           
-          By default root of the Git repository, if in one, or the current working directory.
+          By default root of the Git repository, if in one, or the current
+          working directory.
 
   -f, --force
           Override the up-to-date check

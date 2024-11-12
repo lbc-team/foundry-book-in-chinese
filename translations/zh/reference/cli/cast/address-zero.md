@@ -4,7 +4,10 @@
 
 ```bash
 $ cast address-zero --help
-用法： cast address-zero
+```
+
+```txt
+用法：cast address-zero
 
 选项：
   -h, --help  Print help

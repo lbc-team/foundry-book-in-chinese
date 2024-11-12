@@ -1,10 +1,13 @@
-# cast to-base
+# 转换为基数
 
-将一个基数转换为另一个基数
+将一个基数的数字转换为另一个基数
 
 ```bash
 $ cast to-base --help
-用法： cast to-base [OPTIONS] [VALUE] [BASE]
+```
+
+```txt
+用法：cast to-base [OPTIONS] [VALUE] [BASE]
 
 参数：
   [VALUE]  The value to convert

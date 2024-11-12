@@ -4,13 +4,17 @@
 
 ```bash
 $ cast upload-signature --help
-用法： cast upload-signature [SIGNATURES]...
+```
+
+```txt
+用法：cast upload-signature [SIGNATURES]...
 
 参数：
   [SIGNATURES]...
           The signatures to upload.
           
-          Prefix with 'function', 'event', or 'error'. Defaults to function if no prefix given. Can also take paths to contract artifact JSON.
+          Prefix with 'function', 'event', or 'error'. Defaults to function if
+          no prefix given. Can also take paths to contract artifact JSON.
 
 选项：
   -h, --help

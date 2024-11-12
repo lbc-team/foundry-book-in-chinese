@@ -4,6 +4,9 @@ Perform a call on an account without publishing a transaction
 
 ```bash
 $ cast call --help
+```
+
+```txt
 Usage: cast call [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
 
 Commands:
@@ -25,35 +28,36 @@ Options:
           Data for the transaction
 
       --trace
-          Forks the remote rpc, executes the transaction locally and prints a trace
+          Forks the remote rpc, executes the transaction locally and prints a
+          trace
 
       --debug
-          Can only be used with "--trace"
-          
-          opens an interactive debugger
+          Opens an interactive debugger. Can only be used with `--trace`
 
-      --verbose
-          Can only be used with "--trace"
+      --decode-internal
           
-          prints a more verbose trace
 
       --labels <LABELS>
-          Can only be used with "--trace" Labels to apply to the traces.
-          
-          Format: `address:label`
+          Labels to apply to the traces; format: `address:label`. Can only be
+          used with `--trace`
 
       --evm-version <EVM_VERSION>
-          Can only be used with "--trace"
-          
-          The EVM Version to use.
+          The EVM Version to use. Can only be used with `--trace`
 
   -b, --block <BLOCK>
           The block height to query at.
           
           Can also be the tags earliest, finalized, safe, latest, or pending.
 
+      --alphanet
+          Enable Alphanet features
+
   -h, --help
           Print help (see a summary with '-h')
+
+Display options:
+  -j, --json
+          Print the decoded output as JSON
 
 Transaction options:
       --gas-limit <GAS_LIMIT>
@@ -62,7 +66,11 @@ Transaction options:
           [env: ETH_GAS_LIMIT=]
 
       --gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
+          Gas price for legacy transactions, or max fee per gas for EIP1559
+          transactions, either specified in wei, or as a string with a unit
+          type.
+          
+          Examples: 1ether, 10gwei, 0.01ether
           
           [env: ETH_GAS_PRICE=]
 
@@ -72,7 +80,8 @@ Transaction options:
           [env: ETH_PRIORITY_GAS_PRICE=]
 
       --value <VALUE>
-          Ether to send in the transaction, either specified in wei, or as a string with a unit type.
+          Ether to send in the transaction, either specified in wei, or as a
+          string with a unit type.
           
           Examples: 1ether, 10gwei, 0.01ether
 
@@ -84,6 +93,26 @@ Transaction options:
           
           This is automatically enabled for common networks without EIP1559.
 
+      --blob
+          Send a EIP-4844 blob transaction
+
+      --blob-gas-price <BLOB_PRICE>
+          Gas price for EIP-4844 blob transaction
+          
+          [env: ETH_BLOB_GAS_PRICE=]
+
+      --auth <AUTH>
+          EIP-7702 authorization list.
+          
+          Can be either a hex-encoded signed authorization or an address.
+
+      --access-list [<ACCESS_LIST>]
+          EIP-2930 access list.
+          
+          Accepts either a JSON-encoded access list or an empty value to create
+          the access list via an RPC call to `eth_createAccessList`. To retrieve
+          only the access list portion, use the `cast access-list` command.
+
 Ethereum options:
   -r, --rpc-url <URL>
           The RPC endpoint
@@ -91,15 +120,25 @@ Ethereum options:
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL (https://rpc.flashbots.net)
+          Use the Flashbots RPC URL with fast mode
+          (<https://rpc.flashbots.net/fast>).
+          
+          This shares the transaction privately with all registered builders.
+          
+          See:
+          <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
           JWT Secret for the RPC endpoint.
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be used to simulate a CL `engine_forkchoiceUpdated` call:
+          The JWT secret will be used to create a JWT for a RPC. For example,
+          the following can be used to simulate a CL `engine_forkchoiceUpdated`
+          call:
           
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2 '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc", "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
+          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
+          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
           
           [env: ETH_RPC_JWT_SECRET=]
 
@@ -150,7 +189,8 @@ Wallet options - keystore:
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          Use a keystore from the default keystores folder
+          (~/.foundry/keystores) by its filename
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
@@ -173,7 +213,7 @@ Wallet options - hardware wallet:
   -t, --trezor
           Use a Trezor hardware wallet
 
-Wallet options - AWS KMS:
+Wallet options - remote:
       --aws
           Use AWS Key Management Service
 ```

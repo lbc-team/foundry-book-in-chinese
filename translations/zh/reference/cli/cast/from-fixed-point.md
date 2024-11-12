@@ -1,10 +1,13 @@
-# cast from-fixed-point
+# 从定点数转换
 
-将基点数转换为整数
+将定点数转换为整数
 
 ```bash
 $ cast from-fixed-point --help
-用法： cast from-fixed-point [DECIMALS] [VALUE]
+```
+
+```txt
+用法：cast from-fixed-point [DECIMALS] [VALUE]
 
 参数：
   [DECIMALS]  The number of decimals to use

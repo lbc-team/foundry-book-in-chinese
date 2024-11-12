@@ -1,10 +1,13 @@
 # cast parse-bytes32-address
 
-解析字节 32 编码的校验和地址。
+从 bytes32 编码中解析出一个校验和地址。
 
 ```bash
 $ cast parse-bytes32-address --help
-用法： cast parse-bytes32-address [BYTES]
+```
+
+```txt
+用法：cast parse-bytes32-address [BYTES]
 
 参数：
   [BYTES]  

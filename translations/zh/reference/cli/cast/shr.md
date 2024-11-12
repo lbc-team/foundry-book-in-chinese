@@ -1,10 +1,11 @@
 # cast shr
 
-执行右移操作
-
 ```bash
 $ cast shr --help
-用法： cast shr [OPTIONS] <VALUE> <BITS>
+```
+
+```txt
+用法：cast shr [OPTIONS] <VALUE> <BITS>
 
 参数：
   <VALUE>  The value to shift

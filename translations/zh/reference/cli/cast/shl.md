@@ -4,7 +4,10 @@
 
 ```bash
 $ cast shl --help
-用法： cast shl [OPTIONS] <VALUE> <BITS>
+```
+
+```txt
+用法：cast shl [OPTIONS] <VALUE> <BITS>
 
 参数：
   <VALUE>  The value to shift

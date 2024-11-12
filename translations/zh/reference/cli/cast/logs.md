@@ -1,17 +1,22 @@
-# cast logs
+# 获取日志
 
-按签名或主题获取日志
+通过签名或主题获取日志
 
 ```bash
 $ cast logs --help
-用法： cast logs [OPTIONS] [SIG_OR_TOPIC] [TOPICS_OR_ARGS]...
+```
+
+```txt
+用法：cast logs [OPTIONS] [SIG_OR_TOPIC] [TOPICS_OR_ARGS]...
 
 参数：
   [SIG_OR_TOPIC]
-          The signature of the event to filter logs by which will be converted to the first topic or a topic to filter on
+          The signature of the event to filter logs by which will be converted
+          to the first topic or a topic to filter on
 
   [TOPICS_OR_ARGS]...
-          If used with a signature, the indexed fields of the event to filter by. Otherwise, the remaining topics of the filter
+          If used with a signature, the indexed fields of the event to filter
+          by. Otherwise, the remaining topics of the filter
 
 选项：
       --from-block <FROM_BLOCK>
@@ -28,7 +33,9 @@ $ cast logs --help
           The contract address to filter on
 
       --subscribe
-          If the RPC type and endpoints supports `eth_subscribe` stream logs instead of printing and exiting. Will continue until interrupted or TO_BLOCK is reached
+          If the RPC type and endpoints supports `eth_subscribe` stream logs
+          instead of printing and exiting. Will continue until interrupted or
+          TO_BLOCK is reached
 
   -h, --help
           Print help (see a summary with '-h')
@@ -44,15 +51,25 @@ Ethereum options:
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL (https://rpc.flashbots.net)
+          Use the Flashbots RPC URL with fast mode
+          (<https://rpc.flashbots.net/fast>).
+          
+          This shares the transaction privately with all registered builders.
+          
+          See:
+          <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
           JWT Secret for the RPC endpoint.
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be used to simulate a CL `engine_forkchoiceUpdated` call:
+          The JWT secret will be used to create a JWT for a RPC. For example,
+          the following can be used to simulate a CL `engine_forkchoiceUpdated`
+          call:
           
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2 '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc", "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
+          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
+          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
+          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
           
           [env: ETH_RPC_JWT_SECRET=]
 
@@ -103,7 +120,8 @@ Wallet options - keystore:
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          Use a keystore from the default keystores folder
+          (~/.foundry/keystores) by its filename
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
@@ -126,7 +144,7 @@ Wallet options - hardware wallet:
   -t, --trezor
           Use a Trezor hardware wallet
 
-Wallet options - AWS KMS:
+Wallet options - remote:
       --aws
           Use AWS Key Management Service
 ```

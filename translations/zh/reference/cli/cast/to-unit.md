@@ -1,10 +1,13 @@
-# cast to-unit
+# 转换为单位
 
-将 ETH 数量转换为另一种单位（ether、gwei 或 wei）。
+将 ETH 金额转换为另一种单位（ether、gwei 或 wei）。
 
 ```bash
 $ cast to-unit --help
-用法： cast to-unit [VALUE] [UNIT]
+```
+
+```txt
+用法：cast to-unit [VALUE] [UNIT]
 
 参数：
   [VALUE]
