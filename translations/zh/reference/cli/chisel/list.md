@@ -4,6 +4,9 @@
 
 ```bash
 $ chisel list --help
+```
+
+```txt
 用法： chisel list
 
 选项：

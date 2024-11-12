@@ -4,6 +4,9 @@
 
 ```bash
 $ chisel load --help
+```
+
+```txt
 用法： chisel load <ID>
 
 参数：

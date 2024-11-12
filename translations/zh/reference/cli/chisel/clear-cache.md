@@ -4,6 +4,9 @@
 
 ```bash
 $ chisel clear-cache --help
+```
+
+```txt
 用法： chisel clear-cache
 
 选项：

@@ -4,6 +4,9 @@
 
 ```bash
 $ chisel view --help
+```
+
+```txt
 用法： chisel view <ID>
 
 参数：
