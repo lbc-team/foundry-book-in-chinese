@@ -4,6 +4,9 @@
 
 ```bash
 $ forge clean --help
+```
+
+```txt
 用法： forge clean [OPTIONS]
 
 选项：

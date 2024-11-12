@@ -4,6 +4,9 @@
 
 ```bash
 $ forge completions --help
+```
+
+```txt
 用法： forge completions <SHELL>
 
 参数：

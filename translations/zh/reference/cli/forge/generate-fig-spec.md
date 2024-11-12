@@ -4,6 +4,9 @@
 
 ```bash
 $ forge generate-fig-spec --help
+```
+
+```txt
 用法： forge generate-fig-spec
 
 选项：

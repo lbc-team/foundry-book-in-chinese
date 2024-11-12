@@ -4,6 +4,9 @@
 
 ```bash
 $ forge install --help
+```
+
+```txt
 用法： forge install [OPTIONS] [DEPENDENCIES]...
     forge install [OPTIONS] <github username>/<github project>@<tag>...
     forge install [OPTIONS] <alias>=<github username>/<github project>@<tag>...

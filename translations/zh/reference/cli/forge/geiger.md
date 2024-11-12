@@ -4,6 +4,9 @@
 
 ```bash
 $ forge geiger --help
+```
+
+```txt
 用法： forge geiger [OPTIONS] [PATH]...
 
 参数：

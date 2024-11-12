@@ -4,6 +4,9 @@
 
 ```bash
 $ forge selectors list --help
+```
+
+```txt
 用法： forge selectors list [OPTIONS] [CONTRACT]
 
 参数：

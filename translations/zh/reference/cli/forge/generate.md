@@ -4,6 +4,9 @@
 
 ```bash
 $ forge generate --help
+```
+
+```txt
 用法： forge generate <COMMAND>
 
 Commands:

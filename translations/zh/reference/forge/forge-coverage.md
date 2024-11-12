@@ -12,6 +12,10 @@ forge coverage - 显示哪些部分的代码已被测试覆盖。
 
 显示哪些部分的代码已被测试覆盖。
 
+> **警告** ⚠️  
+> 
+> 在 `lcov` 2.0 版本中引入的 `derive function end line` 功能（默认启用）不受支持，因此 `lcov` 和 `genhtml` 应该使用 `--rc derive_function_end_line=0` 选项运行，以生成覆盖率报告。
+
 ### 选项
 
 #### 报告选项

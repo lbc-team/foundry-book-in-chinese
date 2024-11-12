@@ -4,6 +4,9 @@
 
 ```bash
 $ forge init --help
+```
+
+```txt
 用法： forge init [OPTIONS] [PATH]
 
 参数：

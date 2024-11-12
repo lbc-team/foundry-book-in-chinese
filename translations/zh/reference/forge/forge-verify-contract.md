@@ -35,6 +35,9 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
 
 {{#include ../common/verifier-options.md}}
 
+`--skip-is-verified-check`
+&nbsp;&nbsp;&nbsp;&nbsp;即使合约已经被验证，也发送验证请求。
+
 `--compiler-version` *version*  
 &nbsp;&nbsp;&nbsp;&nbsp;用来构建智能合约的编译器版本。
 
@@ -72,6 +75,10 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
 `--watch`  
 &nbsp;&nbsp;&nbsp;&nbsp;提交后等待验证结果。
 &nbsp;&nbsp;&nbsp;&nbsp;自动运行 `forge verify-check`，直到验证失败或成功。
+
+`--via-ir`
+&nbsp;&nbsp;&nbsp;&nbsp;将 `viaIR` 设置为 true。
+&nbsp;&nbsp;&nbsp;&nbsp;如果在部署时使用了 `--via-ir` 进行编译，请在此处也传递，以防止字节码不匹配。
 
 {{#include project-options.md}}
 
@@ -111,6 +118,16 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
     forge create --rpc-url <rpc_https_endpoint> --private-key $devTestnetPrivateKey src/Contract.sol:SimpleStorage --verify --verifier blockscout --verifier-url <blockscout_homepage_explorer_url>/api? 
     ```
 
+6. 使用 Oklink 验证合约
+    ```sh
+    forge verify-contract 0x8CDDE82cFB4555D6ca21B5b28F97630265DA94c4 Counter --verifier oklink --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER  --api-key $OKLINK_API_KEY
+    ```
+    
+7. 在部署时使用 Oklink 验证合约
+    ```sh
+    forge create Counter --rpc-url <rpc_https_endpoint> --verify --verifier oklink --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER --etherscan-api-key $OKLINK_API_KEY --private-key $PRIVATE_KEY --legacy
+    ```
+    
 ### 另请参阅
 
 [forge](./forge.md), [forge create](./forge-create.md), [forge flatten](./forge-flatten.md), [forge verify-check](./forge-verify-check.md)

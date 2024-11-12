@@ -20,6 +20,8 @@ forge-build - 构建项目的智能合约。
 
 构建是增量的，构建缓存默认保存在项目根目录下的 `cache/`。如果你想清除缓存，请传递 `--force`，如果你想改变缓存目录，请传递 `--cache-path <PATH>`。
 
+可以通过指定多个路径选项（可以是源目录或文件的路径）来选择构建源。
+
 #### Build 模式
 
 有三种 build 模式:
@@ -176,6 +178,8 @@ targets = [ 'assert' ]
 `--skip`
 &nbsp;&nbsp;&nbsp;&nbsp;跳过编译非必要的合约目录，比如测试或脚本（使用 `--skip test`）。
 
+`[PATHS]...`&nbsp;&nbsp;&nbsp;&nbsp;从指定路径构建源文件。
+
 {{#include core-build-options.md}}
 
 {{#include watch-options.md}}
@@ -202,6 +206,11 @@ targets = [ 'assert' ]
 4. 使用监听模式构建项目：
     ```sh
     forge build --watch
+    ```
+
+5. 从 `test/invariant` 目录和 `test/RegressionTest.sol` 构建源文件：
+    ```sh
+    forge build test/invariant test/RegressionTest.sol
     ```
 
 ### 另请参阅

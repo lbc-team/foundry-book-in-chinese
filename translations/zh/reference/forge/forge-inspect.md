@@ -28,6 +28,8 @@ forge-inspect - 获得关于智能合约的专门信息
 - `metadata`/`meta`
 - `userdoc`/`userDoc`/`user-doc`
 - `ewasm`/`e-wasm`
+- `errors`
+- `events`
 
 ### 选项
 
@@ -51,7 +53,7 @@ forge-inspect - 获得关于智能合约的专门信息
     ```
 
 3 . 以漂亮的格式检查合约的 abi：
-   ```sh 
+   ```sh
    forge inspect --pretty MyContract abi
    ```
 

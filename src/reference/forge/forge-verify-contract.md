@@ -36,6 +36,9 @@ you can specify a file containing **space-separated** constructor arguments with
 
 {{#include ../common/verifier-options.md}}
 
+`--skip-is-verified-check`
+&nbsp;&nbsp;&nbsp;&nbsp;Send the verification request even if the contract is already verified.
+
 `--compiler-version` *version*  
 &nbsp;&nbsp;&nbsp;&nbsp;The compiler version used to build the smart contract.
 
@@ -75,6 +78,10 @@ you can specify a file containing **space-separated** constructor arguments with
 &nbsp;&nbsp;&nbsp;&nbsp;Wait for verification result after submission.  
 &nbsp;&nbsp;&nbsp;&nbsp;Automatically runs `forge verify-check` until the verification either fails or succeeds.
 
+`--via-ir`
+&nbsp;&nbsp;&nbsp;&nbsp;Set `viaIR` to true.
+&nbsp;&nbsp;&nbsp;&nbsp;If you compiled using `--via-ir` when deploying, pass it here too in order to prevent a bytecode mismatch.
+
 {{#include project-options.md}}
 
 {{#include common-options.md}}
@@ -111,6 +118,16 @@ you can specify a file containing **space-separated** constructor arguments with
 5. Verify a contract with Blockscout right after deployment (make sure you add "/api?" to the end of the Blockscout homepage explorer URL):
     ```sh
     forge create --rpc-url <rpc_https_endpoint> --private-key $devTestnetPrivateKey src/Contract.sol:SimpleStorage --verify --verifier blockscout --verifier-url <blockscout_homepage_explorer_url>/api? 
+    ```
+
+6. verify a contract with Oklink
+    ```sh
+    forge verify-contract 0x8CDDE82cFB4555D6ca21B5b28F97630265DA94c4 Counter --verifier oklink --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER  --api-key $OKLINK_API_KEY
+    ```
+    
+7. verify a contract with Oklink while deploying
+    ```sh
+    forge create Counter --rpc-url <rpc_https_endpoint> --verify --verifier oklink --verifier-url https://www.oklink.com/api/v5/explorer/contract/verify-source-code-plugin/XLAYER --etherscan-api-key $OKLINK_API_KEY --private-key $PRIVATE_KEY --legacy
     ```
 
 ### SEE ALSO

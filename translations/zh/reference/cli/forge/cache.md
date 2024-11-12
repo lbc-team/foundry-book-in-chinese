@@ -4,6 +4,9 @@
 
 ```bash
 $ forge cache --help
+```
+
+```txt
 用法： forge cache <COMMAND>
 
 Commands:

@@ -46,6 +46,9 @@ forge-script - 以脚本形式运行智能合约，建立可在链上发送的�
 `--skip-simulation`  
 &nbsp;&nbsp;&nbsp;&nbsp;跳过链上模拟。
 
+`--skip`  
+&nbsp;&nbsp;&nbsp;&nbsp;跳过非必要合约目录的编译，如测试或脚本（用法 `--skip test`）。
+
 `--non-interactive`  
 &nbsp;&nbsp;&nbsp;&nbsp;移除交互式提示，如果合约接近 [EIP-170](https://eips.ethereum.org/EIPS/eip-170) 大小限制，则会出现交互式提示。
 
@@ -98,7 +101,7 @@ forge-script - 以脚本形式运行智能合约，建立可在链上发送的�
 1. 以脚本形式运行 `BroadcastTest`，在链上广播产生的交易
     ```sh
     forge script ./test/Broadcast.t.sol --tc BroadcastTest --sig "deploy()" \
-                 -vvv --fork-url $GOERLI_RPC_URL
+                 -vvv --fork-url $SEPOLIA_RPC_URL
     ```
 
 2. 在 Polygon 上部署合约（请参阅脚本教程以获取示例脚本）。*每个网络的验证器网址都不同。*

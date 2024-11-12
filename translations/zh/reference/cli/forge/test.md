@@ -4,6 +4,9 @@
 
 ```bash
 $ forge test --help
+```
+
+```txt
 用法： forge test [OPTIONS]
 
 选项：

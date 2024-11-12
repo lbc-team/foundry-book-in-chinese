@@ -29,6 +29,9 @@ forge - 构建、测试、模糊、调试和部署 Solidity 合约。
 [forge init](./forge-init.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;创建一个新的 Forge 项目。
 
+[forge clone](./forge-clone.md)  
+&nbsp;&nbsp;&nbsp;&nbsp;将一个链上验证过的合约克隆为一个Forge项目。
+
 [forge install](./forge-install.md)  
 &nbsp;&nbsp;&nbsp;&nbsp;安装一个或多个依赖。
 

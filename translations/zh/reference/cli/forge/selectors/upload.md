@@ -4,6 +4,9 @@
 
 ```bash
 $ forge selectors upload --help
+```
+
+```txt
 用法： forge selectors upload [OPTIONS] [CONTRACT]
 
 参数：

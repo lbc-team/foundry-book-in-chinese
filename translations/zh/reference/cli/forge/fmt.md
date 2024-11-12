@@ -4,6 +4,9 @@
 
 ```bash
 $ forge fmt --help
+```
+
+```txt
 用法： forge fmt [OPTIONS] [PATH]...
 
 参数：
