@@ -13,17 +13,16 @@ Foundry 中文文档由贡献者[寒星](https://learnblockchain.cn/people/1123)
 
 期待大家参与，为区块链技术在中文世界的前进添砖加瓦，任何贡献者将出现在贡献者名单中，你的贡献永远被记录。
 
-
-
 文档使用 [mdbook](https://github.com/rust-lang/mdBook) 编译，并使用 `mdbook-i18n` 插件进行中文翻译， 因此需要先进行安装：
 
 ```sh
 cargo install mdbook
 cargo install mdbook-i18n
+cargo install mdbook-external-links
 ```
 
-
-构建文档使用：`mdbook build`， 然后在浏览器打开 `book/i18n/zh/` 下的文件即可预览。
+构建文档使用：`mdbook build`；    
+本地预览：`mdbook serve --open` 
 
 中文翻译在[feature-zh](https://github.com/lbc-team/foundry-book-in-chinese/tree/feature-zh)， 翻译内容在 `translations/zh` 目录下。
 参与者可以查看未翻译的部分，翻译提交 PR。 
@@ -43,6 +42,14 @@ cargo install mdbook-i18n
     <tr>
       <td align="center"><a href="https://github.com/coldstar1993"><img src="https://avatars.githubusercontent.com/u/92623877?v=4?s=100" width="100px;" alt="Zero Ekkusu"/><br /><sub><b>寒星(coldstar1993)</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=coldstar1993" title="Documentation">📖</a></td>
       <td align="center"><a href="https://github.com/xilibi2003"><img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>Tiny熊</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=xilibi2003" title="Documentation">📖</a> <a href="https://twitter.com/tinyxiong_eth" title="Maintenance"><img src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
+      <td align="center"><a href="https://github.com/0xdwong"><img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>dwong</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=0xdwong" title="Documentation">📖</a> <a href="https://twitter.com/0xdwong" title="Maintenance"><img src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
+      
+      <td align="center">
+        <a href="https://github.com/liangjies">
+          <img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>liangjies</b></sub></a><br />
+        <a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=liangjies" title="Documentation">📖
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
