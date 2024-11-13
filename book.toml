@@ -1,19 +1,25 @@
 [book]
 authors = ["Oliver Nordbjerg"]
-language = "en"
+language = "zh"
 multilingual = false
-src = "src"
+src = "translations/zh"
 title = "Foundry Book"
 description = "A book on all things Foundry"
 
+[build]
+create-missing = false
+
+[preprocessor.external-links]
+
 [output.html]
-default-theme = "ayu"
 no-section-label = true
-git-repository-url = "https://github.com/lbc-team/foundry-book-in-chinese"
 git-repository-icon = "fa-github"
-edit-url-template = "https://github.com/lbc-team/foundry-book-in-chinese/tree/feature-zh/{path}"
 site-url = "/docs/foundry/"
+git-repository-url = "https://github.com/lbc-team/foundry-book-in-chinese"
+edit-url-template = "https://github.com/lbc-team/foundry-book-in-chinese/tree/feature-zh/{path}"
+default-theme = "ayu"
 additional-js = ["src/static/solidity.min.js"]
+cname = "https://learnblockchain.cn/docs/foundry/i18n/zh/"
 additional-css = ["src/static/custom.css"]
 
 [output.html.print]
@@ -23,7 +29,7 @@ enable = false
 enable = true
 level = 1
 
-[[output.i18n.translations]]
+[[output.i18n.translations.zh]]
 language = "zh"
 translators = ["https://www.github.com/coldstar1993", "https://github.com/xilibi2003"]
 title = "Foundry 中文文档"
