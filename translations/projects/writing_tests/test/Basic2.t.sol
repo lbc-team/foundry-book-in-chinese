@@ -3,7 +3,7 @@
 pragma solidity 0.8.10;
 
 // ANCHOR: import
-import "forge-std/Test.sol";
+import {Test, stdError} from "forge-std/Test.sol";
 // ANCHOR_END: import
 
 contract ContractBTest is Test {
@@ -16,7 +16,7 @@ contract ContractBTest is Test {
     // ANCHOR_END: setUp
 
     // ANCHOR: testCannotSubtract43
-    function testCannotSubtract43() public {
+    function test_CannotSubtract43() public {
         vm.expectRevert(stdError.arithmeticError);
         testNumber -= 43;
     }

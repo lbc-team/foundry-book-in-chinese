@@ -3,7 +3,7 @@
 pragma solidity 0.8.10;
 
 // ANCHOR: import
-import "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 // ANCHOR_END: import
 
 contract ContractBTest is Test {
@@ -16,13 +16,13 @@ contract ContractBTest is Test {
     // ANCHOR_END: setUp
 
     // ANCHOR: testNumberIs42
-    function testNumberIs42() public {
+    function test_NumberIs42() public {
         assertEq(testNumber, 42);
     }
     // ANCHOR_END: testNumberIs42
 
     // ANCHOR: testFailSubtract43
-    function testFailSubtract43() public {
+    function testFail_Subtract43() public {
         testNumber -= 43;
     }
     // ANCHOR_END: testFailSubtract43
