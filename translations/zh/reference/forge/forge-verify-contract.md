@@ -16,7 +16,7 @@ forge-verify-contract - 在选定的验证 provider 上验证智能合约。
 - 合约地址
 - 合约名称或合约的路径（请阅读下文）
 如果是 Etherscan 验证，你还必须提供：
-- 您的 Etherscan API 密钥，可以将其作为一个参数传递，或者设置 `ETHERSCAN_API_KEY`
+- 你的 Etherscan API 密钥，可以将其作为一个参数传递，或者设置 `ETHERSCAN_API_KEY`
 
 要找到准确的编译器版本，运行 `~/.svm/x.y.z/solc-x.y.z --version` 并搜索版本字符串[此处](https://etherscan.io/solcversions) 中的 8 位十六进制数字。
 

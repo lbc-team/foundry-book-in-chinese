@@ -21,7 +21,7 @@
 ### 先决条件
 
 1. 需要对 Solidity 和 Foundry 有一定了解，并建议对内联汇编有一定了解。请参考 [官方 Solidity 文档](https://docs.soliditylang.org/en/latest/assembly.html)了解内联汇编的基础知识。
-2. 确保您的系统上已经 [安装](../getting-started/installation.md) 了 Foundry。
+2. 确保你的系统上已经 [安装](../getting-started/installation.md) 了 Foundry。
 3. [初始化](../projects/creating-a-new-project.md)一个新的 Foundry 项目。
 
 ### CREATE2 工厂
@@ -45,7 +45,7 @@ contract Create2 {
 
 > ℹ️ **注意**
 >
-> 请注意，由于多种原因，`CREATE2` 部署可能会失败。例如，如果字节码无效，或者如果在计算地址时已经部署了合约。如果您的构造函数由于任何原因回滚，您的部署也可能会失败。
+> 请注意，由于多种原因，`CREATE2` 部署可能会失败。例如，如果字节码无效，或者如果在计算地址时已经部署了合约。如果你的构造函数由于任何原因回滚，你的部署也可能会失败。
 
 接下来，创建一个名为 `deploy` 的函数：
 
@@ -64,7 +64,7 @@ function deploy(bytes32 salt, bytes memory creationCode) external payable return
 
 > ℹ️ **注意**
 >
-> 您可以向使用 `CREATE2` 部署的合约发送 ETH，但前提是它具有可支付的构造函数。如果您尝试在没有可支付构造函数的情况下向其发送 ETH，交易将回滚。
+> 你可以向使用 `CREATE2` 部署的合约发送 ETH，但前提是它具有可支付的构造函数。如果你尝试在没有可支付构造函数的情况下向其发送 ETH，交易将回滚。
 
 在部署函数的顶部添加此回滚语句。我们希望我们的函数在不满足以下条件时拒绝部署请求：
 
@@ -149,7 +149,7 @@ keccak256(0xff ++ address ++ salt ++ keccak256(bytecode))[12:]
 7. 所有值都打包到其正确的内存位置后，我们现在可以在从 `start` 开始的内存槽上调用 `keccak256`，并将内存槽的长度作为第二个参数传递。这将返回一个 32 字节的哈希，我们可以截断以获得最终地址。
 ℹ️ **注意**
 
-您可以在此处查看此工厂实现的完整代码 [此处](https://github.com/Genesis3800/CREATE2Factory/blob/main/src/Create2.sol)。
+你可以在此处查看此工厂实现的完整代码 [此处](https://github.com/Genesis3800/CREATE2Factory/blob/main/src/Create2.sol)。
 还可以查看 OpenZeppelin 的 [CREATE2 库的实现](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/utils/Create2.sol)，该实现已被用作本教程的灵感来源。
 最后，Forge 提供了一些 `CREATE2` 地址计算辅助函数。 [查看它们](https://github.com/foundry-rs/forge-std/blob/f73c73d2018eb6a111f35e4dae7b4f27401e9421/src/StdUtils.sol#L122-L134)。
 
@@ -208,8 +208,8 @@ contract Create2Test is Test {
 ```
 
 保存所有文件，并使用 `forge test --match-path test/Create2.t.sol -vvvv` 运行测试。
-您的测试应该通过，没有任何错误。
+你的测试应该通过，没有任何错误。
 
 > ℹ️ **注意**
 
-本指南旨在帮助理解 `CREATE2`。在大多数情况下，您不需要编写和使用自己的部署器，可以使用现有的确定性部署器。在 forge 脚本中，使用 `new MyContract{salt: salt}()` 将使用地址为 [0x4e59b44847b379578588920ca78fbf26c0b4956c](https://github.com/Arachnid/deterministic-deployment-proxy) 的确定性部署器。
+本指南旨在帮助理解 `CREATE2`。在大多数情况下，你不需要编写和使用自己的部署器，可以使用现有的确定性部署器。在 forge 脚本中，使用 `new MyContract{salt: salt}()` 将使用地址为 [0x4e59b44847b379578588920ca78fbf26c0b4956c](https://github.com/Arachnid/deterministic-deployment-proxy) 的确定性部署器。

@@ -96,7 +96,7 @@ vm.expectRevert(
 );
 ```
 
-如果您需要断言函数回滚_没有_消息，则可以使用`expectRevert(bytes(""))`。
+如果你需要断言函数回滚_没有_消息，则可以使用`expectRevert(bytes(""))`。
 
 ```solidity
 function testExpectRevertNoReason() public {
@@ -108,7 +108,7 @@ function testExpectRevertNoReason() public {
 
 当出现 EVM 错误时，例如当交易消耗超过区块的燃气限制时，会发生无消息的回滚。
 
-如果您需要断言函数以四个字符消息，例如 `AAAA` 回滚，可以这样做：
+如果你需要断言函数以四个字符消息，例如 `AAAA` 回滚，可以这样做：
 
 ```solidity
 function testFourLetterMessage() public {
@@ -118,7 +118,7 @@ function testFourLetterMessage() public {
 
 如果使用 `expectRevert("AAAA")`，编译器会抛出错误，因为它不知道使用哪个重载。
 
-最后，您还可以在单个测试中进行多个 `expectRevert()` 检查。
+最后，你还可以在单个测试中进行多个 `expectRevert()` 检查。
 
 ```solidity
 function testMultipleExpectReverts() public {

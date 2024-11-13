@@ -79,7 +79,7 @@ hoax(alice, 100 ether);
 
 Std Errors 提供围绕常见内部 Solidity 错误 errors 和回退 reverts 的包装器。
 
-Std Errors 与 [`expectRevert`](../cheatcodes/expect-revert.md) 作弊码结合使用最有用，因为您不需要自己记住内部 Solidity panic codes。 请注意，您必须通过 `stdError` 访问它们，因为这是一个库。
+Std Errors 与 [`expectRevert`](../cheatcodes/expect-revert.md) 作弊码结合使用最有用，因为你不需要自己记住内部 Solidity panic codes。 请注意，你必须通过 `stdError` 访问它们，因为这是一个库。
 
 ```solidity
 // expect an arithmetic error on the next call (e.g. underflow)
@@ -90,7 +90,7 @@ vm.expectRevert(stdError.arithmeticError);
 
 Std Storage 使操作合约存储变得容易。 它可以找到并写入与特定变量关联的存储槽。
 
-`Test` 合约已经提供了一个 `StdStorage` 实例 `stdstore`，您可以通过它访问任何标准存储功能。 请注意，您必须先在测试合约中添加语句：`using stdStorage for StdStorage`。
+`Test` 合约已经提供了一个 `StdStorage` 实例 `stdstore`，你可以通过它访问任何标准存储功能。 请注意，你必须先在测试合约中添加语句：`using stdStorage for StdStorage`。
 
 ```solidity
 // find the variable `score` in the contract `game`
@@ -105,7 +105,7 @@ stdstore
 
 Std Math 是一个库，其中包含 Solidity 中未提供的有用的数学函数。
 
-请注意，您必须通过 `stdMath` 访问它们，因为这是一个库。
+请注意，你必须通过 `stdMath` 访问它们，因为这是一个库。
 
 ```solidity
 // get the absolute value of -10

@@ -15,7 +15,7 @@
 - 所有者（Owner）在链下签署批准
 - 消费者（Spender）在链上调用 `permit` 和 `transferFrom`
 
-我们将使用 [Solmate 的 ERC-20](https://github.com/transmissions11/solmate/blob/main/src/tokens/ERC20.sol)，因为随附了 EIP-712 和 EIP-2612 组合。 如果您还没有浏览完整合约，请看一眼 - 这里是 `permit` 实现的：
+我们将使用 [Solmate 的 ERC-20](https://github.com/transmissions11/solmate/blob/main/src/tokens/ERC20.sol)，因为随附了 EIP-712 和 EIP-2612 组合。 如果你还没有浏览完整合约，请看一眼 - 这里是 `permit` 实现的：
 
 ```solidity
     /*//////////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ contract SigUtils {
 
 ### 处理动态值
 
-虽然上面在 getStructHash()函数中传递的 Permit 结构体不包含任何动态值类型，但如果您使用它们，重要的是要记住，'bytes' 和 'string' 类型必须编码为它们内容的 'keccak256' 哈希。有关 [EIP 712 规范的更多信息，请参见此处](https://github.com/ethereum/EIPs/blob/8061f8e2243eaae829d1fa91f7a763c889aca371/EIPS/eip-712.md?plain=1#L135) 。
+虽然上面在 getStructHash()函数中传递的 Permit 结构体不包含任何动态值类型，但如果你使用它们，重要的是要记住，'bytes' 和 'string' 类型必须编码为它们内容的 'keccak256' 哈希。有关 [EIP 712 规范的更多信息，请参见此处](https://github.com/ethereum/EIPs/blob/8061f8e2243eaae829d1fa91f7a763c889aca371/EIPS/eip-712.md?plain=1#L135) 。
 
 
 **设置**

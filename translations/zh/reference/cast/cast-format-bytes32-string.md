@@ -12,7 +12,7 @@ cast-format-bytes32-string - 将字符串格式化为 bytes32 编码。
 
 将字符串格式化为 bytes32 编码。
 
-请注意，此命令仅用于将 [Solidity 字符串文字](https://docs.soliditylang.org/en/v0.8.16/types.html#string-literals-and-types)格式化为 `bytes32`。如果您想要填充字节字符串，请改用 [to-bytes32](./cast-to-bytes32.md)。
+请注意，此命令仅用于将 [Solidity 字符串文字](https://docs.soliditylang.org/en/v0.8.16/types.html#string-literals-and-types)格式化为 `bytes32`。如果你想要填充字节字符串，请改用 [to-bytes32](./cast-to-bytes32.md)。
 
 ### 选项
 

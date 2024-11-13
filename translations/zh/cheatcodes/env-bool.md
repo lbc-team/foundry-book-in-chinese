@@ -18,7 +18,7 @@ function envBool(string calldata key, string calldata delimiter) external return
 
 - 对于 `true`，可以使用 "true" 或 "True" 作为环境变量的值。
 - 对于 `false`，可以使用 "false" 或 "False" 作为环境变量的值。
-- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
+- 对于数组，你可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
 ### 例子
 

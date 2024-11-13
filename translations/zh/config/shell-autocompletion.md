@@ -1,11 +1,11 @@
 
 ## Shell 自动补全
 
-您可以为 `bash`, `elvish`, `fish`, `powershell` 和 `zsh` 生成自动补全 shell 脚本。
+你可以为 `bash`, `elvish`, `fish`, `powershell` 和 `zsh` 生成自动补全 shell 脚本。
 
 ### zsh
 
-首先，确保以下内容存在于您的  `~/.zshrc` 文件中（如果没有，请添加）：
+首先，确保以下内容存在于你的  `~/.zshrc` 文件中（如果没有，请添加）：
 
 ```sh
 autoload -U compinit

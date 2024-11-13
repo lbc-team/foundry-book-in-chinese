@@ -49,7 +49,7 @@ $ forge test
 {{#include ../output/fuzz_testing/forge-test-success-fuzz:all}}
 ```
 
-您可能希望使用 [`assume`](../cheatcodes/assume.md) 作弊码排除某些情况。 在这些情况下，模糊器 fuzzer 将丢弃输入并开始运行新的模糊测试：
+你可能希望使用 [`assume`](../cheatcodes/assume.md) 作弊码排除某些情况。 在这些情况下，模糊器 fuzzer 将丢弃输入并开始运行新的模糊测试：
 
 ```solidity
 function testFuzz_Withdraw(uint96 amount) public {
@@ -62,7 +62,7 @@ function testFuzz_Withdraw(uint96 amount) public {
 
 ### 解读结果
 
-您可能已经注意到，与单元测试相比，模糊测试的总结略有不同：
+你可能已经注意到，与单元测试相比，模糊测试的总结略有不同：
 
 - "runs" 是指模糊器 fuzzer 测试的场景数量。 默认情况下，模糊器 fuzzer 将生成 256 个场景，但用户可以设置此参数以及其他测试执行参数。有关模糊测试器配置详细信息，请参阅 [`这里`](#configuring-fuzz-test-execution)。
 - “μ”（希腊字母 mu）是所有模糊运行中使用的平均 Gas

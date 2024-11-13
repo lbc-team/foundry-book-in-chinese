@@ -5,7 +5,7 @@ Forge 支持使用两种不同的方法在分叉环境中进行测试：
 - [**分叉模式（Forking Mode）**](#forking-mode) — 通过`forge test --fork-url` 标志使用一个单独分叉进行所有测试
 - [**分叉作弊码（Forking Cheatcodes）**](#forking-cheatcodes) — 通过 [forking 作弊码](../cheatcodes/forking.md) 在 Solidity 测试代码中直接创建、选择和管理多个分叉
 
-使用哪种方法？ 分叉模式提供针对特定分叉环境运行整个测试套件，而分叉作弊码提供更大的灵活性和表现力，可以在测试中使用多个分叉。 您的特定用例和测试策略将有助于知晓使用哪种方法。
+使用哪种方法？ 分叉模式提供针对特定分叉环境运行整个测试套件，而分叉作弊码提供更大的灵活性和表现力，可以在测试中使用多个分叉。 你的特定用例和测试策略将有助于知晓使用哪种方法。
 
 ### 分叉模式
 
@@ -32,7 +32,7 @@ forge test --fork-url <your_rpc_url>
 forge test --fork-url <your_rpc_url> --fork-block-number 1
 ```
 
-当您需要与现有合约进行交互时，分叉特别有用。 您可以选择以这种方式进行集成测试，就好像您在实际网络上一样。
+当你需要与现有合约进行交互时，分叉特别有用。 你可以选择以这种方式进行集成测试，就好像你在实际网络上一样。
 
 #### 缓存（Caching）
 
@@ -52,11 +52,11 @@ Forge 支持使用 Etherscan 在分叉环境中识别合约。
 forge test --fork-url <your_rpc_url> --etherscan-api-key <your_etherscan_api_key>
 ```
 
-或者，您可以设置 `ETHERSCAN_API_KEY` 环境变量。
+或者，你可以设置 `ETHERSCAN_API_KEY` 环境变量。
 
 ### 分叉作弊码
 
-分叉作弊码允许您在 Solidity 测试代码中以编程方式进入分叉模式，而不是通过 `forge` CLI 参数配置分叉模式。 这些作弊码允许您在逐个测试的基础上使用分叉模式，并在测试中使用多个分叉，每个分叉都通过其自己唯一的 `uint256` 标识符进行识别。
+分叉作弊码允许你在 Solidity 测试代码中以编程方式进入分叉模式，而不是通过 `forge` CLI 参数配置分叉模式。 这些作弊码允许你在逐个测试的基础上使用分叉模式，并在测试中使用多个分叉，每个分叉都通过其自己唯一的 `uint256` 标识符进行识别。
 
 #### 用法
 
@@ -70,7 +70,7 @@ forge test --fork-url <your_rpc_url> --etherscan-api-key <your_etherscan_api_key
 
 一次只能有一个活动分叉，当前活动分叉的标识符可以通过 [`activeFork`](../cheatcodes/active-fork.md) 检索。
 
-类似于 [`roll`](../cheatcodes/roll.md)，您可以使用 [`rollFork`](../cheatcodes/roll-fork.md) 设置分叉的 `block.number`。
+类似于 [`roll`](../cheatcodes/roll.md)，你可以使用 [`rollFork`](../cheatcodes/roll-fork.md) 设置分叉的 `block.number`。
 
 要了解选择分叉时会发生什么，了解分叉模式的一般工作方式很重要：
 

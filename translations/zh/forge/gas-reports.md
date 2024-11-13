@@ -1,6 +1,6 @@
 ## Gas 报告
 
-Forge 可以为您的合约生成 Gas 报告。 您可以通过 `foundry.toml` 中的 `gas_reports` 字段配置哪些合约输出 Gas 报告。
+Forge 可以为你的合约生成 Gas 报告。 你可以通过 `foundry.toml` 中的 `gas_reports` 字段配置哪些合约输出 Gas 报告。
 
 为特定合约生成报告：
 
@@ -16,7 +16,7 @@ gas_reports = ["*"]
 
 要生成 Gas 报告，请运行 `forge test --gas-report`。
 
-您还可以将它与其他子命令结合使用，例如 `forge test --match-test testBurn --gas-report`，以仅生成与此测试相关的 Gas 报告。
+你还可以将它与其他子命令结合使用，例如 `forge test --match-test testBurn --gas-report`，以仅生成与此测试相关的 Gas 报告。
 
 示例输出：
 
@@ -68,7 +68,7 @@ gas_reports = ["*"]
 ╰───────────────────────┴─────────────────┴────────┴────────┴────────┴─────────╯
 ```
 
-您还可以通过 `foundry.toml` 中的 `gas_reports_ignore` 字段忽略合约：
+你还可以通过 `foundry.toml` 中的 `gas_reports_ignore` 字段忽略合约：
 
 ```toml
 gas_reports_ignore = ["Example"]

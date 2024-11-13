@@ -5,7 +5,7 @@
 
 ### 我无法从源代码构建！
 
-确保您使用的是最新的稳定 Rust 工具链：
+确保你使用的是最新的稳定 Rust 工具链：
 ```sh
 rustup default stable
 rustup update stable
@@ -13,13 +13,13 @@ rustup update stable
 
 ### 运行 `forge`/`cast` 时出现 `libusb` 错误
 
-如果您使用发布的二进制文件，在 MacOS 上可能会看到以下错误：
+如果你使用发布的二进制文件，在 MacOS 上可能会看到以下错误：
 
 ```sh
 dyld: Library not loaded: /usr/local/opt/libusb/lib/libusb-1.0.0.dylib
 ```
 
-为了解决这个问题，您必须安装 `libusb` 库：
+为了解决这个问题，你必须安装 `libusb` 库：
 
 ```sh
 brew install libusb
@@ -70,7 +70,7 @@ import {console} from "forge-std/console.sol";
 
 ### 我该如何使用特定的 Solidity 编译器?
 
-Forge 将尝试自动检测哪个 Solidity 编译器适用于您的项目。
+Forge 将尝试自动检测哪个 Solidity 编译器适用于你的项目。
 
 要使用一个特定的 Solidity 编译器，你可以在你的 [配置文件][config] 中设置 [`solc`][config-solc]，
 或者将 `--use solc:<version>` 传递给支持它的 Forge 命令 (例如 [`forge build`][forge-build]
@@ -120,7 +120,7 @@ contract MyContractTest is TestBase {
 
 ### 我该如何离线使用 Forge?
 
-Forge 有时会检查适合您项目的较新 Solidity 版本。要离线使用 Forge，请使用 `--offline` 标志。
+Forge 有时会检查适合你项目的较新 Solidity 版本。要离线使用 Forge，请使用 `--offline` 标志。
 
 ### 我遇到了 Solc 错误
 

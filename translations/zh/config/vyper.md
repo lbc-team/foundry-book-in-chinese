@@ -4,9 +4,9 @@ Foundry 支持编译和测试 Vyper 合约。
 
 ### 1. 编译
 
-您可以按照 [这里](https://vyper.readthedocs.io/en/stable/installing-vyper.html) 的说明安装 Vyper。如果您的 PATH 中有 `vyper`，foundry 将自动使用它。
+你可以按照 [这里](https://vyper.readthedocs.io/en/stable/installing-vyper.html) 的说明安装 Vyper。如果你的 PATH 中有 `vyper`，foundry 将自动使用它。
 
-否则，您可以通过在 `foundry.toml` 中添加以下内容来设置 `vyper` 的路径：
+否则，你可以通过在 `foundry.toml` 中添加以下内容来设置 `vyper` 的路径：
 ```toml
 [vyper]
 path = "/path/to/vyper"
@@ -66,12 +66,12 @@ contract CounterTest is Test {
 
 ### 3. 部署
 
-您可以通过 `forge create` 命令部署 Vyper 合约：
+你可以通过 `forge create` 命令部署 Vyper 合约：
 ```bash
 forge create Counter --constructor-args '1' --rpc-url $RPC_URL --private-key $PRIVATE_KEY
 ```
 
-使用 `deployCode`，您也可以在脚本中部署 Vyper 合约：
+使用 `deployCode`，你也可以在脚本中部署 Vyper 合约：
 ```solidity
 import {Script} from "forge-std/Script.sol";
 
@@ -85,7 +85,7 @@ contract CounterScript is Script {
 
 ### 4. Vyper 脚本
 
-您可以像编写 Solidity 脚本一样编写 Vyper 脚本：
+你可以像编写 Solidity 脚本一样编写 Vyper 脚本：
 ```vyper
 interface Vm:
     def startBroadcast(): nonpayable
@@ -115,6 +115,6 @@ forge script script/Increment.s.vy  --sig 'run' '<counter address>' --rpc-url $R
 
 ### 5. 限制
 
-- 虽然您可以编写和运行 Vyper 的测试和脚本，但 Vyper 中没有 `new` 关键字来部署合约。未来将通过新的 cheatcodes 解决此问题。
+- 虽然你可以编写和运行 Vyper 的测试和脚本，但 Vyper 中没有 `new` 关键字来部署合约。未来将通过新的 cheatcodes 解决此问题。
 - Vyper 不允许使用相同名称但不同参数类型的重载。因此，一些 cheatcode 组合可能需要使用变通方法。（例如 `startBroadcast(address sender))` 和 `startBroadcast(uint256 pk)`）
 - `forge coverage` 目前不支持 Vyper 合约。

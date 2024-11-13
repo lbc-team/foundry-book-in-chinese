@@ -18,7 +18,7 @@ calldata 参数可以是 `ContractFile.sol`（如果文件名和合约名相同�
 >
 > `getDeployedCode` 需要输出目录的读取权限，请参阅 [文件作弊码](./fs.md) 。
 >
-> 要授予读取访问权限，请在您的 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
+> 要授予读取访问权限，请在你的 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
 
 ### 例子
 

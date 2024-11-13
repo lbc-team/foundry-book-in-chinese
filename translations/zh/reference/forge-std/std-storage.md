@@ -2,7 +2,7 @@
 
 Std Storage 是一个库，使操纵存储变得容易。
 
-要使用 Std Storage，请在您的测试合约中导入以下内容：
+要使用 Std Storage，请在你的测试合约中导入以下内容：
 
 ```solidity
 import {stdStorage, StdStorage} from "forge-std/Test.sol";              

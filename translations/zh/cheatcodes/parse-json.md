@@ -13,15 +13,15 @@ vm.parseJson(string memory json);
 
 这些作弊码用于解析字符串形式的 JSON 文件。通常，它与 `vm.readFile()` 配合使用，后者以字符串形式返回整个文件。
 
-您可以使用 `forge-std` 中的 `stdJson` 作为辅助库，以获得更好的用户体验。
+你可以使用 `forge-std` 中的 `stdJson` 作为辅助库，以获得更好的用户体验。
 
-该作弊码接受一个 `key`，用于在 JSON 中搜索特定值，或者不带 `key` 以返回整个 JSON。它将值作为 abi 编码的 `bytes` 数组返回。这意味着您必须使用 `abi.decode()` 将其解码为适当的类型，否则它将会 `revert`。
+该作弊码接受一个 `key`，用于在 JSON 中搜索特定值，或者不带 `key` 以返回整个 JSON。它将值作为 abi 编码的 `bytes` 数组返回。这意味着你必须使用 `abi.decode()` 将其解码为适当的类型，否则它将会 `revert`。
 
 ### JSONpath Key
 
 `parseJson` 使用一种称为 JSONpath 的语法来为任意的 JSON 文件形成任意的键。相同的语法（或者说是一种方言）被工具 [`jq`](https://stedolan.github.io/jq/) 使用。
 
-要了解更多关于该语法的信息，您可以访问我们在内部使用的 rust 库的 [README](https://crates.io/crates/jsonpath-rust)。这样您就可以确保您正在使用正确的 jsonPath 方言。
+要了解更多关于该语法的信息，你可以访问我们在内部使用的 rust 库的 [README](https://crates.io/crates/jsonpath-rust)。这样你就可以确保你正在使用正确的 jsonPath 方言。
 
 ### JSON 编码规则
 
@@ -58,7 +58,7 @@ vm.parseJson(string memory json);
 
 ### 将 JSON 对象解码为 Solidity 结构体
 
-JSON 对象被编码为元组，可以通过元组或结构体进行解码。这意味着您可以在 Solidity 中定义一个 `struct`，并将整个 JSON 对象解码为该 `struct`。
+JSON 对象被编码为元组，可以通过元组或结构体进行解码。这意味着你可以在 Solidity 中定义一个 `struct`，并将整个 JSON 对象解码为该 `struct`。
 
 例如：
 
@@ -89,7 +89,7 @@ struct Json {
 }
 ```
 
-重要的是字母顺序。由于 JSON 对象是一个无序的数据结构，但元组是一个有序的数据结构，我们必须以某种方式给 JSON 排序。最简单的方法是按照键的字母顺序进行排序。这意味着为了正确解码 JSON 对象，您需要定义结构体的属性，这些属性的 **类型** 对应于 JSON 键的字母顺序的值。
+重要的是字母顺序。由于 JSON 对象是一个无序的数据结构，但元组是一个有序的数据结构，我们必须以某种方式给 JSON 排序。最简单的方法是按照键的字母顺序进行排序。这意味着为了正确解码 JSON 对象，你需要定义结构体的属性，这些属性的 **类型** 对应于 JSON 键的字母顺序的值。
 
 - 结构体是按顺序解释的。这意味着元组的第一个项将根据结构体定义的第一个项进行解码（不是按字母顺序）。
 - JSON 将按字母顺序解析，而不是按顺序解析。
@@ -178,7 +178,7 @@ for (uint256 i = 0; i < fruitstall.apples.length; i++) {
 
 ### 解码 JSON 对象的提示
 
-如果您的 JSON 对象中有 `十六进制数`，它们将被编码为 `bytes`。为了更好的用户体验，将它们解码为 `uint` 的方法是定义两个 `struct`，一个中间 `struct` 定义这些值为 `bytes`，然后一个最终 `struct` 供用户使用。
+如果你的 JSON 对象中有 `十六进制数`，它们将被编码为 `bytes`。为了更好的用户体验，将它们解码为 `uint` 的方法是定义两个 `struct`，一个中间 `struct` 定义这些值为 `bytes`，然后一个最终 `struct` 供用户使用。
 
 1. 将 JSON 解码为中间 `struct`
 2. 将中间 `struct` 转换为最终 `struct`，将 `bytes` 转换为 `uint`。我们在 `forge-std` 中有一个辅助函数来执行此操作
@@ -191,7 +191,7 @@ for (uint256 i = 0; i < fruitstall.apples.length; i++) {
 3. 如果要解析简单值（数字、地址等），请使用辅助函数
 4. 如果要解析整个 JSON 对象：
    1. 在 Solidity 中定义 `struct`。确保按字母顺序--这很难调试
-   2. 使用 `parseRaw()` 辅助函数返回 abi 编码的 `bytes`，然后解码为您的 `struct`
+   2. 使用 `parseRaw()` 辅助函数返回 abi 编码的 `bytes`，然后解码为你的 `struct`
 
 ```solidity
 string memory root = vm.projectRoot();
@@ -205,7 +205,7 @@ RawTx1559Detail memory rawTxDetail = abi.decode(transactionDetails, (RawTx1559De
 
 我们已经创建了一些辅助结构和函数，用于读取广播 Forge 脚本生成的工件。
 
-目前，我们仅支持 EIP1559 兼容链生成的工件，并且我们 **尚不** 支持解析整个 `broadcast.json` 工件。您需要解析单独的值，例如 `transactions`、`receipts` 等。
+目前，我们仅支持 EIP1559 兼容链生成的工件，并且我们 **尚不** 支持解析整个 `broadcast.json` 工件。你需要解析单独的值，例如 `transactions`、`receipts` 等。
 
 要读取交易，只需执行以下操作：
 
@@ -217,7 +217,7 @@ function testReadEIP1559Transactions() public {
 }
 ```
 
-然后您可以在这些结构中访问它们的各种字段：
+然后你可以在这些结构中访问它们的各种字段：
 
 ```solidity
 struct Tx1559 {
@@ -248,7 +248,7 @@ struct Tx1559Detail {
 
 > 失败。原因：路径 `<file-path>` 不允许进行读取操作
 
-如果收到此错误，请确保您在 `foundry.toml` 中使用 [`fs_permissions`键](./fs.md) 启用了读取权限。
+如果收到此错误，请确保你在 `foundry.toml` 中使用 [`fs_permissions`键](./fs.md) 启用了读取权限。
 
 ### 参考
 

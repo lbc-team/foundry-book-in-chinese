@@ -18,8 +18,8 @@ function envString(string calldata key, string calldata delimiter) external retu
 
 ### 提示
 
-- 您可以将环境变量放在 `.env` 文件中。运行 `forge test` 时，Forge 将在加载时自动加载它们。
-- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
+- 你可以将环境变量放在 `.env` 文件中。运行 `forge test` 时，Forge 将在加载时自动加载它们。
+- 对于数组，你可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 - 选择一个在字符串值中不出现的分隔符，以便它们可以被正确分隔。
 
 ### 例子

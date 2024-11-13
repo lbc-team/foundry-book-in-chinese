@@ -1,10 +1,10 @@
 ## gas 函数快照
 
-Forge 可以为您所有的测试函数生成 gas 快照。这对于了解您的合约将消耗多少 gas，或在各种优化前后比较 gas 使用情况非常有用。
+Forge 可以为你所有的测试函数生成 gas 快照。这对于了解你的合约将消耗多少 gas，或在各种优化前后比较 gas 使用情况非常有用。
 
 要生成 gas 快照，请运行 [`forge snapshot`](../reference/forge/forge-snapshot.md)。
 
-这将默认生成一个名为 `.gas-snapshot` 的文件，其中包含您所有的测试及其各自的 gas 使用情况。
+这将默认生成一个名为 `.gas-snapshot` 的文件，其中包含你所有的测试及其各自的 gas 使用情况。
 
 ```ignore
 $ forge snapshot
@@ -24,19 +24,19 @@ ERC20Test:testTransferFrom() (gas: 84152)
 
 ### 过滤
 
-如果您想指定一个不同的输出文件，请运行 `forge snapshot --snap <FILE_NAME>`。
+如果你想指定一个不同的输出文件，请运行 `forge snapshot --snap <FILE_NAME>`。
 
-您还可以按 gas 使用情况对结果进行排序。使用 `--asc` 选项按升序排序结果，使用 `--desc` 选项按降序排序结果。
+你还可以按 gas 使用情况对结果进行排序。使用 `--asc` 选项按升序排序结果，使用 `--desc` 选项按降序排序结果。
 
-最后，您还可以为所有测试指定最小/最大 gas 阈值。要仅包含高于阈值的结果，可以使用 `--min <VALUE>` 选项。同样，要仅包含低于阈值的结果，可以使用 `--max <VALUE>` 选项。
+最后，你还可以为所有测试指定最小/最大 gas 阈值。要仅包含高于阈值的结果，可以使用 `--min <VALUE>` 选项。同样，要仅包含低于阈值的结果，可以使用 `--max <VALUE>` 选项。
 
-请记住，所做的更改将保存在快照文件中，而不是在您屏幕上显示的快照中。
+请记住，所做的更改将保存在快照文件中，而不是在你屏幕上显示的快照中。
 
-您还可以将其与 `forge test` 的过滤器结合使用，例如 `forge snapshot --match-path contracts/test/ERC721.t.sol` 以生成与此测试合约相关的 gas 快照。
+你还可以将其与 `forge test` 的过滤器结合使用，例如 `forge snapshot --match-path contracts/test/ERC721.t.sol` 以生成与此测试合约相关的 gas 快照。
 
 ### 比较 gas 使用情况
 
-如果您想将当前快照文件与您的最新更改进行比较，可以使用 `--diff` 或 `--check` 选项。
+如果你想将当前快照文件与你的最新更改进行比较，可以使用 `--diff` 或 `--check` 选项。
 
 `--diff` 将与快照进行比较并显示快照中的更改。
 
@@ -72,7 +72,7 @@ testApprove() (gas: -8 (-0.000%))
 Overall gas change: -8 (-0.000%)
 ```
 
-`--check` 将比较快照与现有快照文件，并显示所有差异（如果有）。您可以通过提供不同的文件名来更改要比较的文件：`--check <FILE_NAME>`。
+`--check` 将比较快照与现有快照文件，并显示所有差异（如果有）。你可以通过提供不同的文件名来更改要比较的文件：`--check <FILE_NAME>`。
 
 例如：
 

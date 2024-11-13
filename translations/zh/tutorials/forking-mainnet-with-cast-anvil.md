@@ -2,7 +2,7 @@
 
 ### 介绍
 
-通过结合 [Anvil][anvil] 和 [Cast][cast]，您可以通过与真实网络上的合约交互来进行分叉和测试。 本教程的目的是向您展示如何将 Dai 代币从持有 Dai 的人转移到 Anvil 创建的帐户。
+通过结合 [Anvil][anvil] 和 [Cast][cast]，你可以通过与真实网络上的合约交互来进行分叉和测试。 本教程的目的是向你展示如何将 Dai 代币从持有 Dai 的人转移到 Anvil 创建的帐户。
 
 ### 设置
 
@@ -12,7 +12,7 @@
 anvil --fork-url https://mainnet.infura.io/v3/$INFURA_KEY
 ```
 
-您将看到使用公钥和私钥创建了 10 个帐户。 我们将使用 `0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266`（我们称此用户为 Alice）。
+你将看到使用公钥和私钥创建了 10 个帐户。 我们将使用 `0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266`（我们称此用户为 Alice）。
 
 ### 转账 Dai
 

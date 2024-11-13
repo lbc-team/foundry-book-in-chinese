@@ -17,7 +17,7 @@ function envUint(string calldata key, string calldata delimiter) external return
 ### 提示
 
 - 如果值以 `0x` 开头，则将其解释为十六进制值，否则将视为十进制数。
-- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
+- 对于数组，你可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
 ### 例子
 

@@ -28,7 +28,7 @@ $ forge install transmission11/solmate@v7
 
 ### 重新映射依赖项
 
-Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 将自动尝试为您推断出一些重新映射：
+Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 将自动尝试为你推断出一些重新映射：
 
 ```sh
 {{#include ../output/deps/forge-remappings:all}}
@@ -41,7 +41,7 @@ Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 
 - 要从 `solmate` 导入，我们会这样写：`import "solmate/Contract.sol";`
 - 要从 `weird-erc20` 导入，我们会这样写：`import "weird-erc20/Contract.sol";`
 
-您可以通过在项目的根目录中创建一个 `remappings.txt` 文件来自定义这些重新映射。
+你可以通过在项目的根目录中创建一个 `remappings.txt` 文件来自定义这些重新映射。
 
 让我们创建一个名为 `solmate-utils` 的重映射，它指向 solmate repo中的 `utils` 文件夹！
 
@@ -49,7 +49,7 @@ Forge 可以重新映射(remap)依赖关系，使它们更容易导入。 Forge 
 @solmate-utils/=lib/solmate/src/utils/
 ```
 
-您还可以在 `foundry.toml` 中设置重映射。
+你还可以在 `foundry.toml` 中设置重映射。
 
 ```toml
 remappings = [
@@ -65,17 +65,17 @@ import {LibString} from "@solmate-utils/LibString.sol";
 
 ### 更新依赖
 
-您可以使用 [`forge update <dep>`](../reference/forge/forge-update.md) 将特定依赖项更新为您指定版本的最新提交。 例如，如果我们想从我们之前安装的 `solmate` 主版本中提取最新的提交，我们将运行：
+你可以使用 [`forge update <dep>`](../reference/forge/forge-update.md) 将特定依赖项更新为你指定版本的最新提交。 例如，如果我们想从我们之前安装的 `solmate` 主版本中提取最新的提交，我们将运行：
 
 ```sh
 $ forge update lib/solmate
 ```
 
-或者，您可以通过运行 `forge update` 一次对所有依赖项执行更新。
+或者，你可以通过运行 `forge update` 一次对所有依赖项执行更新。
 
 ### 删除依赖
 
-您可以使用 [`forge remove <deps>...`](../reference/forge/forge-remove.md) 删除依赖项，其中 `<deps>` 是依赖项的完整路径或只是名称 . 例如，要删除 `solmate`，这两个命令是等价的：
+你可以使用 [`forge remove <deps>...`](../reference/forge/forge-remove.md) 删除依赖项，其中 `<deps>` 是依赖项的完整路径或只是名称 . 例如，要删除 `solmate`，这两个命令是等价的：
 
 ```ignore
 $ forge remove solmate

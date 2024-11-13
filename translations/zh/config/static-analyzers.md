@@ -2,7 +2,7 @@
 
 ### Slither
 
-要使用 [slither](https://github.com/crytic/slither) 测试您的项目，这里有一个示例 `slither.config.json`：
+要使用 [slither](https://github.com/crytic/slither) 测试你的项目，这里有一个示例 `slither.config.json`：
 
 ```json
 {
@@ -26,11 +26,11 @@ slither src/Contract.sol
 
 请注意，这需要在 [foundry 配置文件中配置 solc 版本](https://book.getfoundry.sh/reference/config/solidity-compiler#solc_version)。
 
-您无需通过 `solc_remaps` 选项提供重映射，因为 Slither 将自动检测 Foundry 项目中的重映射。Slither 将调用 `forge` 来执行构建。
+你无需通过 `solc_remaps` 选项提供重映射，因为 Slither 将自动检测 Foundry 项目中的重映射。Slither 将调用 `forge` 来执行构建。
 
 有关更多信息，请参阅 [Slither wiki](https://github.com/crytic/slither/wiki/Usage)。
 
-为了使用自定义配置，例如上面提到的示例 `slither.config.json`，可以使用以下命令，如 [slither-wiki](https://github.com/crytic/slither/wiki/Usage#configuration-file) 中所述。默认情况下，slither 会查找 `slither.config.json`，但您可以定义路径和您选择的任何其他 `json` 文件：
+为了使用自定义配置，例如上面提到的示例 `slither.config.json`，可以使用以下命令，如 [slither-wiki](https://github.com/crytic/slither/wiki/Usage#configuration-file) 中所述。默认情况下，slither 会查找 `slither.config.json`，但你可以定义路径和你选择的任何其他 `json` 文件：
 
 ```sh
 slither --config-file <path>/file.config.json .
@@ -55,7 +55,7 @@ Slither 还有一个用于 CI/CD 的 [GitHub Action](https://github.com/marketpl
 
 ### Mythril
 
-要使用 [mythril](https://github.com/ConsenSys/mythril) 测试您的项目，这里有一个示例 `mythril.config.json`：
+要使用 [mythril](https://github.com/ConsenSys/mythril) 测试你的项目，这里有一个示例 `mythril.config.json`：
 
 ```json
 {
@@ -70,7 +70,7 @@ Slither 还有一个用于 CI/CD 的 [GitHub Action](https://github.com/marketpl
 }
 ```
 
-请注意，您需要将 `rust` 切换为 nightly 版本以安装 `mythril`：
+请注意，你需要将 `rust` 切换为 nightly 版本以安装 `mythril`：
 
 ```ignore
 rustup default nightly
@@ -80,7 +80,7 @@ myth analyze src/Contract.sol --solc-json mythril.config.json
 
 有关详细信息，请参阅 [mythril 文档](https://mythril-classic.readthedocs.io/en/develop/)。
 
-您可以使用 `--solc-json` 标志将自定义 Solc 编译器输出传递给 Mythril。 例如：
+你可以使用 `--solc-json` 标志将自定义 Solc 编译器输出传递给 Mythril。 例如：
 
 ```bash
 $ myth analyze src/Counter.sol --solc-json mythril.config.json

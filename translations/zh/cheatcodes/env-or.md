@@ -40,7 +40,7 @@ function envOr(string calldata key, string calldata delimiter, bytes[] calldata 
 ### 例子
 
 #### 单个值
-如果环境变量 `FORK` 未设置，您可以将其默认设置为 `false`：
+如果环境变量 `FORK` 未设置，你可以将其默认设置为 `false`：
 ```solidity
 bool fork = vm.envOr("FORK", false);
 ```
@@ -54,7 +54,7 @@ function setUp() {
 ```
 
 #### 数组
-如果环境变量 `BAD_TOKENS` 未设置，您可以将默认值指定为空数组：
+如果环境变量 `BAD_TOKENS` 未设置，你可以将默认值指定为空数组：
 ```solidity
 address[] badTokens;
 

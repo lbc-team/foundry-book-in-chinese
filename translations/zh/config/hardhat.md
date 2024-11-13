@@ -1,6 +1,6 @@
 ## 与 Hardhat 集成
 
-可以让您的 Foundry 项目与 [Hardhat](https://hardhat.org/) 一起工作。本文假设您的系统中已安装了 Foundry 和 node。本文还假定您对 Foundry 和 Hardhat 都很熟悉。
+可以让你的 Foundry 项目与 [Hardhat](https://hardhat.org/) 一起工作。本文假设你的系统中已安装了 Foundry 和 node。本文还假定你对 Foundry 和 Hardhat 都很熟悉。
 
 ### 为什么这不能开箱即用？
 
@@ -17,18 +17,18 @@
 
 [Enjoy！](https://github.com/foundry-rs/hardhat-foundry-template)
 
-如果您想将其适配到已有的 Foundry 项目或了解其工作原理，请阅读以下内容：
+如果你想将其适配到已有的 Foundry 项目或了解其工作原理，请阅读以下内容：
 
 ### 指示
 
-在您的 Foundry 项目工作目录中：
+在你的 Foundry 项目工作目录中：
 
 1. `npm init -y` - 这将设置一个 `package.json` 文件。
-2. `npm i --save-dev hardhat` - 将 Hardhat 作为开发依赖项安装到您的项目中。
-3. `npx hardhat init` - 在相同目录中初始化您的 Hardhat 项目，并选择 “**创建一个空的 hardhat.config.js**” 选项。这将创建一个基本的 `hardhat.config.js` 文件。
+2. `npm i --save-dev hardhat` - 将 Hardhat 作为开发依赖项安装到你的项目中。
+3. `npx hardhat init` - 在相同目录中初始化你的 Hardhat 项目，并选择 “**创建一个空的 hardhat.config.js**” 选项。这将创建一个基本的 `hardhat.config.js` 文件。
 4. `npm i --save-dev @nomicfoundation/hardhat-foundry @nomicfoundation/hardhat-toolbox` - 这将安装 hardhat-foundry 插件和 Hardhat 工具包插件，后者是运行 Hardhat 测试所需的所有基本依赖项的组合。
 
-为使插件工作，您的 hardhat.config.js 文件应如下所示：
+为使插件工作，你的 hardhat.config.js 文件应如下所示：
 
 ```javascript
 require("@nomicfoundation/hardhat-toolbox");
@@ -73,19 +73,19 @@ describe("Counter contract", function () {
 这段代码将执行与默认的 `Counter.t.sol` 文件相同的测试。
 
 就是这样！
-您可以在同一个 `test` 目录中创建 Hardhat 和 Foundry 测试，并分别使用 `npx hardhat test` 和 `forge test` 运行它们。
+你可以在同一个 `test` 目录中创建 Hardhat 和 Foundry 测试，并分别使用 `npx hardhat test` 和 `forge test` 运行它们。
 查看 [Hardhat 的文档](https://hardhat.org/docs)以了解更多信息。
 
 ### 将 Foundry 添加到 Hardhat 项目中
 
-在您的 Hardhat 项目工作目录中：
+在你的 Hardhat 项目工作目录中：
 
 1. `npm i --save-dev @nomicfoundation/hardhat-foundry` - 安装 hardhat-foundry 插件。
-2. 将 `require("@nomicfoundation/hardhat-foundry");` 添加到您的 `hardhat.config.js` 文件顶部。
+2. 将 `require("@nomicfoundation/hardhat-foundry");` 添加到你的 `hardhat.config.js` 文件顶部。
 
 > ℹ️ **注意**
-> 如果您的目录尚未初始化为 git 存储库，则步骤 3 将无法正常工作。如果尚未初始化，请运行 `git init`。
+> 如果你的目录尚未初始化为 git 存储库，则步骤 3 将无法正常工作。如果尚未初始化，请运行 `git init`。
 
-3. 在终端中运行 `npx hardhat init-foundry`。这将基于您的 Hardhat 项目的现有配置生成一个 `foundry.toml` 文件，并安装 `forge-std` 库。
+3. 在终端中运行 `npx hardhat init-foundry`。这将基于你的 Hardhat 项目的现有配置生成一个 `foundry.toml` 文件，并安装 `forge-std` 库。
 
-Hardhat 现在将在相同目录中设置一个基本的 Foundry 项目，并在 `foundry.toml` 文件中进行一些配置，以确保 Foundry 知道在哪里查找您的合约、测试和依赖项。您始终可以通过编辑 `foundry.toml` 文件来更改这些配置。
+Hardhat 现在将在相同目录中设置一个基本的 Foundry 项目，并在 `foundry.toml` 文件中进行一些配置，以确保 Foundry 知道在哪里查找你的合约、测试和依赖项。你始终可以通过编辑 `foundry.toml` 文件来更改这些配置。

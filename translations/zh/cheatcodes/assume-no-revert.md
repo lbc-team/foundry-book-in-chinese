@@ -12,7 +12,7 @@ function assumeNoRevert() external;
 
 如果达到最大拒绝次数，测试可能会失败。
 
-您可以通过在 `foundry.toml` 文件中设置 [`fuzz.max_test_rejects`][max-test-rejects] 来配置拒绝阈值。
+你可以通过在 `foundry.toml` 文件中设置 [`fuzz.max_test_rejects`][max-test-rejects] 来配置拒绝阈值。
 
 ### 示例
 

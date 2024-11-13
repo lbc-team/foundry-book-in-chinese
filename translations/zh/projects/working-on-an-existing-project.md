@@ -1,6 +1,6 @@
 ## 在现有项目工作
 
-如果您下载一个使用 Foundry 的现有项目，那真的很容易上手。
+如果你下载一个使用 Foundry 的现有项目，那真的很容易上手。
 
 对于这个例子，我们将使用[PaulRBerg][paul]的[`foundry-template`][template]。
 

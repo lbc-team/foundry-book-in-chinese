@@ -35,6 +35,6 @@ $ cd hello_foundry
 {{#include ../output/hello_foundry/forge-test:all}}
 ```
 
-您会注意到产生了两个新目录：`out` 和 `cache`。
+你会注意到产生了两个新目录：`out` 和 `cache`。
 
-`out` 目录包含您的合约工件(artifact，例如 ABI，而 `cache` 目录被 `forge` 使用来（记录），以便仅仅去重新编译那些必要编译的内容。
+`out` 目录包含你的合约工件(artifact，例如 ABI，而 `cache` 目录被 `forge` 使用来（记录），以便仅仅去重新编译那些必要编译的内容。

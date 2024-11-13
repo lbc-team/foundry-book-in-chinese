@@ -34,7 +34,7 @@ forge-build - 构建项目的智能合约。
 
 你可以通过 `--optimize` 来启用优化器，你可以通过 `--optimizer-runs <RUNS>` 来调整优化器的 runs 数量。
 
-您也可以通过传递 `--via-ir` 来选择加入 Solidity IR 编译管道。在 [Solidity 文档][ir-pipeline] 中阅读更多关于 IR 管道的信息。
+你也可以通过传递 `--via-ir` 来选择加入 Solidity IR 编译管道。在 [Solidity 文档][ir-pipeline] 中阅读更多关于 IR 管道的信息。
 
 默认情况下，优化器被启用并设置 runs 为 200 个周期。
 
@@ -88,7 +88,7 @@ optimizerSteps = ''
 
 #### Artifacts
 
-您可以通过传递 `--extra-output <SELECTOR>` 将 Solidity 编译器的额外输出添加到您的 artifacts 中。
+你可以通过传递 `--extra-output <SELECTOR>` 将 Solidity 编译器的额外输出添加到你的 artifacts 中。
 
 选择器是 Solidity 编译器输出中的一个路径，你可以在 [Solidity 文档][output-desc] 中阅读更多关于它的信息。
 

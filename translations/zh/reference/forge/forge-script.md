@@ -59,7 +59,7 @@ forge-script - 以脚本形式运行智能合约，建立可在链上发送的�
 &nbsp;&nbsp;&nbsp;&nbsp;你想要运行的合约名称。
 
 `--priority-gas-price`  
-&nbsp;&nbsp;&nbsp;&nbsp;设置 EIP1559 交易的优先级 Gas 价格。当 Gas 价格波动较大且您希望确保您的交易被包含时，此选项非常有用。
+&nbsp;&nbsp;&nbsp;&nbsp;设置 EIP1559 交易的优先级 Gas 价格。当 Gas 价格波动较大且你希望确保你的交易被包含时，此选项非常有用。
 
 `--with-gas-price` *price*  
 &nbsp;&nbsp;&nbsp;&nbsp;设置 **广播** 传统交易的 Gas 价格，或广播 EIP1559 交易的最大费用。 

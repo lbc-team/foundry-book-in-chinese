@@ -38,7 +38,7 @@ cast-call - 在不发布交易的情况下对账户进行调用。
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;您要查询的区块高度。
+&nbsp;&nbsp;&nbsp;&nbsp;你要查询的区块高度。
 
 &nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，也可以是任何标签：`earliest`、`finalized`、`safe`、`latest`或`pending`。
 

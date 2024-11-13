@@ -13,7 +13,7 @@ Forge 可以为失败的测试（`-vvv`）或所有测试（`-vvvv`）生成跟�
 
 每个跟踪可以有更多的子跟踪（subtraces），每个 subtraces 表示对合约的调用和返回值。
 
-如果您的终端支持颜色，跟踪也会有多种颜色：
+如果你的终端支持颜色，跟踪也会有多种颜色：
 
 - **绿色**：对于不会 revert 的调用
 - **红色**：用于有 revert 的调用
@@ -21,7 +21,7 @@ Forge 可以为失败的测试（`-vvv`）或所有测试（`-vvvv`）生成跟�
 - **青色**：用于触发日志
 - **黄色**：用于合约部署
 
-Gas 使用量（标在方括号中）显示整个函数调用 Gas。 但是，您可能会注意到，有时一条 trace 的 Gas 使用量与其所有 subtraces 的 Gas 使用量和并不完全匹配：
+Gas 使用量（标在方括号中）显示整个函数调用 Gas。 但是，你可能会注意到，有时一条 trace 的 Gas 使用量与其所有 subtraces 的 Gas 使用量和并不完全匹配：
 
 ```ignore
   [24661] OwnerUpOnlyTest::testIncrementAsOwner()

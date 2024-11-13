@@ -2,7 +2,7 @@
 
 Chisel 是随 Foundry 提供的高级 Solidity REPL。它可用于在本地或分叉网络上快速测试 Solidity 片段。
 
-Chisel 是 Foundry 套件的一部分，与 `forge`、`cast` 和 `anvil` 一起安装。如果您尚未安装 Foundry 请参阅 [Foundry 安装](../getting-started/installation.md)。
+Chisel 是 Foundry 套件的一部分，与 `forge`、`cast` 和 `anvil` 一起安装。如果你尚未安装 Foundry 请参阅 [Foundry 安装](../getting-started/installation.md)。
 
 > 注意：如果已经安装了旧版 Foundry，则需要重新安装 `foundryup` 才能下载 Chisel。
 

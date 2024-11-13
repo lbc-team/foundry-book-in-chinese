@@ -16,7 +16,7 @@ function envAddress(string calldata key, string calldata delimiter) external ret
 
 ### 提示
 
-- 对于数组，您可以使用 `delimiter` 参数指定用于分隔值的分隔符。
+- 对于数组，你可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
 ### 例子
 

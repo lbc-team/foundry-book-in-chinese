@@ -13,15 +13,15 @@ vm.parseToml(string memory toml);
 
 这些作弊码用于在转换为 JSON 后解析字符串形式的 TOML 文件。通常，它与 `vm.readFile()` 结合使用，该函数以字符串形式返回整个文件。
 
-您可以使用 `forge-std` 中的 `stdToml` 作为辅助库，以获得更好的用户体验。
+你可以使用 `forge-std` 中的 `stdToml` 作为辅助库，以获得更好的用户体验。
 
-该作弊码接受一个 `key` 来搜索 TOML 中的特定值，或者不提供 key 来返回整个 TOML。它将值作为 abi 编码的 `bytes` 数组返回。这意味着您必须使用 `abi.decode()` 将其解码为适当的类型，以便其正常工作，否则将会 `revert`。
+该作弊码接受一个 `key` 来搜索 TOML 中的特定值，或者不提供 key 来返回整个 TOML。它将值作为 abi 编码的 `bytes` 数组返回。这意味着你必须使用 `abi.decode()` 将其解码为适当的类型，以便其正常工作，否则将会 `revert`。
 
 ### JSONpath 键
 
 `parseToml` 使用一种称为 JSONpath 的语法来形成任意 JSON 文件的任意键。该语法（或更确切地说是一种方言）也被工具 [`jq`](https://stedolan.github.io/jq/) 使用。
 
-要了解更多关于该语法的信息，您可以访问我们在底层实现该功能时使用的 Rust 库的 [README](https://crates.io/crates/jsonpath-rust)。这样您可以确保使用的是正确的 jsonPath 方言。
+要了解更多关于该语法的信息，你可以访问我们在底层实现该功能时使用的 Rust 库的 [README](https://crates.io/crates/jsonpath-rust)。这样你可以确保使用的是正确的 jsonPath 方言。
 
 ### 编码规则
 
@@ -69,7 +69,7 @@ numberUint = 9223372036854775807 # TOML is limited to 64-bit integers
 
 ### 将 TOML 表解码为 Solidity 结构体
 
-TOML 表被转换为 JSON 对象。JSON 对象被编码为元组，可以通过元组或结构体进行解码。这意味着您可以在 Solidity 中定义一个 `struct`，它将把整个 JSON 对象解码到该 `struct` 中。
+TOML 表被转换为 JSON 对象。JSON 对象被编码为元组，可以通过元组或结构体进行解码。这意味着你可以在 Solidity 中定义一个 `struct`，它将把整个 JSON 对象解码到该 `struct` 中。
 
 例如：
 
@@ -107,7 +107,7 @@ struct Json {
 }
 ```
 
-重要的是字母顺序。由于 JSON 是一种无序数据结构，而元组是有序的，因此我们必须以某种方式给 JSON 赋予顺序。最简单的方法是按字母顺序对键进行排序。这意味着为了正确解码 JSON 对象，您需要定义结构体的属性，其 **类型** 与 JSON 键的字母顺序对应。
+重要的是字母顺序。由于 JSON 是一种无序数据结构，而元组是有序的，因此我们必须以某种方式给 JSON 赋予顺序。最简单的方法是按字母顺序对键进行排序。这意味着为了正确解码 JSON 对象，你需要定义结构体的属性，其 **类型** 与 JSON 键的字母顺序对应。
 
 - 结构体是串行解释的。这意味着元组的第一个项目将根据结构体定义的第一个项目进行解码（没有字母顺序）。
 - JSON 将按字母顺序解析，而不是串行。
@@ -219,10 +219,10 @@ for (uint256 i = 0; i < fruitstall.apples.length; i++) {
 
 1. 导入库 `import {stdToml} from "forge-std/StdToml.sol";`
 2. 使用 `string` 定义其用法：`using stdToml for string;`
-3. 如果您想解析简单值（数字、地址等），请使用辅助函数
-4. 如果您想解析整个 TOML 表：
+3. 如果你想解析简单值（数字、地址等），请使用辅助函数
+4. 如果你想解析整个 TOML 表：
    1. 在 Solidity 中定义 `struct`。确保遵循字母顺序——这很难调试
-   2. 使用 `parseRaw()` 辅助函数返回 abi 编码的 `bytes`，然后将其解码为您的结构体
+   2. 使用 `parseRaw()` 辅助函数返回 abi 编码的 `bytes`，然后将其解码为你的结构体
 
 ```solidity
 string memory root = vm.projectRoot();
@@ -238,7 +238,7 @@ Config memory config = abi.decode(data, (Config))
 
 > FAIL. 原因：路径 `<file-path>` 不允许进行读取操作
 
-如果您收到此错误，请确保在 `foundry.toml` 中使用 [`fs_permissions` 键](./fs.md) 启用读取权限。
+如果你收到此错误，请确保在 `foundry.toml` 中使用 [`fs_permissions` 键](./fs.md) 启用读取权限。
 
 ### 参考
 

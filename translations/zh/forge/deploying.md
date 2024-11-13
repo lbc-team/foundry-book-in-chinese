@@ -6,7 +6,7 @@ Forge CLI 一次只能部署一个合约。
 
 为了一次性部署和验证多个智能合约，Forge 的 [Solidity 脚本](../tutorials/solidity-scripting.md#deploying-our-contract) 将是更有效的方法。
 
-要部署合约，您必须提供 RPC URL（env：`ETH_RPC_URL`）和部署合约的帐户私钥。
+要部署合约，你必须提供 RPC URL（env：`ETH_RPC_URL`）和部署合约的帐户私钥。
 
 将 `MyContract` 部署到网络：
 
@@ -58,22 +58,22 @@ $ forge create --rpc-url <your_rpc_url> \
 建议在 `forge create` 中使用 `--verify` 标志，以便部署后在 explorer 上自动验证合约。
 请注意，对于 Etherscan，必须设置 [`ETHERSCAN_API_KEY`](../reference/config/etherscan.md#etherscan_api_key)。
 
-如果您正在验证已部署的合约，请继续阅读。
+如果你正在验证已部署的合约，请继续阅读。
 
-您可以使用 [`forge verify-contract`](../reference/forge/forge-verify-contract.md) 命令在 Etherscan、Sourcify、oklink 或 Blockscout 上验证合约。
+你可以使用 [`forge verify-contract`](../reference/forge/forge-verify-contract.md) 命令在 Etherscan、Sourcify、oklink 或 Blockscout 上验证合约。
 
-您必须提供：
+你必须提供：
 - 合约地址
 - 合约名称或合约路径 `<path>:<contractname>`
-- 您的 Etherscan API 密钥（env：`ETHERSCAN_API_KEY`）（如果在 Etherscan 上验证）。
+- 你的 Etherscan API 密钥（env：`ETHERSCAN_API_KEY`）（如果在 Etherscan 上验证）。
 
-此外，您可能需要提供：
+此外，你可能需要提供：
 - ABI 编码格式的构造函数参数，如果有的话
 - [编译器版本](https://etherscan.io/solcversions) 用于构建，由提交版本前缀的 8 位十六进制数字组成（提交通常不是 nightly 版本）。 如果未指定，则会自动检测。
 - 优化次数，如果激活了 Solidity 优化器。 如果未指定，则会自动检测。
 - [链 ID](https://evm-chainlist.netlify.app/)，如果合约不在以太坊主网上
 
-假设您想验证 `MyToken`（见上文）。 您将 [优化次数](../reference/config/solidity-compiler.md#optimizer_runs) 设置为 100 万，使用 v0.8.10 对其进行编译，并将其部署到如上所示的 Sepolia 测试网（链 ID : 11155111). 请注意，如果在验证时没有设置 `--num-of-optimizations` 将默认为 0，而如果在部署时没有设置则默认为 200，所以如果你使用默认的编译设置，请确保输入 `--num-of-optimizations 200`。
+假设你想验证 `MyToken`（见上文）。 你将 [优化次数](../reference/config/solidity-compiler.md#optimizer_runs) 设置为 100 万，使用 v0.8.10 对其进行编译，并将其部署到如上所示的 Sepolia 测试网（链 ID : 11155111). 请注意，如果在验证时没有设置 `--num-of-optimizations` 将默认为 0，而如果在部署时没有设置则默认为 200，所以如果你使用默认的编译设置，请确保输入 `--num-of-optimizations 200`。
 
 验证方法如下：
 
@@ -97,7 +97,7 @@ Submitted contract for verification:
 建议在使用 `verify-contract` 命令的同时使用 [`--watch`](../reference/forge/forge-verify-contract.md#verify-contract-options) 标志
 以便轮询验证结果。
 
-如果未提供 `--watch` 标志，您可以
+如果未提供 `--watch` 标志，你可以
 使用 [`forge verify-check`](../reference/forge/forge-verify-check.md) 命令检查验证状态：
 
 ```bash
@@ -121,7 +121,7 @@ Contract successfully verified.
 确保私钥字符串以 `0x` 开头。
 
 ##### `EIP-1559 not activated`
-RPC 服务器不支持或未激活 EIP-1559。 传递 `--legacy` 标志以使用旧交易而不是 EIP-1559 交易。 如果您在本地环境中进行开发，则可以使用 Hardhat 而不是 Ganache。
+RPC 服务器不支持或未激活 EIP-1559。 传递 `--legacy` 标志以使用旧交易而不是 EIP-1559 交易。 如果你在本地环境中进行开发，则可以使用 Hardhat 而不是 Ganache。
 
 ##### `Failed to parse tokens`
 确保传递的参数类型正确。
@@ -130,7 +130,7 @@ RPC 服务器不支持或未激活 EIP-1559。 传递 `--legacy` 标志以使用
 确保私钥正确。
 
 ##### `Compiler version commit for verify`
-如果您想检查您在本地运行的确切提交，请尝试：`~/.svm/0.x.y/solc-0.x.y --version` 其中 `x` 和
+如果你想检查你在本地运行的确切提交，请尝试：`~/.svm/0.x.y/solc-0.x.y --version` 其中 `x` 和
 `y` 分别是主要和次要版本号。 其输出类似于：
 
 ```ignore
@@ -138,7 +138,7 @@ solc, the solidity compiler commandline interface
 Version: 0.8.12+commit.f00d7308.Darwin.appleclang
 ```
 
-注意：您不能只粘贴整个字符串“0.8.12+commit.f00d7308.Darwin.appleclang”作为编译器版本的参数。 但是您可以使用提交的 8 位十六进制数字来准确查找您应该从 [编译器版本](https://etherscan.io/solcversions) 复制和粘贴的内容。
+注意：你不能只粘贴整个字符串“0.8.12+commit.f00d7308.Darwin.appleclang”作为编译器版本的参数。 但是你可以使用提交的 8 位十六进制数字来准确查找你应该从 [编译器版本](https://etherscan.io/solcversions) 复制和粘贴的内容。
 
 ### 已知的问题
 

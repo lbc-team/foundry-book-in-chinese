@@ -13,9 +13,9 @@ function assume(bool) external;
 `assume` 作弊码主要用于非常狭窄的检查。
 广泛的检查会减慢测试速度，因为找到有效值需要一段时间，如果达到最大拒绝次数，测试可能会失败。
 
-您可以通过在您的 `foundry.toml` 文件中设置 [`fuzz.max_test_rejects`][max-test-rejects] 来配置拒绝阈值。
+你可以通过在你的 `foundry.toml` 文件中设置 [`fuzz.max_test_rejects`][max-test-rejects] 来配置拒绝阈值。
 
-对于广泛的检查，比如确保 `uint256` 落在某个范围内，您可以使用取模运算符或 Forge Standard 的 [`bound`][forge-std-bound] 方法来限制您的输入。
+对于广泛的检查，比如确保 `uint256` 落在某个范围内，你可以使用取模运算符或 Forge Standard 的 [`bound`][forge-std-bound] 方法来限制你的输入。
 
 有关通过 `assume` 进行过滤的更多信息，请参见[这里][filtering-guide]。
 

@@ -1,6 +1,6 @@
 ## Cast 概述
 
-Cast 是 Foundry 用于执行以太坊 RPC 调用的命令行工具。 您可以进行智能合约调用、发送交易或检索任何类型的链数据——所有这些都来自您的命令行！
+Cast 是 Foundry 用于执行以太坊 RPC 调用的命令行工具。 你可以进行智能合约调用、发送交易或检索任何类型的链数据——所有这些都来自你的命令行！
 
 ### 如何使用 Cast
 
@@ -24,7 +24,7 @@ $ cast <subcommand>
 {{#include ../output/cast/cast-4byte-decode:all}}
 ```
 
-您还可以使用 `cast` 发送任意消息。 下面是在两个 Anvil 帐户之间发送消息的示例。
+你还可以使用 `cast` 发送任意消息。 下面是在两个 Anvil 帐户之间发送消息的示例。
 
 ```bash
 $ cast send --private-key <Your Private Key> 0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc $(cast from-utf8 "hello world") --rpc-url http://127.0.0.1:8545/

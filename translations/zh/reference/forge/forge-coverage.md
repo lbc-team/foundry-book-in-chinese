@@ -20,12 +20,12 @@ forge coverage - 显示哪些部分的代码已被测试覆盖。
 
 #### 报告选项
 
-`--report` 允许您指定用于覆盖率的报告类型。此标志可以多次使用。
+`--report` 允许你指定用于覆盖率的报告类型。此标志可以多次使用。
 
 它有三个不同的选项，默认设置为 `summary`。
 
 `summary`  
-&nbsp;&nbsp;&nbsp;&nbsp;输出一个图表，显示您的代码有多少百分比被测试覆盖。
+&nbsp;&nbsp;&nbsp;&nbsp;输出一个图表，显示你的代码有多少百分比被测试覆盖。
 
 `lcov`  
 &nbsp;&nbsp;&nbsp;&nbsp;在项目目录的根目录中创建一个包含覆盖率数据的 lcov.info 文件。
@@ -37,7 +37,7 @@ forge coverage - 显示哪些部分的代码已被测试覆盖。
 
 #### 优化选项
 
-`--ir-minimum` 允许您在覆盖率运行时启用 `via-ir`，以实现所需的 ["最小优化量"](https://github.com/ethereum/solidity/issues/12533#issuecomment-1013073350)。
+`--ir-minimum` 允许你在覆盖率运行时启用 `via-ir`，以实现所需的 ["最小优化量"](https://github.com/ethereum/solidity/issues/12533#issuecomment-1013073350)。
 
 ### 示例
 

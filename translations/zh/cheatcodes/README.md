@@ -1,24 +1,24 @@
 ## 作弊码参考
 
-作弊码为您提供强大的断言，改变 EVM 状态的能力，模拟数据等功能。
+作弊码为你提供强大的断言，改变 EVM 状态的能力，模拟数据等功能。
 
 通过使用作弊码地址（`0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`）来提供作弊码。
 
 > ℹ️ **注意**
 >
-> 如果在测试中使用模糊地址时遇到此地址的错误，您可能希望通过使用以下行将其从模糊测试中排除：
+> 如果在测试中使用模糊地址时遇到此地址的错误，你可能希望通过使用以下行将其从模糊测试中排除：
 >
 > ```solidity
 > vm.assume(address_ != 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
 > ```
 
-您还可以通过 Forge 标准库的 [`Test`](../reference/forge-std/#forge-stds-test) 合约中提供的 `vm` 轻松访问作弊码。
+你还可以通过 Forge 标准库的 [`Test`](../reference/forge-std/#forge-stds-test) 合约中提供的 `vm` 轻松访问作弊码。
 
 ### Forge 标准库作弊码
 
 Forge 标准库实现了作弊码的包装器，这些包装器结合了多个标准作弊码，以改进开发体验。这些技术上不是作弊码，而是 Forge 作弊码的组合。
 
-您可以在[参考部分](../reference/forge-std/std-cheats.md)中查看 Forge 标准库作弊码包装器的列表。您可以参考[Forge 标准库源代码](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) 以了解包装器在内部是如何工作的。
+你可以在[参考部分](../reference/forge-std/std-cheats.md)中查看 Forge 标准库作弊码包装器的列表。你可以参考[Forge 标准库源代码](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) 以了解包装器在内部是如何工作的。
 
 ### 作弊码类型
 
@@ -36,7 +36,7 @@ Forge 标准库实现了作弊码的包装器，这些包装器结合了多个�
 
 ### 添加新的作弊码
 
-如果您需要新功能，请考虑[贡献到 Foundry 的代码库](../contributing.md)以添加作弊码。
+如果你需要新功能，请考虑[贡献到 Foundry 的代码库](../contributing.md)以添加作弊码。
 
 ### 作弊码接口
 

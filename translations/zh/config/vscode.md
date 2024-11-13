@@ -1,18 +1,18 @@
 ## 与 VSCode 集成
 
-您可以通过安装 [VSCode Solidity 扩展](https://github.com/juanfranblanco/vscode-solidity) 获得对 Visual Studio Code 的 Solidity 支持。
+你可以通过安装 [VSCode Solidity 扩展](https://github.com/juanfranblanco/vscode-solidity) 获得对 Visual Studio Code 的 Solidity 支持。
 
-要使该扩展与 Foundry 协同工作，您可能需要调整一些设置。
+要使该扩展与 Foundry 协同工作，你可能需要调整一些设置。
 
 ### 1. 重映射
 
-您可能希望将重映射放置在 `remappings.txt` 中。
+你可能希望将重映射放置在 `remappings.txt` 中。
 
-如果它们已经在 `foundry.toml` 中，请将其复制并改用 `remappings.txt`。如果您只是使用 Foundry 提供的自动生成的重映射，请运行 `forge remappings > remappings.txt`。
+如果它们已经在 `foundry.toml` 中，请将其复制并改用 `remappings.txt`。如果你只是使用 Foundry 提供的自动生成的重映射，请运行 `forge remappings > remappings.txt`。
 
 ### 2. 依赖项
 
-您可能需要将以下内容添加到您的 `.vscode/settings.json` 中，以便扩展程序找到您的依赖项：
+你可能需要将以下内容添加到你的 `.vscode/settings.json` 中，以便扩展程序找到你的依赖项：
 
 ```json
 {
@@ -21,11 +21,11 @@
 }
 ```
 
-其中 `src` 是源代码目录，`lib` 是您的依赖项目录。
+其中 `src` 是源代码目录，`lib` 是你的依赖项目录。
 
 ### 3. 格式化程序
 
-要启用 Foundry 提供的内置格式化程序在保存时自动格式化您的代码，您可以将以下设置添加到您的 `.vscode/settings.json` 中：
+要启用 Foundry 提供的内置格式化程序在保存时自动格式化你的代码，你可以将以下设置添加到你的 `.vscode/settings.json` 中：
 
 ```json
 {

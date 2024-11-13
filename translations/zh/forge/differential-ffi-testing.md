@@ -1,6 +1,6 @@
 ## 差异测试
 
-Forge 可用于差异测试（differential testing）和差异模糊测试（differential fuzzing）。 您甚至可以使用[ `ffi` 作弊码 ](../cheatcodes/ffi.md) 针对非 EVM 可执行文件进行测试。
+Forge 可用于差异测试（differential testing）和差异模糊测试（differential fuzzing）。 你甚至可以使用[ `ffi` 作弊码 ](../cheatcodes/ffi.md) 针对非 EVM 可执行文件进行测试。
 
 ### 背景
 
@@ -8,7 +8,7 @@ Forge 可用于差异测试（differential testing）和差异模糊测试（dif
 
 差异模糊测试是差异测试的扩展。 差异模糊以编程方式生成许多`x`值，以发现手动选择的输入可能无法揭示的差异和边缘情况。
 
-> 注意：本例中的 `==` 运算符可以是等效性的自定义定义。例如，如果测试浮点实现，您可以使用具有一定公差的近似相等。
+> 注意：本例中的 `==` 运算符可以是等效性的自定义定义。例如，如果测试浮点实现，你可以使用具有一定公差的近似相等。
 
 这种类型的测试在现实生活中的一些用途包括：
 
@@ -20,7 +20,7 @@ Forge 可用于差异测试（differential testing）和差异模糊测试（dif
 
 ### 入门：`ffi`  作弊码
 
-[`ffi`](../cheatcodes/ffi.md) 允许您执行任意 shell 命令并捕获输出。 这是一个模拟示例：
+[`ffi`](../cheatcodes/ffi.md) 允许你执行任意 shell 命令并捕获输出。 这是一个模拟示例：
 
 ```solidity
 import {Test} from "forge-std/Test.sol";
@@ -87,7 +87,7 @@ Forge 运行 `npm --prefix differential_testing/scripts/ --silent run generate-r
 
 #### 针对 OpenZeppelin 的 Merkle 证明库的差异模糊测试
 
-您可能希望对另一个 Solidity 实现使用差异测试。 在这种情况下，不需要 `ffi`。 相反，只需要把参考实现直接导入到测试中。
+你可能希望对另一个 Solidity 实现使用差异测试。 在这种情况下，不需要 `ffi`。 相反，只需要把参考实现直接导入到测试中。
 
 ```solidity
 import {MerkleProof} from "openzeppelin-contracts/contracts/utils/cryptography/MerkleProof.sol";
@@ -106,7 +106,7 @@ function testCompatibilityOpenZeppelinProver(bytes32[] memory _data, uint256 nod
 
 #### 针对已知边缘情况的差异测试
 
-差异测试并不总是模糊的——它们对于测试已知的边缘情况也很有用。 在 Murky 代码库的情况下，`log2ceil` 函数的初始实现不适用于某些紧挨 2 的幂的长度（如 129）的数组。 作为安全检查，始终针对此长度的数组运行测试，并与 TypeScript 实现进行比较。 您可以在 [此处](https://github.com/dmfxyz/murky/blob/main/differential_testing/test/DifferentialTests.t.sol#L21) 查看完整测试。
+差异测试并不总是模糊的——它们对于测试已知的边缘情况也很有用。 在 Murky 代码库的情况下，`log2ceil` 函数的初始实现不适用于某些紧挨 2 的幂的长度（如 129）的数组。 作为安全检查，始终针对此长度的数组运行测试，并与 TypeScript 实现进行比较。 你可以在 [此处](https://github.com/dmfxyz/murky/blob/main/differential_testing/test/DifferentialTests.t.sol#L21) 查看完整测试。
 
 #### 针对参考数据的标准化测试
 
@@ -157,4 +157,4 @@ Paradigm 的 [渐进式荷兰拍卖（Gradual Dutch Auction）](https://www.para
 - [Murky](https://www.github.com/dmfxyz/murky)
 - [Solidity Fuzzing Template](https://github.com/patrickd-/solidity-fuzzing-boilerplate)
 
-如果您有另一个可以作为参考的存储库，请贡献它！
+如果你有另一个可以作为参考的存储库，请贡献它！

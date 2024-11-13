@@ -92,7 +92,7 @@ import {Context} from "node_modules/@openzeppelin/openzeppelin-contracts/contrac
 - 默认值: true
 - 环境变量: `FOUNDRY_AUTO_DETECT_SOLC` or `DAPP_AUTO_DETECT_SOLC`
 
-如果启用，Foundry 将自动尝试解决适当的 Solidity 编译器版本来编译您的项目。
+如果启用，Foundry 将自动尝试解决适当的 Solidity 编译器版本来编译你的项目。
 
 如果设置了 `solc_version`，这个键就会被忽略
 

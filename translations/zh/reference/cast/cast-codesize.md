@@ -20,7 +20,7 @@ cast codesize - 获取合约的运行时字节码大小。
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;您要查询的区块高度。
+&nbsp;&nbsp;&nbsp;&nbsp;你要查询的区块高度。
 
 &nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 

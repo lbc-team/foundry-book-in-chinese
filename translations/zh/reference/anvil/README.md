@@ -42,7 +42,7 @@ anvil --port <PORT>
 
 Anvil 在没有分叉的情况下，包含地址为 `0x4e59b44847b379578588920ca78fbf26c0b4956c` 的[默认 CREATE2 部署器代理](https://github.com/Arachnid/deterministic-deployment-proxy) 。
 
-这使您可以在本地测试 CREATE2 部署，而无需进行分叉。
+这使你可以在本地测试 CREATE2 部署，而无需进行分叉。
 
 #### 支持的 RPC 方法
 ##### 标准方法
@@ -142,7 +142,7 @@ Anvil 在没有分叉的情况下，包含地址为 `0x4e59b44847b379578588920ca
 使用 `anvil --steps-tracing` 来获取 `structLogs`
 
 * `debug_traceCall`
-请注意，尚不支持非标准的跟踪。这意味着您不能向 `trace` 参数传递任何参数。
+请注意，尚不支持非标准的跟踪。这意味着你不能向 `trace` 参数传递任何参数。
 
 * `trace_transaction`
 
