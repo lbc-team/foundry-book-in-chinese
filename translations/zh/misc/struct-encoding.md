@@ -1,6 +1,6 @@
-## Struct Encoding
+## Struct 编码
 
-Structs are user defined types that can group several variables:
+Struct 是用户定义的类型，可以将多个变量组合在一起：
 
 ```solidity
 struct MyStruct {
@@ -9,28 +9,28 @@ struct MyStruct {
 }
 ```
 
-Only the new [ABI coder v2](https://docs.soliditylang.org/en/latest/layout-of-source-files.html#abi-coder-pragma) can encode and decode arbitrarily nested arrays and structs. Since Solidity 0.8.0 it is activated by default, prior to that it needs to be activated via `pragma experimental ABIEncoderV2`.
+只有新的 [ABI 编码器 v2](https://docs.soliditylang.org/en/latest/layout-of-source-files.html#abi-coder-pragma) 能够对任意嵌套的数组和结构体进行编码和解码。从 Solidity 0.8.0 开始默认激活，在此之前需要通过 `pragma experimental ABIEncoderV2` 激活。
 
-Solidity structs map to the ABI type "tuple". For more information on how Solidity types map to ABI types see [Mapping Solidity to ABI types](https://docs.soliditylang.org/en/latest/abi-spec.html#mapping-solidity-to-abi-types) in the Solidity documentation.
+Solidity 结构体映射到 ABI 类型 “tuple”。有关 Solidity 类型如何映射到 ABI 类型的更多信息，请参见 Solidity 文档中的 [Mapping Solidity to ABI types](https://docs.soliditylang.org/en/latest/abi-spec.html#mapping-solidity-to-abi-types)。
 
-Structs are therefore encoded and decodes as tuples. So the struct we defined above, `MyStruct`, maps to the tuple `(address,uint256)` in terms of the ABI.
+因此，结构体会被编码和解码为元组。因此，我们上面定义的结构体 `MyStruct`，在 ABI 中映射为元组 `(address,uint256)`。
 
-Let's see how this works in a contract:
+让我们看看这在合约中的工作原理：
 
 ```solidity
 pragma solidity =0.8.15;
-
 
 contract Test {
     struct MyStruct {
         address addr;
         uint256 amount;
     }
+
     function f(MyStruct memory t) public pure {}
 }
 ```
 
-The ABI of the `f` function in this contract is:
+这个合约中 `f` 函数的 ABI 是：
 
 ```json
 {
@@ -60,7 +60,7 @@ The ABI of the `f` function in this contract is:
 }
 ```
 
-which reads: The function `f` takes 1 input of type `tuple` with two components of type `address` and `uint256`.
+该函数 `f` 接受一个类型为 `tuple` 的输入，包含两个组件，分别为 `address` 类型和 `uint256` 类型。
 
 **嵌套结构体编码：**
 这是一个更复杂的嵌套结构体示例：
