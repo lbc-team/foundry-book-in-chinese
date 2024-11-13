@@ -38,20 +38,35 @@ cargo install mdbook-external-links
 <!-- markdownlint-disable -->
 
 <table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="https://github.com/coldstar1993"><img src="https://avatars.githubusercontent.com/u/92623877?v=4?s=100" width="100px;" alt="Zero Ekkusu"/><br /><sub><b>寒星(coldstar1993)</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=coldstar1993" title="Documentation">📖</a></td>
-      <td align="center"><a href="https://github.com/xilibi2003"><img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>Tiny熊</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=xilibi2003" title="Documentation">📖</a> <a href="https://twitter.com/tinyxiong_eth" title="Maintenance"><img src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
-      <td align="center"><a href="https://github.com/0xdwong"><img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>dwong</b></sub></a><br /><a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=0xdwong" title="Documentation">📖</a> <a href="https://twitter.com/0xdwong" title="Maintenance"><img src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
-      
-      <td align="center">
-        <a href="https://github.com/liangjies">
-          <img src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;" alt="Rootul Patel"/><br /><sub><b>liangjies</b></sub></a><br />
-        <a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=liangjies" title="Documentation">📖
-        </a>
-      </td>
-    </tr>
-  </tbody>
+    <tbody>
+        <tr>
+            <td align="center"><a href="https://github.com/coldstar1993"><img
+                        src="https://avatars.githubusercontent.com/u/92623877?v=4?s=100" width="100px;"
+                        alt="Zero Ekkusu" /><br /><sub><b>寒星(coldstar1993)</b></sub></a><br /><a
+                    href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=coldstar1993"
+                    title="Documentation">📖</a></td>
+            <td align="center"><a href="https://github.com/xilibi2003"><img
+                        src="https://avatars.githubusercontent.com/u/1132399?v=4?s=100" width="100px;"
+                        alt="Rootul Patel" /><br /><sub><b>Tiny熊</b></sub></a><br /><a
+                    href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=xilibi2003"
+                    title="Documentation">📖</a> <a href="https://twitter.com/tinyxiong_eth" title="Maintenance"><img
+                        src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
+            <td align="center"><a href="https://github.com/0xdwong"><img
+                        src="https://avatars.githubusercontent.com/u/121151857?v=4?s=100" width="100px;"
+                        alt="Rootul Patel" /><br /><sub><b>dwong</b></sub></a><br /><a
+                    href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=0xdwong"
+                    title="Documentation">📖</a> <a href="https://twitter.com/0xdwong" title="Maintenance"><img
+                        src="https://learnblockchain.cn/css/default/twitter.svg" width="20px;" /></a> </td>
+            <td align="center">
+                <a href="https://github.com/liangjies">
+                    <img src="https://avatars.githubusercontent.com/u/11037807?v=4?s=100" width="100px;"
+                        alt="Rootul Patel" /><br /><sub><b>liangjies</b></sub></a><br />
+                <a href="https://github.com/lbc-team/foundry-book-in-chinese/commits?author=liangjies"
+                    title="Documentation">📖
+                </a>
+            </td>
+        </tr>
+    </tbody>
 </table>
 
 <!-- markdownlint-restore -->
