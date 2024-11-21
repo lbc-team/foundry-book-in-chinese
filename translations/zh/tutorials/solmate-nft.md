@@ -86,7 +86,7 @@ export PRIVATE_KEY=<你的钱包私钥>
 设置完成后，你可以通过运行以下命令，同时将相关构造函数参数添加到 NFT 合约来使用 Forge 部署你的 NFT：
 
 ```bash
-forge 创建 NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <name> <symbol>
+forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <name> <symbol>
 ```
 
 如果部署成功，你将看到部署钱包的地址、合约地址以及交易哈希打印到你的终端。
